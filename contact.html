@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact &amp; Request Demo — Aleph</title>
+  <meta name="description" content="Get in touch with the Aleph team. Request a demo or ask about product compliance.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F6E1;</text></svg>">
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav" role="navigation">
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        Aleph
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="nav-menu">
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="theme-toggle" aria-label="Toggle theme">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+          <a href="https://app.alephco.io" class="btn btn-primary btn-sm">Log In</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="spacer"></div>
+
+  <!-- Contact Form -->
+  <section class="section">
+    <div class="container" style="max-width:640px;">
+      <div class="section-heading text-center">
+        <span class="section-label">Contact</span>
+        <h1>Get in touch</h1>
+        <p>Request a demo, ask a question, or tell us which regulation is keeping you up at night.</p>
+      </div>
+
+      <div class="form-success">
+        <strong>Message sent.</strong> We&rsquo;ll get back to you within one business day.
+      </div>
+
+      <form id="contact-form" action="https://formspree.io/f/PLACEHOLDER" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="you@company.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" placeholder="Your company name">
+        </div>
+        <div class="form-group">
+          <label for="regulation">Which regulation are you dealing with?</label>
+          <select id="regulation" name="regulation">
+            <option value="">Select one...</option>
+            <option value="fsvp">FSVP (FDA Food Imports)</option>
+            <option value="cpsia">CPSIA / CPC (Children's Products)</option>
+            <option value="prop65">Prop 65 (California Chemical Disclosure)</option>
+            <option value="pfas">PFAS (Per- and Polyfluoroalkyl Substances)</option>
+            <option value="multiple">Multiple Regulations</option>
+            <option value="not_sure">Not Sure</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us about your compliance needs..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" style="background: var(--bg-subtle);">
+    <div class="container" style="max-width:640px;">
+      <div class="section-heading text-center">
+        <span class="section-label">FAQ</span>
+        <h2>Getting started</h2>
+      </div>
+      <div>
+        <div class="faq-item">
+          <button class="faq-q">How long does it take to set up?</button>
+          <div class="faq-a"><p>Most importers are up and running in under 30 minutes. Create an account, add your first product, and complete the compliance questionnaire. If you have a CSV of your SKUs, you can import them all at once.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Do I need to know which regulations apply to me?</button>
+          <div class="faq-a"><p>Not upfront. Each compliance module starts with an assessment questionnaire that helps you determine whether the regulation applies to your specific products. The platform guides you through it.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Can I try it before committing?</button>
+          <div class="faq-a"><p>Yes. Every plan includes a 14-day free trial with full access to all features. No credit card required to start.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <span>&copy; 2025 Aleph Compliance, Inc.</span>
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="https://app.alephco.io">Log In</a></li>
+      </ul>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>
