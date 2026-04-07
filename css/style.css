@@ -106,6 +106,7 @@ p  { color: var(--fg-muted); }
   text-decoration: none;
 }
 .nav-logo svg { color: var(--primary); }
+.nav-menu { display: flex; align-items: center; gap: 2rem; }
 .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
 .nav-links a {
   font-size: .875rem; font-weight: 500; color: var(--fg-muted);
