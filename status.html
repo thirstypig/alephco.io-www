@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Status — Aleph</title>
+  <meta name="description" content="Real-time system status for Aleph's compliance platform. Check if all services are operational.">
+  <link rel="canonical" href="https://www.alephco.io/status.html">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F6E1;</text></svg>">
+  <style>
+    .status-hero { text-align: center; padding: 3rem 0 2rem; }
+    .status-hero h1 { font-size: 2rem; margin-bottom: .5rem; }
+    .status-banner { display: inline-flex; align-items: center; gap: .5rem; padding: .5rem 1.25rem; border-radius: 999px; font-size: .9375rem; font-weight: 600; margin-top: 1rem; }
+    .status-banner.operational { background: rgba(16,185,129,.1); color: #10b981; border: 1px solid rgba(16,185,129,.2); }
+    .status-banner.degraded { background: rgba(245,158,11,.1); color: #f59e0b; border: 1px solid rgba(245,158,11,.2); }
+    .status-banner.down { background: rgba(239,68,68,.1); color: #ef4444; border: 1px solid rgba(239,68,68,.2); }
+    .status-dot-lg { width: 10px; height: 10px; border-radius: 50%; }
+    .status-dot-lg.green { background: #10b981; }
+    .status-dot-lg.yellow { background: #f59e0b; }
+    .status-dot-lg.red { background: #ef4444; }
+    .status-dot-lg.gray { background: #6b7280; }
+
+    .status-grid { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin: 2rem 0; }
+    .status-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; background: var(--bg); }
+    .status-row-name { font-weight: 600; font-size: .9375rem; }
+    .status-row-name small { display: block; font-weight: 400; font-size: .8125rem; color: var(--fg-subtle); margin-top: .125rem; }
+    .status-row-badge { display: inline-flex; align-items: center; gap: .375rem; font-size: .8125rem; font-weight: 500; }
+    .status-row-badge.ok { color: #10b981; }
+    .status-row-badge.warn { color: #f59e0b; }
+    .status-row-badge.err { color: #ef4444; }
+    .status-row-badge.unknown { color: var(--fg-subtle); }
+
+    .status-footer-note { text-align: center; font-size: .8125rem; color: var(--fg-subtle); margin: 2rem 0; }
+    .status-footer-note a { color: var(--primary); }
+    .status-updated { text-align: center; font-size: .75rem; color: var(--fg-subtle); margin-top: 1rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav" role="navigation">
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        Aleph
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="nav-menu">
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="theme-toggle" aria-label="Toggle theme">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+          <a href="https://app.alephco.io/login" class="btn btn-primary btn-sm">Log In</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="spacer"></div>
+
+  <section class="section">
+    <div class="container" style="max-width:720px;">
+
+      <!-- Hero -->
+      <div class="status-hero">
+        <h1>System Status</h1>
+        <p style="color:var(--fg-muted);">Real-time health of Aleph's compliance platform.</p>
+        <div class="status-banner operational" id="status-banner">
+          <span class="status-dot-lg green" id="banner-dot"></span>
+          <span id="banner-text">Checking...</span>
+        </div>
+        <div class="status-updated" id="status-time"></div>
+      </div>
+
+      <!-- Components -->
+      <div class="status-grid">
+        <div class="status-row">
+          <div class="status-row-name">
+            Application
+            <small>app.alephco.io &mdash; web application</small>
+          </div>
+          <div class="status-row-badge unknown" id="comp-app">
+            <span class="status-dot-lg gray"></span> Checking
+          </div>
+        </div>
+        <div class="status-row">
+          <div class="status-row-name">
+            Database
+            <small>PostgreSQL &mdash; Supabase hosted</small>
+          </div>
+          <div class="status-row-badge unknown" id="comp-db">
+            <span class="status-dot-lg gray"></span> Checking
+          </div>
+        </div>
+        <div class="status-row">
+          <div class="status-row-name">
+            Authentication
+            <small>Supabase Auth &mdash; login, OAuth, sessions</small>
+          </div>
+          <div class="status-row-badge unknown" id="comp-auth">
+            <span class="status-dot-lg gray"></span> Checking
+          </div>
+        </div>
+        <div class="status-row">
+          <div class="status-row-name">
+            Document Storage
+            <small>Supabase Storage &mdash; file uploads, PDFs</small>
+          </div>
+          <div class="status-row-badge unknown" id="comp-storage">
+            <span class="status-dot-lg gray"></span> Checking
+          </div>
+        </div>
+        <div class="status-row">
+          <div class="status-row-name">
+            Marketing Site
+            <small>alephco.io &mdash; GitHub Pages</small>
+          </div>
+          <div class="status-row-badge ok" id="comp-www">
+            <span class="status-dot-lg green"></span> Operational
+          </div>
+        </div>
+      </div>
+
+      <div class="status-footer-note">
+        <p>Having issues? <a href="contact.html">Contact support</a> or email <a href="mailto:support@alephco.io">support@alephco.io</a></p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <span>&copy; 2026 Aleph Compliance, Inc.</span>
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="https://app.alephco.io/login">Log In</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Check system health
+    (async function checkStatus() {
+      const banner = document.getElementById('status-banner');
+      const bannerDot = document.getElementById('banner-dot');
+      const bannerText = document.getElementById('banner-text');
+      const timeEl = document.getElementById('status-time');
+
+      function setBadge(id, status, label) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const dotClass = status === 'ok' ? 'green' : status === 'warn' ? 'yellow' : status === 'err' ? 'red' : 'gray';
+        const badgeClass = status === 'ok' ? 'ok' : status === 'warn' ? 'warn' : status === 'err' ? 'err' : 'unknown';
+        el.className = 'status-row-badge ' + badgeClass;
+        el.innerHTML = '<span class="status-dot-lg ' + dotClass + '"></span> ' + label;
+      }
+
+      try {
+        const res = await fetch('https://app.alephco.io/api/health');
+        const data = await res.json();
+
+        if (data.status === 'healthy' && data.database === 'connected') {
+          // All good
+          banner.className = 'status-banner operational';
+          bannerDot.className = 'status-dot-lg green';
+          bannerText.textContent = 'All Systems Operational';
+          setBadge('comp-app', 'ok', 'Operational');
+          setBadge('comp-db', 'ok', 'Connected');
+          setBadge('comp-auth', 'ok', 'Operational');
+          setBadge('comp-storage', 'ok', 'Operational');
+        } else if (data.status === 'healthy') {
+          // App up but DB issue
+          banner.className = 'status-banner degraded';
+          bannerDot.className = 'status-dot-lg yellow';
+          bannerText.textContent = 'Partial System Degradation';
+          setBadge('comp-app', 'ok', 'Operational');
+          setBadge('comp-db', 'warn', 'Degraded');
+          setBadge('comp-auth', 'warn', 'Degraded');
+          setBadge('comp-storage', 'ok', 'Operational');
+        }
+
+        timeEl.textContent = 'Last checked: ' + new Date().toLocaleTimeString();
+      } catch (e) {
+        // App unreachable
+        banner.className = 'status-banner down';
+        bannerDot.className = 'status-dot-lg red';
+        bannerText.textContent = 'Service Disruption';
+        setBadge('comp-app', 'err', 'Unreachable');
+        setBadge('comp-db', 'unknown', 'Unknown');
+        setBadge('comp-auth', 'unknown', 'Unknown');
+        setBadge('comp-storage', 'unknown', 'Unknown');
+        timeEl.textContent = 'Last checked: ' + new Date().toLocaleTimeString();
+      }
+
+      // Re-check every 60 seconds
+      setTimeout(checkStatus, 60000);
+    })();
+  </script>
+</body>
+</html>
