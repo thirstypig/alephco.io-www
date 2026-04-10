@@ -105,20 +105,12 @@
   </footer>
   <script src="js/main.js"></script>
   <script>
-    // Auto-release blog posts on their publish date
+    // Auto-release blog posts on their publish date — hide future posts entirely
     document.addEventListener('DOMContentLoaded', () => {
-      const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+      const today = new Date().toISOString().slice(0, 10);
       document.querySelectorAll('.blog-card[data-publish]').forEach(card => {
-        const publishDate = card.dataset.publish;
-        if (publishDate > today) {
-          // Not yet published — dim it and show "Coming" label
-          card.style.opacity = '.6';
-          const meta = card.querySelector('.blog-meta');
-          const d = new Date(publishDate + 'T12:00:00');
-          meta.textContent = 'Coming ' + d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
-          // Remove link so it's not clickable
-          const link = card.querySelector('h3 a');
-          if (link) link.replaceWith(document.createTextNode(link.textContent));
+        if (card.dataset.publish > today) {
+          card.style.display = 'none';
         }
       });
     });
