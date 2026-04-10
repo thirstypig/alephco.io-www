@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why I Built Aleph — Aleph Blog</title>
+  <meta name="description" content="The compliance tools available to importers are either painfully generic or absurdly expensive. Here's why I decided to build something better.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F6E1;</text></svg>">
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav" role="navigation">
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        Aleph
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="nav-menu">
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="theme-toggle" aria-label="Toggle theme">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+          <a href="https://app.alephco.io/login" class="btn btn-primary btn-sm">Log In</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="spacer"></div>
+
+  <section class="section">
+    <div class="container">
+      <a href="../blog.html" class="blog-back">&larr; Back to Blog</a>
+
+      <div class="blog-content">
+        <div class="blog-meta">April 10, 2026 &middot; 5 min read</div>
+        <h1>Why I Built Aleph</h1>
+
+        <p>If you import consumer products into the United States, you already know the feeling. It is 11 PM on a Sunday, you are deep in a spreadsheet trying to reconcile which SKUs need updated Certificates of Product Compliance, whether your Prop 65 warnings are using the current template language, and if your food contact materials supplier actually sent back those PFAS test results &mdash; or if that was the other supplier, for the other product line, three emails ago.</p>
+
+        <p>I have lived in that world. I have watched smart, experienced importers &mdash; people who know their supply chains inside and out &mdash; lose hours every week to compliance busywork that should not be this hard. Not because the regulations are unreasonable (most of them exist for good reasons), but because the tools available to manage them are terrible.</p>
+
+        <p>The typical setup looks something like this: a shared Google Drive with hundreds of PDFs organized by some naming convention that made sense to whoever set it up two years ago. A spreadsheet tracking which products fall under CPSIA, which need Prop 65 warnings, which are covered by your FSVP program. Maybe a calendar reminder for when lab test results expire. And a lot of email threads with subject lines like &ldquo;Re: Re: Fwd: COA &mdash; updated??&rdquo;</p>
+
+        <p>It works, barely, until it does not.</p>
+
+        <h2>The Gap Nobody Was Filling</h2>
+
+        <p>When I started looking at the compliance software landscape, I expected to find someone had already solved this. Surely there was a platform that handled the specific, overlapping regulatory requirements US importers face.</p>
+
+        <p>What I found instead were two categories of tools. On one side, massive enterprise compliance suites designed for multinational manufacturers &mdash; six-figure contracts, months-long implementations, and feature sets built for problems importers do not have. On the other side, generic document management platforms that could store your files but had zero understanding of what a Children&rsquo;s Product Certificate actually requires, or when California updated its Prop 65 warning language, or what the FDA expects in an FSVP record.</p>
+
+        <p>Nothing in between. Nothing that spoke the language of a mid-market importer bringing in consumer goods and trying to stay on the right side of CPSIA, Prop 65, FSVP, and the growing patchwork of PFAS restrictions &mdash; all at the same time, often for the same product.</p>
+
+        <p>That was the moment it clicked. The problem is not that compliance is inherently complicated. The problem is that importers are forced to treat each regulation as a separate workstream, managed with separate tools and separate mental models, when in reality they all converge on the same products, the same suppliers, and the same shipments.</p>
+
+        <h2>What Aleph Actually Does</h2>
+
+        <p>Aleph is a compliance platform built specifically for US importers. Not adapted from something else, not a generic workflow tool with compliance templates bolted on. Every feature exists because an importer needs it.</p>
+
+        <p>You organize your work around product families &mdash; because that is how your business actually thinks. For a given product, Aleph knows which regulations apply and what documentation you need. It generates Children&rsquo;s Product Certificates with the correct CPSC-referenced testing standards. It produces Prop 65 warnings using current safe harbor language. It manages your FSVP documentation with the structure FDA expects. And as PFAS disclosure requirements expand across states, it helps you track which products are affected and generate the appropriate disclosures.</p>
+
+        <p>The goal is not to replace your testing labs or your customs broker or your legal counsel. It is to be the single place where all your compliance information lives, stays current, and is ready when you need it &mdash; whether that is for a customs audit, a retail buyer&rsquo;s vendor compliance questionnaire, or your own internal peace of mind.</p>
+
+        <h2>Where This Is Going</h2>
+
+        <p>We are early. I want to be honest about that. Aleph is live and functional today, but the product roadmap is long and we are building based on what importers actually tell us they need.</p>
+
+        <p>In the near term, we are focused on making the day-to-day workflow faster &mdash; less manual data entry, smarter defaults, better ways to handle products that share components or testing. Longer term, we are looking at how to help importers stay ahead of regulatory changes rather than scrambling to react to them. The compliance landscape for imported goods is getting more complex, not less. PFAS regulations alone are evolving on a state-by-state basis in ways that are genuinely difficult to track manually.</p>
+
+        <p>I am not going to promise we will solve every compliance problem an importer faces. But I am committed to building the tool I wished existed when I first saw how broken this process was &mdash; something focused, practical, and built by people who understand the specific world of US import compliance.</p>
+
+        <p>If that resonates with you, I would love to hear from you. <a href="https://alephco.io">Sign up at alephco.io</a> to get early access and product updates. Or just reply to any email we send &mdash; it goes to a real inbox, and I read every one.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <span>&copy; 2026 Aleph Compliance, Inc.</span>
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="https://app.alephco.io/login">Log In</a></li>
+      </ul>
+    </div>
+  </footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>
