@@ -346,16 +346,27 @@ tr:last-child td { border-bottom: none; }
 .blog-card h3 a:hover { color: var(--primary); }
 .blog-meta { font-size: .8125rem; color: var(--fg-subtle); margin-bottom: .5rem; }
 .blog-excerpt { font-size: .9rem; color: var(--fg-muted); }
-.blog-content { max-width: 720px; margin: 0 auto; line-height: 1.75; }
-.blog-content h2 { margin: 2rem 0 .75rem; font-size: 1.5rem; }
-.blog-content p { margin-bottom: 1.25rem; font-size: 1rem; color: var(--fg-muted); }
-.blog-content ul, .blog-content ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: var(--fg-muted); }
+.blog-content { max-width: 720px; margin: 0 auto; line-height: 1.75; font-size: 1.125rem; letter-spacing: .005em; }
+.blog-content h1 { font-size: 2.5rem; line-height: 1.15; letter-spacing: -.015em; font-weight: 700; margin-bottom: .5rem; }
+.blog-content h2 { font-size: 1.625rem; line-height: 1.3; letter-spacing: -.015em; font-weight: 700; margin-top: 3.5rem; margin-bottom: 1.25rem; padding-bottom: .75rem; border-bottom: 1px solid var(--border); }
+.blog-content h3 { font-size: 1.25rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: .75rem; }
+.blog-content p { margin-bottom: 1.75rem; font-size: inherit; color: var(--fg-muted); }
+.blog-content strong { color: var(--fg); font-weight: 600; }
+.blog-content a { color: #60a5fa; text-decoration: none; }
+.blog-content a:hover { text-decoration: underline; }
+.blog-content ul, .blog-content ol { margin-bottom: 1.75rem; padding-left: 1.5rem; color: var(--fg-muted); }
 .blog-content li { margin-bottom: .5rem; }
 .blog-back { display: inline-flex; align-items: center; gap: .25rem; font-size: .875rem; color: var(--primary); text-decoration: none; margin-bottom: 2rem; }
 .blog-back:hover { text-decoration: underline; }
 
-/* ── Blog Enhanced ───────────────────────────────────────── */
-.tldr-box { background: var(--bg-subtle); border-left: 4px solid var(--primary); padding: 1.25rem 1.5rem; border-radius: var(--radius); margin-bottom: 2rem; }
+/* ── Blog Enhanced (Design system: Stripe/Linear/Vercel inspired) ── */
+.blog-tag { display: inline-block; font-size: .6875rem; font-weight: 600; letter-spacing: .05em; padding: .2rem .6rem; border: 1px solid var(--border); border-radius: 999px; color: var(--fg-muted); }
+.blog-subtitle { font-size: 1.125rem; color: var(--fg-subtle); line-height: 1.6; margin: .75rem 0 1.5rem; }
+.blog-author-line { display: flex; align-items: center; gap: .75rem; margin-bottom: 2rem; }
+.blog-author-avatar { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--primary); color: var(--primary-fg); display: flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 700; flex-shrink: 0; }
+.blog-author-line strong { display: block; font-size: .9rem; }
+.blog-ai-badge { font-size: .75rem; color: var(--fg-subtle); font-style: italic; }
+.tldr-box { background: rgba(59,130,246,.04); border-left: 3px solid #3b82f6; padding: 1.25rem 1.5rem; border-radius: 0 var(--radius-lg) var(--radius-lg) 0; margin-bottom: 2.5rem; }
 .tldr-box strong { display: block; margin-bottom: .5rem; color: var(--fg); font-size: .875rem; text-transform: uppercase; letter-spacing: .05em; }
 .tldr-box ul { margin-bottom: 0; padding-left: 1.25rem; }
 .tldr-box li { font-size: .9rem; color: var(--fg-muted); margin-bottom: .25rem; }
@@ -386,8 +397,8 @@ tr:last-child td { border-bottom: none; }
 .blog-hero { margin: 1.5rem 0 2rem; }
 .blog-hero img { width: 100%; height: auto; border-radius: var(--radius-lg); }
 
-.blog-content blockquote { border-left: 3px solid var(--primary); padding: .75rem 1.25rem; margin: 1.5rem 0; background: var(--bg-subtle); border-radius: 0 var(--radius) var(--radius) 0; }
-.blog-content blockquote p { margin-bottom: 0; font-style: italic; color: var(--fg-muted); }
+.blog-content blockquote { border-left: 3px solid #3b82f6; padding: 1.25rem 1.5rem; margin: 1.75rem 0; background: rgba(59,130,246,.04); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
+.blog-content blockquote p { margin-bottom: 0; font-style: normal; color: var(--fg); }
 
 /* ── Footer ──────────────────────────────────────────────── */
 .footer {
