@@ -3,8 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Why I Built Aleph — Aleph Blog</title>
-  <meta name="description" content="The compliance tools available to importers are either painfully generic or absurdly expensive. Here's why I decided to build something better.">
+  <title>Why I Built Aleph | Import Compliance Software for Importers</title>
+  <meta name="description" content="The compliance tools for importers are painfully generic or absurdly expensive. Here's why I built a product compliance platform from scratch. Try Aleph free.">
+  <link rel="canonical" href="https://www.alephco.io/blog/why-i-built-aleph.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Why I Built Aleph | Import Compliance Software">
+  <meta property="og:description" content="The compliance tools for importers are painfully generic or absurdly expensive. Here's why I built something better.">
+  <meta property="og:url" content="https://www.alephco.io/blog/why-i-built-aleph.html">
+  <meta property="og:site_name" content="Aleph">
+  <meta property="article:published_time" content="2026-04-10T12:00:00Z">
+  <meta property="article:author" content="James Chang">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Why I Built Aleph | Import Compliance Software">
+  <meta name="twitter:description" content="The compliance tools for importers are painfully generic or absurdly expensive. Here's why I built something better.">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Why I Built Aleph: Import Compliance Software for Importers",
+    "description": "The compliance tools for importers are painfully generic or absurdly expensive. Here's why I built a product compliance platform from scratch.",
+    "author": { "@type": "Person", "name": "James Chang", "url": "https://www.alephco.io/about.html" },
+    "publisher": { "@type": "Organization", "name": "Aleph Compliance, Inc.", "url": "https://www.alephco.io" },
+    "datePublished": "2026-04-10",
+    "dateModified": "2026-04-10",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.alephco.io/blog/why-i-built-aleph.html" },
+    "keywords": ["import compliance software", "product compliance platform", "US importer compliance", "CPSIA", "Prop 65", "FSVP", "PFAS"],
+    "articleSection": "Compliance",
+    "wordCount": 950
+  }
+  </script>
+
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F6E1;</text></svg>">
 </head>
@@ -45,47 +79,119 @@
     <div class="container">
       <a href="../blog.html" class="blog-back">&larr; Back to Blog</a>
 
-      <div class="blog-content">
-        <div class="blog-meta">April 10, 2026 &middot; 5 min read</div>
+      <article class="blog-content">
+
+        <!-- Byline -->
+        <div class="blog-meta">
+          <span>By James Chang</span> &middot;
+          <time datetime="2026-04-10">April 10, 2026</time> &middot;
+          <span>5 min read</span>
+        </div>
+
         <h1>Why I Built Aleph</h1>
 
-        <p>If you import consumer products into the United States, you already know the feeling. It is 11 PM on a Sunday, you are deep in a spreadsheet trying to reconcile which SKUs need updated Certificates of Product Compliance, whether your Prop 65 warnings are using the current template language, and if your food contact materials supplier actually sent back those PFAS test results &mdash; or if that was the other supplier, for the other product line, three emails ago.</p>
+        <!-- TL;DR -->
+        <div class="tldr-box">
+          <strong>TL;DR</strong>
+          <ul>
+            <li>Existing import compliance tools are either enterprise-priced ($100K+) or generic document storage with zero regulatory awareness</li>
+            <li>US importers juggle CPSIA, Prop 65, FSVP, and PFAS &mdash; often for the same product &mdash; using spreadsheets and email chains</li>
+            <li>Aleph is a focused compliance platform that generates certificates, tracks documents, and maps regulations to products</li>
+          </ul>
+        </div>
 
-        <p>I have lived in that world. I have watched smart, experienced importers &mdash; people who know their supply chains inside and out &mdash; lose hours every week to compliance busywork that should not be this hard. Not because the regulations are unreasonable (most of them exist for good reasons), but because the tools available to manage them are terrible.</p>
+        <p>If you import consumer products into the United States, you already know the feeling. It's 11 PM on a Sunday, you're deep in a spreadsheet trying to reconcile which SKUs need updated Certificates of Product Compliance, whether your <a href="prop-65-warnings-guide.html">Prop 65 warnings</a> are using the current template language, and if your food contact materials supplier actually sent back those <a href="pfas-regulations-guide.html">PFAS test results</a> &mdash; or if that was the other supplier, for the other product line, three emails ago.</p>
 
-        <p>The typical setup looks something like this: a shared Google Drive with hundreds of PDFs organized by some naming convention that made sense to whoever set it up two years ago. A spreadsheet tracking which products fall under CPSIA, which need Prop 65 warnings, which are covered by your FSVP program. Maybe a calendar reminder for when lab test results expire. And a lot of email threads with subject lines like &ldquo;Re: Re: Fwd: COA &mdash; updated??&rdquo;</p>
+        <p>I've lived in that world. I've watched smart, experienced importers &mdash; people who know their supply chains inside and out &mdash; lose hours every week to compliance busywork that shouldn't be this hard. Not because the regulations are unreasonable (most of them exist for good reasons), but because the <em>import compliance software</em> available to manage them is terrible.</p>
 
-        <p>It works, barely, until it does not.</p>
+        <p>The typical setup looks something like this: a shared Google Drive with hundreds of PDFs organized by some naming convention that made sense to whoever set it up two years ago. A spreadsheet tracking which products fall under CPSIA, which need Prop 65 warnings, which are covered by your <a href="fsvp-guide-for-importers.html">FSVP program</a>. Maybe a calendar reminder for when lab test results expire. And a lot of email threads with subject lines like &ldquo;Re: Re: Fwd: COA &mdash; updated??&rdquo;</p>
 
-        <h2>The Gap Nobody Was Filling</h2>
+        <p>It works, barely, until it doesn't.</p>
 
-        <p>When I started looking at the compliance software landscape, I expected to find someone had already solved this. Surely there was a platform that handled the specific, overlapping regulatory requirements US importers face.</p>
+        <h2>Why Import Compliance Tools Are Broken</h2>
 
-        <p>What I found instead were two categories of tools. On one side, massive enterprise compliance suites designed for multinational manufacturers &mdash; six-figure contracts, months-long implementations, and feature sets built for problems importers do not have. On the other side, generic document management platforms that could store your files but had zero understanding of what a Children&rsquo;s Product Certificate actually requires, or when California updated its Prop 65 warning language, or what the FDA expects in an FSVP record.</p>
+        <p>When I started looking at the compliance software landscape, I expected to find someone who'd already solved this. Surely there was a platform that handled the specific, overlapping regulatory requirements US importers face.</p>
+
+        <p>What I found instead were two categories of tools:</p>
+
+        <ul>
+          <li><strong>Enterprise compliance suites</strong> &mdash; six-figure contracts, months-long implementations, and feature sets built for problems importers don't have</li>
+          <li><strong>Generic document management</strong> &mdash; platforms that can store your files but have zero understanding of what a <a href="cpc-certificate-guide.html">Children's Product Certificate</a> actually requires, or when California updated its Prop 65 warning language, or what the FDA expects in an FSVP record</li>
+        </ul>
 
         <p>Nothing in between. Nothing that spoke the language of a mid-market importer bringing in consumer goods and trying to stay on the right side of CPSIA, Prop 65, FSVP, and the growing patchwork of PFAS restrictions &mdash; all at the same time, often for the same product.</p>
 
-        <p>That was the moment it clicked. The problem is not that compliance is inherently complicated. The problem is that importers are forced to treat each regulation as a separate workstream, managed with separate tools and separate mental models, when in reality they all converge on the same products, the same suppliers, and the same shipments.</p>
+        <blockquote><p>The problem isn't that compliance is inherently complicated. The problem is that importers are forced to treat each regulation as a separate workstream, when in reality they all converge on the same products, the same suppliers, and the same shipments.</p></blockquote>
 
-        <h2>What Aleph Actually Does</h2>
+        <h2>What Mid-Market Importers Actually Need</h2>
 
-        <p>Aleph is a compliance platform built specifically for US importers. Not adapted from something else, not a generic workflow tool with compliance templates bolted on. Every feature exists because an importer needs it.</p>
+        <p>After talking to dozens of importers, a clear pattern emerged. They don't need another document storage tool. They don't need a $200K enterprise platform designed for a Fortune 500 manufacturer. They need something that:</p>
 
-        <p>You organize your work around product families &mdash; because that is how your business actually thinks. For a given product, Aleph knows which regulations apply and what documentation you need. It generates Children&rsquo;s Product Certificates with the correct CPSC-referenced testing standards. It produces Prop 65 warnings using current safe harbor language. It manages your FSVP documentation with the structure FDA expects. And as PFAS disclosure requirements expand across states, it helps you track which products are affected and generate the appropriate disclosures.</p>
+        <ol>
+          <li><strong>Knows which regulations apply to each product</strong> &mdash; automatically, based on product category and destination market</li>
+          <li><strong>Generates the actual compliance documents</strong> &mdash; CPCs with all 7 required fields, Prop 65 labels with current safe harbor language, PFAS disclosures mapped to the right states</li>
+          <li><strong>Tracks expiration and renewal</strong> &mdash; so you find out your lab report is expiring <em>before</em> customs holds your shipment, not after</li>
+          <li><strong>Connects documents to products</strong> &mdash; not scattered across drives, inboxes, and filing cabinets</li>
+        </ol>
 
-        <p>The goal is not to replace your testing labs or your customs broker or your legal counsel. It is to be the single place where all your compliance information lives, stays current, and is ready when you need it &mdash; whether that is for a customs audit, a retail buyer&rsquo;s vendor compliance questionnaire, or your own internal peace of mind.</p>
+        <h2>How Aleph Handles CPSIA, Prop 65, FSVP, and PFAS</h2>
 
-        <h2>Where This Is Going</h2>
+        <p>Aleph is a <a href="https://alephco.io/how-it-works.html">product compliance platform</a> built specifically for US importers. Not adapted from something else, not a generic workflow tool with compliance templates bolted on. Every feature exists because an importer needs it.</p>
 
-        <p>We are early. I want to be honest about that. Aleph is live and functional today, but the product roadmap is long and we are building based on what importers actually tell us they need.</p>
+        <p>You organize your work around product families &mdash; because that's how your business actually thinks. For a given product, Aleph knows which regulations apply and what documentation you need. It generates <a href="cpc-certificate-guide.html">Children's Product Certificates</a> with the correct CPSC-referenced testing standards. It produces <a href="prop-65-warnings-guide.html">Prop 65 warnings</a> using current safe harbor language. It manages your <a href="fsvp-guide-for-importers.html">FSVP documentation</a> with the structure FDA expects. And as <a href="pfas-regulations-guide.html">PFAS disclosure requirements</a> expand across states, it helps you track which products are affected and generate the appropriate disclosures.</p>
 
-        <p>In the near term, we are focused on making the day-to-day workflow faster &mdash; less manual data entry, smarter defaults, better ways to handle products that share components or testing. Longer term, we are looking at how to help importers stay ahead of regulatory changes rather than scrambling to react to them. The compliance landscape for imported goods is getting more complex, not less. PFAS regulations alone are evolving on a state-by-state basis in ways that are genuinely difficult to track manually.</p>
+        <p>The goal isn't to replace your testing labs or your customs broker or your legal counsel. It's to be the single place where all your compliance information lives, stays current, and is ready when you need it &mdash; whether that's for a customs audit, a retail buyer's vendor compliance questionnaire, or your own internal peace of mind.</p>
 
-        <p>I am not going to promise we will solve every compliance problem an importer faces. But I am committed to building the tool I wished existed when I first saw how broken this process was &mdash; something focused, practical, and built by people who understand the specific world of US import compliance.</p>
+        <!-- Mid-post CTA -->
+        <div class="blog-cta-inline">
+          <p><strong>Aleph automates certificate generation and document tracking for CPSIA, Prop 65, FSVP, and PFAS.</strong>
+          <a href="https://alephco.io/how-it-works.html">See how it works &rarr;</a></p>
+        </div>
 
-        <p>If that resonates with you, I would love to hear from you. <a href="https://alephco.io">Sign up at alephco.io</a> to get early access and product updates. Or just reply to any email we send &mdash; it goes to a real inbox, and I read every one.</p>
+        <h2>What We're Building Next</h2>
 
-      </div>
+        <p>We're early. I want to be honest about that. Aleph is live and functional today, but the product roadmap is long and we're building based on what importers actually tell us they need.</p>
+
+        <p>In the near term, we're focused on making the day-to-day workflow faster &mdash; less manual data entry, smarter defaults, better ways to handle products that share components or testing. Longer term, we're looking at how to help importers stay <em>ahead</em> of regulatory changes rather than scrambling to react to them. The compliance landscape for imported goods is getting more complex, not less. <a href="pfas-regulations-guide.html">PFAS regulations alone</a> are evolving on a state-by-state basis in ways that are genuinely difficult to track manually.</p>
+
+        <p>I'm not going to promise we'll solve every compliance problem an importer faces. But I'm committed to building the tool I wished existed when I first saw how broken this process was &mdash; something focused, practical, and built by people who understand the specific world of US import compliance.</p>
+
+        <!-- Key Takeaways -->
+        <div class="takeaways-box">
+          <strong>Key Takeaways</strong>
+          <ol>
+            <li>If you're managing compliance across CPSIA, Prop 65, FSVP, or PFAS with spreadsheets, you're not alone &mdash; but there's a better way</li>
+            <li>The gap in the market isn't "document storage" &mdash; it's regulation-aware compliance management built for importers</li>
+            <li>Aleph generates certificates, tracks expiry, and maps regulations to your products in one platform</li>
+          </ol>
+        </div>
+
+        <!-- End CTA -->
+        <div class="blog-cta-end">
+          <h3>Stop managing compliance in spreadsheets</h3>
+          <p>Aleph keeps your certificates, disclosures, and audit records current, organized, and ready.</p>
+          <a href="https://app.alephco.io/register" class="btn btn-primary">Get Started Free</a>
+        </div>
+
+        <!-- Author Bio -->
+        <div class="author-bio">
+          <div class="author-bio-text">
+            <strong>James Chang</strong>
+            <p>Founder of Aleph. Building import compliance tools for US importers who are tired of spreadsheets and six-figure enterprise software.</p>
+          </div>
+        </div>
+
+        <!-- Related Posts -->
+        <div class="related-posts">
+          <h3>Related Reading</h3>
+          <ul>
+            <li><a href="fsvp-guide-for-importers.html">What Every Food Importer Needs to Know About FSVP</a></li>
+            <li><a href="cpc-certificate-guide.html">Children's Product Certificates: A Complete Guide for Importers</a></li>
+            <li><a href="spreadsheets-failing-compliance.html">Why Spreadsheets Are Failing Product Compliance Teams</a></li>
+          </ul>
+        </div>
+
+      </article>
     </div>
   </section>
 
