@@ -26,6 +26,7 @@
           <li><a href="how-it-works.html">How It Works</a></li>
           <li><a href="pricing.html">Pricing</a></li>
           <li><a href="about.html">About</a></li>
+          <li><a href="blog.html">Blog</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
         <div class="nav-actions">
@@ -168,13 +169,30 @@
     </div>
   </section>
 
-  <!-- CTA Banner -->
+  <!-- Email Signup -->
   <section class="section-sm">
     <div class="container">
       <div class="cta-banner">
-        <h2>Ready to simplify compliance?</h2>
-        <p>Join importers who have replaced spreadsheets, email chains, and guesswork with a single compliance platform.</p>
-        <a href="https://app.alephco.io/register" class="btn btn-lg">Get Started Free</a>
+        <h2>Stay in the loop</h2>
+        <p>Get early access, product updates, and compliance insights. No spam &mdash; just useful stuff for importers.</p>
+        <form class="signup-form" id="email-signup" onsubmit="handleSignup(event)">
+          <input type="email" name="email" placeholder="you@company.com" required class="signup-input" />
+          <button type="submit" class="btn btn-lg signup-btn">Get Updates</button>
+        </form>
+        <p class="signup-msg" id="signup-msg" style="display:none;margin-top:.75rem;font-size:.875rem;"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Status -->
+  <section style="padding:1.5rem 0;border-top:1px solid var(--border);">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;">
+      <div style="display:flex;align-items:center;gap:.5rem;font-size:.8125rem;color:var(--fg-muted);">
+        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#10b981;" id="status-dot"></span>
+        <span id="status-text">All systems operational</span>
+      </div>
+      <div style="font-size:.75rem;color:var(--fg-subtle);">
+        Platform version 1.0 &mdash; Serving importers since 2026
       </div>
     </div>
   </section>
@@ -182,10 +200,11 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <span>&copy; 2025 Aleph Compliance, Inc.</span>
+      <span>&copy; 2026 Aleph Compliance, Inc.</span>
       <ul class="footer-links">
         <li><a href="about.html">About</a></li>
         <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="blog.html">Blog</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="https://app.alephco.io/login">Log In</a></li>
       </ul>
