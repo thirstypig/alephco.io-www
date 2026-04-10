@@ -51,41 +51,39 @@
 
       <div class="blog-list">
 
-        <!-- Post 1 -->
-        <div class="blog-card">
+        <div class="blog-card" data-publish="2026-04-10" data-slug="blog/why-i-built-aleph.html" data-read="5 min read">
           <div class="blog-meta">April 10, 2026 &middot; 5 min read</div>
           <h3><a href="blog/why-i-built-aleph.html">Why I Built Aleph</a></h3>
           <p class="blog-excerpt">The compliance tools available to importers are either painfully generic or absurdly expensive. I decided to build something better.</p>
         </div>
 
-        <!-- Upcoming posts (shown as coming soon) -->
-        <div class="blog-card" style="opacity:.6;">
-          <div class="blog-meta">Coming Monday, April 14</div>
-          <h3>What Every Food Importer Needs to Know About FSVP</h3>
+        <div class="blog-card" data-publish="2026-04-14" data-slug="blog/fsvp-guide-for-importers.html" data-read="6 min read">
+          <div class="blog-meta">April 14, 2026 &middot; 6 min read</div>
+          <h3><a href="blog/fsvp-guide-for-importers.html">What Every Food Importer Needs to Know About FSVP</a></h3>
           <p class="blog-excerpt">A plain-language breakdown of the FDA's Foreign Supplier Verification Program — what's required, what inspectors look for, and how to stay compliant.</p>
         </div>
 
-        <div class="blog-card" style="opacity:.6;">
-          <div class="blog-meta">Coming Monday, April 21</div>
-          <h3>Children's Product Certificates: A Complete Guide for Importers</h3>
+        <div class="blog-card" data-publish="2026-04-21" data-slug="blog/cpc-certificate-guide.html" data-read="7 min read">
+          <div class="blog-meta">April 21, 2026 &middot; 7 min read</div>
+          <h3><a href="blog/cpc-certificate-guide.html">Children's Product Certificates: A Complete Guide for Importers</a></h3>
           <p class="blog-excerpt">Everything you need to know about CPSIA, third-party testing, and generating a valid CPC before your products hit US shelves.</p>
         </div>
 
-        <div class="blog-card" style="opacity:.6;">
-          <div class="blog-meta">Coming Monday, April 28</div>
-          <h3>Prop 65 Warnings: When Do You Actually Need One?</h3>
+        <div class="blog-card" data-publish="2026-04-28" data-slug="blog/prop-65-warnings-guide.html" data-read="6 min read">
+          <div class="blog-meta">April 28, 2026 &middot; 6 min read</div>
+          <h3><a href="blog/prop-65-warnings-guide.html">Prop 65 Warnings: When Do You Actually Need One?</a></h3>
           <p class="blog-excerpt">California's Prop 65 applies to more products than you think. Here's how to determine if you need a warning and what the label must say.</p>
         </div>
 
-        <div class="blog-card" style="opacity:.6;">
-          <div class="blog-meta">Coming Monday, May 5</div>
-          <h3>PFAS Regulations Are Coming: What Product Importers Should Know</h3>
+        <div class="blog-card" data-publish="2026-05-05" data-slug="blog/pfas-regulations-guide.html" data-read="7 min read">
+          <div class="blog-meta">May 5, 2026 &middot; 7 min read</div>
+          <h3><a href="blog/pfas-regulations-guide.html">PFAS Regulations Are Coming: What Product Importers Should Know</a></h3>
           <p class="blog-excerpt">15 states now have PFAS laws on the books. If your products use coatings, treatments, or packaging, you may have disclosure obligations.</p>
         </div>
 
-        <div class="blog-card" style="opacity:.6;">
-          <div class="blog-meta">Coming Monday, May 12</div>
-          <h3>Why Spreadsheets Are Failing Product Compliance Teams</h3>
+        <div class="blog-card" data-publish="2026-05-12" data-slug="blog/spreadsheets-failing-compliance.html" data-read="5 min read">
+          <div class="blog-meta">May 12, 2026 &middot; 5 min read</div>
+          <h3><a href="blog/spreadsheets-failing-compliance.html">Why Spreadsheets Are Failing Product Compliance Teams</a></h3>
           <p class="blog-excerpt">Spreadsheets can't track document expiry, generate certificates, or alert you when regulations change. Here's what breaks first.</p>
         </div>
 
@@ -106,5 +104,24 @@
     </div>
   </footer>
   <script src="js/main.js"></script>
+  <script>
+    // Auto-release blog posts on their publish date
+    document.addEventListener('DOMContentLoaded', () => {
+      const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+      document.querySelectorAll('.blog-card[data-publish]').forEach(card => {
+        const publishDate = card.dataset.publish;
+        if (publishDate > today) {
+          // Not yet published — dim it and show "Coming" label
+          card.style.opacity = '.6';
+          const meta = card.querySelector('.blog-meta');
+          const d = new Date(publishDate + 'T12:00:00');
+          meta.textContent = 'Coming ' + d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+          // Remove link so it's not clickable
+          const link = card.querySelector('h3 a');
+          if (link) link.replaceWith(document.createTextNode(link.textContent));
+        }
+      });
+    });
+  </script>
 </body>
 </html>
