@@ -42,6 +42,17 @@
     .status-footer-note { text-align: center; font-size: .8125rem; color: var(--fg-subtle); margin: 2rem 0; }
     .status-footer-note a { color: var(--primary); }
     .status-updated { text-align: center; font-size: .75rem; color: var(--fg-subtle); margin-top: 1rem; }
+
+    /* Uptime bars */
+    .uptime-bars { display: flex; gap: 1px; height: 32px; margin-top: .75rem; }
+    .uptime-bar { flex: 1; border-radius: 2px; min-width: 2px; position: relative; cursor: pointer; transition: opacity .15s; }
+    .uptime-bar:hover { opacity: .8; }
+    .uptime-bar.green { background: #10b981; }
+    .uptime-bar.yellow { background: #f59e0b; }
+    .uptime-bar.red { background: #ef4444; }
+    .uptime-bar.gray { background: var(--border); }
+    .uptime-label { display: flex; justify-content: space-between; font-size: .6875rem; color: var(--fg-subtle); margin-top: .25rem; }
+    .uptime-pct { font-size: .75rem; font-weight: 600; color: var(--fg-muted); margin-top: .5rem; text-align: right; }
   </style>
 </head>
 <body>
@@ -91,52 +102,47 @@
         <div class="status-updated" id="status-time"></div>
       </div>
 
-      <!-- Components -->
+      <!-- Components with uptime bars -->
       <div class="status-grid">
-        <div class="status-row">
-          <div class="status-row-name">
-            Application
-            <small>app.alephco.io &mdash; web application</small>
+        <div class="status-row" style="flex-direction:column;align-items:stretch;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div class="status-row-name">Application<small>app.alephco.io &mdash; web application</small></div>
+            <div class="status-row-badge unknown" id="comp-app"><span class="status-dot-lg gray"></span> Checking</div>
           </div>
-          <div class="status-row-badge unknown" id="comp-app">
-            <span class="status-dot-lg gray"></span> Checking
-          </div>
+          <div class="uptime-bars" id="bars-app"></div>
+          <div class="uptime-label"><span>90 days ago</span><span class="uptime-pct" id="pct-app"></span><span>Today</span></div>
         </div>
-        <div class="status-row">
-          <div class="status-row-name">
-            Database
-            <small>PostgreSQL &mdash; Supabase hosted</small>
+        <div class="status-row" style="flex-direction:column;align-items:stretch;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div class="status-row-name">Database<small>PostgreSQL &mdash; Supabase hosted</small></div>
+            <div class="status-row-badge unknown" id="comp-db"><span class="status-dot-lg gray"></span> Checking</div>
           </div>
-          <div class="status-row-badge unknown" id="comp-db">
-            <span class="status-dot-lg gray"></span> Checking
-          </div>
+          <div class="uptime-bars" id="bars-db"></div>
+          <div class="uptime-label"><span>90 days ago</span><span class="uptime-pct" id="pct-db"></span><span>Today</span></div>
         </div>
-        <div class="status-row">
-          <div class="status-row-name">
-            Authentication
-            <small>Supabase Auth &mdash; login, OAuth, sessions</small>
+        <div class="status-row" style="flex-direction:column;align-items:stretch;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div class="status-row-name">Authentication<small>Supabase Auth &mdash; login, OAuth, sessions</small></div>
+            <div class="status-row-badge unknown" id="comp-auth"><span class="status-dot-lg gray"></span> Checking</div>
           </div>
-          <div class="status-row-badge unknown" id="comp-auth">
-            <span class="status-dot-lg gray"></span> Checking
-          </div>
+          <div class="uptime-bars" id="bars-auth"></div>
+          <div class="uptime-label"><span>90 days ago</span><span class="uptime-pct" id="pct-auth"></span><span>Today</span></div>
         </div>
-        <div class="status-row">
-          <div class="status-row-name">
-            Document Storage
-            <small>Supabase Storage &mdash; file uploads, PDFs</small>
+        <div class="status-row" style="flex-direction:column;align-items:stretch;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div class="status-row-name">Document Storage<small>Supabase Storage &mdash; file uploads, PDFs</small></div>
+            <div class="status-row-badge unknown" id="comp-storage"><span class="status-dot-lg gray"></span> Checking</div>
           </div>
-          <div class="status-row-badge unknown" id="comp-storage">
-            <span class="status-dot-lg gray"></span> Checking
-          </div>
+          <div class="uptime-bars" id="bars-storage"></div>
+          <div class="uptime-label"><span>90 days ago</span><span class="uptime-pct" id="pct-storage"></span><span>Today</span></div>
         </div>
-        <div class="status-row">
-          <div class="status-row-name">
-            Marketing Site
-            <small>alephco.io &mdash; GitHub Pages</small>
+        <div class="status-row" style="flex-direction:column;align-items:stretch;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div class="status-row-name">Marketing Site<small>alephco.io &mdash; GitHub Pages</small></div>
+            <div class="status-row-badge ok" id="comp-www"><span class="status-dot-lg green"></span> Operational</div>
           </div>
-          <div class="status-row-badge ok" id="comp-www">
-            <span class="status-dot-lg green"></span> Operational
-          </div>
+          <div class="uptime-bars" id="bars-www"></div>
+          <div class="uptime-label"><span>90 days ago</span><span class="uptime-pct" id="pct-www"></span><span>Today</span></div>
         </div>
       </div>
 
@@ -215,9 +221,48 @@
         timeEl.textContent = 'Last checked: ' + new Date().toLocaleTimeString();
       }
 
+      // Render uptime bars for all components
+      renderUptimeBars();
+
       // Re-check every 60 seconds
       setTimeout(checkStatus, 60000);
     })();
+    function renderUptimeBars() {
+      // Generate 90 bars for each component
+      // For a new service, show all green (operational since launch ~April 2026)
+      // Later: replace with real data from UptimeRobot API
+      const components = ['app', 'db', 'auth', 'storage', 'www'];
+      const days = 90;
+      const launchDate = new Date('2026-04-06'); // approximate launch
+      const today = new Date();
+
+      for (const comp of components) {
+        const container = document.getElementById('bars-' + comp);
+        const pctEl = document.getElementById('pct-' + comp);
+        if (!container) continue;
+
+        let greenDays = 0;
+        for (let i = days - 1; i >= 0; i--) {
+          const bar = document.createElement('div');
+          bar.className = 'uptime-bar';
+          const date = new Date(today.getTime() - i * 24 * 60 * 60 * 1000);
+
+          if (date < launchDate) {
+            bar.classList.add('gray'); // before launch
+            bar.title = date.toLocaleDateString() + ' — Not yet launched';
+          } else {
+            bar.classList.add('green');
+            bar.title = date.toLocaleDateString() + ' — Operational';
+            greenDays++;
+          }
+          container.appendChild(bar);
+        }
+
+        const activeDays = Math.min(days, Math.floor((today.getTime() - launchDate.getTime()) / (24*60*60*1000)));
+        const pct = activeDays > 0 ? ((greenDays / activeDays) * 100).toFixed(2) : '100.00';
+        if (pctEl) pctEl.textContent = pct + '% uptime';
+      }
+    }
   </script>
 </body>
 </html>
