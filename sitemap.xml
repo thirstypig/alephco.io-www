@@ -5,6 +5,8 @@
   <url><loc>https://www.alephco.io/pricing.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.alephco.io/about.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.alephco.io/contact.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.alephco.io/terms.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://www.alephco.io/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://www.alephco.io/status.html</loc><changefreq>always</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.alephco.io/blog.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.alephco.io/blog/why-i-built-aleph.html</loc><lastmod>2026-04-10</lastmod><priority>0.7</priority></url>
