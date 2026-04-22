@@ -17,4 +17,19 @@
   <url><loc>https://www.alephco.io/blog/spreadsheets-failing-compliance.html</loc><lastmod>2026-05-12</lastmod><priority>0.8</priority></url>
   <url><loc>https://www.alephco.io/blog/cpsc-recalls-for-importers.html</loc><lastmod>2026-05-19</lastmod><priority>0.8</priority></url>
   <url><loc>https://www.alephco.io/blog/how-to-choose-testing-lab.html</loc><lastmod>2026-05-26</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.alephco.io/blog/product-compliance-for-amazon-sellers.html</loc><lastmod>2026-06-02</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.alephco.io/blog/multi-regulation-compliance-framework.html</loc><lastmod>2026-06-09</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.alephco.io/blog/fsvp-vs-haccp.html</loc><lastmod>2026-06-16</lastmod><priority>0.8</priority></url>
+  <!-- Feature pages -->
+  <url><loc>https://www.alephco.io/features/cpsia-cpc-generator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.alephco.io/features/prop-65-labels.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.alephco.io/features/pfas-tracking.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.alephco.io/features/fsvp-management.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <!-- Comparison pages -->
+  <url><loc>https://www.alephco.io/compare/registrar-corp.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.alephco.io/compare/assent-compliance.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <!-- Audience pages -->
+  <url><loc>https://www.alephco.io/for/food-importers.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.alephco.io/for/toy-importers.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.alephco.io/for/amazon-sellers.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
