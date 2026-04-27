@@ -10,26 +10,63 @@
 - Plain HTML + CSS + vanilla JavaScript
 - `css/style.css` — all styles, CSS custom properties for theming
 - `js/main.js` — nav toggle, theme toggle, FAQ accordion, contact form, email signup, live status check
-- `package.json` exists but only for local dev (`python3 -m http.server 3060`)
+- `package.json` — local dev server (`npm run dev` on port 3060) + structural tests (`npm test`)
 - No npm production dependencies, no bundler
 
-## Pages
+## Pages (31 HTML files)
+
+### Root Pages (11)
 | File | Purpose |
 |---|---|
 | `index.html` | Homepage — hero, problem/solution, module overview, email signup, status |
 | `how-it-works.html` | Step-by-step platform walkthrough |
+| `industries.html` | Target industries — 3 active (Food & Beverage, Children's Products, Consumer Goods) + 5 coming soon |
 | `pricing.html` | Pricing tiers (Starter/Growth/Pro) + compliance FAQ accordion |
 | `about.html` | Company and founder info |
-| `blog.html` | Blog index with auto-release system |
+| `blog.html` | Blog index with auto-release system (11 posts) |
 | `contact.html` | Contact form (Formspree integration) |
+| `status.html` | System status with 90-day uptime bars |
+| `terms.html` | Terms of Service |
+| `privacy.html` | Privacy Policy |
 | `404.html` | Custom 404 page |
+
+### Feature Pages (`features/`, 4)
+| File | Purpose |
+|---|---|
+| `features/cpsia-cpc-generator.html` | CPSIA & CPC certificate generation landing |
+| `features/prop-65-labels.html` | Prop 65 warning label generation landing |
+| `features/pfas-tracking.html` | PFAS disclosure tracking landing |
+| `features/fsvp-management.html` | FSVP audit management landing |
+
+### Audience Pages (`for/`, 3)
+| File | Purpose |
+|---|---|
+| `for/food-importers.html` | Food & beverage importer landing |
+| `for/toy-importers.html` | Children's product importer landing |
+| `for/amazon-sellers.html` | Amazon/marketplace seller landing |
+
+### Comparison Pages (`compare/`, 2)
+| File | Purpose |
+|---|---|
+| `compare/assent-compliance.html` | Aleph vs Assent Compliance |
+| `compare/registrar-corp.html` | Aleph vs Registrar Corp |
+
+### Blog Posts (`blog/`, 11)
+See `docs/blog-writing-guide.md` for schedule and style conventions.
 
 ## Blog System
 - Blog index: `blog.html` — cards with `data-publish="YYYY-MM-DD"` attributes
-- Blog posts: `blog/*.html` — individual post pages (currently: `why-i-built-aleph.html`)
+- Blog posts: `blog/*.html` — 11 individual post pages
 - Auto-release: inline `<script>` on blog.html checks current date, dims future posts, removes links, shows "Coming [weekday]" label
 - Schedule: posts release on Mondays
 - Future posts are listed in HTML but hidden client-side until their publish date
+
+## Navigation Structure
+- **Top nav**: Logo (links to `/`, serves as home button) + 3 links (How It Works, Industries, Pricing) + theme toggle + Log In CTA
+- **Footer**: 5-column CSS grid (`.footer-grid`) — Brand + tagline, Product, Resources, Company, Legal — with copyright bar (`.footer-bottom`)
+- **Mobile**: hamburger menu at 768px breakpoint; footer collapses to 2-col then 1-col
+- **Path convention**: Root pages use `how-it-works.html`; subdirectory pages use `../how-it-works.html`
+- All 30 pages (excluding 404) share identical nav and footer structure
 
 ## Features
 - **Email signup** — localStorage-based (ready for API integration)
@@ -38,6 +75,7 @@
 - **Dark mode** — CSS supports both `prefers-color-scheme: dark` and `data-theme="dark"` attribute
 - **Mobile nav** — hamburger menu at 768px breakpoint
 - **FAQ accordion** — `.faq-q` / `.faq-a` pattern on pricing page
+- **GA4** — `G-B3X5H4KJ11` tracking on all pages
 
 ## Deployment
 - GitHub Pages via `.github/workflows/deploy.yml` (actions/deploy-pages)
@@ -75,3 +113,8 @@
 - Blog posts auto-release based on client-side date check (not server-side)
 - Copyright year: 2026
 - CNAME file must not be deleted — it configures the GitHub Pages custom domain
+
+## Testing
+- `npm test` — runs `tests/validate-structure.mjs` (1,158 structural checks across 30 pages)
+- Validates: nav consistency (no "Home" link, exactly 3 nav links), footer structure (grid, 4 columns, brand, bottom bar, column headings), internal link integrity (all `href` resolve to real files), CSS class presence
+- Zero dependencies — Node built-ins only
