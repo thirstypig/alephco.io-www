@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.alephco.io/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://www.alephco.io/how-it-works.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.alephco.io/industries.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.alephco.io/pricing.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.alephco.io/about.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.alephco.io/contact.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
