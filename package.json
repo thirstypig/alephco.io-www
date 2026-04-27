@@ -5,6 +5,7 @@
   "description": "Marketing site for Aleph — product compliance platform",
   "scripts": {
     "dev": "python3 -m http.server 3060",
-    "start": "python3 -m http.server 3060"
+    "start": "python3 -m http.server 3060",
+    "test": "node tests/validate-structure.mjs"
   }
 }
