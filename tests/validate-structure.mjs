@@ -30,6 +30,7 @@ const PAGES = [
   "blog/fsvp-guide-for-importers.html",
   "blog/fsvp-vs-haccp.html",
   "blog/how-to-choose-testing-lab.html",
+  "blog/manifest-design-system.html",
   "blog/multi-regulation-compliance-framework.html",
   "blog/pfas-regulations-guide.html",
   "blog/product-compliance-for-amazon-sellers.html",

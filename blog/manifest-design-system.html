@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Manifest Redesign: Why We Made Aleph Look Like a Customs Form | Aleph</title>
+  <meta name="description" content="We rebuilt every page of Aleph around a new design system called Manifest — navy, cream, red, zero border-radius, and an aesthetic borrowed from customs forms and shipping receipts. Here's why.">
+  <link rel="canonical" href="https://www.alephco.io/blog/manifest-design-system.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Manifest Redesign: Why We Made Aleph Look Like a Customs Form">
+  <meta property="og:description" content="We rebuilt every page of Aleph around a design system inspired by customs forms and shipping receipts. Here's why compliance software should look institutional.">
+  <meta property="og:url" content="https://www.alephco.io/blog/manifest-design-system.html">
+  <meta property="og:site_name" content="Aleph">
+  <meta property="article:published_time" content="2026-05-05T12:00:00Z">
+  <meta property="article:author" content="James Chang">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Manifest Redesign: Why We Made Aleph Look Like a Customs Form">
+  <meta name="twitter:description" content="We rebuilt every page of Aleph around a design system inspired by customs forms and shipping receipts. Here's why compliance software should look institutional.">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "The Manifest Redesign: Why We Made Aleph Look Like a Customs Form",
+    "description": "We rebuilt every page of Aleph around a new design system called Manifest — inspired by customs forms and shipping receipts. Here's why compliance software should look institutional, not trendy.",
+    "author": { "@type": "Person", "name": "James Chang", "url": "https://www.alephco.io/about.html" },
+    "publisher": { "@type": "Organization", "name": "Aleph Compliance, Inc.", "url": "https://www.alephco.io" },
+    "datePublished": "2026-05-05",
+    "dateModified": "2026-05-05",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.alephco.io/blog/manifest-design-system.html" },
+    "keywords": ["design system", "Manifest", "compliance software design", "UI rebrand", "customs form aesthetic", "Aleph"],
+    "articleSection": "Product",
+    "wordCount": 1350
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&family=Bungee+Inline&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F6E1;</text></svg>">
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3X5H4KJ11"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-B3X5H4KJ11');
+  </script>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav" role="navigation">
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <img src="../img/aleph-logo-dark.png" alt="Aleph" height="28"/>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="nav-menu">
+        <ul class="nav-links">
+          <li><a href="../how-it-works.html">How It Works</a></li>
+          <li><a href="../industries.html">Industries</a></li>
+          <li><a href="../pricing.html">Pricing</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="theme-toggle" aria-label="Toggle theme">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+          <a href="https://app.alephco.io/login" class="btn btn-red btn-sm">LOG IN</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="spacer"></div>
+
+  <section class="section">
+    <div class="container">
+      <a href="../blog.html" class="blog-back">&larr; Back to Blog</a>
+
+      <article class="blog-content">
+
+        <!-- Meta line + category tags -->
+        <div class="blog-meta">
+          <time datetime="2026-05-05">May 5, 2026</time> &middot;
+          <span>6 min read</span> &middot;
+          <span class="blog-tag">PRODUCT</span>
+          <span class="blog-tag">DESIGN</span>
+        </div>
+
+        <h1>The Manifest Redesign: Why We Made Aleph Look Like a Customs Form</h1>
+
+        <!-- Subtitle -->
+        <p class="blog-subtitle">We threw out rounded corners, gradient backgrounds, and every SaaS design trope we could find &mdash; then rebuilt the entire product around an aesthetic borrowed from customs declarations and shipping receipts.</p>
+
+        <!-- Author + AI attribution -->
+        <div class="blog-author-line">
+          <div class="blog-author-avatar">JC</div>
+          <div>
+            <strong>James Chang</strong>
+            <span class="blog-ai-badge">Written with AI</span>
+          </div>
+        </div>
+
+        <!-- Hero image placeholder -->
+        <figure class="blog-hero">
+          <div style="width:100%;height:400px;background:var(--navy-deep, #0f172a);border:2px solid var(--rule, #d1d5db);border-radius:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.5rem;position:relative;overflow:hidden;">
+            <!-- Corner registration marks -->
+            <div style="position:absolute;top:12px;left:12px;width:20px;height:20px;border-top:2px solid rgba(255,255,255,.3);border-left:2px solid rgba(255,255,255,.3);"></div>
+            <div style="position:absolute;top:12px;right:12px;width:20px;height:20px;border-top:2px solid rgba(255,255,255,.3);border-right:2px solid rgba(255,255,255,.3);"></div>
+            <div style="position:absolute;bottom:12px;left:12px;width:20px;height:20px;border-bottom:2px solid rgba(255,255,255,.3);border-left:2px solid rgba(255,255,255,.3);"></div>
+            <div style="position:absolute;bottom:12px;right:12px;width:20px;height:20px;border-bottom:2px solid rgba(255,255,255,.3);border-right:2px solid rgba(255,255,255,.3);"></div>
+            <span style="font-family:'Bungee Inline',sans-serif;font-size:2.5rem;color:#f5f0e8;letter-spacing:.05em;">MANIFEST</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:rgba(245,240,232,.5);letter-spacing:.1em;text-transform:uppercase;">Navy &middot; Cream &middot; Red &middot; Zero Radius &middot; 2px Borders</span>
+            <div style="position:absolute;bottom:40px;left:50%;transform:translateX(-50%);width:60%;border-top:2px dashed rgba(245,240,232,.15);"></div>
+          </div>
+        </figure>
+
+        <!-- TL;DR -->
+        <div class="tldr-box">
+          <strong>TL;DR</strong>
+          <ul>
+            <li>We redesigned every page of Aleph &mdash; the app, marketing site, and landing pages &mdash; under a new design system called <strong>Manifest</strong></li>
+            <li>The aesthetic is inspired by customs forms, shipping receipts, and port-of-entry stamps &mdash; institutional and serious, not trendy</li>
+            <li>47 files updated in a single marathon session, built with Claude Code</li>
+          </ul>
+        </div>
+
+        <p>Here's a thing nobody tells you when you're building a compliance platform: at some point, you look at your app and realize it looks exactly like every other SaaS product on the internet. Rounded corners, subtle shadows, a nice blue-to-purple gradient in the header. Clean, inoffensive, utterly forgettable.</p>
+
+        <p>That's fine if you're building a project management tool or a CRM. But we generate FDA certificates. We produce CPSIA compliance documents that go in front of customs inspectors. Our users are importers whose businesses depend on getting regulatory paperwork right. And our app looked like it was designed to help you manage your podcast subscriptions.</p>
+
+        <p>Something had to change.</p>
+
+        <h2>Why Compliance Software Shouldn't Look Like Every Other SaaS</h2>
+
+        <p>Design communicates trust. When you walk into a bank, you expect marble and mahogany, not bean bag chairs and a ping pong table. When you open an official government form, you expect sharp corners, dense type, and registration marks &mdash; not playful illustrations and a confetti animation.</p>
+
+        <p>Our product sits at the intersection of commerce and regulation. The documents we generate get scrutinized by FDA inspectors, customs officers, and retail compliance teams. The interface that produces those documents should feel like it belongs in that world. It should feel <em>institutional</em>.</p>
+
+        <p>So we asked ourselves: what if we designed Aleph to look like the documents it produces? What if the app felt less like a tech startup and more like a customs declaration?</p>
+
+        <h2>Introducing Manifest</h2>
+
+        <p>Manifest is our design system, and it's named after the shipping manifest &mdash; the document that declares everything aboard a vessel. The name felt right because that's essentially what our product does: it declares that your products meet the requirements to enter the United States.</p>
+
+        <p>Here's what defines it:</p>
+
+        <p><strong>The palette.</strong> Navy, cream, and red. Pulled directly from the color world of customs forms, shipping labels, and official stamps. The navy is deep and authoritative. The cream is warm, like aged paper. The red is the accent &mdash; the color of a stamp, a warning, a seal.</p>
+
+        <p><strong>The typography.</strong> Three fonts, each with a job. <strong>Bungee Inline</strong> for display text &mdash; bold, stamped, unapologetic. It looks like something that was pressed into metal at a port of entry. <strong>IBM Plex Mono</strong> for labels and metadata &mdash; institutional, monospaced, the kind of font you'd see on a shipping receipt or a government form field. <strong>Inter</strong> for body text &mdash; clean, readable, no-nonsense. Every font earns its place.</p>
+
+        <p><strong>Zero border-radius. Everywhere.</strong> No rounded corners on anything. Cards, buttons, inputs, avatars, tags &mdash; everything is sharp-edged. This was the single biggest visual shift. Rounded corners say "friendly" and "approachable." Square corners say "official" and "precise." We wanted precise.</p>
+
+        <p><strong>2px borders instead of shadows.</strong> Shadows are the universal SaaS crutch. They create depth, they look modern, they're everywhere. We replaced them with solid 2px borders. It's flatter, more graphic, more like a printed document. Cards don't float above the page &mdash; they sit on it, like fields on a form.</p>
+
+        <h2>The Receipts Aesthetic</h2>
+
+        <p>The real character of Manifest comes from the details that make it feel like physical paperwork:</p>
+
+        <p><strong>Corner registration marks.</strong> You know those little L-shaped marks in the corners of printed documents? The ones that help printers align the page? We put them on our cards. They serve no functional purpose in a web UI, and that's exactly the point. They signal that this interface belongs in the world of printed compliance documents.</p>
+
+        <p><strong>Dashed-line separators.</strong> Instead of solid hairlines or spacing alone, we use dashed borders to separate sections &mdash; like the perforated lines on a multi-part form.</p>
+
+        <p><strong>Stamp-bar navigation.</strong> The nav feels like a header strip on an official document, not a floating glass panel. Dense, structured, stamped.</p>
+
+        <p>The cumulative effect is an interface that looks like it was stamped at a port of entry. Which, for a product that helps importers clear compliance at the port of entry, is exactly right.</p>
+
+        <h2>47 Files in One Session</h2>
+
+        <p>Here's where it gets a little unhinged. We didn't roll this out incrementally. We didn't do a phased migration with a Figma handoff and a six-sprint plan. We rebuilt everything in a single marathon session.</p>
+
+        <p>Every page in the app. The entire marketing site &mdash; all 31 pages. Two landing pages. Login and Register, rebuilt as split-screen layouts. The executive dashboard, converted from a generic SaaS look to institutional analytics with the Manifest treatment.</p>
+
+        <p>47 files. One session. Built with <a href="https://claude.ai/claude-code" target="_blank" rel="noopener">Claude Code</a>.</p>
+
+        <p>I want to be transparent about this because I think it matters. AI-assisted development made this kind of sweeping redesign possible in a timeframe that would have been absurd otherwise. Could I have done it without AI? Sure. Would it have taken two weeks instead of one very long night? Also yes. The honest answer is that Claude Code let me move at the speed of my design decisions rather than the speed of my typing.</p>
+
+        <blockquote><p>The best design systems aren't the ones that look the prettiest. They're the ones that make your product feel like it belongs in the world it serves. Manifest makes Aleph feel like it belongs in a customs office, and that's a compliment.</p></blockquote>
+
+        <h2>Polarizing by Design</h2>
+
+        <p>I'll be honest: Manifest is not for everyone. Some people are going to look at our app and think "this looks like a government form." And the correct response to that is: yes, that's the point.</p>
+
+        <p>We'd rather be memorable than forgettable. We'd rather someone look at Aleph and immediately understand what kind of product this is than have them confuse us with yet another generic SaaS dashboard. When your competitors all look the same, looking different is a feature.</p>
+
+        <p>The compliance world is serious. The documents are serious. The consequences of getting them wrong are serious. Our design should communicate that seriousness. Not with a frown, but with precision. Not with austerity, but with intention.</p>
+
+        <p>Every sharp corner, every registration mark, every monospaced label is a deliberate choice that says: we know what world we operate in, and we built this to belong there.</p>
+
+        <!-- Mid-post CTA -->
+        <div class="blog-cta-inline">
+          <p><strong>See Manifest in action.</strong> Aleph's compliance platform was redesigned from the ground up.
+          <a href="https://alephco.io/how-it-works.html">See how it works &rarr;</a></p>
+        </div>
+
+        <h2>What's Next</h2>
+
+        <p>Manifest is live across every surface of Aleph today. But a design system is a living thing &mdash; it evolves as the product does. We're already thinking about how to extend the aesthetic into new areas: PDF exports that match the app (compliance documents that look like compliance documents, what a concept), email notifications with the same institutional feel, and eventually a component library we can open source.</p>
+
+        <p>If you're building something in a regulated industry &mdash; fintech, healthcare, compliance, legal &mdash; I'd encourage you to think hard about whether your design communicates the right kind of trust. The SaaS playbook of rounded corners and gradient headers isn't wrong, but it might not be <em>right</em> for what you're building.</p>
+
+        <p>Sometimes looking like a customs form is exactly what your product needs.</p>
+
+        <!-- Key Takeaways -->
+        <div class="takeaways-box">
+          <strong>Key Takeaways</strong>
+          <ol>
+            <li>Compliance software should look institutional and trustworthy &mdash; not like every other SaaS dashboard</li>
+            <li>Manifest draws from customs forms, shipping receipts, and port-of-entry stamps: navy/cream/red palette, zero border-radius, 2px borders, registration marks</li>
+            <li>47 files redesigned in one marathon session with Claude Code &mdash; AI made sweeping design changes possible at decision speed, not typing speed</li>
+            <li>Polarizing design is a feature when your competitors all look the same</li>
+          </ol>
+        </div>
+
+        <!-- End CTA -->
+        <div class="blog-cta-end">
+          <h3>See the new Aleph</h3>
+          <p>We rebuilt our compliance platform from the ground up with the Manifest design system. Come see what institutional software looks like.</p>
+          <a href="https://app.alephco.io/register" class="btn btn-primary">Get Started Free</a>
+        </div>
+
+        <!-- Author Bio -->
+        <div class="author-bio">
+          <div class="author-bio-text">
+            <strong>James Chang</strong>
+            <p>Founder of Aleph. Building import compliance tools for US importers who are tired of spreadsheets and six-figure enterprise software.</p>
+          </div>
+        </div>
+
+        <!-- Related Posts -->
+        <div class="related-posts">
+          <h3>Related Reading</h3>
+          <ul>
+            <li><a href="why-i-built-aleph.html">Why I Built Aleph</a></li>
+            <li><a href="spreadsheets-failing-compliance.html">Why Spreadsheets Are Failing Product Compliance Teams</a></li>
+            <li><a href="cpc-certificate-guide.html">Children's Product Certificates: A Complete Guide for Importers</a></li>
+          </ul>
+        </div>
+
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/">
+            <img src="../img/aleph-logo-dark.png" alt="Aleph" height="24"/>
+          </a>
+          <p>Product compliance for importers who ship physical goods into the U.S.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="../how-it-works.html">How It Works</a></li>
+            <li><a href="../industries.html">Industries</a></li>
+            <li><a href="../pricing.html">Pricing</a></li>
+            <li><a href="https://app.alephco.io/register">Get Started</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="../pricing.html#faq">FAQ</a></li>
+            <li><a href="../features/cpsia-cpc-generator.html">CPSIA &amp; CPC</a></li>
+            <li><a href="../features/prop-65-labels.html">Prop 65 Labels</a></li>
+            <li><a href="../features/pfas-tracking.html">PFAS Tracking</a></li>
+            <li><a href="../features/fsvp-management.html">FSVP Management</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../status.html">System Status</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="../terms.html">Terms of Service</a></li>
+            <li><a href="../privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Aleph Compliance, Inc.</span>
+        <div class="footer-social">
+          <a href="https://app.alephco.io/login">Log In</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>

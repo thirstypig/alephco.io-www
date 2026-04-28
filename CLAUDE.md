@@ -13,7 +13,7 @@
 - `package.json` — local dev server (`npm run dev` on port 3060) + structural tests (`npm test`)
 - No npm production dependencies, no bundler
 
-## Pages (31 HTML files)
+## Pages (32 HTML files)
 
 ### Root Pages (11)
 | File | Purpose |
@@ -51,12 +51,12 @@
 | `compare/assent-compliance.html` | Aleph vs Assent Compliance |
 | `compare/registrar-corp.html` | Aleph vs Registrar Corp |
 
-### Blog Posts (`blog/`, 11)
+### Blog Posts (`blog/`, 12)
 See `docs/blog-writing-guide.md` for schedule and style conventions.
 
 ## Blog System
 - Blog index: `blog.html` — cards with `data-publish="YYYY-MM-DD"` attributes
-- Blog posts: `blog/*.html` — 11 individual post pages
+- Blog posts: `blog/*.html` — 12 individual post pages
 - Auto-release: inline `<script>` on blog.html checks current date, dims future posts, removes links, shows "Coming [weekday]" label
 - Schedule: posts release on Mondays
 - Future posts are listed in HTML but hidden client-side until their publish date
