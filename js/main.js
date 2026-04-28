@@ -14,7 +14,7 @@ function handleSignup(e) {
     signups.push(email);
     localStorage.setItem('aleph-signups', JSON.stringify(signups));
     msg.textContent = "You're in! We'll send updates to " + email;
-    msg.style.color = 'var(--teal-500)';
+    msg.style.color = '#1f7a4a';
   }
   msg.style.display = 'block';
   form.email.value = '';
@@ -42,20 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close on link click (mobile)
     menu.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => menu.classList.remove('open'));
-    });
-  }
-
-  // Theme toggle
-  const themeBtn = document.querySelector('.theme-toggle');
-  if (themeBtn) {
-    const saved = localStorage.getItem('aleph-theme');
-    if (saved) document.documentElement.setAttribute('data-theme', saved);
-
-    themeBtn.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('aleph-theme', next);
     });
   }
 
