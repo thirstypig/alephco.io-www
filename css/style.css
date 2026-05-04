@@ -220,6 +220,66 @@ p  { color: var(--fg-muted); }
   background-size: 12px; background-repeat: no-repeat; background-position: center;
 }
 
+/* ── Pricing comparison tables ───────────────────────────── */
+.pricing-compare-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 2px solid var(--navy);
+  background: #fff;
+}
+.pricing-compare {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-family: "Inter", system-ui, sans-serif;
+}
+.pricing-compare thead {
+  background: var(--navy-deep);
+  color: var(--paper);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.pricing-compare th,
+.pricing-compare td {
+  text-align: center;
+  padding: .85rem 1rem;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: .9rem;
+}
+.pricing-compare thead th {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.pricing-compare tbody th[scope="row"] {
+  text-align: left;
+  font-weight: 600;
+  color: var(--navy-deep);
+  background: #faf6e8;
+}
+.pricing-compare th.feature-col,
+.pricing-compare tbody th[scope="row"] {
+  min-width: 220px;
+}
+.pricing-compare tbody tr:hover td,
+.pricing-compare tbody tr:hover th[scope="row"] {
+  background: #f3eee2;
+}
+.pricing-compare td.check {
+  color: var(--accent, #c43a2e);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+@media (max-width: 768px) {
+  .pricing-compare th,
+  .pricing-compare td { padding: .65rem .65rem; font-size: .82rem; }
+  .pricing-compare th.feature-col,
+  .pricing-compare tbody th[scope="row"] { min-width: 160px; }
+}
+
 /* ── Steps ───────────────────────────────────────────────── */
 .step { display: flex; gap: 1.5rem; align-items: flex-start; }
 .step-number {
