@@ -114,14 +114,23 @@
         <p>No per-certificate charges. No hidden fees. Save 20% with annual billing.</p>
       </div>
 
-      <div class="grid-3">
+      <!-- Billing toggle -->
+      <div class="billing-toggle" role="tablist" aria-label="Billing period" style="display:flex;justify-content:center;gap:.5rem;margin-bottom:2rem;">
+        <button type="button" role="tab" id="billing-monthly" aria-selected="false" data-period="monthly" class="btn btn-outline btn-sm" style="min-width:110px;">Monthly</button>
+        <button type="button" role="tab" id="billing-annual" aria-selected="true" data-period="annual" class="btn btn-primary btn-sm" style="min-width:110px;">Annual <span style="font-size:.75rem;opacity:.85;margin-left:.25rem;">−20%</span></button>
+      </div>
+
+      <div class="grid-3" data-billing="annual">
         <!-- Starter -->
         <div class="card pricing-card">
           <div>
             <h3>Starter</h3>
             <p style="font-size:.875rem;">For importers with a single regulation to manage.</p>
           </div>
-          <div class="pricing-price">$79<span>/mo</span></div>
+          <div class="pricing-price">
+            <span class="price-amount" data-monthly="$99" data-annual="$79">$79</span><span>/mo</span>
+            <div class="price-note" style="font-size:.75rem;color:var(--fg-muted);margin-top:.25rem;">billed annually</div>
+          </div>
           <ul class="pricing-features">
             <li>Cover one regulation end to end</li>
             <li>Up to 25 products</li>
@@ -138,7 +147,10 @@
             <h3>Growth</h3>
             <p style="font-size:.875rem;">For importers juggling multiple regulations.</p>
           </div>
-          <div class="pricing-price">$199<span>/mo</span></div>
+          <div class="pricing-price">
+            <span class="price-amount" data-monthly="$249" data-annual="$199">$199</span><span>/mo</span>
+            <div class="price-note" style="font-size:.75rem;color:var(--fg-muted);margin-top:.25rem;">billed annually</div>
+          </div>
           <ul class="pricing-features">
             <li>Cover every regulation &mdash; FSVP, CPSIA, Prop 65, PFAS</li>
             <li>Up to 200 products</li>
@@ -154,7 +166,10 @@
             <h3>Pro</h3>
             <p style="font-size:.875rem;">For teams managing compliance at scale.</p>
           </div>
-          <div class="pricing-price">$399<span>/mo</span></div>
+          <div class="pricing-price">
+            <span class="price-amount" data-monthly="$499" data-annual="$399">$399</span><span>/mo</span>
+            <div class="price-note" style="font-size:.75rem;color:var(--fg-muted);margin-top:.25rem;">billed annually</div>
+          </div>
           <ul class="pricing-features">
             <li>Every module, unlimited products</li>
             <li>Your whole team (up to 5 seats)</li>
@@ -164,6 +179,33 @@
           <span class="btn btn-outline" style="width:100%;opacity:.6;pointer-events:none;cursor:default;">Coming Soon</span>
         </div>
       </div>
+
+      <script>
+        (function () {
+          var monthlyBtn = document.getElementById('billing-monthly');
+          var annualBtn = document.getElementById('billing-annual');
+          var grid = document.querySelector('.grid-3[data-billing]');
+          if (!monthlyBtn || !annualBtn || !grid) return;
+          function setPeriod(period) {
+            grid.setAttribute('data-billing', period);
+            grid.querySelectorAll('.price-amount').forEach(function (el) {
+              el.textContent = el.getAttribute('data-' + period) || el.textContent;
+            });
+            grid.querySelectorAll('.price-note').forEach(function (el) {
+              el.textContent = period === 'annual' ? 'billed annually' : 'billed monthly';
+            });
+            var isAnnual = period === 'annual';
+            annualBtn.classList.toggle('btn-primary', isAnnual);
+            annualBtn.classList.toggle('btn-outline', !isAnnual);
+            monthlyBtn.classList.toggle('btn-primary', !isAnnual);
+            monthlyBtn.classList.toggle('btn-outline', isAnnual);
+            annualBtn.setAttribute('aria-selected', String(isAnnual));
+            monthlyBtn.setAttribute('aria-selected', String(!isAnnual));
+          }
+          monthlyBtn.addEventListener('click', function () { setPeriod('monthly'); });
+          annualBtn.addEventListener('click', function () { setPeriod('annual'); });
+        })();
+      </script>
 
       <p class="text-center mt-4" style="font-size:.875rem;color:var(--fg-subtle);">
         We're finalizing our plans. <a href="contact.html" style="color:var(--accent);text-decoration:underline;">Contact us</a> to get early access pricing.
