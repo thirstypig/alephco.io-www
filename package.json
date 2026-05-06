@@ -6,6 +6,12 @@
   "scripts": {
     "dev": "python3 -m http.server 3060",
     "start": "python3 -m http.server 3060",
-    "test": "node tests/validate-structure.mjs"
+    "test": "node tests/validate-structure.mjs",
+    "build:learn": "node scripts/build-learn-pages.mjs"
+  },
+  "devDependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "dotenv": "^16.4.5",
+    "marked": "^14.1.0"
   }
 }

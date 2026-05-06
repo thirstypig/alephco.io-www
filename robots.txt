@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Allow: /learn/
 
 Sitemap: https://www.alephco.io/sitemap.xml

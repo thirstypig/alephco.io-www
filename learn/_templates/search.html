@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+{{HEAD}}
+</head>
+<body>
+{{NAV}}
+  <section class="hero hero-sm">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/learn/">Learn</a><span>/</span><span>Search</span>
+      </nav>
+      <h1>Search the knowledge base</h1>
+      <form class="learn-search" id="search-form" action="/learn/search/" method="get">
+        <input type="search" id="search-input" name="q" placeholder="Search articles..." aria-label="Search articles" required/>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div id="search-status" class="article-list-empty">Enter a query above to search.</div>
+      <div class="article-list" id="search-results"></div>
+    </div>
+  </section>
+{{FOOTER}}
+  <script type="module" src="/learn/js/search.js"></script>
+</body>
+</html>

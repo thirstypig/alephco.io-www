@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+{{HEAD}}
+</head>
+<body>
+{{NAV}}
+  <main class="learn-article">
+    <div class="container container-narrow">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/learn/">Learn</a>
+        <span>/</span>
+        <a href="/learn/m/{{MODULE}}/">{{MODULE_LABEL}}</a>
+        <span>/</span>
+        <span>{{TITLE}}</span>
+      </nav>
+      <article class="article-body">
+        <header class="article-header">
+          <span class="section-label">{{CATEGORY_LABEL}}</span>
+          <h1>{{TITLE}}</h1>
+          <p class="article-excerpt">{{EXCERPT}}</p>
+        </header>
+        <div class="prose">
+{{CONTENT_HTML}}
+        </div>
+        <aside class="article-cta">
+          <h3>Want the full guide with screenshots?</h3>
+          <p>Sign up free and explore the in-app help center alongside your products.</p>
+          <a href="https://app.alephco.io/register" class="btn btn-primary">Sign up free</a>
+        </aside>
+        {{RELATED_HTML}}
+        <!-- TODO v2: feedback widget (was this helpful?) -->
+        <!-- TODO v2: view tracking via anon insert into help_article_views -->
+      </article>
+    </div>
+  </main>
+{{FOOTER}}
+</body>
+</html>
