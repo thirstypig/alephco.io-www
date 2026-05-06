@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+{{HEAD}}
+</head>
+<body>
+{{NAV}}
+  <section class="hero hero-sm">
+    <div class="container">
+      <span class="section-label">Aleph Learn</span>
+      <h1>Compliance, explained.</h1>
+      <p>Plain-language guides to FSVP, CPSIA, Prop 65, and PFAS for US importers. Updated as the rules change.</p>
+      <form class="learn-search" action="/learn/search/" method="get">
+        <input type="search" name="q" placeholder="Search articles..." aria-label="Search articles" required/>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">Browse by module</span>
+        <h2>Pick the regulation you're working on</h2>
+      </div>
+      <div class="grid-4">
+{{MODULE_CARDS}}
+      </div>
+    </div>
+  </section>
+  <section class="section" style="background: var(--bg-subtle);">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">All articles</span>
+        <h2>{{ARTICLE_COUNT}} guides and explainers</h2>
+      </div>
+      <div class="article-list">
+{{ARTICLE_CARDS}}
+      </div>
+    </div>
+  </section>
+{{FOOTER}}
+</body>
+</html>

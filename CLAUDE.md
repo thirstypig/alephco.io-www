@@ -81,7 +81,9 @@ See `docs/blog-writing-guide.md` for schedule and style conventions.
 - GitHub Pages via `.github/workflows/deploy.yml` (actions/deploy-pages)
 - Triggers on push to `main` or manual workflow_dispatch
 - CNAME file: `www.alephco.io`
-- No build step — entire repo is uploaded as-is
+- Build step: `npm ci && npm run build:learn` runs in CI to regenerate `/learn/*` static pages from Supabase before upload
+- **Required GitHub repository secrets:** `SUPABASE_URL` and `SUPABASE_ANON_KEY` (anon key only — never service role). Without these, the build step fails and the deploy is blocked.
+- The rest of the repo (hand-written `.html` files) is uploaded as-is
 
 ## DNS Records (Squarespace)
 - `alephco.io` → GitHub Pages (A records: 185.199.108-111.153)
