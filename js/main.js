@@ -1,23 +1,49 @@
-// Email signup handler
-function handleSignup(e) {
+// Email signup handler — double opt-in via the app's public /api/subscribe.
+// The visitor is saved as "pending" and emailed a confirmation link; only after
+// they click it do they count as confirmed. No email/data is stored in the
+// browser. Uses localhost:4060 during local dev (same pattern as the links below).
+const SIGNUP_API_BASE =
+  (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+    ? 'http://localhost:4060'
+    : 'https://app.alephco.io';
+
+async function handleSignup(e) {
   e.preventDefault();
   const form = e.target;
-  const email = form.email.value;
+  const email = (form.email.value || '').trim();
+  const website = form.website ? form.website.value : ''; // honeypot — bots fill it
   const msg = document.getElementById('signup-msg');
+  const btn = form.querySelector('button[type="submit"]');
 
-  // Store locally for now (replace with Resend/Mailchimp/API endpoint later)
-  const signups = JSON.parse(localStorage.getItem('aleph-signups') || '[]');
-  if (signups.includes(email)) {
-    msg.textContent = "You're already on the list!";
-    msg.style.color = 'var(--fg-muted)';
-  } else {
-    signups.push(email);
-    localStorage.setItem('aleph-signups', JSON.stringify(signups));
-    msg.textContent = "You're in! We'll send updates to " + email;
-    msg.style.color = '#1f7a4a';
+  function say(text, color) {
+    msg.textContent = text;
+    msg.style.color = color;
+    msg.style.display = 'block';
   }
-  msg.style.display = 'block';
-  form.email.value = '';
+
+  if (!email) { say('Please enter your email.', '#991b1b'); return; }
+
+  const original = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+  try {
+    const res = await fetch(SIGNUP_API_BASE + '/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, website: website }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (data && data.ok) {
+      say(data.message || "Check your inbox to confirm your email.", '#1f7a4a');
+      form.email.value = '';
+    } else {
+      say((data && data.message) || 'Sorry, something went wrong. Please try again.', '#991b1b');
+    }
+  } catch (_) {
+    say('Sorry, something went wrong. Please try again.', '#991b1b');
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = original; }
+  }
 }
 
 // Localhost detection: rewrite app.alephco.io links to localhost:4060

@@ -210,6 +210,9 @@
         <p>Get early access, product updates, and compliance insights. No spam &mdash; just useful stuff for importers.</p>
         <form class="signup-form" id="email-signup" onsubmit="handleSignup(event)">
           <input type="email" name="email" placeholder="you@company.com" required class="signup-input" />
+          <!-- Honeypot: hidden from people + screen readers; bots fill it → silent no-op. -->
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"
+                 style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" />
           <button type="submit" class="btn btn-lg signup-btn">Get Updates</button>
         </form>
         <p class="signup-msg" id="signup-msg" style="display:none;margin-top:.75rem;font-size:.875rem;"></p>

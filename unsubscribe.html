@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Unsubscribe — Aleph</title>
+  <link rel="canonical" href="https://www.alephco.io/unsubscribe">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&family=Bungee+Inline&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F6E1;</text></svg>">
+  <style>
+    .confirm-wrap{min-height:60vh;display:flex;align-items:center;justify-content:center;padding:48px 16px;}
+    .confirm-card{max-width:440px;width:100%;background:#fff;border:2px solid #1f3a5f;padding:32px;text-align:center;}
+    .confirm-card h1{font-size:24px;color:#1f3a5f;margin:0 0 12px;}
+    .confirm-card p{color:#444;font-size:15px;line-height:1.6;margin:0 0 20px;}
+    .confirm-card .muted{color:#888;font-size:13px;}
+    .confirm-hide{display:none;}
+  </style>
+</head>
+<body>
+  <nav class="nav" role="navigation">
+    <div class="container">
+      <a href="/" class="nav-logo"><img src="img/aleph-logo-dark.png" alt="Aleph" height="28"/></a>
+    </div>
+  </nav>
+  <div class="spacer"></div>
+
+  <div class="confirm-wrap">
+    <div class="confirm-card">
+      <!-- State: ask -->
+      <div id="state-ask">
+        <h1>Unsubscribe</h1>
+        <p>Click below to stop receiving emails from Aleph. You can re-subscribe anytime.</p>
+        <button id="unsub-btn" class="btn btn-red">Yes, unsubscribe me</button>
+      </div>
+      <!-- State: working -->
+      <div id="state-loading" class="confirm-hide">
+        <h1>One moment…</h1>
+        <p class="muted">Updating your preferences.</p>
+      </div>
+      <!-- State: success -->
+      <div id="state-success" class="confirm-hide">
+        <h1>You're unsubscribed</h1>
+        <p>Sorry to see you go — you won't receive any more emails from us. Changed your mind? You can sign up again anytime.</p>
+        <a href="/" class="btn">Back to alephco.io</a>
+      </div>
+      <!-- State: error -->
+      <div id="state-error" class="confirm-hide">
+        <h1>Something went wrong</h1>
+        <p>We couldn't update your preferences just now. Please try the link again in a moment.</p>
+        <a href="/" class="btn">Back to alephco.io</a>
+      </div>
+      <!-- State: missing token -->
+      <div id="state-notoken" class="confirm-hide">
+        <h1>Something's missing</h1>
+        <p>This link is missing its code. Please use the unsubscribe link directly from one of our emails.</p>
+        <a href="/" class="btn">Back to alephco.io</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    (function () {
+      var API = "https://app.alephco.io/api/subscribe/unsubscribe";
+      function show(id) {
+        ["state-ask","state-loading","state-success","state-error","state-notoken"]
+          .forEach(function (s) { document.getElementById(s).classList.add("confirm-hide"); });
+        document.getElementById(id).classList.remove("confirm-hide");
+      }
+      var token = new URLSearchParams(window.location.search).get("token");
+      if (!token) { show("state-notoken"); return; }
+
+      document.getElementById("unsub-btn").addEventListener("click", function () {
+        show("state-loading");
+        fetch(API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token: token })
+        })
+          .then(function (r) { return r.json().catch(function () { return {}; }); })
+          .then(function (data) { show(data && data.ok ? "state-success" : "state-error"); })
+          .catch(function () { show("state-error"); });
+      });
+    })();
+  </script>
+</body>
+</html>
