@@ -13,9 +13,9 @@
 - `package.json` — local dev server (`npm run dev` on port 3060) + structural tests (`npm test`)
 - No npm production dependencies, no bundler
 
-## Pages (32 HTML files)
+## Pages (34 HTML files)
 
-### Root Pages (11)
+### Root Pages (13)
 | File | Purpose |
 |---|---|
 | `index.html` | Homepage — hero, problem/solution, module overview, email signup, status |
@@ -28,6 +28,8 @@
 | `status.html` | System status with 90-day uptime bars |
 | `terms.html` | Terms of Service |
 | `privacy.html` | Privacy Policy |
+| `confirm.html` | Email-list double opt-in confirm page (`/confirm?token=`) — minimal chrome, `noindex`; button-triggered POST to `app.alephco.io/api/subscribe/confirm` |
+| `unsubscribe.html` | Email-list unsubscribe page (`/unsubscribe?token=`) — minimal chrome, `noindex`; POSTs to `/api/subscribe/unsubscribe` |
 | `404.html` | Custom 404 page |
 
 ### Feature Pages (`features/`, 4)
@@ -69,7 +71,7 @@ See `docs/blog-writing-guide.md` for schedule and style conventions.
 - All 30 pages (excluding 404) share identical nav and footer structure
 
 ## Features
-- **Email signup** — localStorage-based (ready for API integration)
+- **Email signup** — double opt-in via `app.alephco.io/api/subscribe` (`handleSignup` in `main.js`). The homepage "Stay in the loop" form (bottom of `index.html`) has a hidden honeypot; on submit it POSTs the email, the visitor gets a confirmation email, and only confirmed addresses count. Confirm/unsubscribe happen on `/confirm` + `/unsubscribe`. No email is stored in the browser. Backend + `subscribers` table live in the app repo.
 - **Live status indicator** — pings `app.alephco.io/api/health`, shows green/amber/red dot
 - **Theme toggle** — light/dark, persisted in localStorage as `aleph-theme`
 - **Dark mode** — CSS supports both `prefers-color-scheme: dark` and `data-theme="dark"` attribute
