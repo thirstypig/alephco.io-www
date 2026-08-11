@@ -1,6 +1,6 @@
 # 🗂️ Master Port Registry — All Projects
 > 📍 Canonical location: `~/Projects/MASTER-PORTS.md`
-> 🗓️ Last Updated: 2026-05-11
+> 🗓️ Last Updated: 2026-07-31
 > ⚠️ This is the single source of truth. Update this file first, then mirror to each project's local copy.
 
 Copies of this file live in each active project root (e.g., `~/Projects/bahtzang-trader/MASTER-PORTS.md`). They must stay byte-identical to the root copy.
@@ -26,6 +26,12 @@ Copies of this file live in each active project root (e.g., `~/Projects/bahtzang
 | **jameschang.co**                     | 3090     | —    | —         | —          | —     | —     | Personal site |
 | **thirstypig**                        | 4321     | —    | —         | —          | —     | —     | Astro default |
 | **cooper-stack3**                     | —        | 4100 | —         | —          | —     | —     | Express server (rarely run) |
+| **vouch**                             | 3020     | —    | —         | (Supabase) | —     | —     | Next.js 16 (App Router); Supabase cloud DB |
+| **TIP** (was: spar)                   | 3110     | —    | —         | (Supabase) | —     | —     | Next.js 16 (App Router); Retell voice + Stripe later; renamed from Spar 2026-07; Railway at tip.bahtzang.com |
+| **shengchangmd**                      | 3120     | —    | —         | —          | —     | —     | Astro 5 static, trilingual; no backend; GitHub Pages at shengchangmd.bahtzang.com |
+| **tobinchang**                        | 3130     | —    | —         | —          | —     | —     | Static site; GitHub Pages at tobinchang.com |
+| **jarrenchang**                       | 3140     | —    | —         | —          | —     | —     | Static site; GitHub Pages at jarrenchang.com (apex, Squarespace DNS) |
+| **rhyschang**                         | 3150     | —    | —         | —          | —     | —     | Static site; GitHub Pages at rhyschang.com |
 
 ---
 
@@ -36,7 +42,7 @@ Each product owns a 10-port block (3XX0–3XX9 frontend, 4XX0–4XX9 API). Sub-s
 | Frontend Range | API Range   | PG   | Redis | Owner                                |
 |----------------|-------------|------|-------|--------------------------------------|
 | 3010 – 3019    | 4010 – 4019 | 5442 | 6381  | thefantasticleagues (app + www)      |
-| 3020 – 3029    | 4020 – 4029 | 5443 | 6382  | **AVAILABLE** (reclaimed from fsvppro) |
+| 3020 – 3029    | 4020 – 4029 | 5443 | 6382  | vouch (Next.js, Supabase cloud DB — local PG/Redis unused) |
 | 3030 – 3039    | 4030 – 4039 | 5444 | 6383  | bbq-judge (app + www)                |
 | 3040 – 3049    | 4040 – 4049 | 5445 | 6385  | ktv-singer (+ WebSocket 8040–8049)   |
 | 3050 – 3059    | 4050 – 4059 | 5446 | 6384  | tastemakers (web + backend + admin)  |
@@ -46,13 +52,16 @@ Each product owns a 10-port block (3XX0–3XX9 frontend, 4XX0–4XX9 API). Sub-s
 | 3090 – 3099    | —           | —    | —     | jameschang.co (static)               |
 | 4100 – 4109    | —           | —    | —     | cooper-stack3                        |
 | 4321           | —           | —    | —     | thirstypig (Astro default)           |
-| 3110 – 3119    | 4110 – 4119 | 5449 | 6388  | **AVAILABLE** — reserved for future  |
-| 3120 – 3129    | 4120 – 4129 | 5450 | 6389  | **AVAILABLE** — reserved for future  |
-| 3130 – 3139    | 4130 – 4139 | 5451 | 6390  | **AVAILABLE** — reserved for future  |
+| 3110 – 3119    | 4110 – 4119 | 5449 | 6388  | TIP, was spar (Next.js; Retell voice + Stripe; Supabase — local PG/Redis unused) |
+| 3120 – 3129    | 4120 – 4129 | 5450 | 6389  | shengchangmd (Astro static; no API/PG/Redis in use) |
+| 3130 – 3139    | 4130 – 4139 | 5451 | 6390  | tobinchang (static site; no API/PG/Redis in use) |
+| 3140 – 3149    | 4140 – 4149 | 5452 | 6391  | jarrenchang (static site; no API/PG/Redis in use) |
+| 3150 – 3159    | 4150 – 4159 | 5453 | 6392  | rhyschang (static site; no API/PG/Redis in use) |
+| 3160 – 3169    | 4160 – 4169 | 5454 | 6393  | **AVAILABLE** — reserved for future  |
 | 8040 – 8049    | —           | —    | —     | ktv-singer (WebSocket)               |
 | 24680 – 24689  | —           | —    | —     | Vite HMR (per-project, pick any)     |
 
-**Free capacity:** 4 full product slots (fsvppro reclaim + 3 reserved).
+**Free capacity:** 1 full product slot (1 reserved block remains: 3160–3169).
 
 ---
 
@@ -76,6 +85,12 @@ tabledrop/apps/web       → FE: 3080
 jameschang.co            → FE: 3090
 thirstypig               → FE: 4321 (Astro default)
 cooper-stack3            → API: 4100
+vouch                    → FE: 3020 (Supabase cloud DB)
+TIP (was spar)           → FE: 3110 (Retell voice + Stripe; Railway, tip.bahtzang.com)
+shengchangmd             → FE: 3120 (Astro static; GitHub Pages)
+tobinchang               → FE: 3130 (static; GitHub Pages, tobinchang.com)
+jarrenchang              → FE: 3140 (static; GitHub Pages, jarrenchang.com)
+rhyschang                → FE: 3150 (static; GitHub Pages, rhyschang.com)
 
 Never cross-assign ports between projects. Each product owns its 10-port block
 (e.g., thefantasticleagues owns 3010-3019 and 4010-4019). If a new service
@@ -89,7 +104,7 @@ the AVAILABLE rows in MASTER-PORTS.md before creating any new product.
 Run this anytime to see what's actually listening:
 
 ```bash
-lsof -i -P -n | grep LISTEN | grep -E '3010|3011|3030|3031|3040|3050|3060|3070|3080|3090|4010|4030|4040|4050|4051|4060|4070|4100|4321|5442|5444|5445|5446|5448|6381|6383|6384|6385|6387|8040|24680|24681'
+lsof -i -P -n | grep LISTEN | grep -E '3010|3011|3020|3030|3031|3040|3050|3060|3070|3080|3090|3110|3120|3130|3140|3150|4010|4030|4040|4050|4051|4060|4070|4100|4321|5442|5444|5445|5446|5448|6381|6383|6384|6385|6387|8040|24680|24681'
 ```
 
 ---
@@ -107,6 +122,13 @@ lsof -i -P -n | grep LISTEN | grep -E '3010|3011|3030|3031|3040|3050|3060|3070|3
 
 ## 📝 Changelog
 
+- **2026-07-31** — Added the three personal-site projects **tobinchang** (FE 3130), **jarrenchang** (FE 3140) and **rhyschang** (FE 3150), extending the registry with two new blocks (3140–3149, 3150–3159) and a fresh **FUTURE** block (3160–3169) so the "always one slot free" invariant holds. All three are static sites bound for GitHub Pages on their own apex domains, so API/PG/Redis in each block stay unassigned.
+  - **Block order was set by what was already running, not alphabetically.** `tobinchang` had a `python3 -m http.server 3130` live at assignment time, so it kept 3130 rather than being moved; reassigning would have broken a running dev server mid-session. This is the failure the "claim before you run" rule exists to prevent — the claim happened after the fact for the second time in three entries (see shengchangmd, 2026-07-30).
+  - **Corrected a stale row:** `spar` was renamed to **TIP** in commit `283e8bd` ("refactor: rename the product Spar → TIP across code, copy and docs"). Same 3110–3119 block, now deployed on Railway at tip.bahtzang.com. There is no `spar` folder on disk; the registry had been pointing at a product name that no longer existed.
+  - **Re-synced all mirrors.** The copies had drifted into **4 distinct versions across 35 files** despite the byte-identical rule — the `ktv-singer/*` sub-repos (7 files) and a tastemakers/alephco/bbq-judge/thefantasticleagues group (10 files) were both stale, and `thefantasticleagues-app` was on a version of its own. All 35 `MASTER-PORTS.md` and 20 `PORTS.md` copies now match the root.
+- **2026-07-30** — Added **shengchangmd** (Astro 5 static site for Sheng Chang, M.D.; trilingual en/zh-hant/zh-hans) on **FE 3120**, claiming the FUTURE-2 block (3120–3129 / 4120–4129). Static only — no API, PostgreSQL or Redis in use, so 4120/5450/6389 stay unassigned within the block. Deployed to GitHub Pages at shengchangmd.bahtzang.com. Registry was retroactive: the project had been running on 3120 before the block was claimed.
+- **2026-07-09** — Added **spar** (Next.js 16 App Router; Retell voice + Stripe later; staging spar.bahtzang.com) on **FE 3110**, claiming the FUTURE-1 block (3110–3119 / 4110–4119). Mirrored MASTER-PORTS.md + PORTS.md into the spar folder. Also removed a stray empty `package-lock.json` from `~/Projects` that was confusing Next.js's workspace-root detection.
+- **2026-06-30** — Added **vouch** (Next.js 16 + Supabase cloud) on **FE 3020**, claiming the reclaimed fsvppro block (3020–3029). Mirrored MASTER-PORTS.md + PORTS.md into the vouch folder and re-synced all project copies; also added the missing PORTS.md to alephco.io. Vouch dev server pinned to `-p 3020`.
 - **2026-05-11** — Full sync: updated date, added top-level MASTER-PORTS.md + PORTS.md to all project folders (alephco.io, bbq-judge, thefantasticleagues). Created root PORTS.md quick-reference and README.md for Projects folder.
 - **2026-04-20** — Major restructure: added alephco.io, bahtzang-trader, tabledrop, jameschang.co, thirstypig, cooper-stack3, and `-www` marketing sites. Resolved 3 port conflicts (3060, 4060, 3030). Retired fsvppro block.
 - **2026-03-08** — Initial 5-project registry (fbst, fvsppro, bbq-judge, ktv-singer, tastemakers).

@@ -7,54 +7,20 @@
 - Separate from the app repo (`alephco.io-app`) — the React/Express platform lives at app.alephco.io
 
 ## Tech Stack
-- Plain HTML + CSS + vanilla JavaScript
-- `css/style.css` — all styles, CSS custom properties for theming
-- `js/main.js` — nav toggle, theme toggle, FAQ accordion, contact form, email signup, live status check
-- `package.json` — local dev server (`npm run dev` on port 3060) + structural tests (`npm test`)
-- No npm production dependencies, no bundler
 
-## Pages (34 HTML files)
+Plain HTML + CSS + vanilla JS. **No framework, no bundler, no npm production dependencies** —
+`package.json` exists only for the local dev server (`npm run dev`, port 3060) and the structural
+tests (`npm test`). All styles live in `css/style.css`; all behavior in `js/main.js`. Keep it that
+way — adding a build step breaks the GitHub Pages deploy assumption below.
 
-### Root Pages (13)
-| File | Purpose |
-|---|---|
-| `index.html` | Homepage — hero, problem/solution, module overview, email signup, status |
-| `how-it-works.html` | Step-by-step platform walkthrough |
-| `industries.html` | Target industries — 3 active (Food & Beverage, Children's Products, Consumer Goods) + 5 coming soon |
-| `pricing.html` | Pricing tiers (Starter/Growth/Pro) + compliance FAQ accordion |
-| `about.html` | Company and founder info |
-| `blog.html` | Blog index with auto-release system (11 posts) |
-| `contact.html` | Contact form (Formspree integration) |
-| `status.html` | System status with 90-day uptime bars |
-| `terms.html` | Terms of Service |
-| `privacy.html` | Privacy Policy |
-| `confirm.html` | Email-list double opt-in confirm page (`/confirm?token=`) — minimal chrome, `noindex`; button-triggered POST to `app.alephco.io/api/subscribe/confirm` |
-| `unsubscribe.html` | Email-list unsubscribe page (`/unsubscribe?token=`) — minimal chrome, `noindex`; POSTs to `/api/subscribe/unsubscribe` |
-| `404.html` | Custom 404 page |
+## Pages
 
-### Feature Pages (`features/`, 4)
-| File | Purpose |
-|---|---|
-| `features/cpsia-cpc-generator.html` | CPSIA & CPC certificate generation landing |
-| `features/prop-65-labels.html` | Prop 65 warning label generation landing |
-| `features/pfas-tracking.html` | PFAS disclosure tracking landing |
-| `features/fsvp-management.html` | FSVP audit management landing |
+`ls *.html features/ for/ compare/ blog/` for the inventory. Two are not obvious from filename:
+`confirm.html` and `unsubscribe.html` are the email-list double-opt-in surfaces
+(`/confirm?token=` and `/unsubscribe?token=`) — minimal chrome, `noindex`, and **button-triggered
+POSTs** to `app.alephco.io/api/subscribe/*` so email scanners can't fire them by prefetching a link.
 
-### Audience Pages (`for/`, 3)
-| File | Purpose |
-|---|---|
-| `for/food-importers.html` | Food & beverage importer landing |
-| `for/toy-importers.html` | Children's product importer landing |
-| `for/amazon-sellers.html` | Amazon/marketplace seller landing |
-
-### Comparison Pages (`compare/`, 2)
-| File | Purpose |
-|---|---|
-| `compare/assent-compliance.html` | Aleph vs Assent Compliance |
-| `compare/registrar-corp.html` | Aleph vs Registrar Corp |
-
-### Blog Posts (`blog/`, 12)
-See `docs/blog-writing-guide.md` for schedule and style conventions.
+Blog style + schedule conventions: `docs/blog-writing-guide.md`.
 
 ## Blog System
 - Blog index: `blog.html` — cards with `data-publish="YYYY-MM-DD"` attributes
