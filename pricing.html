@@ -120,7 +120,7 @@
         <button type="button" role="tab" id="billing-annual" aria-selected="true" data-period="annual" class="btn btn-primary btn-sm" style="min-width:110px;">Annual <span style="font-size:.75rem;opacity:.85;margin-left:.25rem;">−20%</span></button>
       </div>
 
-      <div class="grid-3" data-billing="annual">
+      <div class="grid-4" data-billing="annual">
         <!-- Starter -->
         <div class="card pricing-card">
           <div>
@@ -180,13 +180,39 @@
           </ul>
           <a href="https://app.alephco.io/register" class="btn btn-outline" style="width:100%;">Get Started</a>
         </div>
+
+        <!-- Enterprise — deliberately has NO .price-amount / .price-note, so the billing
+             toggle leaves it untouched. Claims here are limited to what we can actually
+             deliver today: a bigger catalog, more seats, and a conversation. -->
+        <div class="card pricing-card">
+          <div>
+            <h3>Enterprise</h3>
+            <p style="font-size:.875rem;">For importers whose catalog has outgrown self-serve.</p>
+          </div>
+          <!-- min-height matches the rendered height of a 2.5rem price + its note, so this
+               card's feature list and button stay on the same baseline as the other three. -->
+          <div class="pricing-price" style="font-size:1.75rem;min-height:3.65rem;display:flex;flex-direction:column;justify-content:flex-end;">
+            Let&rsquo;s talk
+            <div style="font-size:.75rem;color:var(--fg-muted);margin-top:.25rem;font-weight:500;">priced around your catalog</div>
+          </div>
+          <ul class="pricing-features">
+            <li>Everything in Pro</li>
+            <li>More than 500 products</li>
+            <li>Custom team seats</li>
+            <li>Onboarding support for bulk imports</li>
+          </ul>
+          <a href="contact.html" class="btn btn-outline" style="width:100%;">Contact Us</a>
+        </div>
       </div>
 
       <script>
         (function () {
           var monthlyBtn = document.getElementById('billing-monthly');
           var annualBtn = document.getElementById('billing-annual');
-          var grid = document.querySelector('.grid-3[data-billing]');
+          // Selected by the data attribute, NOT by the grid class. This used to read
+          // '.grid-3[data-billing]', so adding the Enterprise card (grid-3 -> grid-4) would
+          // have silently disabled the whole Annual/Monthly toggle via the guard below.
+          var grid = document.querySelector('[data-billing]');
           if (!monthlyBtn || !annualBtn || !grid) return;
           function setPeriod(period) {
             grid.setAttribute('data-billing', period);
