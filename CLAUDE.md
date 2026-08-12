@@ -79,7 +79,17 @@ Blog style + schedule conventions: `docs/blog-writing-guide.md`.
 - "Log In" and "Get Started" link to `app.alephco.io/login` and `/register`
 - `main.js` rewrites these to `localhost:4060` when running on localhost
 - Local dev: `npm run dev` (serves on port 3060)
-- Pricing page buttons are "Coming Soon" — disabled with inline `pointer-events:none`
+- **Pricing page buttons are LIVE (session 86)** — all four cards link out, three to
+  `app.alephco.io/register` and Enterprise to `contact.html`. They were previously disabled
+  `<span>`s with `pointer-events:none`. Real cards are charged from the app, so **any claim on
+  `pricing.html` is now a commitment**: opening them exposed three that the product does not
+  keep (Pro described as "unlimited products" — it is 500; a $2.99/SKU overage model deleted in
+  app-session 85; and a 14-day free trial that does not exist). All corrected. Check a new claim
+  against `alephco.io-app/shared/plan-entitlements.ts` before publishing it.
+- ⚠️ **The billing-period toggle selects by `[data-billing]`, not by grid class.** It used to
+  read `.grid-3[data-billing]` and guard with `if (!grid) return`, so adding the Enterprise card
+  (`grid-3` → `grid-4`) would have silently disabled the whole Annual/Monthly switch — prices
+  frozen, no console error. Do not reintroduce a class-coupled selector.
 - Blog posts auto-release based on client-side date check (not server-side)
 - Copyright year: 2026
 - CNAME file must not be deleted — it configures the GitHub Pages custom domain
