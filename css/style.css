@@ -49,6 +49,40 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ── Accessibility ───────────────────────────────────────── */
+/* Skip link: visually hidden until keyboard-focused, so sighted mouse users
+   never see it but keyboard/screen-reader users can bypass the nav on every
+   page load instead of tabbing through it every time (WCAG 2.4.1). */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 1000;
+  padding: .75rem 1.25rem;
+  background: var(--navy-deep);
+  color: var(--paper);
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: top .15s ease;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Visible focus outline on every interactive element (WCAG 2.4.7). Only
+   :focus-visible so mouse clicks don't show a ring — keyboard/assistive-tech
+   navigation still gets one everywhere, not just the form inputs that
+   already had their own :focus rule below. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--navy-deep);
+  outline-offset: 2px;
+}
+
 /* ── Typography ──────────────────────────────────────────── */
 h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 700; line-height: 0.92; letter-spacing: -.02em; color: var(--navy); }
 h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3.5vw, 2.25rem); font-weight: 700; line-height: 0.95; letter-spacing: -.015em; color: var(--navy); }
