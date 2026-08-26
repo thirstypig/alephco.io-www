@@ -52,6 +52,7 @@
 <body>
 
   <!-- Nav -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <nav class="nav" role="navigation">
     <div class="container">
       <a href="/" class="nav-logo">
@@ -75,6 +76,7 @@
       </div>
     </div>
   </nav>
+  <div id="main-content" tabindex="-1"></div>
 
   <!-- Hero -->
   <section class="hero">
@@ -220,7 +222,7 @@
         <h2>Stay in the loop</h2>
         <p>Get early access, product updates, and compliance insights. No spam &mdash; just useful stuff for importers.</p>
         <form class="signup-form" id="email-signup" onsubmit="handleSignup(event)">
-          <input type="email" name="email" placeholder="you@company.com" required class="signup-input" />
+          <input type="email" name="email" placeholder="you@company.com" required class="signup-input" aria-label="Email address" />
           <!-- Honeypot: hidden from people + screen readers; bots fill it → silent no-op. -->
           <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"
                  style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" />
