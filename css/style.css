@@ -159,11 +159,15 @@ p  { color: var(--fg-muted); }
 .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; }
 @media (max-width: 768px) {
-  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; }
 }
 @media (min-width: 769px) and (max-width: 1024px) {
-  .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3, .grid-4, .grid-5 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .grid-5 { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ── Module Colors ───────────────────────────────────────── */
@@ -171,6 +175,7 @@ p  { color: var(--fg-muted); }
 .mod-cpsia .card-icon { background: #f0ead4; color: var(--warn); }
 .mod-prop65 .card-icon { background: #f2e4e3; color: var(--accent); }
 .mod-pfas  .card-icon { background: #e2e8ef; color: #2563eb; }
+.mod-mocra .card-icon { background: #fdf2f8; color: #db2777; }
 
 /* ── Section Headings ────────────────────────────────────── */
 .section-heading { margin-bottom: 3rem; }
