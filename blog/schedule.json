@@ -1,0 +1,77 @@
+{
+  "_comment": "Blog content calendar — read by the app admin's Blog page (todo 539). Add a 'planned' entry with a targetDate for a post that doesn't exist yet; flip it to 'published' with publishedDate once the HTML file ships. Edited by hand, same workflow as writing a post.",
+  "posts": [
+    {
+      "slug": "why-i-built-aleph",
+      "title": "Why I Built Aleph | Import Compliance Software for Importers",
+      "status": "published",
+      "publishedDate": "2026-04-10"
+    },
+    {
+      "slug": "fsvp-guide-for-importers",
+      "title": "FSVP Requirements: A Guide for US Food Importers (2026)",
+      "status": "published",
+      "publishedDate": "2026-04-14"
+    },
+    {
+      "slug": "cpc-certificate-guide",
+      "title": "Children's Product Certificate (CPC): Importer Guide 2026",
+      "status": "published",
+      "publishedDate": "2026-04-21"
+    },
+    {
+      "slug": "prop-65-warnings-guide",
+      "title": "Prop 65 Warning Requirements: Do You Need One? (2026)",
+      "status": "published",
+      "publishedDate": "2026-04-28"
+    },
+    {
+      "slug": "pfas-regulations-guide",
+      "title": "PFAS Regulations for Importers: State Laws and Compliance",
+      "status": "published",
+      "publishedDate": "2026-05-05"
+    },
+    {
+      "slug": "manifest-design-system",
+      "title": "The Manifest Redesign: Why We Made Aleph Look Like a Customs Form",
+      "status": "published",
+      "publishedDate": "2026-05-05"
+    },
+    {
+      "slug": "spreadsheets-failing-compliance",
+      "title": "Why Spreadsheets Fail Product Compliance Teams",
+      "status": "published",
+      "publishedDate": "2026-05-12"
+    },
+    {
+      "slug": "cpsc-recalls-for-importers",
+      "title": "CPSC Recalls: What Every Importer Should Know Before It's Too Late",
+      "status": "published",
+      "publishedDate": "2026-05-19"
+    },
+    {
+      "slug": "how-to-choose-testing-lab",
+      "title": "How to Choose a Testing Lab (Without Getting Burned)",
+      "status": "published",
+      "publishedDate": "2026-05-26"
+    },
+    {
+      "slug": "product-compliance-for-amazon-sellers",
+      "title": "Product Compliance for Amazon Sellers: Documents You Actually Need (2026)",
+      "status": "published",
+      "publishedDate": "2026-06-02"
+    },
+    {
+      "slug": "multi-regulation-compliance-framework",
+      "title": "Multi-State Product Compliance: A Framework for US Importers (2026)",
+      "status": "published",
+      "publishedDate": "2026-06-09"
+    },
+    {
+      "slug": "fsvp-vs-haccp",
+      "title": "FSVP vs HACCP: What Food Importers Need to Understand (2026)",
+      "status": "published",
+      "publishedDate": "2026-06-16"
+    }
+  ]
+}
