@@ -7,3 +7,8 @@ learn/index.html
 learn/articles/
 learn/m/
 learn/search/
+
+# Draft blog posts rendered for local reading only (npm run preview:blog).
+# ⚠️ MUST stay ignored: these are unpublished, often unverified posts, and the deploy
+# uploads the whole repo — a tracked _preview/ would ship them live.
+blog/_preview/

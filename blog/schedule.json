@@ -1,77 +1,326 @@
 {
-  "_comment": "Blog content calendar — read by the app admin's Blog page (todo 539). Add a 'planned' entry with a targetDate for a post that doesn't exist yet; flip it to 'published' with publishedDate once the HTML file ships. Edited by hand, same workflow as writing a post.",
+  "generated": "2026-09-01",
   "posts": [
     {
-      "slug": "why-i-built-aleph",
-      "title": "Why I Built Aleph | Import Compliance Software for Importers",
-      "status": "published",
-      "publishedDate": "2026-04-10"
+      "slug": "compliance-for-a-200-sku-catalogue-without",
+      "title": "Compliance for a 200-SKU catalogue without a compliance team",
+      "status": "planned",
+      "targetDate": "2027-02-22",
+      "image": "/img/blog/compliance-for-a-200-sku-catalogue-without.png",
+      "url": "https://www.alephco.io/blog/compliance-for-a-200-sku-catalogue-without.html",
+      "draft": true
     },
     {
-      "slug": "fsvp-guide-for-importers",
-      "title": "FSVP Requirements: A Guide for US Food Importers (2026)",
-      "status": "published",
-      "publishedDate": "2026-04-14"
+      "slug": "surviving-a-cpsc-or-fda-request-for",
+      "title": "Surviving a CPSC or FDA request for records",
+      "status": "planned",
+      "targetDate": "2027-02-15",
+      "image": "/img/blog/surviving-a-cpsc-or-fda-request-for.png",
+      "url": "https://www.alephco.io/blog/surviving-a-cpsc-or-fda-request-for.html",
+      "draft": true
     },
     {
-      "slug": "cpc-certificate-guide",
-      "title": "Children's Product Certificate (CPC): Importer Guide 2026",
-      "status": "published",
-      "publishedDate": "2026-04-21"
+      "slug": "supplier-declarations-that-hold-up-in-an",
+      "title": "Supplier declarations that hold up in an audit",
+      "status": "planned",
+      "targetDate": "2027-02-08",
+      "image": "/img/blog/supplier-declarations-that-hold-up-in-an.png",
+      "url": "https://www.alephco.io/blog/supplier-declarations-that-hold-up-in-an.html",
+      "draft": true
     },
     {
-      "slug": "prop-65-warnings-guide",
-      "title": "Prop 65 Warning Requirements: Do You Need One? (2026)",
-      "status": "published",
-      "publishedDate": "2026-04-28"
+      "slug": "amazon-compliance-documents-what-seller-central-requires",
+      "title": "Amazon compliance documents: what Seller Central requires",
+      "status": "planned",
+      "targetDate": "2027-02-01",
+      "image": "/img/blog/amazon-compliance-documents-what-seller-central-requires.png",
+      "url": "https://www.alephco.io/blog/amazon-compliance-documents-what-seller-central-requires.html",
+      "draft": true
     },
     {
-      "slug": "pfas-regulations-guide",
-      "title": "PFAS Regulations for Importers: State Laws and Compliance",
-      "status": "published",
-      "publishedDate": "2026-05-05"
+      "slug": "selling-into-canada-and-mexico-what-changes",
+      "title": "Selling into Canada and Mexico: what changes",
+      "status": "planned",
+      "targetDate": "2027-01-25",
+      "image": "/img/blog/selling-into-canada-and-mexico-what-changes.png",
+      "url": "https://www.alephco.io/blog/selling-into-canada-and-mexico-what-changes.html",
+      "draft": true
     },
     {
-      "slug": "manifest-design-system",
-      "title": "The Manifest Redesign: Why We Made Aleph Look Like a Customs Form",
-      "status": "published",
-      "publishedDate": "2026-05-05"
+      "slug": "mocra-for-cosmetics-importers-registration-and-listing",
+      "title": "MoCRA for cosmetics importers: registration and listing",
+      "status": "planned",
+      "targetDate": "2027-01-18",
+      "image": "/img/blog/mocra-for-cosmetics-importers-registration-and-listing.png",
+      "url": "https://www.alephco.io/blog/mocra-for-cosmetics-importers-registration-and-listing.html",
+      "draft": true
     },
     {
-      "slug": "spreadsheets-failing-compliance",
-      "title": "Why Spreadsheets Fail Product Compliance Teams",
-      "status": "published",
-      "publishedDate": "2026-05-12"
+      "slug": "reach-and-svhc-for-us-companies-selling",
+      "title": "REACH and SVHC for US companies selling into the EU",
+      "status": "planned",
+      "targetDate": "2027-01-11",
+      "image": "/img/blog/reach-and-svhc-for-us-companies-selling.png",
+      "url": "https://www.alephco.io/blog/reach-and-svhc-for-us-companies-selling.html",
+      "draft": true
     },
     {
-      "slug": "cpsc-recalls-for-importers",
-      "title": "CPSC Recalls: What Every Importer Should Know Before It's Too Late",
-      "status": "published",
-      "publishedDate": "2026-05-19"
+      "slug": "what-changes-in-2027-the-importer-s",
+      "title": "What changes in 2027: the importer's regulatory calendar",
+      "status": "planned",
+      "targetDate": "2027-01-04",
+      "image": "/img/blog/what-changes-in-2027-the-importer-s.png",
+      "url": "https://www.alephco.io/blog/what-changes-in-2027-the-importer-s.html",
+      "draft": true
     },
     {
-      "slug": "how-to-choose-testing-lab",
-      "title": "How to Choose a Testing Lab (Without Getting Burned)",
-      "status": "published",
-      "publishedDate": "2026-05-26"
+      "slug": "year-end-compliance-review-what-to-close",
+      "title": "Year-end compliance review: what to close before 31 Dec",
+      "status": "planned",
+      "targetDate": "2026-12-28",
+      "image": "/img/blog/year-end-compliance-review-what-to-close.png",
+      "url": "https://www.alephco.io/blog/year-end-compliance-review-what-to-close.html",
+      "draft": true
     },
     {
-      "slug": "product-compliance-for-amazon-sellers",
-      "title": "Product Compliance for Amazon Sellers: Documents You Actually Need (2026)",
-      "status": "published",
-      "publishedDate": "2026-06-02"
+      "slug": "hazard-analysis-without-a-consultant",
+      "title": "Hazard analysis without a consultant",
+      "status": "planned",
+      "targetDate": "2026-12-21",
+      "image": "/img/blog/hazard-analysis-without-a-consultant.png",
+      "url": "https://www.alephco.io/blog/hazard-analysis-without-a-consultant.html",
+      "draft": true
     },
     {
-      "slug": "multi-regulation-compliance-framework",
-      "title": "Multi-State Product Compliance: A Framework for US Importers (2026)",
-      "status": "published",
-      "publishedDate": "2026-06-09"
+      "slug": "supplier-verification-what-fda-actually-accepts",
+      "title": "Supplier verification: what FDA actually accepts",
+      "status": "planned",
+      "targetDate": "2026-12-14",
+      "image": "/img/blog/supplier-verification-what-fda-actually-accepts.png",
+      "url": "https://www.alephco.io/blog/supplier-verification-what-fda-actually-accepts.html",
+      "draft": true
+    },
+    {
+      "slug": "fsvp-for-the-first-time-importer",
+      "title": "FSVP for the first-time importer",
+      "status": "planned",
+      "targetDate": "2026-12-07",
+      "image": "/img/blog/fsvp-for-the-first-time-importer.png",
+      "url": "https://www.alephco.io/blog/fsvp-for-the-first-time-importer.html",
+      "draft": true
+    },
+    {
+      "slug": "when-oehha-adds-a-chemical-what-it",
+      "title": "When OEHHA adds a chemical: what it means for your SKUs",
+      "status": "planned",
+      "targetDate": "2026-11-30",
+      "image": "/img/blog/when-oehha-adds-a-chemical-what-it.png",
+      "url": "https://www.alephco.io/blog/when-oehha-adds-a-chemical-what-it.html",
+      "draft": true
+    },
+    {
+      "slug": "you-received-a-60-day-notice-now",
+      "title": "You received a 60-day notice. Now what?",
+      "status": "planned",
+      "targetDate": "2026-11-23",
+      "image": "/img/blog/you-received-a-60-day-notice-now.png",
+      "url": "https://www.alephco.io/blog/you-received-a-60-day-notice-now.html",
+      "draft": true
+    },
+    {
+      "slug": "exposure-assessment-without-a-toxicologist",
+      "title": "Exposure assessment without a toxicologist",
+      "status": "planned",
+      "targetDate": "2026-11-16",
+      "image": "/img/blog/exposure-assessment-without-a-toxicologist.png",
+      "url": "https://www.alephco.io/blog/exposure-assessment-without-a-toxicologist.html",
+      "draft": true
+    },
+    {
+      "slug": "short-form-warnings-what-changed",
+      "title": "Short-form warnings: what changed",
+      "status": "planned",
+      "targetDate": "2026-11-09",
+      "image": "/img/blog/short-form-warnings-what-changed.png",
+      "url": "https://www.alephco.io/blog/short-form-warnings-what-changed.html",
+      "draft": true
+    },
+    {
+      "slug": "prop-65-for-importers-who-it-applies",
+      "title": "Prop 65 for importers: who it applies to",
+      "status": "planned",
+      "targetDate": "2026-11-02",
+      "image": "/img/blog/prop-65-for-importers-who-it-applies.png",
+      "url": "https://www.alephco.io/blog/prop-65-for-importers-who-it-applies.html",
+      "draft": true
+    },
+    {
+      "slug": "the-children-s-product-compliance-checklist",
+      "title": "The children's-product compliance checklist",
+      "status": "planned",
+      "targetDate": "2026-10-26",
+      "image": "/img/blog/the-children-s-product-compliance-checklist.png",
+      "url": "https://www.alephco.io/blog/the-children-s-product-compliance-checklist.html",
+      "draft": true
+    },
+    {
+      "slug": "third-party-testing-choosing-a-cpsc-accepted",
+      "title": "Third-party testing: choosing a CPSC-accepted lab",
+      "status": "planned",
+      "targetDate": "2026-10-19",
+      "image": "/img/blog/third-party-testing-choosing-a-cpsc-accepted.png",
+      "url": "https://www.alephco.io/blog/third-party-testing-choosing-a-cpsc-accepted.html",
+      "draft": true
+    },
+    {
+      "slug": "tracking-labels-what-has-to-be-on",
+      "title": "Tracking labels: what has to be on the product",
+      "status": "planned",
+      "targetDate": "2026-10-12",
+      "image": "/img/blog/tracking-labels-what-has-to-be-on.png",
+      "url": "https://www.alephco.io/blog/tracking-labels-what-has-to-be-on.html",
+      "draft": true
+    },
+    {
+      "slug": "gcc-vs-cpc-which-certificate-does-your",
+      "title": "GCC vs CPC: which certificate does your product need?",
+      "status": "planned",
+      "targetDate": "2026-10-05",
+      "image": "/img/blog/gcc-vs-cpc-which-certificate-does-your.png",
+      "url": "https://www.alephco.io/blog/gcc-vs-cpc-which-certificate-does-your.html",
+      "draft": true
+    },
+    {
+      "slug": "total-organic-fluorine-testing-when-you-need",
+      "title": "Total organic fluorine testing: when you need it",
+      "status": "planned",
+      "targetDate": "2026-09-28",
+      "image": "/img/blog/total-organic-fluorine-testing-when-you-need.png",
+      "url": "https://www.alephco.io/blog/total-organic-fluorine-testing-when-you-need.html",
+      "draft": true
+    },
+    {
+      "slug": "getting-a-pfas-declaration-out-of-an",
+      "title": "Getting a PFAS declaration out of an overseas supplier",
+      "status": "planned",
+      "targetDate": "2026-09-21",
+      "image": "/img/blog/getting-a-pfas-declaration-out-of-an.png",
+      "url": "https://www.alephco.io/blog/getting-a-pfas-declaration-out-of-an.html",
+      "draft": true
+    },
+    {
+      "slug": "what-intentionally-added-pfas-actually-means",
+      "title": "What \"intentionally added\" PFAS actually means",
+      "status": "planned",
+      "targetDate": "2026-09-14",
+      "image": "/img/blog/what-intentionally-added-pfas-actually-means.png",
+      "url": "https://www.alephco.io/blog/what-intentionally-added-pfas-actually-means.html",
+      "draft": true
+    },
+    {
+      "slug": "pfas-rules-for-importers",
+      "title": "PFAS Rules for Importers: Which States, Which Products",
+      "status": "planned",
+      "targetDate": "2026-09-07",
+      "image": "/img/blog/pfas-rules-for-importers.png",
+      "url": "https://www.alephco.io/blog/pfas-rules-for-importers.html",
+      "draft": true
     },
     {
       "slug": "fsvp-vs-haccp",
       "title": "FSVP vs HACCP: What Food Importers Need to Understand (2026)",
       "status": "published",
-      "publishedDate": "2026-06-16"
+      "publishedDate": "2026-06-16",
+      "image": "/img/blog/fsvp-vs-haccp.png",
+      "url": "https://www.alephco.io/blog/fsvp-vs-haccp.html"
+    },
+    {
+      "slug": "multi-regulation-compliance-framework",
+      "title": "Multi-State Product Compliance: A Framework for US Importers (2026)",
+      "status": "published",
+      "publishedDate": "2026-06-09",
+      "image": "/img/blog/multi-regulation-compliance-framework.png",
+      "url": "https://www.alephco.io/blog/multi-regulation-compliance-framework.html"
+    },
+    {
+      "slug": "product-compliance-for-amazon-sellers",
+      "title": "Product Compliance for Amazon Sellers: Documents You Actually Need (2026)",
+      "status": "published",
+      "publishedDate": "2026-06-02",
+      "image": "/img/blog/product-compliance-for-amazon-sellers.png",
+      "url": "https://www.alephco.io/blog/product-compliance-for-amazon-sellers.html"
+    },
+    {
+      "slug": "how-to-choose-testing-lab",
+      "title": "How to Choose a Testing Lab (Without Getting Burned) | Aleph",
+      "status": "published",
+      "publishedDate": "2026-05-26",
+      "image": "/img/blog/how-to-choose-testing-lab.png",
+      "url": "https://www.alephco.io/blog/how-to-choose-testing-lab.html"
+    },
+    {
+      "slug": "cpsc-recalls-for-importers",
+      "title": "CPSC Recalls: What Every Importer Should Know Before It's Too Late",
+      "status": "published",
+      "publishedDate": "2026-05-19",
+      "image": "/img/blog/cpsc-recalls-for-importers.png",
+      "url": "https://www.alephco.io/blog/cpsc-recalls-for-importers.html"
+    },
+    {
+      "slug": "spreadsheets-failing-compliance",
+      "title": "Why Spreadsheets Fail Product Compliance Teams | Aleph",
+      "status": "published",
+      "publishedDate": "2026-05-12",
+      "image": "/img/blog/spreadsheets-failing-compliance.png",
+      "url": "https://www.alephco.io/blog/spreadsheets-failing-compliance.html"
+    },
+    {
+      "slug": "manifest-design-system",
+      "title": "The Manifest Redesign: Why We Made Aleph Look Like a Customs Form | Aleph",
+      "status": "published",
+      "publishedDate": "2026-05-05",
+      "image": "/img/blog/manifest-design-system.png",
+      "url": "https://www.alephco.io/blog/manifest-design-system.html"
+    },
+    {
+      "slug": "pfas-regulations-guide",
+      "title": "PFAS Regulations for Importers: State Laws and Compliance",
+      "status": "published",
+      "publishedDate": "2026-05-05",
+      "image": "/img/blog/pfas-regulations-guide.png",
+      "url": "https://www.alephco.io/blog/pfas-regulations-guide.html"
+    },
+    {
+      "slug": "prop-65-warnings-guide",
+      "title": "Prop 65 Warning Requirements: Do You Need One? (2026)",
+      "status": "published",
+      "publishedDate": "2026-04-28",
+      "image": "/img/blog/prop-65-warnings-guide.png",
+      "url": "https://www.alephco.io/blog/prop-65-warnings-guide.html"
+    },
+    {
+      "slug": "cpc-certificate-guide",
+      "title": "Children's Product Certificate (CPC): Importer Guide 2026",
+      "status": "published",
+      "publishedDate": "2026-04-21",
+      "image": "/img/blog/cpc-certificate-guide.png",
+      "url": "https://www.alephco.io/blog/cpc-certificate-guide.html"
+    },
+    {
+      "slug": "fsvp-guide-for-importers",
+      "title": "FSVP Requirements: A Guide for US Food Importers (2026)",
+      "status": "published",
+      "publishedDate": "2026-04-14",
+      "image": "/img/blog/fsvp-guide-for-importers.png",
+      "url": "https://www.alephco.io/blog/fsvp-guide-for-importers.html"
+    },
+    {
+      "slug": "why-i-built-aleph",
+      "title": "Why I Built Aleph | Import Compliance Software for Importers",
+      "status": "published",
+      "publishedDate": "2026-04-10",
+      "image": "/img/blog/why-i-built-aleph.png",
+      "url": "https://www.alephco.io/blog/why-i-built-aleph.html"
     }
   ]
 }

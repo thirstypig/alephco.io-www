@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <link rel="canonical" href="{{URL}}">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{TITLE}}">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:url" content="{{URL}}">
+  <meta property="og:site_name" content="Aleph">
+  <meta property="og:image" content="{{IMAGE}}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="article:published_time" content="{{DATE}}T12:00:00Z">
+  <meta property="article:author" content="James Chang">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{TITLE}}">
+  <meta name="twitter:description" content="{{DESCRIPTION}}">
+  <meta name="twitter:image" content="{{IMAGE}}">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "{{TITLE}}",
+    "description": "{{DESCRIPTION}}",
+    "author": { "@type": "Person", "name": "James Chang", "url": "https://www.alephco.io/about.html" },
+    "publisher": { "@type": "Organization", "name": "{{PUBLISHER}}", "url": "https://www.alephco.io" },
+    "datePublished": "{{DATE}}",
+    "dateModified": "{{DATE}}",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "{{URL}}" },
+    "keywords": {{KEYWORDS}},
+    "articleSection": "Compliance",
+    "wordCount": 1100
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&family=Bungee+Inline&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3X5H4KJ11"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-B3X5H4KJ11');
+  </script>
+</head>
+<body>
+
+  <!-- Nav -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <nav class="nav" role="navigation">
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <img src="../img/aleph-logo-dark.png" alt="Aleph" height="28"/>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="nav-menu">
+        <ul class="nav-links">
+          <li><a href="../how-it-works.html">How It Works</a></li>
+          <li><a href="../industries.html">Industries</a></li>
+          <li><a href="../pricing.html">Pricing</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="theme-toggle" aria-label="Toggle theme">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+          <a href="https://app.alephco.io/login" class="btn btn-red btn-sm">LOG IN</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div id="main-content" tabindex="-1"></div>
+
+  <div class="spacer"></div>
+
+  <section class="section">
+    <div class="container">
+      <a href="../blog.html" class="blog-back">&larr; Back to Blog</a>
+
+      <article class="blog-content">
+{{BODY}}
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/">
+            <img src="../img/aleph-logo-dark.png" alt="Aleph" height="24"/>
+          </a>
+          <p>Product compliance for importers who ship physical goods into the U.S.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="../how-it-works.html">How It Works</a></li>
+            <li><a href="../industries.html">Industries</a></li>
+            <li><a href="../pricing.html">Pricing</a></li>
+            <li><a href="https://app.alephco.io/register">Get Started</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="../learn/">Learn</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="../pricing.html#faq">FAQ</a></li>
+            <li><a href="../features/cpsia-cpc-generator.html">CPSIA &amp; CPC</a></li>
+            <li><a href="../features/prop-65-labels.html">Prop 65 Labels</a></li>
+            <li><a href="../features/pfas-tracking.html">PFAS Tracking</a></li>
+            <li><a href="../features/fsvp-management.html">FSVP Management</a></li>
+            <li><a href="../features/mocra.html">MoCRA Cosmetics</a></li>
+            <li><a href="../features/regulatory-alerts.html">Regulatory Alerts</a></li>
+            <li><a href="../features/supplier-declarations.html">Supplier Declarations</a></li>
+            <li><a href="../features/cfr-citations.html">CFR Citations</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../status.html">System Status</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="https://app.alephco.io/legal/terms">Terms of Service</a></li>
+            <li><a href="https://app.alephco.io/legal/privacy">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Aleph Compliance, Inc.</span>
+        <div class="footer-social">
+          <a href="https://app.alephco.io/login">Log In</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>
