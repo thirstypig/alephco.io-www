@@ -2,16 +2,19 @@
 
 ## Project Overview
 - Marketing site for Aleph at **alephco.io**
-- Static HTML/CSS/JS — no framework, no build step
+- Static HTML/CSS/JS — no framework, no bundler; two generator steps run in CI (see Tech Stack)
 - Repo: https://github.com/thirstypig/alephco.io-www
 - Separate from the app repo (`alephco.io-app`) — the React/Express platform lives at app.alephco.io
 
 ## Tech Stack
 
 Plain HTML + CSS + vanilla JS. **No framework, no bundler, no npm production dependencies** —
-`package.json` exists only for the local dev server (`npm run dev`, port 3060) and the structural
-tests (`npm test`). All styles live in `css/style.css`; all behavior in `js/main.js`. Keep it that
-way — adding a build step breaks the GitHub Pages deploy assumption below.
+`package.json` exists for the local dev server (`npm run dev`, port 3060), the structural tests
+(`npm test`), and TWO static-site generators that run in CI before upload: `build:learn`
+(/learn pages from Supabase) and `build:blog` (blog posts from Markdown). Those are the only
+permitted build steps, and both only EMIT static HTML before upload — the deployed artifact is
+still plain files. All styles live in `css/style.css`; all behavior in `js/main.js`. Keep it that
+way: do not add a bundler or a framework, and do not introduce a step the site needs at RUNTIME.
 
 ## Pages
 
@@ -23,11 +26,40 @@ POSTs** to `app.alephco.io/api/subscribe/*` so email scanners can't fire them by
 Blog style + schedule conventions: `docs/blog-writing-guide.md`.
 
 ## Blog System
+
+**New posts are Markdown. `npm run build:blog` generates everything else.**
+
+- Source: `blog/posts/<slug>.md` — frontmatter (`title`, `description`, `date`, optional
+  `slug`, `keywords`, `read`, `draft`) plus Markdown body.
+- Generator: `scripts/build-blog.mjs`. Emits `blog/<slug>.html`, rewrites the card list in
+  `blog.html` between `<!-- BLOG_CARDS:START -->` / `:END`, and rewrites the `/blog/` half
+  of `sitemap.xml`. Runs in CI after `build:learn` (both write the sitemap).
+- Template: `blog/_template.html` — **derived from a real post**, so nav/footer/theme are
+  byte-identical to the hand-written ones and cannot drift.
+
+⚠️ **`draft: true` means the post is not built at all** — no HTML, no card, no sitemap
+entry. Use it for anything whose regulatory claims are unverified. Session 99 published the
+wrong Maine PFAS law to this site, SEO-indexed; blog and help are the two surfaces with no
+citation guard.
+
+⚠️ **A future-dated post IS built and IS listed, but is kept OUT of the sitemap until its
+date.** The auto-release script only dims the index card — the page itself is live at its
+URL, so the sitemap is the only thing holding it back from search.
+
+⚠️ **The 12 pre-existing posts are NOT migrated and must stay hand-written HTML.** They
+rank; regenerating them risks changing metadata on working pages. The generator READS them
+so the index and sitemap stay complete.
+
+📌 `PUBLISHER` in the generator is one constant on purpose. It is currently
+`"Aleph Compliance, Inc."`, which also appears in 12 posts plus index/about/contact/blog/
+status — while the app footer and Stripe both say `Pasadena Works, LLC d/b/a Aleph Co.`
+**That discrepancy is unresolved and is a legal question, not an engineering one.**
+
 - Blog index: `blog.html` — cards with `data-publish="YYYY-MM-DD"` attributes
-- Blog posts: `blog/*.html` — 12 individual post pages
-- Auto-release: inline `<script>` on blog.html checks current date, dims future posts, removes links, shows "Coming [weekday]" label
-- Schedule: posts release on Mondays
-- Future posts are listed in HTML but hidden client-side until their publish date
+- Auto-release: inline `<script>` on blog.html checks current date, dims future posts,
+  removes links, shows "Coming [weekday]" label
+- Schedule: posts release on Mondays. The 25-post schedule to Feb 2027 is in the app repo,
+  `todos/539-pending-p3-seo-and-blogging-expansion-plan.md`.
 
 ## Navigation Structure
 - **Top nav**: Logo (links to `/`, serves as home button) + 3 links (How It Works, Industries, Pricing) + theme toggle + Log In CTA

@@ -32,6 +32,15 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: npm run build:learn
+      # Blog posts from Markdown, plus the blog index and the blog half of sitemap.xml.
+      # Runs AFTER build:learn because both write sitemap.xml and this one must see the
+      # /learn entries already in place — it rewrites only lines matching /blog/.
+      #
+      # ⚠️ A post dated in the future is BUILT but kept out of the sitemap until its date;
+      # blog.html's auto-release script dims the card, but the page itself is live at its
+      # URL, so the sitemap is the only thing actually holding it back from search.
+      - name: Build blog posts from Markdown
+        run: npm run build:blog
       - uses: actions/upload-pages-artifact@v3.0.1
         with:
           path: '.'
