@@ -10,7 +10,8 @@
     "build:learn": "node scripts/build-learn-pages.mjs",
     "build:blog": "node scripts/build-blog.mjs",
     "check:blog": "node scripts/build-blog.mjs --check",
-    "preview:blog": "node scripts/build-blog.mjs --drafts"
+    "preview:blog": "node scripts/build-blog.mjs --drafts",
+    "test:blog": "node tests/validate-blog-build.mjs"
   },
   "devDependencies": {
     "@supabase/supabase-js": "^2.45.0",

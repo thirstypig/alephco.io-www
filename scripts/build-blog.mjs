@@ -44,7 +44,13 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { marked } from 'marked';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+// BLOG_ROOT lets the test suite point the whole generator at a throwaway fixture tree.
+// Without it the only way to exercise this script is against the REAL blog.html and
+// sitemap.xml — which it rewrites in place, so a test run would be indistinguishable from
+// a bad build. Defaults to the repo root, so normal use is unchanged.
+const ROOT = process.env.BLOG_ROOT
+  ? path.resolve(process.env.BLOG_ROOT)
+  : path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const POSTS_DIR = path.join(ROOT, 'blog', 'posts');
 const BLOG_DIR = path.join(ROOT, 'blog');
 const TEMPLATE = path.join(ROOT, 'blog', '_template.html');
@@ -204,7 +210,13 @@ async function main() {
     for (const d of drafts) console.log(`    · ${d.date}  ${d.title}  (${d.file})`);
   }
 
-  if (posts.length === 0) throw new Error('no posts found — refusing to write an empty index');
+  // ⚠️ The guard is on SOURCES, not on publishable output. It exists so a broken glob
+  // cannot silently wipe blog.html — but "every post is currently a draft" is a legitimate
+  // state (a site mid-authoring), and throwing on it would block the drafts-only workflow
+  // this generator is built around. Found by tests/validate-blog-build.mjs.
+  if (mdFiles.length === 0 && legacy.length === 0) {
+    throw new Error('no post sources found (no blog/posts/*.md, no blog/*.html) — refusing to write an empty index');
+  }
   console.log(`\n  ${posts.length} posts (${generated.length} markdown, ${legacy.length} legacy html)`);
 
   // ── Index cards ────────────────────────────────────────────────────────────

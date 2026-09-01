@@ -129,6 +129,12 @@ status — while the app footer and Stripe both say `Pasadena Works, LLC d/b/a A
 - CNAME file must not be deleted — it configures the GitHub Pages custom domain
 
 ## Testing
-- `npm test` — runs `tests/validate-structure.mjs` (1,158 structural checks across 30 pages)
+- `npm test` — runs `tests/validate-structure.mjs` (structural checks across all pages).
+  ⚠️ This suite is currently RED with **22 pre-existing failures** (`terms.html` /
+  `privacy.html` missing footer structure). Compare the COUNT before and after a change
+  rather than expecting green.
+- `npm run test:blog` — runs `tests/validate-blog-build.mjs`: behavioural tests for the
+  blog generator, executed against a throwaway fixture tree via `BLOG_ROOT`. Kept separate
+  from `npm test` deliberately, so a green new suite is not buried under a red old one.
 - Validates: nav consistency (no "Home" link, exactly 3 nav links), footer structure (grid, 4 columns, brand, bottom bar, column headings), internal link integrity (all `href` resolve to real files), CSS class presence
 - Zero dependencies — Node built-ins only
