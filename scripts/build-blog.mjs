@@ -48,6 +48,8 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const POSTS_DIR = path.join(ROOT, 'blog', 'posts');
 const BLOG_DIR = path.join(ROOT, 'blog');
 const TEMPLATE = path.join(ROOT, 'blog', '_template.html');
+/** Gitignored. Drafts rendered here for reading only — never deployed. */
+const PREVIEW_DIR = path.join(ROOT, 'blog', '_preview');
 const INDEX = path.join(ROOT, 'blog.html');
 const SITEMAP = path.join(ROOT, 'sitemap.xml');
 
@@ -115,6 +117,11 @@ async function readLegacyPost(file) {
 
 async function main() {
   const check = process.argv.includes('--check');
+  // ⚠️ Drafts are unviewable without this. `draft: true` correctly builds nothing, which
+  // means the ONLY way to see a draft was to publish it — defeating the point of having a
+  // draft state at all. --drafts renders them to blog/_preview/, which is gitignored and
+  // never deployed, so previewing cannot leak an unfinished post.
+  const withDrafts = process.argv.includes('--drafts');
   const template = await fs.readFile(TEMPLATE, 'utf8');
 
   await fs.mkdir(POSTS_DIR, { recursive: true });
@@ -130,7 +137,7 @@ async function main() {
     // blog/posts/ publishes it — and for regulatory content, publishing an unverified
     // claim is the failure this whole pipeline is supposed to make harder, not easier.
     // A draft is skipped entirely: no HTML, no index card, no sitemap entry.
-    if (String(meta.draft).toLowerCase() === 'true') {
+    if (String(meta.draft).toLowerCase() === 'true' && !withDrafts) {
       drafts.push({
         file,
         slug: meta.slug || file.replace(/\.md$/, ''),
@@ -162,8 +169,19 @@ async function main() {
       .replaceAll('{{IMAGE}}', image)
       .replaceAll('{{BODY}}', marked.parse(body));
 
-    const out = path.join(BLOG_DIR, `${slug}.html`);
-    if (!check) await fs.writeFile(out, html, 'utf8');
+    const isDraft = String(meta.draft).toLowerCase() === 'true';
+    const out = isDraft
+      ? path.join(PREVIEW_DIR, `${slug}.html`)
+      : path.join(BLOG_DIR, `${slug}.html`);
+    if (!check) {
+      if (isDraft) await fs.mkdir(PREVIEW_DIR, { recursive: true });
+      await fs.writeFile(out, html, 'utf8');
+    }
+    if (isDraft) {
+      drafts.push({ file, slug, title: meta.title, date: meta.date });
+      console.log(`  preview  blog/_preview/${slug}.html   (DRAFT — not published)`);
+      continue;
+    }
     generated.push({
       slug, title: meta.title, description: meta.description, date: meta.date,
       read: meta.read || readingTime(body), legacy: false,

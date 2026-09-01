@@ -38,7 +38,9 @@ Blog style + schedule conventions: `docs/blog-writing-guide.md`.
   byte-identical to the hand-written ones and cannot drift.
 
 ⚠️ **`draft: true` means the post is not built at all** — no HTML, no card, no sitemap
-entry. Use it for anything whose regulatory claims are unverified. Session 99 published the
+entry. To READ one before publishing, `npm run preview:blog` renders drafts into
+`blog/_preview/`, which is **gitignored** and never deployed (the deploy uploads the whole
+repo, so a tracked preview dir would ship unfinished posts live). Use it for anything whose regulatory claims are unverified. Session 99 published the
 wrong Maine PFAS law to this site, SEO-indexed; blog and help are the two surfaces with no
 citation guard.
 
