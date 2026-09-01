@@ -131,7 +131,12 @@ async function main() {
     // claim is the failure this whole pipeline is supposed to make harder, not easier.
     // A draft is skipped entirely: no HTML, no index card, no sitemap entry.
     if (String(meta.draft).toLowerCase() === 'true') {
-      drafts.push({ file, title: meta.title || '(untitled)', date: meta.date || '(no date)' });
+      drafts.push({
+        file,
+        slug: meta.slug || file.replace(/\.md$/, ''),
+        title: meta.title || '(untitled)',
+        date: meta.date || '(no date)',
+      });
       continue;
     }
 
@@ -140,6 +145,12 @@ async function main() {
     const slug = meta.slug || file.replace(/\.md$/, '');
     const url = `${SITE_URL}/blog/${slug}.html`;
     const keywords = Array.isArray(meta.keywords) ? meta.keywords : [];
+    // Per-post share card. `build-og-cards.mjs` writes img/blog/<slug>.png; the shared
+    // og-default is the fallback only if a card has not been rendered yet. Every post
+    // sharing one image was a distribution problem, not a cosmetic one.
+    const image = meta.image
+      ? `${SITE_URL}${meta.image.startsWith('/') ? '' : '/'}${meta.image}`
+      : `${SITE_URL}/img/blog/${meta.slug || file.replace(/\.md$/, '')}.png`;
 
     const html = template
       .replaceAll('{{TITLE}}', escapeHtml(meta.title))
@@ -148,6 +159,7 @@ async function main() {
       .replaceAll('{{DATE}}', meta.date)
       .replaceAll('{{PUBLISHER}}', PUBLISHER)
       .replaceAll('{{KEYWORDS}}', JSON.stringify(keywords))
+      .replaceAll('{{IMAGE}}', image)
       .replaceAll('{{BODY}}', marked.parse(body));
 
     const out = path.join(BLOG_DIR, `${slug}.html`);
@@ -234,10 +246,41 @@ async function main() {
     return;
   }
 
+  // ── schedule.json — the admin blog calendar's data source ──────────────────
+  //
+  // ⚠️ This file was HAND-EDITED until session 110, which is the same drift the index and
+  // sitemap had: /admin/blog reads it via server/routes/admin-blog.ts, so a stale file
+  // makes the admin calendar quietly disagree with the site. It held 12 published and ZERO
+  // planned while 25 posts were scheduled — so the schedule was, in practice, unviewable.
+  //
+  // `planned` vs `published` is decided by the DATE, not by a hand-set field: a post whose
+  // date has arrived is published, because that is exactly what blog.html's auto-release
+  // script decides too. One rule, two consumers.
+  const schedule = {
+    generated: new Date().toISOString().slice(0, 10),
+    // ⚠️ DRAFTS ARE INCLUDED HERE and nowhere else. /admin/blog exists to show what is
+    // COMING, and a pipeline you cannot see is not a pipeline. They are still not built,
+    // not in blog.html, and not in the sitemap — this is a private admin view, fed by a
+    // file that is public but unlinked.
+    posts: [...posts, ...drafts.map((d) => ({ ...d, draft: true }))]
+      .sort((a, b) => b.date.localeCompare(a.date))
+      .map((p) => ({
+      slug: p.slug,
+      title: p.title,
+      status: p.date <= today ? 'published' : 'planned',
+      ...(p.date <= today ? { publishedDate: p.date } : { targetDate: p.date }),
+      image: `/img/blog/${p.slug}.png`,
+      url: `${SITE_URL}/blog/${p.slug}.html`,
+      ...(p.draft ? { draft: true } : {}),
+    })),
+  };
+  await fs.writeFile(path.join(ROOT, 'blog', 'schedule.json'), JSON.stringify(schedule, null, 2) + '\n', 'utf8');
+
   await fs.writeFile(INDEX, nextIndex, 'utf8');
   await fs.writeFile(SITEMAP, nextSitemap, 'utf8');
   console.log(`  index   blog.html      (${posts.length} cards)`);
   console.log(`  sitemap sitemap.xml    (${released.length} blog urls; ${scheduled.length} scheduled, excluded)`);
+  console.log(`  schedule blog/schedule.json (${schedule.posts.length} entries for /admin/blog; ${drafts.length} draft)`);
   console.log('\n[build-blog] done.');
 }
 
