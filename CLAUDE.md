@@ -77,7 +77,26 @@ status — while the app footer and Stripe both say `Pasadena Works, LLC d/b/a A
 - **Dark mode** — CSS supports both `prefers-color-scheme: dark` and `data-theme="dark"` attribute
 - **Mobile nav** — hamburger menu at 768px breakpoint
 - **FAQ accordion** — `.faq-q` / `.faq-a` pattern on pricing page
-- **GA4** — `G-B3X5H4KJ11` tracking on all pages
+- **GA4** — `G-B3X5H4KJ11`, initialised by **`js/analytics.js` only**. Every page loads that one
+  file; no page inlines a `gtag()` call any more.
+
+  ⚠️ **It is behind a hostname ALLOWLIST (`alephco.io`, `www.alephco.io`) and that guard is
+  load-bearing.** Until session 111 all 38 pages inlined their own snippet and called
+  `gtag('config', …)` unconditionally, so `npm run dev` on localhost:3060 counted every local
+  preview as a real visitor. The app repo had the identical defect and it was not theoretical:
+  GA4 for 2026-08-03 → 2026-08-30 showed **5,109 of 5,210 "active users" coming from localhost**
+  — 98% noise — against 96 real marketing visitors. That one was fixed in app-session 110; this
+  repo stayed exposed a session longer because nobody checked the sibling.
+
+  **Allowlist, never a blocklist.** Excluding only "localhost" is what let a staging host through
+  in the app repo. A new environment — a branch deploy, a preview URL, `thirstypig.github.io` —
+  stays silent until someone adds it deliberately. Off-allowlist the file also declines to LOAD
+  the Google tag at all, rather than loading it and muting `gtag`.
+
+  `npm test` asserts this in both directions: no page may inline `gtag('config', …)` or load
+  googletagmanager directly, at least 30 pages must still reference the loader (so deleting
+  analytics outright is not a green result), and it **executes `analytics.js` against a fake
+  window** for a live host and four off-allowlist hosts rather than grepping it.
 
 ## Deployment
 - GitHub Pages via `.github/workflows/deploy.yml` (actions/deploy-pages)
