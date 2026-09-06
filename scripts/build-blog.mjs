@@ -150,6 +150,20 @@ function assertPublishable(meta, body, file) {
     }
   }
 
+  // ⚠️ A stray backslash in a title or description is a PARSER ARTIFACT, not a choice.
+  // parseFrontmatter strips one leading/trailing quote and does not unescape \" — so a
+  // title written as "What \"x\" means" publishes with the backslashes visible. Found
+  // exactly that way, on a post the readiness check had already called ready. Wrap a
+  // title containing quotes in SINGLE quotes instead.
+  for (const field of ['title', 'description']) {
+    if (typeof meta[field] === 'string' && meta[field].includes('\\')) {
+      throw new Error(
+        `${file}: ${field} contains a backslash — "${meta[field]}".\n` +
+        `    The frontmatter parser does not unescape quotes. Wrap the value in single quotes.`,
+      );
+    }
+  }
+
   // Frontmatter is searched too: a title or description can carry a placeholder just as
   // easily as the body, and those are the parts that reach search results.
   const haystack = `${body}\n${Object.values(meta).flat().join('\n')}`;

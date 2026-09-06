@@ -389,6 +389,15 @@ check("the draft listing reports what still blocks each draft", () => {
   } finally { cleanup(root); }
 });
 
+check("REFUSES a title whose quotes were escaped into backslashes", () => {
+  const root = fixture({ posts: [{ slug: "escaped", title: 'What \\"x\\" means', date: "2026-01-05" }] });
+  try {
+    const threw = refusal(root);
+    assert(threw, "a title containing a backslash published — it renders with the backslashes visible");
+    assert(/contains a backslash/.test(threw), `wrong error: ${threw.slice(0, 200)}`);
+  } finally { cleanup(root); }
+});
+
 console.log(`\n${failures.length === 0 ? "✓" : "✗"} ${passed} passed, ${failures.length} failed`);
 for (const f of failures) console.log(`\n  ✗ ${f}`);
 process.exit(failures.length === 0 ? 0 : 1);
