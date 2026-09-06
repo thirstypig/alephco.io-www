@@ -31,6 +31,13 @@ Blog style + schedule conventions: `docs/blog-writing-guide.md`.
 
 - Source: `blog/posts/<slug>.md` — frontmatter (`title`, `description`, `date`, optional
   `slug`, `keywords`, `read`, `draft`) plus Markdown body.
+- ⚠️ **`sources:` is REQUIRED to publish.** A post with `draft: false` must carry
+  `sources: [https://…]` — at least one absolute https primary source — and must contain
+  no placeholder marker (`PLACEHOLDER`, `TODO`, `TKTK`, `XXX`, `[TBD]`, `NOT PUBLISHABLE`)
+  in body or frontmatter. The build THROWS otherwise. `draft: true` guards an unfinished
+  post leaking; it guarded nothing at the moment someone deliberately published, which is
+  exactly when an unverified regulatory claim goes out. Drafting is unaffected.
+  `npm run check:blog` lists every draft and what still blocks it.
 - Generator: `scripts/build-blog.mjs`. Emits `blog/<slug>.html`, rewrites the card list in
   `blog.html` between `<!-- BLOG_CARDS:START -->` / `:END`, and rewrites the `/blog/` half
   of `sitemap.xml`. Runs in CI after `build:learn` (both write the sitemap).
@@ -100,13 +107,20 @@ status — while the app footer and Stripe both say `Pasadena Works, LLC d/b/a A
 
 ## Deployment
 - GitHub Pages via `.github/workflows/deploy.yml` (actions/deploy-pages)
-- Triggers on push to `main` or manual workflow_dispatch
+- Triggers on push to `main`, on pull_request (tests only, no deploy), or workflow_dispatch
+- ⚠️ **`deploy` needs the `test` job.** A red suite blocks publication. Until session 116
+  nothing in CI ran `npm test` at all — the suite's only consumer was a human typing it,
+  which is why it could sit 22-red indefinitely. Free minutes: this repo is public.
 - CNAME file: `www.alephco.io`
 - Build step: `npm ci && npm run build:learn` runs in CI to regenerate `/learn/*` static pages from Supabase before upload
 - **Required GitHub repository secrets:** `SUPABASE_URL` and `SUPABASE_ANON_KEY` (anon key only — never service role). Without these, the build step fails and the deploy is blocked.
 - The rest of the repo (hand-written `.html` files) is uploaded as-is
 
-## DNS Records (Squarespace)
+## DNS Records (Cloudflare — NOT Squarespace)
+
+⚠️ **DNS was delegated to Cloudflare on 2026-08-25. Squarespace is the registrar only, and
+its DNS editor silently does nothing.** A DMARC record added there in session 115 never
+resolved. Run `dig NS alephco.io` before giving anyone DNS instructions.
 - `alephco.io` → GitHub Pages (A records: 185.199.108-111.153)
 - `www.alephco.io` → GitHub Pages (CNAME)
 - `app.alephco.io` → Railway (CNAME)
@@ -148,12 +162,16 @@ status — while the app footer and Stripe both say `Pasadena Works, LLC d/b/a A
 - CNAME file must not be deleted — it configures the GitHub Pages custom domain
 
 ## Testing
-- `npm test` — runs `tests/validate-structure.mjs` (structural checks across all pages).
-  ⚠️ This suite is currently RED with **22 pre-existing failures** (`terms.html` /
-  `privacy.html` missing footer structure). Compare the COUNT before and after a change
-  rather than expecting green.
-- `npm run test:blog` — runs `tests/validate-blog-build.mjs`: behavioural tests for the
-  blog generator, executed against a throwaway fixture tree via `BLOG_ROOT`. Kept separate
-  from `npm test` deliberately, so a green new suite is not buried under a red old one.
+- `npm test` — runs BOTH `tests/validate-structure.mjs` (structural checks across all
+  pages) and `tests/validate-blog-build.mjs` (behavioural tests for the blog generator,
+  run against a throwaway fixture tree via `BLOG_ROOT`). **Expect green.**
+  ⚠️ This suite used to be permanently RED with 22 pre-existing failures, and this file
+  used to tell you to compare the count rather than expect green. Both are fixed
+  (session 116): `privacy.html`/`terms.html` are redirect stubs and are now judged as
+  such. **An accepted-red gate has no signal** — the next real regression arrived as
+  "23 of 1418" and nobody read the difference. If you see a failure, it is a failure.
+- `npm run check:blog` — runs the generator against the REAL `blog/posts/` without
+  writing anything. CI runs this too, so a pull request that publishes an uncited post
+  fails at review rather than at deploy.
 - Validates: nav consistency (no "Home" link, exactly 3 nav links), footer structure (grid, 4 columns, brand, bottom bar, column headings), internal link integrity (all `href` resolve to real files), CSS class presence
 - Zero dependencies — Node built-ins only
