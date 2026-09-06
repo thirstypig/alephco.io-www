@@ -31,6 +31,12 @@ jobs:
       # built recently is a suite that passes for reasons unrelated to the code. Verified
       # against a fresh clone — 1,588 checks green with nothing built.
       - run: npm test
+      # ⚠️ The suites above test the generator against FIXTURES. This runs it against the
+      # REAL blog/posts/, so a pull request that flips `draft: false` on an uncited or
+      # placeholder-ridden post fails HERE, at review time — not at deploy, after merge.
+      # `--check` writes nothing (asserted session 116 by diffing the tree around it).
+      - name: Validate the real blog sources (publish gate for regulatory content)
+        run: npm run check:blog
 
   # ── Deploy ──────────────────────────────────────────────────────
   deploy:
