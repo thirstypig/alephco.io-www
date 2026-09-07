@@ -20,8 +20,50 @@ const ROOT = resolve(__dirname, "..");
 // session 115 this comment claimed PAGES was "everything except 404"; it was not, and
 // four live feature pages had never been checked by anything as a result.
 
+/**
+ * Blog posts generated from `blog/posts/*.md` by `scripts/build-blog.mjs`.
+ *
+ * Derived, not hand-listed. The 12 legacy posts in PAGES below are hand-written HTML and
+ * stay hand-listed. A GENERATED post already has a markdown source naming it, so requiring
+ * a second manual entry here would mean every Monday's publish reds this suite until
+ * somebody remembers to add a line — a per-post manual step hidden inside a weekly cadence,
+ * which is how a cadence stops. Found the honest way: publishing post 1 of 25 (todo 539)
+ * went green locally and red in CI, because `git ls-files` does not see a file that has not
+ * been added yet.
+ *
+ * ⚠️ THIS DOES NOT WEAKEN THE GATE, and the gate is load-bearing — until session 115 four
+ * live feature pages sat in no list and nothing had ever checked them. A derived post is
+ * spread into PAGES, so it is still checked for nav, footer and link integrity exactly like
+ * every other page. What is automated is the BOOKKEEPING, not the validation. A stray
+ * `blog/whatever.html` with no markdown source is still in no category and still fails.
+ *
+ * And it adds a check that did not exist before: a post flipped to `draft: false` whose HTML
+ * was never regenerated becomes a PAGES entry pointing at a missing file, which the
+ * "lists cannot rot in the other direction" assertion below catches by name.
+ *
+ * Slug derivation mirrors the generator exactly (`meta.slug || filename`,
+ * scripts/build-blog.mjs:260). If those two ever disagree this list points at files that do
+ * not exist, and the same rot assertion says so.
+ */
+const GENERATED_POSTS = readdirSync(join(ROOT, "blog", "posts"))
+  .filter((f) => f.endsWith(".md"))
+  .map((f) => {
+    const src = readFileSync(join(ROOT, "blog", "posts", f), "utf-8");
+    const fm = src.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+    const body = fm ? fm[1] : "";
+    // Matches the generator's `String(meta.draft).toLowerCase() === 'true'`.
+    const isDraft = /^draft:\s*true\s*$/im.test(body);
+    const slug = body.match(/^slug:\s*(\S+)\s*$/m);
+    return { isDraft, file: `blog/${slug ? slug[1] : f.replace(/\.md$/, "")}.html` };
+  })
+  // A draft builds no HTML at all, so it must NOT be classified — otherwise the rot
+  // assertion would demand a file the generator deliberately did not write.
+  .filter((p) => !p.isDraft)
+  .map((p) => p.file);
+
 // Full marketing pages: must carry nav + footer.
 const PAGES = [
+  ...GENERATED_POSTS,
   "index.html",
   "about.html",
   "blog.html",
