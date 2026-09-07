@@ -363,6 +363,69 @@ for (const [page, target] of Object.entries(REDIRECT_PAGES)) {
   );
 }
 
+// ── Structured data (JSON-LD) ───────────────────────────────────
+//
+// Pages that carry schema.org markup. Listed rather than inferred, so DELETING a block is a
+// failure instead of a silent no-op — an absent script tag has no symptom at all, and the
+// only place you would notice is a search result weeks later.
+const JSON_LD_PAGES = [
+  "index.html",
+  "about.html",
+  "pricing.html",
+  "blog.html",
+  "contact.html",
+  "how-it-works.html",
+  "industries.html",
+  "status.html",
+];
+
+for (const page of JSON_LD_PAGES) {
+  const filepath = join(ROOT, page);
+  if (!existsSync(filepath)) {
+    assert(false, `${page}: listed in JSON_LD_PAGES but the file does not exist`);
+    continue;
+  }
+  const html = readFileSync(filepath, "utf-8");
+  const m = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+  if (!m) {
+    assert(false, `${page}: no JSON-LD block — structured data was removed`);
+    continue;
+  }
+  let data = null;
+  try {
+    data = JSON.parse(m[1]);
+  } catch (err) {
+    assert(false, `${page}: JSON-LD does not parse (${err.message}) — search engines ignore it silently`);
+    continue;
+  }
+  assert(data["@context"] === "https://schema.org", `${page}: JSON-LD @context is not https://schema.org`);
+  assert(typeof data["@type"] === "string" && data["@type"].length > 0, `${page}: JSON-LD has no @type`);
+
+  // ⚠️ FAQ markup must match what the page actually SHOWS.
+  //
+  // Google requires the marked-up question and answer to be visible on the page, and
+  // marking up content that is not there is a manual-action risk rather than a lost
+  // opportunity. The two are written in different places — a <script> in <head> and the
+  // accordion in <body> — so editing the visible copy silently desyncs them. This asserts
+  // every Question name still appears in the rendered text.
+  if (data["@type"] === "FAQPage") {
+    const visible = html
+      .replace(/<script[\s\S]*?<\/script>/g, "")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/&amp;/g, "&").replace(/&#39;|&rsquo;/g, "'").replace(/&quot;/g, '"')
+      .replace(/\s+/g, " ");
+    const questions = Array.isArray(data.mainEntity) ? data.mainEntity : [];
+    assert(questions.length > 0, `${page}: FAQPage markup has no questions`);
+    for (const q of questions) {
+      const name = String(q.name || "").replace(/\s+/g, " ").trim();
+      assert(
+        name.length > 0 && visible.includes(name),
+        `${page}: FAQ markup asks "${name.slice(0, 60)}" but that question is not visible on the page`
+      );
+    }
+  }
+}
+
 // ── CSS validation ──────────────────────────────────────────────
 const css = readFileSync(join(ROOT, "css/style.css"), "utf-8");
 
