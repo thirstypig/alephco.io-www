@@ -3,19 +3,56 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
 jobs:
+  # ── Tests ───────────────────────────────────────────────────────
+  # ⚠️ Until session 115 nothing in CI ran `npm test` at all. The suite existed, and the
+  # only thing that ever ran it was a human typing it locally — so it sat 22-of-1418 red
+  # on a healthy tree for long enough that the red became the expected output (todo 569).
+  # A gate nobody runs and a gate that is always red fail the same way: silently.
+  #
+  # Deliberately runs on pull_request too, so a page is checked BEFORE it reaches main
+  # rather than after it is already live.
+  test:
+    name: Structure and blog checks
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      # No build step on purpose. The suite must pass on a bare checkout: the generated
+      # /learn pages are gitignored, and a suite whose verdict depends on whether someone
+      # built recently is a suite that passes for reasons unrelated to the code. Verified
+      # against a fresh clone — 1,588 checks green with nothing built.
+      - run: npm test
+      # ⚠️ The suites above test the generator against FIXTURES. This runs it against the
+      # REAL blog/posts/, so a pull request that flips `draft: false` on an uncited or
+      # placeholder-ridden post fails HERE, at review time — not at deploy, after merge.
+      # `--check` writes nothing (asserted session 116 by diffing the tree around it).
+      - name: Validate the real blog sources (publish gate for regulatory content)
+        run: npm run check:blog
+
+  # ── Deploy ──────────────────────────────────────────────────────
   deploy:
+    needs: test
+    # Pull requests get the tests above and stop there — they must not publish.
+    if: github.event_name != 'pull_request'
+    # ⚠️ Concurrency is scoped to THIS job, not the workflow. At workflow level the shared
+    # "pages" group would let a pull-request run cancel an in-flight deployment of main,
+    # since cancel-in-progress is true.
+    concurrency:
+      group: "pages"
+      cancel-in-progress: true
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

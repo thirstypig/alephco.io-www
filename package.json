@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "python3 -m http.server 3060",
     "start": "python3 -m http.server 3060",
-    "test": "node tests/validate-structure.mjs",
+    "test": "node tests/validate-structure.mjs && node tests/validate-blog-build.mjs",
     "build:learn": "node scripts/build-learn-pages.mjs",
     "build:blog": "node scripts/build-blog.mjs",
     "check:blog": "node scripts/build-blog.mjs --check",

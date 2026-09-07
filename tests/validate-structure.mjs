@@ -6,6 +6,7 @@
  * Zero dependencies — uses only Node built-ins.
  */
 import { readFileSync, existsSync, readdirSync } from "fs";
+import { execFileSync } from "child_process";
 import { resolve, dirname, join } from "path";
 import { fileURLToPath } from "url";
 
@@ -13,7 +14,13 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 
 // ── File inventory ──────────────────────────────────────────────
-// All pages that should have nav + footer (everything except 404)
+//
+// Every tracked .html file must appear in EXACTLY ONE of PAGES, REDIRECT_PAGES or
+// EXEMPT_PAGES. That is asserted below — see "Classification is exhaustive". Until
+// session 115 this comment claimed PAGES was "everything except 404"; it was not, and
+// four live feature pages had never been checked by anything as a result.
+
+// Full marketing pages: must carry nav + footer.
 const PAGES = [
   "index.html",
   "about.html",
@@ -22,9 +29,7 @@ const PAGES = [
   "how-it-works.html",
   "industries.html",
   "pricing.html",
-  "privacy.html",
   "status.html",
-  "terms.html",
   "blog/cpc-certificate-guide.html",
   "blog/cpsc-recalls-for-importers.html",
   "blog/fsvp-guide-for-importers.html",
@@ -37,16 +42,63 @@ const PAGES = [
   "blog/prop-65-warnings-guide.html",
   "blog/spreadsheets-failing-compliance.html",
   "blog/why-i-built-aleph.html",
+  "features/cfr-citations.html",
   "features/cpsia-cpc-generator.html",
   "features/fsvp-management.html",
+  "features/mocra.html",
   "features/pfas-tracking.html",
   "features/prop-65-labels.html",
+  "features/regulatory-alerts.html",
+  "features/supplier-declarations.html",
   "for/amazon-sellers.html",
   "for/food-importers.html",
   "for/toy-importers.html",
   "compare/assent-compliance.html",
   "compare/registrar-corp.html",
 ];
+
+/**
+ * Redirect stubs: a real URL whose only job is to forward, mapped to its destination.
+ *
+ * These are NOT pages and must never be judged as pages — `privacy.html` and `terms.html`
+ * sat in PAGES until session 115 and failed 22 checks on every run for having no nav and
+ * no footer, which a redirect correctly does not have. An accepted-red default gate
+ * destroys the signal: the next real regression arrives as "23 of 1418 failed" and nobody
+ * reads the difference (todo 569).
+ *
+ * ⚠️ The destination is PINNED, not merely required to be self-consistent. Each stub names
+ * its target in FOUR places, and the failure that matters is three of them being updated
+ * and one missed — a canonical still pointing at the old URL tells Google to index the
+ * wrong page while every human sees the right one. Self-consistency cannot catch that;
+ * only a value written down here can. When a legal page legitimately moves, this map
+ * changes in the same commit.
+ */
+const REDIRECT_PAGES = {
+  "privacy.html": "https://app.alephco.io/legal/privacy",
+  "terms.html": "https://app.alephco.io/legal/terms",
+};
+
+/**
+ * Tracked .html files that are deliberately neither a full page nor a redirect.
+ * Each needs a REASON, because this set is the only way to leave the gate.
+ */
+const EXEMPT_PAGES = new Set([
+  "404.html", // no nav by design — a dead end should not offer a full site chrome
+  "confirm.html", // transactional email landing, deliberately chrome-free
+  "unsubscribe.html", // ditto
+  "blog/_template.html", // authoring scaffold, never served
+  "dist/index.html", // build output of the Vite widget, not a marketing page
+  // Learn-page templates. The GENERATED pages are gitignored build artifacts and are
+  // excluded from the tracked list entirely (see below); these tracked templates are
+  // what actually needs policing, and they are fragments, not whole documents.
+  "learn/_templates/_footer.html",
+  "learn/_templates/_head.html",
+  "learn/_templates/_nav.html",
+  "learn/_templates/article.html",
+  "learn/_templates/landing.html",
+  "learn/_templates/module.html",
+  "learn/_templates/search.html",
+]);
 
 const EXPECTED_NAV_LINKS = ["How It Works", "Industries", "Pricing"];
 
@@ -74,6 +126,26 @@ function allHtmlFiles(dir = ROOT, prefix = "") {
 
 const ALL_HTML_FILES = allHtmlFiles();
 
+/**
+ * The tracked .html files, from git rather than from a directory walk.
+ *
+ * ⚠️ NOT interchangeable with ALL_HTML_FILES above, and the difference is the point.
+ * The walk sees whatever is on this machine, including gitignored build output
+ * (`learn/index.html`, `learn/m/`, `learn/search/`, `blog/_preview/`). Classification has
+ * to be judged against what is IN THE REPO, or the answer changes depending on whether
+ * someone ran a build — the same "passes for an unrelated reason" trap the walk's own
+ * comment warns about.
+ *
+ * Asking git also means .gitignore stays the single source of truth. A second hand-written
+ * copy of those exclusions here would be the 38-copies drift that DOC-062 is about.
+ */
+const TRACKED_HTML_FILES = execFileSync("git", ["ls-files", "*.html"], {
+  cwd: ROOT,
+  encoding: "utf-8",
+})
+  .split("\n")
+  .filter(Boolean);
+
 let passed = 0;
 let failed = 0;
 const failures = [];
@@ -89,8 +161,61 @@ function assert(condition, message) {
 
 // ── Tests ───────────────────────────────────────────────────────
 
+// ⚠️ THIS RUNS FIRST, DELIBERATELY.
+// These are checks on the INVENTORY, and everything below reads files the inventory
+// names. Ordered the other way (as it was when written), a stale entry crashed the
+// PAGES loop with a raw ENOENT before the assertion that explains it could run — the
+// build still went red, but on a stack trace instead of a sentence, and the check
+// itself was unreachable. Verify what the list SAYS before trusting what it points at.
+// ── Classification is exhaustive ────────────────────────────────
+//
+// The reason this exists: until session 115, PAGES was described as "everything except
+// 404" and was not. Four live feature pages (cfr-citations, mocra, regulatory-alerts,
+// supplier-declarations) were in no list at all, so nothing had ever checked them — the
+// suite reported 1,418 green checks while silently looking away from four real pages.
+//
+// A gate you can leave by saying nothing is not a gate. Every tracked .html must now be
+// named somewhere, and adding a page without classifying it fails the build.
+
+const CLASSIFIED = [
+  ...PAGES,
+  ...Object.keys(REDIRECT_PAGES),
+  ...EXEMPT_PAGES,
+];
+
+for (const file of TRACKED_HTML_FILES) {
+  assert(
+    CLASSIFIED.includes(file),
+    `${file}: tracked .html in no category — add it to PAGES (a full page), REDIRECT_PAGES (a stub), or EXEMPT_PAGES with a written reason`
+  );
+}
+
+// …and the counterpart, so the lists cannot rot in the other direction. Without this a
+// deleted or renamed file would sit in PAGES forever, and a typo'd entry would look like
+// coverage while checking nothing.
+for (const listed of CLASSIFIED) {
+  assert(
+    TRACKED_HTML_FILES.includes(listed),
+    `${listed}: listed in the inventory but is not a tracked file — the inventory is stale`
+  );
+}
+
+// No file may be claimed twice; overlapping lists would let a page be both policed and
+// exempt, and which one wins would depend on read order.
+assert(
+  CLASSIFIED.length === new Set(CLASSIFIED).size,
+  `a file appears in more than one of PAGES / REDIRECT_PAGES / EXEMPT_PAGES: ${CLASSIFIED.filter(
+    (f, i) => CLASSIFIED.indexOf(f) !== i
+  ).join(", ")}`
+);
+
+
 for (const page of PAGES) {
   const filepath = join(ROOT, page);
+  // The classification block above already reports a stale entry in a sentence. Skip it
+  // here rather than letting readFileSync throw: an ENOENT stack trace on top of that
+  // message is noise, and a crash also stops every LATER page from being checked.
+  if (!existsSync(filepath)) continue;
   const html = readFileSync(filepath, "utf-8");
   const isSubdir = page.includes("/");
   const prefix = isSubdir ? "\\.\\./" : "";
@@ -176,6 +301,129 @@ for (const page of PAGES) {
     html.includes('href="/" class="nav-logo"'),
     `${page}: nav logo should link to /`
   );
+}
+
+// ── Redirect stubs ──────────────────────────────────────────────
+//
+// A stub's contract is that it FORWARDS, and that every mechanism agrees on where. Each
+// file states its destination four times — canonical, meta refresh, window.location and
+// the visible no-JS link — and they are checked individually against the pinned value
+// rather than against each other, so a partial edit cannot pass by being consistently
+// wrong. See REDIRECT_PAGES above for why the value is pinned.
+
+for (const [page, target] of Object.entries(REDIRECT_PAGES)) {
+  const filepath = join(ROOT, page);
+  if (!existsSync(filepath)) {
+    assert(false, `${page}: listed as a redirect stub but the file does not exist`);
+    continue;
+  }
+  const html = readFileSync(filepath, "utf-8");
+
+  assert(
+    target.startsWith("https://"),
+    `${page}: redirect target "${target}" is not an absolute https URL`
+  );
+
+  // 1. Canonical — what search engines index. The one that fails silently.
+  assert(
+    html.includes(`<link rel="canonical" href="${target}">`),
+    `${page}: canonical does not point at ${target} — search engines would index the wrong page`
+  );
+
+  // 2. Meta refresh, and it must be immediate. A non-zero delay parks the visitor on a
+  //    blank page; `content="0; url=…"` is the whole contract, not just the url part.
+  assert(
+    html.includes(`<meta http-equiv="refresh" content="0; url=${target}">`),
+    `${page}: missing an immediate meta refresh to ${target}`
+  );
+
+  // 3. The scripted redirect, which is what actually fires for most visitors.
+  assert(
+    html.includes(`window.location.replace('${target}')`),
+    `${page}: window.location.replace does not target ${target}`
+  );
+
+  // 4. The visible fallback, for no-JS and for anyone the two above failed.
+  //    Checked INSIDE <body> deliberately: the canonical in <head> already contains
+  //    href="${target}", so a whole-document search would pass on that alone and this
+  //    assertion would prove nothing.
+  const body = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
+  assert(
+    body !== null && body[1].includes(`href="${target}"`),
+    `${page}: no visible link to ${target} in <body> — a no-JS visitor reaches a dead end`
+  );
+
+  // 5. ⚠️ THE ESCAPE HATCH THIS CLOSES.
+  //    Without it, REDIRECT_PAGES is a way to make any failing page green: move it here
+  //    and the nav/footer checks stop applying. A stub has no site chrome, so requiring
+  //    its ABSENCE means a real page cannot be parked in this list.
+  assert(
+    !html.includes('class="footer-grid"'),
+    `${page}: carries a full footer — a real page cannot be listed as a redirect stub to skip the page checks`
+  );
+}
+
+// ── Structured data (JSON-LD) ───────────────────────────────────
+//
+// Pages that carry schema.org markup. Listed rather than inferred, so DELETING a block is a
+// failure instead of a silent no-op — an absent script tag has no symptom at all, and the
+// only place you would notice is a search result weeks later.
+const JSON_LD_PAGES = [
+  "index.html",
+  "about.html",
+  "pricing.html",
+  "blog.html",
+  "contact.html",
+  "how-it-works.html",
+  "industries.html",
+  "status.html",
+];
+
+for (const page of JSON_LD_PAGES) {
+  const filepath = join(ROOT, page);
+  if (!existsSync(filepath)) {
+    assert(false, `${page}: listed in JSON_LD_PAGES but the file does not exist`);
+    continue;
+  }
+  const html = readFileSync(filepath, "utf-8");
+  const m = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+  if (!m) {
+    assert(false, `${page}: no JSON-LD block — structured data was removed`);
+    continue;
+  }
+  let data = null;
+  try {
+    data = JSON.parse(m[1]);
+  } catch (err) {
+    assert(false, `${page}: JSON-LD does not parse (${err.message}) — search engines ignore it silently`);
+    continue;
+  }
+  assert(data["@context"] === "https://schema.org", `${page}: JSON-LD @context is not https://schema.org`);
+  assert(typeof data["@type"] === "string" && data["@type"].length > 0, `${page}: JSON-LD has no @type`);
+
+  // ⚠️ FAQ markup must match what the page actually SHOWS.
+  //
+  // Google requires the marked-up question and answer to be visible on the page, and
+  // marking up content that is not there is a manual-action risk rather than a lost
+  // opportunity. The two are written in different places — a <script> in <head> and the
+  // accordion in <body> — so editing the visible copy silently desyncs them. This asserts
+  // every Question name still appears in the rendered text.
+  if (data["@type"] === "FAQPage") {
+    const visible = html
+      .replace(/<script[\s\S]*?<\/script>/g, "")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/&amp;/g, "&").replace(/&#39;|&rsquo;/g, "'").replace(/&quot;/g, '"')
+      .replace(/\s+/g, " ");
+    const questions = Array.isArray(data.mainEntity) ? data.mainEntity : [];
+    assert(questions.length > 0, `${page}: FAQPage markup has no questions`);
+    for (const q of questions) {
+      const name = String(q.name || "").replace(/\s+/g, " ").trim();
+      assert(
+        name.length > 0 && visible.includes(name),
+        `${page}: FAQ markup asks "${name.slice(0, 60)}" but that question is not visible on the page`
+      );
+    }
+  }
 }
 
 // ── CSS validation ──────────────────────────────────────────────
@@ -311,7 +559,9 @@ for (const host of ["localhost", "127.0.0.1", "thirstypig.github.io", "staging.a
 // ── Report ──────────────────────────────────────────────────────
 console.log("");
 if (failed === 0) {
-  console.log(`\u2713 All ${passed} checks passed across ${PAGES.length} pages`);
+  console.log(
+    `\u2713 All ${passed} checks passed across ${PAGES.length} pages, ${Object.keys(REDIRECT_PAGES).length} redirect stubs and ${EXEMPT_PAGES.size} exempt files`
+  );
 } else {
   console.log(`\u2717 ${failed} of ${passed + failed} checks failed:\n`);
   for (const f of failures) {

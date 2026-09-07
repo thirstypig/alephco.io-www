@@ -78,14 +78,21 @@ function fixture({ posts = [], withMarkers = true } = {}) {
   );
 
   for (const p of posts) {
+    // A published post needs a citation to clear assertPublishable, so that is the
+    // DEFAULT here — otherwise every unrelated test would be asserting the publish gate
+    // by accident, and a change to that gate would light up the whole file. Pass
+    // `sources: []` to exercise the gate deliberately.
+    const sources = p.sources === undefined ? ["https://www.ecfr.gov/current/title-21"] : p.sources;
     const fm = [
       `title: "${p.title}"`,
       `description: "${p.description ?? "A description long enough to be plausible."}"`,
       `date: ${p.date}`,
       `slug: ${p.slug}`,
+      sources.length ? `sources: [${sources.join(", ")}]` : null,
       p.draft ? "draft: true" : null,
     ].filter(Boolean).join("\n");
-    writeFileSync(join(root, "blog", "posts", `${p.slug}.md`), `---\n${fm}\n---\n\n## Body\n\nWords.\n`);
+    const body = p.body ?? "## Body\n\nWords.";
+    writeFileSync(join(root, "blog", "posts", `${p.slug}.md`), `---\n${fm}\n---\n\n${body}\n`);
   }
   return root;
 }
@@ -268,6 +275,126 @@ check("POSITIVE CONTROL: the harness actually builds something", () => {
     const out = build(root);
     assert(out.includes("control"), "generator reported no output for a valid post");
     assert(existsSync(join(root, "blog", "control.html")), "no html produced for a valid post");
+  } finally { cleanup(root); }
+});
+
+// ── The publish gate for regulatory content (todo 539 §5, session 116) ───────
+//
+// `draft: true` stops an unfinished post leaking. It stops nothing at the moment someone
+// deliberately publishes, which is when an unverified regulatory claim actually goes out.
+// These five run the gate in BOTH directions, because a gate that refuses everything and
+// a gate that refuses nothing both look "green" from one side.
+//
+// ⚠️ Reachability matters more than usual here: every post in blog/posts/ is currently a
+// draft, so this guard NEVER fires against the real repo. Without a test that publishes
+// something, it is dead code that everyone believes is protecting them.
+
+function refusal(root, args = []) {
+  try {
+    build(root, args);
+    return null;
+  } catch (err) {
+    return String(err.stderr || err.message);
+  }
+}
+
+check("REFUSES to publish a post with no sources", () => {
+  const root = fixture({ posts: [{ slug: "uncited", title: "Uncited", date: "2026-01-05", sources: [] }] });
+  try {
+    const threw = refusal(root);
+    assert(threw, "an uncited post BUILT — the citation requirement is not enforced");
+    assert(/no `sources:` in frontmatter/.test(threw), `wrong error: ${threw.slice(0, 200)}`);
+    assert(!existsSync(join(root, "blog", "uncited.html")), "the page was written anyway");
+    assert(!read(root, "sitemap.xml").includes("uncited"), "the uncited post reached the sitemap");
+  } finally { cleanup(root); }
+});
+
+check("REFUSES to publish a post that still contains placeholder text", () => {
+  const root = fixture({
+    posts: [{
+      slug: "half-written", title: "Half Written", date: "2026-01-05",
+      body: "## Rules\n\nMaine requires reporting by PLACEHOLDER for all covered products.",
+    }],
+  });
+  try {
+    const threw = refusal(root);
+    assert(threw, "a post containing PLACEHOLDER published — this is the session-99 failure");
+    assert(/still contains "PLACEHOLDER"/.test(threw), `wrong error: ${threw.slice(0, 200)}`);
+    assert(!existsSync(join(root, "blog", "half-written.html")), "the page was written anyway");
+  } finally { cleanup(root); }
+});
+
+check("REFUSES a source that is not an absolute https URL", () => {
+  const root = fixture({ posts: [{ slug: "bad-cite", title: "Bad Cite", date: "2026-01-05", sources: ["see the FDA website"] }] });
+  try {
+    const threw = refusal(root);
+    assert(threw, "an unfollowable citation was accepted");
+    assert(/not an absolute https URL/.test(threw), `wrong error: ${threw.slice(0, 200)}`);
+  } finally { cleanup(root); }
+});
+
+// ⚠️ THE NEGATIVE CONTROL. Without this, a gate that threw on EVERY post would pass all
+// three tests above and nothing would ever publish again.
+check("PUBLISHES a cited post with no placeholders", () => {
+  const root = fixture({
+    posts: [{
+      slug: "properly-sourced", title: "Properly Sourced", date: "2026-01-05",
+      sources: ["https://www.ecfr.gov/current/title-21/part-117", "https://legislature.maine.gov/statutes/38/title38sec1614.html"],
+      body: "## Rules\n\nA claim, followed by where it was checked.",
+    }],
+  });
+  try {
+    build(root);
+    assert(existsSync(join(root, "blog", "properly-sourced.html")), "a properly cited post did NOT publish — the gate refuses everything");
+    assert(read(root, "blog.html").includes("properly-sourced"), "cited post missing from the index");
+    assert(read(root, "sitemap.xml").includes("properly-sourced"), "cited post missing from the sitemap");
+  } finally { cleanup(root); }
+});
+
+// ...and the gate must not reach drafting, or writing becomes impossible: a post is
+// uncited and full of placeholders for its whole life until the moment it is finished.
+check("does NOT block previewing an uncited, placeholder-filled DRAFT", () => {
+  const root = fixture({
+    posts: [{
+      slug: "in-progress", title: "In Progress", date: future(30), draft: true, sources: [],
+      body: "## Rules\n\nTODO: check the threshold. NOT PUBLISHABLE AS WRITTEN.",
+    }],
+  });
+  try {
+    build(root, ["--drafts"]);
+    assert(existsSync(join(root, "blog", "_preview", "in-progress.html")), "an unfinished draft could not be previewed — the gate reaches drafting");
+    assert(!existsSync(join(root, "blog", "in-progress.html")), "the draft was published");
+    assert(!read(root, "sitemap.xml").includes("in-progress"), "the draft reached the sitemap");
+  } finally { cleanup(root); }
+});
+
+// The draft listing must say WHY a draft is not publishable. Otherwise the only way to
+// discover a post is uncited is to flip `draft: false` and be refused — i.e. on the day
+// you had scheduled it. Both directions in one test: blocked reports the reason, ready
+// reports ready.
+check("the draft listing reports what still blocks each draft", () => {
+  const root = fixture({
+    posts: [
+      { slug: "not-ready", title: "Not Ready", date: future(10), draft: true, sources: [] },
+      { slug: "is-ready", title: "Is Ready", date: future(20), draft: true },
+    ],
+  });
+  try {
+    const out = build(root);
+    const line = (slug) => out.split("\n").find((l) => l.includes(slug)) || "";
+    assert(/no `sources:`/.test(line("not-ready")), `uncited draft did not report a reason: ${line("not-ready")}`);
+    assert(/ready to publish/.test(line("is-ready")), `ready draft was not reported ready: ${line("is-ready")}`);
+    // ...and neither was actually published, which is the whole point of them being drafts.
+    assert(!existsSync(join(root, "blog", "is-ready.html")), "a draft marked ready was published anyway");
+  } finally { cleanup(root); }
+});
+
+check("REFUSES a title whose quotes were escaped into backslashes", () => {
+  const root = fixture({ posts: [{ slug: "escaped", title: 'What \\"x\\" means', date: "2026-01-05" }] });
+  try {
+    const threw = refusal(root);
+    assert(threw, "a title containing a backslash published — it renders with the backslashes visible");
+    assert(/contains a backslash/.test(threw), `wrong error: ${threw.slice(0, 200)}`);
   } finally { cleanup(root); }
 });
 

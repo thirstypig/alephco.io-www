@@ -87,6 +87,97 @@ function parseFrontmatter(raw, file) {
   return { meta, body: m[2] };
 }
 
+/**
+ * Markers that mean "this text is not finished". Checked in the BODY and in the
+ * frontmatter of any post that is actually publishing.
+ *
+ * ⚠️ Deliberately includes NOT PUBLISHABLE, which is what the scaffolded session-110
+ * posts say about themselves. A post that still describes itself as unpublishable must
+ * not be publishable.
+ */
+const PLACEHOLDER_MARKERS = [
+  /NOT PUBLISHABLE/i,
+  /\bPLACEHOLDER\b/i,
+  /\bTODO\b/,
+  /\bTKTK\b/i,
+  /\bXXX\b/,
+  /\[\s*(?:TBD|TBC)\s*\]/i,
+];
+
+/**
+ * The publish gate for regulatory content. Runs ONLY for a post that is going live.
+ *
+ * ─── Why this exists ───────────────────────────────────────────────────────────
+ *
+ * `draft: true` is a good guard against the wrong ACCIDENT — an unfinished post leaking.
+ * It is no guard at all against the deliberate act of publishing, which is exactly the
+ * moment an unverified regulatory claim goes out. The safety catch and the trigger are
+ * the same flag, and flipping it took one character.
+ *
+ * Todo 539 §5 calls verified-and-cited "non-negotiable", and it was enforced by nobody:
+ * measured session 116, all 25 scheduled posts carried ZERO citations and only ONE
+ * carried a warning saying so. Session 99 put the WRONG Maine PFAS law on this site,
+ * SEO-indexed, and it stayed. Blog and help content are the two surfaces with no citation
+ * guard — only REQUIREMENT_SET in the app forces one. This is that guard for the blog.
+ *
+ * ⚠️ WHAT THIS CANNOT DO: it cannot tell whether a claim is TRUE. It checks that someone
+ * wrote down where they checked, and that no "finish me" marker survives. Those are
+ * proxies. The value is that publishing now requires a deliberate, recorded act rather
+ * than remembering — not that a cited post is automatically correct.
+ */
+function assertPublishable(meta, body, file) {
+  const sources = Array.isArray(meta.sources)
+    ? meta.sources
+    : meta.sources
+      ? [meta.sources]
+      : [];
+
+  if (sources.length === 0) {
+    throw new Error(
+      `${file}: REFUSING TO PUBLISH — no \`sources:\` in frontmatter.\n` +
+      `    Every regulatory claim must be verified against primary source and cited (todo 539 §5).\n` +
+      `    Add e.g.  sources: [https://www.ecfr.gov/..., https://legislature.maine.gov/...]\n` +
+      `    Use the eCFR versioner API or the state's own statute text, not recalled knowledge.`,
+    );
+  }
+
+  for (const url of sources) {
+    if (!/^https:\/\/\S+$/.test(url)) {
+      throw new Error(
+        `${file}: source "${url}" is not an absolute https URL. A citation a reader ` +
+        `cannot follow is not a citation.`,
+      );
+    }
+  }
+
+  // ⚠️ A stray backslash in a title or description is a PARSER ARTIFACT, not a choice.
+  // parseFrontmatter strips one leading/trailing quote and does not unescape \" — so a
+  // title written as "What \"x\" means" publishes with the backslashes visible. Found
+  // exactly that way, on a post the readiness check had already called ready. Wrap a
+  // title containing quotes in SINGLE quotes instead.
+  for (const field of ['title', 'description']) {
+    if (typeof meta[field] === 'string' && meta[field].includes('\\')) {
+      throw new Error(
+        `${file}: ${field} contains a backslash — "${meta[field]}".\n` +
+        `    The frontmatter parser does not unescape quotes. Wrap the value in single quotes.`,
+      );
+    }
+  }
+
+  // Frontmatter is searched too: a title or description can carry a placeholder just as
+  // easily as the body, and those are the parts that reach search results.
+  const haystack = `${body}\n${Object.values(meta).flat().join('\n')}`;
+  for (const marker of PLACEHOLDER_MARKERS) {
+    const hit = haystack.match(marker);
+    if (hit) {
+      throw new Error(
+        `${file}: REFUSING TO PUBLISH — still contains "${hit[0]}".\n` +
+        `    Placeholder text in a published post is how a made-up threshold reaches search.`,
+      );
+    }
+  }
+}
+
 const REQUIRED = ['title', 'description', 'date'];
 
 function validate(meta, file) {
@@ -144,16 +235,27 @@ async function main() {
     // claim is the failure this whole pipeline is supposed to make harder, not easier.
     // A draft is skipped entirely: no HTML, no index card, no sitemap entry.
     if (String(meta.draft).toLowerCase() === 'true' && !withDrafts) {
+      let blockedBy = null;
+      try {
+        assertPublishable(meta, body, file);
+      } catch (err) {
+        // First line only — the full remedy prints when it actually blocks a publish.
+        blockedBy = String(err.message).split('\n')[0].replace(`${file}: `, '');
+      }
       drafts.push({
         file,
         slug: meta.slug || file.replace(/\.md$/, ''),
         title: meta.title || '(untitled)',
         date: meta.date || '(no date)',
+        blockedBy,
       });
       continue;
     }
 
     validate(meta, file);
+    // ⚠️ Only for a post that is actually going live. With --drafts a draft reaches
+    // this line too, and previewing an unfinished post is the entire point of --drafts.
+    if (String(meta.draft).toLowerCase() !== 'true') assertPublishable(meta, body, file);
 
     const slug = meta.slug || file.replace(/\.md$/, '');
     const url = `${SITE_URL}/blog/${slug}.html`;
@@ -207,7 +309,13 @@ async function main() {
 
   if (drafts.length > 0) {
     console.log(`\n  ${drafts.length} draft(s) SKIPPED — set \`draft: false\` to publish:`);
-    for (const d of drafts) console.log(`    · ${d.date}  ${d.title}  (${d.file})`);
+    // Each draft is told what STILL BLOCKS it. Without this the only way to discover that
+    // a post is uncited is to flip `draft: false` and be refused — which means finding out
+    // at the moment you were trying to publish, on the day you had scheduled it.
+    for (const d of drafts) {
+      const why = d.blockedBy ? `  ⚠️ ${d.blockedBy}` : '  ✓ ready to publish';
+      console.log(`    · ${d.date}  ${d.title}  (${d.file})${why}`);
+    }
   }
 
   // ⚠️ The guard is on SOURCES, not on publishable output. It exists so a broken glob
