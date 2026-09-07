@@ -5,7 +5,7 @@ date: 2026-09-07
 slug: pfas-rules-for-importers
 keywords: [PFAS, PFAS reporting, intentionally added PFAS, product compliance, US importer, state PFAS law]
 sources: [https://www.revisor.mn.gov/statutes/cite/116.943, https://www.pca.state.mn.us/air-water-land-climate/reporting-pfas-in-products, https://legislature.maine.gov/legis/statutes/38/title38sec1614.html, https://www.maine.gov/dep/spills/topics/pfas/PFAS-products/, https://portal.ct.gov/deep/p2/pfas-in-products, https://www.env.nm.gov/pfas/pfas-protection-act-hb212/]
-draft: true
+draft: false
 ---
 
 PFAS is the compliance question importers ask us most often, and the honest answer is that

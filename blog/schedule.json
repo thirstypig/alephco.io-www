@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-06",
+  "generated": "2026-09-07",
   "posts": [
     {
       "slug": "compliance-for-a-200-sku-catalogue-without",
@@ -220,11 +220,10 @@
     {
       "slug": "pfas-rules-for-importers",
       "title": "PFAS Rules for Importers: Which States, Which Products",
-      "status": "planned",
-      "targetDate": "2026-09-07",
+      "status": "published",
+      "publishedDate": "2026-09-07",
       "image": "/img/blog/pfas-rules-for-importers.png",
-      "url": "https://www.alephco.io/blog/pfas-rules-for-importers.html",
-      "draft": true
+      "url": "https://www.alephco.io/blog/pfas-rules-for-importers.html"
     },
     {
       "slug": "fsvp-vs-haccp",
