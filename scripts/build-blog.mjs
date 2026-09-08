@@ -215,13 +215,16 @@ const MODULES = [
   [/\bREACH\b|\bSVHC\b/i, 'REACH'],
   [/\bCPSC\b|recall/i, 'CPSC'],
 ];
-const categoryTags = (meta) => {
+const categoryLabels = (meta) => {
   const hay = `${meta.title} ${(meta.keywords || []).join(' ')}`;
   const found = MODULES.filter(([re]) => re.test(hay)).map(([, label]) => label).slice(0, 2);
-  return ['COMPLIANCE', ...found]
+  return ['COMPLIANCE', ...found];
+};
+
+const categoryTags = (meta) =>
+  categoryLabels(meta)
     .map((t) => `\n          <span class="blog-tag">${t}</span>`)
     .join('');
-};
 
 /**
  * In-page hero photo, emitted ONLY when the file is actually on disk.
@@ -237,11 +240,23 @@ const categoryTags = (meta) => {
  */
 const heroFigure = (slug, meta, available) => {
   const hit = available.get(slug);
-  if (!hit) return '';
-  const alt = meta.hero_alt ? escapeHtml(meta.hero_alt) : '';
-  return `
+  if (hit) {
+    const alt = meta.hero_alt ? escapeHtml(meta.hero_alt) : '';
+    return `
         <figure class="blog-hero">
           <img src="/img/blog/hero/${hit}" alt="${alt}" width="1600" height="900" loading="eager" decoding="async">
+        </figure>`;
+  }
+  // No photo: a branded band, not a gap and not a broken <img>. Some topics — an
+  // importer's calendar, a tracking label — have no honest photograph, so this is the
+  // permanent answer for them rather than a placeholder waiting to be replaced.
+  const label = [...new Set(categoryLabels(meta))].join(' \u00b7 ');
+  return `
+        <figure class="blog-hero">
+          <div class="blog-hero-fallback">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>${escapeHtml(label)}</span>
+          </div>
         </figure>`;
 };
 
