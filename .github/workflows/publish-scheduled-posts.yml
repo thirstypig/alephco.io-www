@@ -1,0 +1,92 @@
+# Release blog posts whose publish date has arrived.
+#
+# ─── Why this is a workflow and not a person ───────────────────────────────────
+#
+# The 25-post schedule (todo 539) runs weekly to Feb 2027. Publishing was a manual flag
+# flip per post — 24 manual acts inside a cadence that already failed once: 12 posts
+# shipped Apr–Jun 2026, then eleven weeks of silence.
+#
+# ⚠️ Flipping all 25 up front is NOT the alternative. `build-blog.mjs` builds a
+# future-dated post and serves it live at its URL; only the sitemap entry and the index
+# card link are withheld. `draft: true` is the only state that builds nothing at all.
+#
+# So posts stay `draft: true` and this releases whatever is due.
+
+name: Publish scheduled posts
+
+on:
+  schedule:
+    # Mondays 13:00 UTC — 06:00 PT, so a post is live before the US working day.
+    # ⚠️ GitHub delays scheduled runs under load and does not guarantee the minute. That is
+    # fine here: `release-due-posts.mjs` releases everything DUE, not "today's post", so a
+    # skipped or late run self-heals on the next one rather than dropping a post forever.
+    - cron: "0 13 * * 1"
+  workflow_dispatch:
+
+concurrency:
+  group: publish-scheduled-posts
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # commit the flag flip
+      actions: write # dispatch the deploy (see the GITHUB_TOKEN note below)
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Release any post whose date has arrived
+        id: release
+        run: node scripts/release-due-posts.mjs
+
+      - name: Build the blog
+        if: steps.release.outputs.released != '0'
+        # This is the GATE, not a formality. `build-blog.mjs` throws on a post with no
+        # `sources:` or with a placeholder marker still in it, so an unfit post fails here
+        # and nothing is committed. Session 99 put the wrong Maine PFAS law on this site.
+        run: npm run build:blog
+
+      - name: Run the full suite
+        if: steps.release.outputs.released != '0'
+        # A newly released post becomes a tracked page, and `validate-structure.mjs` derives
+        # generated posts into PAGES — so it is checked for nav, footer and link integrity
+        # here, before it can reach main.
+        run: npm test
+
+      - name: Commit and push
+        if: steps.release.outputs.released != '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "content: release scheduled post(s)
+
+          Automated by .github/workflows/publish-scheduled-posts.yml.
+          Flag flipped by scripts/release-due-posts.mjs; the build's publish gate and the
+          full structure suite both passed before this commit was made."
+          git push
+
+      - name: Trigger the deploy
+        if: steps.release.outputs.released != '0'
+        # 🔴 THIS STEP IS LOAD-BEARING AND ITS ABSENCE WOULD BE SILENT.
+        #
+        # A push made with GITHUB_TOKEN does NOT trigger other workflows — GitHub blocks it
+        # to prevent recursive runs. So the push above will NOT start `deploy.yml`, and
+        # without this the post would be committed to main, look published in every way,
+        # and never actually reach the site. The failure mode is a green workflow and an
+        # unchanged website.
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run deploy.yml --ref main
+
+      - name: Report
+        run: |
+          if [ "${{ steps.release.outputs.released }}" = "0" ]; then
+            echo "Nothing was due. This is a normal no-op run."
+          else
+            echo "Released ${{ steps.release.outputs.released }} post(s) and dispatched the deploy."
+          fi
