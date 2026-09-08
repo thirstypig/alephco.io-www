@@ -19,16 +19,36 @@ this sweep returned a false zero and would otherwise have been reported as clean
 
 `/learn` is clean: 370 hits for "compliance", zero banned verdict words.
 
-## Fixed in this PR
+## Fixed in this PR — three false claims about the testing-lab directory
 
-**`for/toy-importers.html` — "Aleph verifies your testing lab is CPSC-accepted".**
+**1. `for/toy-importers.html` — "Aleph verifies your testing lab is CPSC-accepted".**
 False. `cpcCertificates.labCpscAccepted` is a user-entered boolean defaulting to `false`,
 beside hand-typed `labName` / `labAddress` / `labPhone`; `product-standards.ts:204` string-
 matches a supplied `accreditations` array. Nothing is checked against CPSC's list, and
 DOC-067 §1 says the platform "does not know whether the document is authentic, current, or
 issued by an accredited body". Rewritten to describe the lab directory that does exist.
 
-A guard in `tests/validate-structure.mjs` now fails the build on this claim shape.
+**2. `features/cpsia-cpc-generator.html` — "verify CPSC-accepted labs".**
+The same false claim, in the `og:description` and `twitter:description` (lines 11 and 19).
+Found only when the live copy was extracted verbatim for the counsel inventory below: the
+phrase carries no "Aleph" beside the verb, so the first guard pattern did not see it.
+
+**3. `features/cpsia-cpc-generator.html` — "25 CPSC-accepted labs" (lines 7, 63, 148).**
+`shared/data/testing-labs.ts` holds **10** labs — SGS, Bureau Veritas, Intertek, UL
+Solutions, Eurofins, TÜV Rheinland, QIMA, ACT Lab, Pace Analytical, Element — of which
+**7** carry `"CPSC-Accepted"` in `accreditations`. So the number was wrong and so was the
+characterisation. The proximity scoring the same sentences advertise IS real
+(`scoreLabForProduct`, `proximityTier`) and was kept.
+
+`tests/validate-structure.mjs` now fails the build on both claim shapes: `Aleph
+verifies …accredited`, and the capability-list form `verify CPSC-accepted labs`. The second
+pattern is scoped to the accredited thing as the direct object, so reader advice —
+"Verify that the lab is CPSC-accepted", which is what the copy SHOULD say, and which
+`blog/cpc-certificate-guide.html` and `blog/how-to-choose-testing-lab.html` both say
+correctly — still passes. Both verified red-then-green against the real strings.
+
+📌 **No guard on the lab COUNT.** It would have to hardcode 10, and this repo has no
+dependency on the app repo to read it from. A count that drifts is invisible here.
 
 ## 🔴 Hand-back to the app repo — not fixable from here
 
@@ -74,13 +94,20 @@ Not a marketing defect: the 15-state dataset is real and reachable
 (`server/data/pfas-regulations.ts`, CA CO CT HI IL MA MD ME MN NJ OR NY RI VT WA, exposed
 through `PfasStateReportService`), so the site's "15 states" claims are accurate.
 
-## 🟡 For counsel — added to DOC-067 §3
+## 🟡 For counsel — inventoried in `566-counsel-live-copy-companion.md`
+
+📌 The companion document quotes every line below verbatim, grouped, with file and line, so
+counsel can redline **sentences** rather than a feature. It also carries the finding that
+matters most: `features/cpsia-cpc-generator.html:125` already publishes "**No incomplete
+certificates**" — which is DOC-067 §3 option C, the register the brief calls "the version we
+would like but suspect we cannot have", live since before the brief was written.
+
 
 Class A and B below are **not** fixed here, deliberately. Whether Aleph may call a document
 "compliant" is DOC-067 §4 questions 1, 2 and 6, and rewriting it now would pre-empt the
 answer the gate exists to wait for.
 
-**Class A — Aleph produces a document it calls "compliant" (18 instances, 8 files)**
+**Class A — Aleph produces a document it calls "compliant" (19 instances, 8 files)**
 `index.html:175` · `industries.html:143` · `features/cpsia-cpc-generator.html:7,11,19,62,132`
 · `features/prop-65-labels.html:7,11,19,131,132` · `for/toy-importers.html:164`
 · `for/amazon-sellers.html:125` · `blog/prop-65-warnings-guide.html:210,241`

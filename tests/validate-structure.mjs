@@ -627,6 +627,18 @@ const VERIFICATION_CLAIMS = [
       /Aleph[^.<]{0,40}\b(?:verifies|certifies|authenticates|confirms|guarantees)\b[^.<]{0,90}\b(?:accredited|accreditation|CPSC[- ]accepted|authentic|genuine|legitimate|is valid)\b/i,
     why: "claims Aleph verifies an accreditation or a document's authenticity — it does not (DOC-067 §1)",
   },
+  {
+    // The capability-list phrasing, which carries no "Aleph" next to the verb and so slips
+    // past the pattern above: "Auto-populate fields, verify CPSC-accepted labs, and track
+    // re-test dates" (features/cpsia-cpc-generator.html, og: and twitter: descriptions).
+    //
+    // Scoped to the ACCREDITED THING as the direct object, so that advice addressed to the
+    // reader still passes — "Verify that the lab is CPSC-accepted" is what we WANT the copy
+    // to say, and blog/cpc-certificate-guide.html and blog/how-to-choose-testing-lab.html
+    // both say it correctly.
+    pattern: /\bverif(?:y|ies)\s+(?:the\s+)?(?:CPSC[- ]accepted|accredited)\s+lab/i,
+    why: "offers verifying a lab's accreditation as a product capability — the platform stores what the customer asserts (DOC-067 §1)",
+  },
 ];
 
 const COPY_FILES = [
