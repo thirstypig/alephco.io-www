@@ -754,6 +754,34 @@ for (const file of BLOG_POSTS) {
   }
 }
 
+// ── A hero photo carries its attribution (licence, not courtesy) ─
+//
+// The hero photos come from the Pexels API, whose terms require a prominent link back to
+// Pexels and credit to the photographer. That is a CONDITION OF THE LICENCE: a post that
+// shows the photo without the credit is not a tidier post, it is an unlicensed one.
+//
+// Unsplash was rejected for these precisely because its API guidelines require HOTLINKING
+// ("All API uses must use the hotlinked image URLs returned by the API"), which would make
+// a third-party host a runtime dependency of a static site. See scripts/fetch-blog-heroes.mjs.
+//
+// The credit is small, grey and easy to mistake for clutter — which is exactly why it needs
+// a test and not a comment.
+
+let heroPosts = 0;
+for (const file of BLOG_POSTS) {
+  const html = readFileSync(join(ROOT, file), "utf-8");
+  if (!html.includes("/img/blog/hero/")) continue;
+  heroPosts++;
+  assert(
+    /class="blog-hero-credit"/.test(html) && /pexels\.com/.test(html),
+    `${file}: shows a hero photo with no Pexels attribution — the licence requires crediting the photographer and linking to Pexels`
+  );
+  assert(
+    /<img[^>]+\/img\/blog\/hero\/[^>]+\salt="[^"]/.test(html),
+    `${file}: hero photo has no alt text`
+  );
+}
+
 // ── Report ──────────────────────────────────────────────────────
 console.log("");
 if (failed === 0) {

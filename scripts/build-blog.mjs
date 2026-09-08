@@ -238,13 +238,23 @@ const categoryTags = (meta) =>
  * the <h1> gains nothing from hearing the headline again as an image description, and stock
  * photography above a post is decoration. Give it real alt text only when it carries meaning.
  */
-const heroFigure = (slug, meta, available) => {
+const heroFigure = (slug, meta, available, credits) => {
   const hit = available.get(slug);
   if (hit) {
-    const alt = meta.hero_alt ? escapeHtml(meta.hero_alt) : '';
+    const c = credits[slug];
+    // `hero_alt:` overrides; otherwise the provider's own description, which is written by
+    // a human who looked at the photo and is better than anything derivable from the title.
+    const alt = escapeHtml(meta.hero_alt || c?.alt || '');
+    // ⚠️ ATTRIBUTION IS A LICENCE CONDITION, not a courtesy. Pexels requires a prominent
+    // link back to Pexels and credit to the photographer. Removing this while keeping the
+    // photo puts the site out of licence — see scripts/fetch-blog-heroes.mjs.
+    const credit = c
+      ? `
+          <figcaption class="blog-hero-credit">Photo by <a href="${escapeHtml(c.photographer_url)}" rel="noopener nofollow" target="_blank">${escapeHtml(c.photographer)}</a> on <a href="${escapeHtml(c.pexels_url)}" rel="noopener nofollow" target="_blank">Pexels</a></figcaption>`
+      : '';
     return `
         <figure class="blog-hero">
-          <img src="/img/blog/hero/${hit}" alt="${alt}" width="1600" height="900" loading="eager" decoding="async">
+          <img src="/img/blog/hero/${hit}" alt="${alt}" width="1600" height="900" loading="eager" decoding="async">${credit}
         </figure>`;
   }
   // No photo: a branded band, not a gap and not a broken <img>. Some topics — an
@@ -259,6 +269,15 @@ const heroFigure = (slug, meta, available) => {
           </div>
         </figure>`;
 };
+
+/** Photographer credits, slug -> {photographer, photographer_url, pexels_url, alt}. */
+async function heroManifest() {
+  try {
+    return JSON.parse(await fs.readFile(path.join(ROOT, 'img', 'blog', 'hero', 'manifest.json'), 'utf8'));
+  } catch {
+    return {};
+  }
+}
 
 /** Hero files present on disk, slug -> filename. Read once; the loop only looks up. */
 async function heroIndex() {
@@ -301,6 +320,7 @@ async function main() {
   const mdFiles = (await fs.readdir(POSTS_DIR)).filter((f) => f.endsWith('.md')).sort();
 
   const heroes = await heroIndex();
+  const heroCredits = await heroManifest();
   const generated = [];
   const drafts = [];
   for (const file of mdFiles) {
@@ -355,7 +375,7 @@ async function main() {
       .replaceAll('{{DATE_HUMAN}}', prettyDate(meta.date))
       .replaceAll('{{READ}}', meta.read || readingTime(body))
       .replaceAll('{{TAGS}}', categoryTags(meta))
-      .replaceAll('{{HERO}}', heroFigure(slug, meta, heroes))
+      .replaceAll('{{HERO}}', heroFigure(slug, meta, heroes, heroCredits))
       .replaceAll('{{BODY}}', marked.parse(body));
 
     const isDraft = String(meta.draft).toLowerCase() === 'true';

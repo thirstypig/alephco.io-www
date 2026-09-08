@@ -476,6 +476,12 @@ tr:last-child td { border-bottom: none; }
   min-height: 180px; padding: 2.5rem 2rem;
   background: var(--navy-deep); border-left: 6px solid var(--accent);
 }
+.blog-hero-credit {
+  font-size: .75rem; color: var(--fg-muted); padding-top: .5rem; letter-spacing: .01em;
+}
+.blog-hero-credit a { color: var(--fg-muted); text-decoration: underline; }
+.blog-hero-credit a:hover { color: var(--fg); }
+
 .blog-hero-fallback svg { flex: none; color: var(--paper); opacity: .8; }
 .blog-hero-fallback span {
   font-family: var(--font-mono); font-size: .8125rem; letter-spacing: .08em;
