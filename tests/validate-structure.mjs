@@ -665,6 +665,95 @@ for (const claim of VERIFICATION_CLAIMS) {
   );
 }
 
+// ── Every blog post carries the same article furniture ──────────
+//
+// `blog/_template.html` was derived from a real post so that nav, footer and theme could
+// not drift from the hand-written ones — and that worked. What came across was the page
+// CHROME. What did not was the article header: the template's body was
+// `<article class="blog-content">{{BODY}}</article>` and nothing else.
+//
+// So the first generated post shipped with NO <h1> AT ALL. Its JSON-LD declared a
+// `headline` that appeared nowhere on the page, and it had no date, no author, no byline
+// and no bio, while all 12 hand-written posts had all five. Nobody noticed, because the
+// post was present, valid HTML, correctly styled, and in the sitemap — it was only wrong
+// in the way a search engine reads it. 24 more posts were queued on that template,
+// releasing weekly to Feb 2027 on a timer with nobody watching.
+//
+// ⚠️ The headline/H1 pair is checked as a PAIR deliberately. Either half alone passes the
+// broken page: the JSON-LD headline was there the whole time.
+
+/** Posts built from Markdown — those whose slug has a source file in blog/posts/. */
+const GENERATED_SLUGS = new Set(
+  readdirSync(join(ROOT, "blog", "posts"))
+    .filter((f) => f.endsWith(".md"))
+    .map((f) => {
+      const src = readFileSync(join(ROOT, "blog", "posts", f), "utf-8");
+      return (src.match(/^slug:\s*(\S+)/m)?.[1] || f.replace(/\.md$/, "")).trim();
+    })
+);
+
+const BLOG_POSTS = TRACKED_HTML_FILES.filter(
+  (f) => f.startsWith("blog/") && !f.endsWith("_template.html")
+);
+
+// A broken file list would make every assertion below pass vacuously.
+assert(
+  BLOG_POSTS.length >= 12,
+  `blog structure guard found only ${BLOG_POSTS.length} posts — the file list is broken, not the blog clean`
+);
+
+/** Visible text, entity-decoded and whitespace-collapsed, for comparing against JSON-LD. */
+const plain = (html) =>
+  html
+    .replace(/<[^>]*>/g, "")
+    .replace(/&rsquo;|&#8217;/g, "’")
+    .replace(/&mdash;/g, "—")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/\s+/g, " ")
+    .trim();
+
+const ARTICLE_PARTS = [
+  [/<div class="blog-meta">/, "a .blog-meta line (date and read time)"],
+  [/<p class="blog-subtitle">/, "a .blog-subtitle"],
+  [/<div class="blog-author-line">/, "a .blog-author-line byline"],
+  [/<div class="author-bio">/, "an .author-bio"],
+  [/<link rel="canonical"/, "a canonical link"],
+];
+
+for (const file of BLOG_POSTS) {
+  const html = readFileSync(join(ROOT, file), "utf-8");
+
+  const h1s = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/g) || [];
+  assert(
+    h1s.length === 1,
+    `${file}: has ${h1s.length} <h1> elements, expected exactly 1 — a post with no visible headline is invisible to search`
+  );
+
+  for (const [re, what] of ARTICLE_PARTS) {
+    assert(re.test(html), `${file}: missing ${what}`);
+  }
+
+  const ld = html.match(/"headline":\s*"((?:[^"\\]|\\.)*)"/);
+  assert(ld !== null && ld[1].trim() !== "", `${file}: JSON-LD has no non-empty headline`);
+
+  // ⚠️ Equality with the <h1> is asserted for GENERATED posts ONLY, and the asymmetry is
+  // deliberate. In a generated post both sides come from the same `title:` frontmatter key,
+  // so any divergence is a template bug by definition. Hand-written posts legitimately do
+  // something else: `headline` tracks the SEO <title> — which carries a year or a brand
+  // suffix the reader does not need above the article — while the <h1> is the shorter
+  // display form. Three of the twelve do exactly that, on purpose, and they rank. A guard
+  // that forced them to match would be rewriting working metadata to satisfy a test.
+  if (ld && h1s.length === 1 && GENERATED_SLUGS.has(file.replace(/^blog\/|\.html$/g, ""))) {
+    const shown = plain(h1s[0]);
+    const declared = plain(ld[1].replace(/\\"/g, '"'));
+    assert(
+      shown === declared,
+      `${file}: generated post's JSON-LD headline "${declared}" does not match its <h1> "${shown}" — both come from the same frontmatter title, so this is a template bug`
+    );
+  }
+}
+
 // ── Report ──────────────────────────────────────────────────────
 console.log("");
 if (failed === 0) {

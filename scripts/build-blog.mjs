@@ -201,6 +201,67 @@ const prettyDate = (iso) =>
 const readingTime = (md) =>
   `${Math.max(1, Math.round(md.trim().split(/\s+/).length / WORDS_PER_MINUTE))} min read`;
 
+/**
+ * Category chips for the meta line, matched against the same module vocabulary the rest of
+ * the site uses. Derived rather than declared: 25 posts already exist without a `tags:` key,
+ * and a field nobody fills is a field that renders empty.
+ */
+const MODULES = [
+  [/\bFSVP\b|foreign supplier/i, 'FSVP'],
+  [/\bCPSIA\b|children'?s product|\bCPC\b|\bGCC\b|tracking label/i, 'CPSIA'],
+  [/prop(osition)?[ -]?65|OEHHA|60-day notice/i, 'PROP 65'],
+  [/\bPFAS\b|organic fluorine|\bTOF\b/i, 'PFAS'],
+  [/\bMoCRA\b|cosmetic/i, 'MOCRA'],
+  [/\bREACH\b|\bSVHC\b/i, 'REACH'],
+  [/\bCPSC\b|recall/i, 'CPSC'],
+];
+const categoryTags = (meta) => {
+  const hay = `${meta.title} ${(meta.keywords || []).join(' ')}`;
+  const found = MODULES.filter(([re]) => re.test(hay)).map(([, label]) => label).slice(0, 2);
+  return ['COMPLIANCE', ...found]
+    .map((t) => `\n          <span class="blog-tag">${t}</span>`)
+    .join('');
+};
+
+/**
+ * In-page hero photo, emitted ONLY when the file is actually on disk.
+ *
+ * ⚠️ A hero that renders unconditionally is worse than no hero: a missing file gives every
+ * reader a broken-image icon at the top of the post, and the 25 scheduled posts release on a
+ * timer with nobody watching. Absent photo -> no <figure> at all, and the post still reads.
+ *
+ * `hero_alt:` in frontmatter supplies the alt text. When it is absent the image is treated as
+ * DECORATIVE and gets alt="" — deliberately, not lazily. A screen reader that has just read
+ * the <h1> gains nothing from hearing the headline again as an image description, and stock
+ * photography above a post is decoration. Give it real alt text only when it carries meaning.
+ */
+const heroFigure = (slug, meta, available) => {
+  const hit = available.get(slug);
+  if (!hit) return '';
+  const alt = meta.hero_alt ? escapeHtml(meta.hero_alt) : '';
+  return `
+        <figure class="blog-hero">
+          <img src="/img/blog/hero/${hit}" alt="${alt}" width="1600" height="900" loading="eager" decoding="async">
+        </figure>`;
+};
+
+/** Hero files present on disk, slug -> filename. Read once; the loop only looks up. */
+async function heroIndex() {
+  const dir = path.join(ROOT, 'img', 'blog', 'hero');
+  const out = new Map();
+  let entries = [];
+  try { entries = await fs.readdir(dir); } catch { return out; }
+  for (const ext of ['.webp', '.jpg', '.jpeg', '.png']) {
+    for (const f of entries) {
+      if (f.toLowerCase().endsWith(ext)) {
+        const slug = f.slice(0, -ext.length);
+        if (!out.has(slug)) out.set(slug, f);
+      }
+    }
+  }
+  return out;
+}
+
 /** Metadata for a legacy hand-written post, read back out of its own tags. */
 async function readLegacyPost(file) {
   const html = await fs.readFile(path.join(BLOG_DIR, file), 'utf8');
@@ -224,6 +285,7 @@ async function main() {
   await fs.mkdir(POSTS_DIR, { recursive: true });
   const mdFiles = (await fs.readdir(POSTS_DIR)).filter((f) => f.endsWith('.md')).sort();
 
+  const heroes = await heroIndex();
   const generated = [];
   const drafts = [];
   for (const file of mdFiles) {
@@ -275,6 +337,10 @@ async function main() {
       .replaceAll('{{PUBLISHER}}', PUBLISHER)
       .replaceAll('{{KEYWORDS}}', JSON.stringify(keywords))
       .replaceAll('{{IMAGE}}', image)
+      .replaceAll('{{DATE_HUMAN}}', prettyDate(meta.date))
+      .replaceAll('{{READ}}', meta.read || readingTime(body))
+      .replaceAll('{{TAGS}}', categoryTags(meta))
+      .replaceAll('{{HERO}}', heroFigure(slug, meta, heroes))
       .replaceAll('{{BODY}}', marked.parse(body));
 
     const isDraft = String(meta.draft).toLowerCase() === 'true';
