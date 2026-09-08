@@ -598,6 +598,73 @@ for (const host of ["localhost", "127.0.0.1", "thirstypig.github.io", "staging.a
   );
 }
 
+// ── Aleph never claims to VERIFY a document or an accreditation (todo 566) ──
+//
+// PRD-008 §1 locks the positioning: Aleph never renders a compliance verdict. The
+// readiness mechanism is presence-or-absence against a field list we chose — it does not
+// read values for correctness, and it does not know whether a document is authentic,
+// current, or issued by an accredited body (DOC-067 §1).
+//
+// This shipped anyway. `for/toy-importers.html` told customers "Aleph verifies your
+// testing lab is CPSC-accepted" while the app stores `labCpscAccepted` as a user-entered
+// checkbox defaulting to false, beside hand-typed lab name and address. Nothing was
+// checked against CPSC's list; the customer's own assertion was being sold back to them
+// as verification.
+//
+// ⚠️ MATCH THE CLAIM SHAPE, NOT ONE SPELLING. The app repo's equivalent guard
+// (scripts/no-compliance-score.test.ts) bans the literal "NON-COMPLIANT" and so does not
+// see `status: "compliant" | "non_compliant"` in PfasStateReportService — the same verdict,
+// lowercased and underscored, walks straight past it. A guard written to the exact string
+// the last bug used only ever catches the bug already fixed.
+//
+// Deliberately NOT guarded here: whether Aleph may call a document it generates
+// "compliant" (DOC-067 §3 Class A) is with counsel, and a guard must not encode a wording
+// choice that may be reversed. This covers only what DOC-067 §1 already settles.
+
+const VERIFICATION_CLAIMS = [
+  {
+    pattern:
+      /Aleph[^.<]{0,40}\b(?:verifies|certifies|authenticates|confirms|guarantees)\b[^.<]{0,90}\b(?:accredited|accreditation|CPSC[- ]accepted|authentic|genuine|legitimate|is valid)\b/i,
+    why: "claims Aleph verifies an accreditation or a document's authenticity — it does not (DOC-067 §1)",
+  },
+  {
+    // The capability-list phrasing, which carries no "Aleph" next to the verb and so slips
+    // past the pattern above: "Auto-populate fields, verify CPSC-accepted labs, and track
+    // re-test dates" (features/cpsia-cpc-generator.html, og: and twitter: descriptions).
+    //
+    // Scoped to the ACCREDITED THING as the direct object, so that advice addressed to the
+    // reader still passes — "Verify that the lab is CPSC-accepted" is what we WANT the copy
+    // to say, and blog/cpc-certificate-guide.html and blog/how-to-choose-testing-lab.html
+    // both say it correctly.
+    pattern: /\bverif(?:y|ies)\s+(?:the\s+)?(?:CPSC[- ]accepted|accredited)\s+lab/i,
+    why: "offers verifying a lab's accreditation as a product capability — the platform stores what the customer asserts (DOC-067 §1)",
+  },
+];
+
+const COPY_FILES = [
+  ...TRACKED_HTML_FILES,
+  ...readdirSync(join(ROOT, "blog", "posts"))
+    .filter((f) => f.endsWith(".md"))
+    .map((f) => `blog/posts/${f}`),
+];
+
+// Without this, a broken file list makes every assertion below pass vacuously — a green
+// result that means "we searched nothing". This suite has been bitten by exactly that.
+assert(
+  COPY_FILES.length > 40,
+  `verification-claim guard scanned only ${COPY_FILES.length} files — the file list is broken, not the copy clean`
+);
+
+for (const claim of VERIFICATION_CLAIMS) {
+  const offenders = COPY_FILES.filter((f) =>
+    claim.pattern.test(readFileSync(join(ROOT, f), "utf-8"))
+  );
+  assert(
+    offenders.length === 0,
+    `${offenders.join(", ")}: ${claim.why}`
+  );
+}
+
 // ── Report ──────────────────────────────────────────────────────
 console.log("");
 if (failed === 0) {
