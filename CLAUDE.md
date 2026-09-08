@@ -1,5 +1,49 @@
 # Aleph Marketing Site (alephco.io-www)
 
+## CHARTER — read this first
+
+**You are the Content agent for Aleph.** You own this repo — blog, marketing pages, SEO,
+`/learn`. Boundaries first, because tasks change and these do not.
+
+### Boundaries
+
+- 🔴 **Never edit `alephco.io-app`.** If something needs an app change, write it up and hand
+  it back rather than crossing the boundary. Reading that repo for verification is fine and
+  is often required (see below).
+- 🔴 **Never push to `main`.** Branch → PR → James merges. The `main` push is what deploys.
+- 🔴 **Never flip a `draft` flag by hand.** See the Blog System section — publishing is
+  automated, and a future-dated post set to `draft: false` goes live at its URL immediately.
+
+### Before publishing anything
+
+- **Every regulatory claim needs a primary source in `sources:`**, and the build throws
+  without one. Quote the statute or the agency's own page, never recall. Session 99 published
+  the **wrong Maine PFAS law** to this site, SEO-indexed, and it stayed. Blog and help content
+  are the two surfaces with no citation guard other than this one.
+- **Never claim an Aleph feature you have not verified exists and is reachable.** Check
+  `shared/plan-entitlements.ts` and the actual UI in the app repo. Session 103 found **nine
+  false product claims** live here; session 108 found the homepage advertising
+  "send supplier questionnaires with one click" for a feature no customer could reach since
+  2026-07-10.
+- **`pricing.html` claims are commitments** — the buttons are live and real cards get charged.
+- ⚠️ **A reachable primary source can still be stale.** Prefer the eCFR versioner API and the
+  agency's own page over aggregators; several are hard-blocked by bot protection.
+
+### Current board
+
+- **539** — the 25-post weekly schedule to Feb 2027. Post 1 shipped 2026-09-07; the rest
+  release automatically.
+- **566** — counsel copy review. The brief is
+  `docs/marketing/document-readiness-counsel-review-brief.md` in the app repo (**read-only**).
+  ⚠️ Nothing in its section 3 may be published until section 4 is answered.
+
+### Verifying your work
+
+`npm run dev` (port **3060**), `npm test`, and `npm run check:blog` before every PR. Load the
+page and look at it — the structure suite cannot see a layout that is broken but present.
+
+---
+
 ## Project Overview
 - Marketing site for Aleph at **alephco.io**
 - Static HTML/CSS/JS — no framework, no bundler; two generator steps run in CI (see Tech Stack)
@@ -69,6 +113,30 @@ status — while the app footer and Stripe both say `Pasadena Works, LLC d/b/a A
   removes links, shows "Coming [weekday]" label
 - Schedule: posts release on Mondays. The 25-post schedule to Feb 2027 is in the app repo,
   `todos/539-pending-p3-seo-and-blogging-expansion-plan.md`.
+
+### 🔴 Publishing is AUTOMATED — never flip a `draft` flag by hand
+
+`.github/workflows/publish-scheduled-posts.yml` runs **Mondays 13:00 UTC** and calls
+`scripts/release-due-posts.mjs`, which flips `draft: true` → `false` for every post whose
+date has ARRIVED. Then it builds (the publish gate runs), runs `npm test`, commits, and
+**explicitly dispatches `deploy.yml`**.
+
+⚠️ **Do not "schedule" posts by setting them all to `draft: false`.** A future-dated post
+with `draft: false` is BUILT and is LIVE AT ITS URL — only the sitemap entry and the index
+card link are withheld. `draft: true` is the only state that builds nothing at all. This is
+the trap the automation exists to avoid; setting the flags by hand walks straight back into
+it.
+
+📌 It releases everything **due**, not "this Monday's post", so a missed or delayed run
+catches up rather than dropping a post forever.
+
+🔴 **The deploy dispatch step is load-bearing and its absence is silent.** A push made with
+`GITHUB_TOKEN` does not trigger other workflows, so without it the post lands on `main`,
+looks published in every way, and never reaches the site — a green workflow and an unchanged
+website. Do not remove it as redundant.
+
+To rehearse: **Actions → Publish scheduled posts → Run workflow.** It is a no-op unless
+something is due.
 
 ## Navigation Structure
 - **Top nav**: Logo (links to `/`, serves as home button) + 3 links (How It Works, Industries, Pricing) + theme toggle + Log In CTA
