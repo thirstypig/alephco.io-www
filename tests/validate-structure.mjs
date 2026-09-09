@@ -783,6 +783,32 @@ for (const file of BLOG_POSTS) {
   );
 }
 
+// ── Every post shares its OWN card, not the site default ────────
+//
+// build-og-cards.mjs was written in session 110 to fix exactly this:
+//
+//   $ grep -h 'property="og:image"' blog/*.html | sort | uniq -c
+//     13   <meta property="og:image" content=".../img/og-default.png">
+//
+// It rendered a card for all 37 posts. Then only the ONE generated post was ever wired to
+// its card, and the other twelve kept the shared default for another six sessions — so the
+// asset existed, the problem was solved, and the fix was not applied. The cards are on
+// disk; nothing about the failure was visible from the script, which reported success.
+//
+// ⚠️ A legacy card is rendered FROM THE POST'S <title>. Shortening a title without
+// re-rendering leaves the card advertising the old headline. That coupling is invisible
+// unless you look at the PNG, so it is written down here.
+
+for (const file of BLOG_POSTS) {
+  const html = readFileSync(join(ROOT, file), "utf-8");
+  const slug = file.replace(/^blog\/|\.html$/g, "");
+  const og = html.match(/<meta property="og:image" content="([^"]*)"/)?.[1] ?? "";
+  assert(
+    og.endsWith(`/img/blog/${slug}.png`),
+    `${file}: og:image is "${og.split("/").pop()}" — every post needs its own share card (img/blog/${slug}.png), or every link preview looks identical`
+  );
+}
+
 // ── A hero photo carries its attribution (licence, not courtesy) ─
 //
 // The hero photos come from the Pexels API, whose terms require a prominent link back to
