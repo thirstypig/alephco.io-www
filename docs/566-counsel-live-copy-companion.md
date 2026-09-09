@@ -11,7 +11,7 @@ site already publishes.
 
 **31 lines are live today that go further than any of the three proposed options.** A
 reviewer given only §3 would rule on "Know which documents are incomplete before someone
-else tells you" without learning that nineteen published lines already say Aleph *generates
+else tells you" without learning that twenty-six published lines already say Aleph *generates
 a compliant certificate*. That is a materially different question, and it is the one that
 carries present exposure rather than future exposure.
 
@@ -31,6 +31,19 @@ That is option C, in the imperative, live since before this brief was written. �
 whether "incomplete" is safe to *start* using. It is already in use, in its strongest form,
 as an unqualified guarantee about the platform's own output.
 
+✅ **But the mechanism behind it is real, and counsel should be told so.**
+`server/services/compliance/CpsiaService.ts` exports the 16 CFR 1110.11(a) requirement
+groups as cited constants, handles the 1110.11(c) exclusions rule correctly — the testing
+group is waived only when EVERY applicable standard carries a claimed exclusion, partial
+exclusions still require it — and enforces at PDF-generation time.
+`client/…/lib/cpc-required-fields.ts` mirrors it to gate the Generate button. A certificate
+missing a required element genuinely cannot be produced.
+
+So this is **not** an unsupported claim. It is a supported claim in contested words, which
+is a materially easier question: does "incomplete" read as *"missing a field on the list
+16 CFR 1110.11(a) sets"* — which is what the software checks and can cite — or as
+*"legally insufficient"*, which it does not assess? That is question 8.
+
 ⚠️ DOC-067 lives in the app repo and was not edited. This is a separate document, to be read
 beside it or folded into its §3 by whoever owns that file.
 
@@ -43,7 +56,7 @@ standing qualifier, which is DOC-067 §4 question 4 with real instances attached
 
 ---
 
-## Group 1 — Aleph produces a document, and calls that document "compliant" (19 lines)
+## Group 1 — Aleph produces a document, and calls that document "compliant" or "valid" (26 lines)
 
 - `index.html:175`
   > Generate compliant Children’s Product Certificates in minutes, not weeks. Find the right CPSC-accepted testing lab near your manufacturer and never miss an annual re-test deadline.
@@ -83,11 +96,41 @@ standing qualifier, which is DOC-067 §4 question 4 with real instances attached
   > Prop 65 documentation: Aleph tracks which products need Prop 65 warnings, generates compliant warning labels, and maintains your assessment records — so you have documentation whether you're adding warnings or justifying why you don't need them.
 - `blog/product-compliance-for-amazon-sellers.html:263`
   > Aleph generates compliant CPCs, tracks Prop 65 requirements, and keeps all your product compliance documents organized and ready — for Amazon, retailers, or regulators.
+- `features/prop-65-labels.html:63`
+  > 900+ listed chemicals. Changing exposure thresholds. Complex safe harbor requirements. Aleph gives you a 95-chemical database with real OEHHA NSRL/MADL values, an exposure assessment calculator, and a label generator that produces 2018-amendment-compliant warnings with named chemicals — so you get it right the first time.
+- `features/prop-65-labels.html:110`
+  > Aleph’s Prop 65 module includes a 95-chemical database with real OEHHA NSRL/MADL threshold values, an exposure assessment calculator, and a label generator that produces 2018-amendment-compliant short-form and long-form warnings — with named chemicals as required.
+- `blog/cpc-certificate-guide.html:174`
+  > Aleph auto-generates valid CPCs from your test reports — all 7 required elements, correctly formatted, every time.
+- `blog/cpc-certificate-guide.html:217`
+  > This is exactly what Aleph was built to handle. You upload your third-party test reports, Aleph extracts the relevant data — lab name, accreditation info, test dates, standards tested, results — and maps it to your product. Then it generates a valid CPC with all 7 required elements populated correctly. No manual data entry. No hoping you listed the right CFR citation. No realizing six months later that you referenced the wrong lab address.
+- `blog/cpc-certificate-guide.html:227`
+  > You don't need a consultant to produce a CPC — use Aleph to auto-generate valid certificates directly from your test reports. Start free.
+- `blog/cpc-certificate-guide.html:233`
+  > Generate valid CPCs in minutes, not hours
+- `blog/cpsc-recalls-for-importers.html:252`
+  > Certificate tracking and generation. Aleph tracks your Children's Product Certificates, test reports, and supplier documentation in one place. When a test report is approaching expiry, you get an alert — not a scramble. If you need to generate a new CPC, Aleph pulls the data from your test reports and produces a valid certificate automatically.
 
-📌 **Six of these nineteen are in meta, `og:` or `twitter:` descriptions** — short-form
+📌 **Two §5 adjectives, one claim.** DOC-067 §5 bans saying a document is "compliant,
+**valid**, sufficient, accepted or approved". Seven of these lines use *valid* rather than
+*compliant* — "Aleph auto-generates valid CPCs", "produces a valid certificate
+automatically" — and they were missed on the first pass because that pass swept only
+"compliant". They are the same claim in a different word and should get the same answer.
+
+📌 **`blog/cpc-certificate-guide.html:174` is the most exposed sentence in this inventory**,
+alongside Group 3's. It does not merely call the output valid — it adds **"every time"**,
+which converts a description into a guarantee.
+
+📌 **Editorial uses of "valid" are deliberately excluded** and are not offered for review.
+`blog/cpc-certificate-guide.html:126` ("A valid CPC must contain 7 specific elements"),
+`:156`, `:215`, `:225` and `blog/cpsc-recalls-for-importers.html:267` describe what the
+regulation requires rather than what Aleph delivers. That distinction — the regulation's
+standard versus our output — is the same one question 8 turns on.
+
+📌 **Six of these twenty-six are in meta, `og:` or `twitter:` descriptions** — short-form
 placements that cannot carry the standing qualifier, and that get republished as link
 previews on other people's platforms. DOC-067 §4 Q4 asks about this hypothetically; these
-are the actual instances. The other thirteen are body copy, where a qualifier would fit.
+are the actual instances. The other twenty are body copy, where a qualifier would fit.
 
 ---
 
@@ -136,10 +179,12 @@ and are not offered for review: `for/toy-importers.html:98` (CPSC recalls "for p
 that lacked proper testing or had incomplete certificates") and
 `blog/multi-regulation-compliance-framework.html:168` ("do incompletely").
 
-📌 The same sentence also carries "validates all 7 required CPC fields … per CPSC rules"
-elsewhere on the page (`:156`). The 1110.11(a) elements are genuinely modelled with
-paragraph-level citations, but only `productDescription` is `notNull()` in the schema, so
-"validates" may be doing more work than the mechanism supports. Flagged, not asserted.
+📌 **"Validates all 7 required CPC fields per CPSC rules" (`:125`, `:156`) checks out**,
+with one imprecision. There are seven requirement GROUPS under 1110.11(a), comprising
+**26 fields** — not seven fields. The copy then lists the seven groups ("product
+description, applicable regulations, lab details, test dates, manufacturing info, contact
+person, and certification date"), so the description is right and the noun is wrong.
+Worth correcting for accuracy; not a positioning question.
 
 ---
 
@@ -161,7 +206,7 @@ presumably a verdict in the marketing, and the two repos should not disagree.
 DOC-067 §5 says, **"regardless of the answer"**, that we will not say a document *is*
 compliant, valid, sufficient, accepted or approved.
 
-Read literally, that settles all nineteen Group 1 lines today, and they are not §4 questions
+Read literally, that settles all twenty-six Group 1 lines today, and they are not §4 questions
 at all. But there is a real scope argument the brief never addresses:
 
 - **DOC-067 is scoped to the document-readiness flags** — a feature that reads documents the
@@ -172,7 +217,7 @@ at all. But there is a real scope argument the brief never addresses:
   genuinely does.
 
 Those may deserve different answers. If they do, §5 needs a scope line saying so, because as
-written it appears to forbid what nineteen live lines currently say.
+written it appears to forbid what twenty-six live lines currently say.
 
 ## Proposed additional questions
 
@@ -182,7 +227,7 @@ Numbered to extend DOC-067 §4.
    is the question that decides whether Group 1 is a redline or a rewrite.
 8. **Is a format claim distinguishable from a compliance claim** in short-form copy — can we
    say "a CPC with all seven required elements" where we cannot say "a compliant CPC"?
-9. **Do the six short-form placements need different treatment** from the thirteen in body
+9. **Do the six short-form placements need different treatment** from the twenty in body
    copy, given they cannot carry the qualifier? (§4 Q4, now with instances.)
 10. **Does structured data (JSON-LD) carry the same exposure as visible copy?** Two Group 2
     lines are `HowTo` step names.

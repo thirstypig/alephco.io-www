@@ -107,7 +107,7 @@ Class A and B below are **not** fixed here, deliberately. Whether Aleph may call
 "compliant" is DOC-067 §4 questions 1, 2 and 6, and rewriting it now would pre-empt the
 answer the gate exists to wait for.
 
-**Class A — Aleph produces a document it calls "compliant" (19 instances, 8 files)**
+**Class A — Aleph produces a document it calls "compliant" or "valid" (26 instances, 11 files)**
 `index.html:175` · `industries.html:143` · `features/cpsia-cpc-generator.html:7,11,19,62,132`
 · `features/prop-65-labels.html:7,11,19,131,132` · `for/toy-importers.html:164`
 · `for/amazon-sellers.html:125` · `blog/prop-65-warnings-guide.html:210,241`
@@ -134,10 +134,32 @@ milder than what 18 live lines already say.
 - `blog/multi-regulation-compliance-framework.html:219,260` — "tracks your compliance status"
 - `blog/multi-regulation-compliance-framework.html:242` — "which products are **compliant**
   in which states" (accurate to the product today; blocked on hand-back item 1)
-- `features/cpsia-cpc-generator.html:125,156` — "validates all 7 required fields per CPSC
-  rules". The 1110.11(a) elements are modelled with paragraph-level citations, but only
-  `productDescription` is `notNull()`. Not called false; needs a closer look than this
-  sweep gave it.
+- ~~`features/cpsia-cpc-generator.html:125,156` — "validates all 7 required fields per CPSC
+  rules"~~ **RESOLVED — the claim checks out.** `server/services/compliance/CpsiaService.ts`
+  exports the 1110.11(a) requirement groups as cited constants, handles the (c) exclusions
+  rule (testing waived only when EVERY standard carries an exclusion), and enforces at
+  PDF-generation time; `client/…/lib/cpc-required-fields.ts` mirrors it to gate the Generate
+  button. The earlier doubt came from reading `insertCpcCertificateSchema`, where only
+  `productDescription` is `notNull()` — but the DB schema is not the enforcement point, and
+  judging the feature by it was the wrong place to look.
+
+  One imprecision remains: there are seven requirement GROUPS comprising **26 fields**, not
+  seven fields. The copy lists the seven groups correctly, so only the noun is wrong.
+
+## Sweep completeness
+
+The first pass swept `compliant`, `non-compliant`, `verdict`, `certified`, `approved`,
+`passes` and `fails`. It did **not** sweep three of DOC-067 §5's own words — `valid`,
+`sufficient`, `accepted` — and a second pass found seven more Class A instances using
+"valid" (`blog/cpc-certificate-guide.html:174,217,227,233`,
+`blog/cpsc-recalls-for-importers.html:252`) plus two using a `produces …compliant`
+construction (`features/prop-65-labels.html:63,110`).
+
+`sufficient` (3) and `accepted` (94) are clean: every use is either a statutory quotation or
+CPSC's lab-acceptance regime under 16 CFR 1112, never Aleph declaring a document accepted.
+
+📌 **Sweep the vocabulary the rule names, not the vocabulary the last bug used.** §5 lists
+five adjectives; the first pass covered two of them and reported a complete result.
 
 ## Cleared
 
