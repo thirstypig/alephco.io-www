@@ -201,6 +201,101 @@ const prettyDate = (iso) =>
 const readingTime = (md) =>
   `${Math.max(1, Math.round(md.trim().split(/\s+/).length / WORDS_PER_MINUTE))} min read`;
 
+/**
+ * Category chips for the meta line, matched against the same module vocabulary the rest of
+ * the site uses. Derived rather than declared: 25 posts already exist without a `tags:` key,
+ * and a field nobody fills is a field that renders empty.
+ */
+const MODULES = [
+  [/\bFSVP\b|foreign supplier/i, 'FSVP'],
+  [/\bCPSIA\b|children'?s product|\bCPC\b|\bGCC\b|tracking label/i, 'CPSIA'],
+  [/prop(osition)?[ -]?65|OEHHA|60-day notice/i, 'PROP 65'],
+  [/\bPFAS\b|organic fluorine|\bTOF\b/i, 'PFAS'],
+  [/\bMoCRA\b|cosmetic/i, 'MOCRA'],
+  [/\bREACH\b|\bSVHC\b/i, 'REACH'],
+  [/\bCPSC\b|recall/i, 'CPSC'],
+];
+const categoryLabels = (meta) => {
+  const hay = `${meta.title} ${(meta.keywords || []).join(' ')}`;
+  const found = MODULES.filter(([re]) => re.test(hay)).map(([, label]) => label).slice(0, 2);
+  return ['COMPLIANCE', ...found];
+};
+
+const categoryTags = (meta) =>
+  categoryLabels(meta)
+    .map((t) => `\n          <span class="blog-tag">${t}</span>`)
+    .join('');
+
+/**
+ * In-page hero photo, emitted ONLY when the file is actually on disk.
+ *
+ * ⚠️ A hero that renders unconditionally is worse than no hero: a missing file gives every
+ * reader a broken-image icon at the top of the post, and the 25 scheduled posts release on a
+ * timer with nobody watching. Absent photo -> no <figure> at all, and the post still reads.
+ *
+ * `hero_alt:` in frontmatter supplies the alt text. When it is absent the image is treated as
+ * DECORATIVE and gets alt="" — deliberately, not lazily. A screen reader that has just read
+ * the <h1> gains nothing from hearing the headline again as an image description, and stock
+ * photography above a post is decoration. Give it real alt text only when it carries meaning.
+ */
+const heroFigure = (slug, meta, available, credits) => {
+  const hit = available.get(slug);
+  if (hit) {
+    const c = credits[slug];
+    // `hero_alt:` overrides; otherwise the provider's own description, which is written by
+    // a human who looked at the photo and is better than anything derivable from the title.
+    const alt = escapeHtml(meta.hero_alt || c?.alt || '');
+    // ⚠️ ATTRIBUTION IS A LICENCE CONDITION, not a courtesy. Pexels requires a prominent
+    // link back to Pexels and credit to the photographer. Removing this while keeping the
+    // photo puts the site out of licence — see scripts/fetch-blog-heroes.mjs.
+    const credit = c
+      ? `
+          <figcaption class="blog-hero-credit">Photo by <a href="${escapeHtml(c.photographer_url)}" rel="noopener nofollow" target="_blank">${escapeHtml(c.photographer)}</a> on <a href="${escapeHtml(c.pexels_url)}" rel="noopener nofollow" target="_blank">Pexels</a></figcaption>`
+      : '';
+    return `
+        <figure class="blog-hero">
+          <img src="/img/blog/hero/${hit}" alt="${alt}" width="1600" height="900" loading="eager" decoding="async">${credit}
+        </figure>`;
+  }
+  // No photo: a branded band, not a gap and not a broken <img>. Some topics — an
+  // importer's calendar, a tracking label — have no honest photograph, so this is the
+  // permanent answer for them rather than a placeholder waiting to be replaced.
+  const label = [...new Set(categoryLabels(meta))].join(' \u00b7 ');
+  return `
+        <figure class="blog-hero">
+          <div class="blog-hero-fallback">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>${escapeHtml(label)}</span>
+          </div>
+        </figure>`;
+};
+
+/** Photographer credits, slug -> {photographer, photographer_url, pexels_url, alt}. */
+async function heroManifest() {
+  try {
+    return JSON.parse(await fs.readFile(path.join(ROOT, 'img', 'blog', 'hero', 'manifest.json'), 'utf8'));
+  } catch {
+    return {};
+  }
+}
+
+/** Hero files present on disk, slug -> filename. Read once; the loop only looks up. */
+async function heroIndex() {
+  const dir = path.join(ROOT, 'img', 'blog', 'hero');
+  const out = new Map();
+  let entries = [];
+  try { entries = await fs.readdir(dir); } catch { return out; }
+  for (const ext of ['.webp', '.jpg', '.jpeg', '.png']) {
+    for (const f of entries) {
+      if (f.toLowerCase().endsWith(ext)) {
+        const slug = f.slice(0, -ext.length);
+        if (!out.has(slug)) out.set(slug, f);
+      }
+    }
+  }
+  return out;
+}
+
 /** Metadata for a legacy hand-written post, read back out of its own tags. */
 async function readLegacyPost(file) {
   const html = await fs.readFile(path.join(BLOG_DIR, file), 'utf8');
@@ -224,6 +319,8 @@ async function main() {
   await fs.mkdir(POSTS_DIR, { recursive: true });
   const mdFiles = (await fs.readdir(POSTS_DIR)).filter((f) => f.endsWith('.md')).sort();
 
+  const heroes = await heroIndex();
+  const heroCredits = await heroManifest();
   const generated = [];
   const drafts = [];
   for (const file of mdFiles) {
@@ -268,6 +365,16 @@ async function main() {
       : `${SITE_URL}/img/blog/${meta.slug || file.replace(/\.md$/, '')}.png`;
 
     const html = template
+      // ⚠️ Replace SEO_TITLE BEFORE TITLE — '{{SEO_TITLE}}' contains '{{TITLE}}' as a
+      // substring only if you are careless with the order, and a TITLE-first pass would
+      // leave a mangled '{{SEO_<title text>}}' in the head.
+      //
+      // A separate <title> exists because the SERP truncates around 60 characters while a
+      // headline above an article has no such limit. Three hand-written posts already do
+      // this deliberately ("... (2026)", "... | Aleph"); this gives generated posts the
+      // same room. The <h1> and the JSON-LD headline both stay on `title`, so they still
+      // match each other — which is what the structure guard asserts.
+      .replaceAll('{{SEO_TITLE}}', escapeHtml(meta.seo_title || meta.title))
       .replaceAll('{{TITLE}}', escapeHtml(meta.title))
       .replaceAll('{{DESCRIPTION}}', escapeHtml(meta.description))
       .replaceAll('{{URL}}', url)
@@ -275,6 +382,10 @@ async function main() {
       .replaceAll('{{PUBLISHER}}', PUBLISHER)
       .replaceAll('{{KEYWORDS}}', JSON.stringify(keywords))
       .replaceAll('{{IMAGE}}', image)
+      .replaceAll('{{DATE_HUMAN}}', prettyDate(meta.date))
+      .replaceAll('{{READ}}', meta.read || readingTime(body))
+      .replaceAll('{{TAGS}}', categoryTags(meta))
+      .replaceAll('{{HERO}}', heroFigure(slug, meta, heroes, heroCredits))
       .replaceAll('{{BODY}}', marked.parse(body));
 
     const isDraft = String(meta.draft).toLowerCase() === 'true';

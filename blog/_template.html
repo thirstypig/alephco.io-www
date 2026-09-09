@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{TITLE}}</title>
+  <title>{{SEO_TITLE}}</title>
   <meta name="description" content="{{DESCRIPTION}}">
   <link rel="canonical" href="{{URL}}">
 
@@ -87,7 +87,37 @@
       <a href="../blog.html" class="blog-back">&larr; Back to Blog</a>
 
       <article class="blog-content">
+
+        <!-- Meta line + category tags -->
+        <div class="blog-meta">
+          <time datetime="{{DATE}}">{{DATE_HUMAN}}</time> &middot;
+          <span>{{READ}}</span>{{TAGS}}
+        </div>
+
+        <h1>{{TITLE}}</h1>
+
+        <!-- Subtitle -->
+        <p class="blog-subtitle">{{DESCRIPTION}}</p>
+
+        <!-- Author + AI attribution -->
+        <div class="blog-author-line">
+          <div class="blog-author-avatar">JC</div>
+          <div>
+            <strong>James Chang</strong>
+            <span class="blog-ai-badge">Written with AI</span>
+          </div>
+        </div>
+{{HERO}}
 {{BODY}}
+
+        <!-- Author Bio -->
+        <div class="author-bio">
+          <div class="author-bio-text">
+            <strong>James Chang</strong>
+            <p>Founder of Aleph. Building import compliance tools for US importers who are tired of spreadsheets and six-figure enterprise software.</p>
+          </div>
+        </div>
+
       </article>
     </div>
   </section>

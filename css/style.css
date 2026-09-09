@@ -465,7 +465,28 @@ tr:last-child td { border-bottom: none; }
 .related-posts a:hover { text-decoration: underline; }
 
 .blog-hero { margin: 1.5rem 0 2rem; }
-.blog-hero img { width: 100%; height: auto; border-radius: 0; }
+.blog-hero img { width: 100%; height: auto; border-radius: 0; display: block; }
+
+/* Fallback hero for a post with no photo. Same visual language as the share cards
+   (navy field, accent rule, mono label) rather than the old teal/amber gradient the
+   hand-written posts still carry inline — that palette predates the Manifest redesign.
+   Deliberately carries NO headline: the <h1> sits directly beneath it. */
+.blog-hero-fallback {
+  display: flex; align-items: center; gap: 1rem;
+  min-height: 180px; padding: 2.5rem 2rem;
+  background: var(--navy-deep); border-left: 6px solid var(--accent);
+}
+.blog-hero-credit {
+  font-size: .75rem; color: var(--fg-muted); padding-top: .5rem; letter-spacing: .01em;
+}
+.blog-hero-credit a { color: var(--fg-muted); text-decoration: underline; }
+.blog-hero-credit a:hover { color: var(--fg); }
+
+.blog-hero-fallback svg { flex: none; color: var(--paper); opacity: .8; }
+.blog-hero-fallback span {
+  font-family: var(--font-mono); font-size: .8125rem; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--rule-soft);
+}
 
 .blog-content blockquote { border-left: 3px solid var(--navy); padding: 1.25rem 1.5rem; margin: 1.75rem 0; background: rgba(31,58,95,.04); border-radius: 0; }
 .blog-content blockquote p { margin-bottom: 0; font-style: normal; color: var(--fg); }
