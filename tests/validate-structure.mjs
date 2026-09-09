@@ -783,6 +783,50 @@ for (const file of BLOG_POSTS) {
   );
 }
 
+// ── Related links say what the destination is actually called ───
+//
+// The hand-written posts carry curated "Related Reading" lists. The link TEXT was typed once
+// and never revisited, so as titles changed the lists kept advertising headlines that no
+// longer exist anywhere — 24 of them across 11 posts, naming things like "Children's Product
+// Certificates: A Complete Guide for Importers" for a post now called "Children's Product
+// Certificate (CPC): The Complete Importer Guide for 2026".
+//
+// This is not a broken link, which is why the existing link-integrity check never saw it: the
+// href resolves perfectly. The reader clicks one headline and lands on a different one.
+//
+// ⚠️ EITHER the <h1> OR the <title> is accepted, deliberately. Generated posts derive related
+// link text from a legacy post's <title> (via readLegacyPost), while hand-written posts read
+// better with the display <h1> — and three legacy posts have deliberately different ones.
+// Requiring a single source would force a cosmetic rewrite on posts that rank.
+
+const POST_TITLES = new Map(
+  BLOG_POSTS.map((f) => {
+    const html = readFileSync(join(ROOT, f), "utf-8");
+    return [
+      f.replace(/^blog\/|\.html$/g, ""),
+      {
+        h1: plain(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1] ?? ""),
+        title: plain(html.match(/<title>([^<]*)<\/title>/)?.[1] ?? ""),
+      },
+    ];
+  })
+);
+
+for (const file of BLOG_POSTS) {
+  const html = readFileSync(join(ROOT, file), "utf-8");
+  const block = html.match(/<!-- Related Posts -->([\s\S]*?)<\/div>/)?.[1];
+  if (!block) continue;
+  for (const [, href, text] of block.matchAll(/<li><a href="([^"]+)\.html">([\s\S]*?)<\/a>/g)) {
+    const dest = POST_TITLES.get(href);
+    if (!dest) continue; // the link-integrity check above already owns unresolvable hrefs
+    const shown = plain(text);
+    assert(
+      shown === dest.h1 || shown === dest.title,
+      `${file}: related link to ${href} reads "${shown}", but that post is called "${dest.h1}" — the href resolves, so nothing else catches this`
+    );
+  }
+}
+
 // ── Every post shares its OWN card, not the site default ────────
 //
 // build-og-cards.mjs was written in session 110 to fix exactly this:
