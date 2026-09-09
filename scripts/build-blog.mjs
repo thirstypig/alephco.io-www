@@ -270,6 +270,51 @@ const heroFigure = (slug, meta, available, credits) => {
         </figure>`;
 };
 
+/**
+ * "Related Reading" — three internal links per generated post.
+ *
+ * ─── WHY THIS NEEDED A SECOND PASS ──────────────────────────────────────────
+ *
+ * The render loop used to emit each post before it knew the others existed, so a post could
+ * not link to its siblings. Legacy posts have hand-written related lists; generated ones had
+ * none, which left the newest 25 posts as internal-link dead ends — every one of them a page
+ * search engines can reach but that leads nowhere.
+ *
+ * ⚠️ ONLY POSTS THAT WILL EXIST. Drafts are not built, so linking one is a guaranteed 404.
+ * The candidate list is built from posts that are actually being written to disk plus the
+ * hand-written ones, never from the full Markdown directory.
+ *
+ * Ranked by shared module tag first (a PFAS post should point at PFAS posts), then by
+ * recency. 'COMPLIANCE' is stripped before comparing because every post carries it, so
+ * leaving it in would score every pair identically and collapse this to "three newest".
+ */
+function relatedPosts(slug, meta, universe) {
+  const mine = new Set(categoryLabels(meta).filter((t) => t !== 'COMPLIANCE'));
+  const scored = universe
+    .filter((p) => p.slug !== slug)
+    .map((p) => {
+      const theirs = new Set((p.tags || []).filter((t) => t !== 'COMPLIANCE'));
+      const shared = [...mine].filter((t) => theirs.has(t)).length;
+      return { p, shared };
+    })
+    .sort((a, b) => b.shared - a.shared || b.p.date.localeCompare(a.p.date))
+    .slice(0, 3)
+    .map(({ p }) => p);
+
+  if (scored.length === 0) return '';
+  const items = scored
+    .map((p) => `\n            <li><a href="${p.slug}.html">${escapeHtml(p.title)}</a></li>`)
+    .join('');
+  return `
+        <!-- Related Posts -->
+        <div class="related-posts">
+          <h3>Related Reading</h3>
+          <ul>${items}
+          </ul>
+        </div>
+`;
+}
+
 /** Photographer credits, slug -> {photographer, photographer_url, pexels_url, alt}. */
 async function heroManifest() {
   try {
@@ -321,6 +366,48 @@ async function main() {
 
   const heroes = await heroIndex();
   const heroCredits = await heroManifest();
+
+  // ── First pass: what will exist on disk when this run finishes ────────────
+  //
+  // Related links need the whole set BEFORE any post renders, and they must contain only
+  // posts that will actually be written — a link to a draft is a guaranteed 404, and drafts
+  // are the majority here (24 of 25). Frontmatter is parsed twice as a result, which is
+  // cheap and beats threading state through the render loop.
+  const parsed = [];
+  for (const file of mdFiles) {
+    const raw = await fs.readFile(path.join(POSTS_DIR, file), 'utf8');
+    const { meta } = parseFrontmatter(raw, file);
+    parsed.push({ file, meta, slug: meta.slug || file.replace(/\.md$/, '') });
+  }
+  // ⚠️ NON-DRAFTS ONLY, AND NOT `|| withDrafts`. That was the first version of this line and
+  // it was wrong: `--drafts` still rewrites the REAL blog/*.html for every non-draft post,
+  // so including drafts in the universe gave a PUBLISHED post three related links to pages
+  // that do not exist. The link-integrity check caught it — three broken links out of 1845.
+  //
+  // A draft previewed in blog/_preview/ therefore links to published posts it cannot reach
+  // from that directory. That is the right trade: _preview is a local reading tool, gitignored
+  // and never deployed, and those links resolve the moment the post actually publishes.
+  const willPublish = parsed.filter((x) => String(x.meta.draft).toLowerCase() !== 'true');
+  const mdSlugs = new Set(parsed.map((x) => x.slug));
+  const legacyForLinks = (
+    await Promise.all(
+      (await fs.readdir(BLOG_DIR))
+        .filter((f) => f.endsWith('.html') && !f.startsWith('_'))
+        .filter((f) => !mdSlugs.has(f.replace(/\.html$/, '')))
+        .map(readLegacyPost)
+    )
+  ).filter(Boolean);
+
+  const universe = [
+    ...willPublish.map((x) => ({
+      slug: x.slug, title: x.meta.title, date: x.meta.date, tags: categoryLabels(x.meta),
+    })),
+    ...legacyForLinks.map((p) => ({
+      slug: p.slug, title: p.title, date: p.date,
+      tags: categoryLabels({ title: p.title, keywords: [] }),
+    })),
+  ];
+
   const generated = [];
   const drafts = [];
   for (const file of mdFiles) {
@@ -386,6 +473,7 @@ async function main() {
       .replaceAll('{{READ}}', meta.read || readingTime(body))
       .replaceAll('{{TAGS}}', categoryTags(meta))
       .replaceAll('{{HERO}}', heroFigure(slug, meta, heroes, heroCredits))
+      .replaceAll('{{RELATED}}', relatedPosts(slug, meta, universe))
       .replaceAll('{{BODY}}', marked.parse(body));
 
     const isDraft = String(meta.draft).toLowerCase() === 'true';
