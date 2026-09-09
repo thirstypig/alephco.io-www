@@ -214,5 +214,104 @@
     "pexels_url": "https://www.pexels.com/photo/person-wearing-a-sweater-holding-a-brown-envelope-5899171/",
     "alt": "Close-up of a woman sealing a brown envelope while seated at a wooden desk indoors.",
     "provider": "Pexels"
+  },
+  "cpc-certificate-guide": {
+    "query": "toy manufacturing factory production line",
+    "id": 8957287,
+    "photographer": "АНАТОЛИЙ",
+    "photographer_url": "https://www.pexels.com/@86420125",
+    "pexels_url": "https://www.pexels.com/photo/woman-in-toy-factory-8957287/",
+    "alt": "A woman in a toy factory carefully painting traditional colorful toys, surrounded by various dolls.",
+    "provider": "Pexels"
+  },
+  "cpsc-recalls-for-importers": {
+    "query": "cardboard boxes stacked plain warehouse",
+    "id": 10834810,
+    "photographer": "Ihsan Adityawarman",
+    "photographer_url": "https://www.pexels.com/@ihsanaditya",
+    "pexels_url": "https://www.pexels.com/photo/stacked-boxes-in-a-warehouse-10834810/",
+    "alt": "High stacks of cardboard boxes organized in a warehouse with a blue metal ceiling.",
+    "provider": "Pexels"
+  },
+  "fsvp-guide-for-importers": {
+    "query": "food import warehouse pallets crates",
+    "id": 10096900,
+    "photographer": "Mathias Reding",
+    "photographer_url": "https://www.pexels.com/@matreding",
+    "pexels_url": "https://www.pexels.com/photo/stacked-plastic-pallet-10096900/",
+    "alt": "Massive stack of blue wooden pallets outside a building, ready for transport.",
+    "provider": "Pexels"
+  },
+  "fsvp-vs-haccp": {
+    "query": "food processing plant hygiene stainless",
+    "id": 5953798,
+    "photographer": "Anna Shvets",
+    "photographer_url": "https://www.pexels.com/@shvetsa",
+    "pexels_url": "https://www.pexels.com/photo/close-up-of-person-working-in-cheese-factory-5953798/",
+    "alt": "A worker using a cheesemaking tool in a factory setting, wearing protective clothing.",
+    "provider": "Pexels"
+  },
+  "how-to-choose-testing-lab": {
+    "query": "scientists working laboratory equipment",
+    "id": 4031417,
+    "photographer": "Edward Jenner",
+    "photographer_url": "https://www.pexels.com/@edward-jenner",
+    "pexels_url": "https://www.pexels.com/photo/scientists-in-laboratory-4031417/",
+    "alt": "Two scientists working in a well-equipped laboratory with microscopes and test tubes.",
+    "provider": "Pexels"
+  },
+  "multi-regulation-compliance-framework": {
+    "query": "stacked paper documents desk office",
+    "id": 7680681,
+    "photographer": "https://kaboompics.com/",
+    "photographer_url": "https://www.pexels.com/@karola-g",
+    "pexels_url": "https://www.pexels.com/photo/receipts-and-documents-on-top-of-a-desk-7680681/",
+    "alt": "Close-up of a tidy desk with receipts, documents, and office stationery for business organization.",
+    "provider": "Pexels"
+  },
+  "pfas-regulations-guide": {
+    "query": "water droplets fabric coating macro",
+    "id": 673799,
+    "photographer": "Sridhar Rajini",
+    "photographer_url": "https://www.pexels.com/@sridharrajini",
+    "pexels_url": "https://www.pexels.com/photo/macro-photography-of-water-droplets-673799/",
+    "alt": "Close-up of dew droplets on a textured surface, glistening in natural light.",
+    "provider": "Pexels"
+  },
+  "product-compliance-for-amazon-sellers": {
+    "query": "ecommerce delivery packages boxes",
+    "id": 9603486,
+    "photographer": "Ron Lach",
+    "photographer_url": "https://www.pexels.com/@ron-lach",
+    "pexels_url": "https://www.pexels.com/photo/people-carrying-cardboard-boxes-9603486/",
+    "alt": "Two people exchanging cardboard boxes indoors, emphasizing teamwork and logistics.",
+    "provider": "Pexels"
+  },
+  "prop-65-warnings-guide": {
+    "query": "plain cardboard packaging blank unbranded",
+    "id": 8015895,
+    "photographer": "Cup of  Couple",
+    "photographer_url": "https://www.pexels.com/@cup-of-couple",
+    "pexels_url": "https://www.pexels.com/photo/a-tube-cream-beside-a-box-with-pouch-8015895/",
+    "alt": "Stylish minimalist mockup featuring a cardboard box, linen pouch, and cream tube on a white background.",
+    "provider": "Pexels"
+  },
+  "spreadsheets-failing-compliance": {
+    "query": "spreadsheet laptop data analysis desk",
+    "id": 7947999,
+    "photographer": "RDNE Stock project",
+    "photographer_url": "https://www.pexels.com/@rdne",
+    "pexels_url": "https://www.pexels.com/photo/person-using-black-and-gray-laptop-7947999/",
+    "alt": "Focused business analysis with charts and graphs on a laptop in a modern office setting.",
+    "provider": "Pexels"
+  },
+  "why-i-built-aleph": {
+    "query": "founder working laptop startup office",
+    "id": 7437487,
+    "photographer": "cottonbro studio",
+    "photographer_url": "https://www.pexels.com/@cottonbro",
+    "pexels_url": "https://www.pexels.com/photo/man-sitting-in-front-of-a-laptop-7437487/",
+    "alt": "Focused young professional working on a laptop in a modern office environment.",
+    "provider": "Pexels"
   }
 }

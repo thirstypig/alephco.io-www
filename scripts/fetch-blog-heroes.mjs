@@ -83,6 +83,24 @@ const QUERIES = {
   'when-oehha-adds-a-chemical-what-it': 'chemical bottles laboratory shelf',
   'year-end-compliance-review-what-to-close': 'desk paperwork review office',
   'you-received-a-60-day-notice-now': 'legal envelope mail letter desk',
+
+  // ── The 12 hand-written posts (not generated from Markdown) ───────────────
+  // They shipped with inline gradient heroes in the PRE-MANIFEST palette (#0F6E56 teal,
+  // #BA7517 amber), which the redesign left behind. Photos bring them into line with the
+  // generated posts. `manifest-design-system` is deliberately absent: it is a post about
+  // the design system itself, and stock photography above it would be the filler this
+  // whole approach is trying to avoid.
+  'cpc-certificate-guide': 'toy manufacturing factory production line',
+  'cpsc-recalls-for-importers': 'cardboard boxes stacked plain warehouse',
+  'fsvp-guide-for-importers': 'food import warehouse pallets crates',
+  'fsvp-vs-haccp': 'food processing plant hygiene stainless',
+  'how-to-choose-testing-lab': 'scientists working laboratory equipment',
+  'multi-regulation-compliance-framework': 'stacked paper documents desk office',
+  'pfas-regulations-guide': 'water droplets fabric coating macro',
+  'product-compliance-for-amazon-sellers': 'ecommerce delivery packages boxes',
+  'prop-65-warnings-guide': 'plain cardboard packaging blank unbranded',
+  'spreadsheets-failing-compliance': 'spreadsheet laptop data analysis desk',
+  'why-i-built-aleph': 'founder working laptop startup office',
 };
 
 async function pexelsKey() {
