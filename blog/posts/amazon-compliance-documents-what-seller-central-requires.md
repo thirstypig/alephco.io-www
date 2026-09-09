@@ -1,5 +1,6 @@
 ---
 title: "Amazon compliance documents: what Seller Central asks for and why"
+seo_title: "Amazon compliance documents: what Seller Central asks for"
 description: "Almost every document Amazon requests exists because a law requires it. Knowing which law tells you what will satisfy the request and what will not."
 date: 2027-02-01
 slug: amazon-compliance-documents-what-seller-central-requires

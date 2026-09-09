@@ -754,6 +754,35 @@ for (const file of BLOG_POSTS) {
   }
 }
 
+// ── Generated posts stay inside SERP limits ─────────────────────
+//
+// Google truncates a title around 60 characters and a description around 155. Over-long
+// metadata is not a ranking penalty — it is a CTR one: the reader sees "…" where the point
+// of the sentence was. `seo_title:` in frontmatter sets <title> independently of the <h1>,
+// so a headline never has to be shortened to satisfy a search result.
+//
+// ⚠️ GENERATED POSTS ONLY, and this exemption is deliberate rather than lazy. Five
+// hand-written posts exceed these limits. They also RANK, and CLAUDE.md is explicit that
+// rewriting metadata on a working page is a risk taken on purpose or not at all — not one
+// a test forces on a Tuesday. Their lengths are recorded in the session notes for a human
+// to weigh; a build failure is the wrong instrument for that decision.
+
+for (const file of BLOG_POSTS) {
+  const slug = file.replace(/^blog\/|\.html$/g, "");
+  if (!GENERATED_SLUGS.has(slug)) continue;
+  const html = readFileSync(join(ROOT, file), "utf-8");
+  const title = html.match(/<title>([^<]*)<\/title>/)?.[1]?.trim() ?? "";
+  const desc = html.match(/<meta name="description" content="([^"]*)"/)?.[1]?.trim() ?? "";
+  assert(
+    title.length > 0 && title.length <= 62,
+    `${file}: <title> is ${title.length} chars — over ~60 truncates in search results. Set seo_title: in frontmatter to shorten it without touching the headline`
+  );
+  assert(
+    desc.length >= 110 && desc.length <= 160,
+    `${file}: meta description is ${desc.length} chars — aim for 110-160 so it is neither truncated nor padded`
+  );
+}
+
 // ── A hero photo carries its attribution (licence, not courtesy) ─
 //
 // The hero photos come from the Pexels API, whose terms require a prominent link back to

@@ -1,5 +1,6 @@
 ---
 title: "Prop 65 for importers: who it applies to and what it actually requires"
+seo_title: "Prop 65 for importers: who it applies to, and what it requires"
 description: "There is no registration, no filing and no approval. There is one duty, three exemptions, and a private enforcement system that does the work."
 date: 2026-11-02
 slug: prop-65-for-importers-who-it-applies

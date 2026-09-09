@@ -365,6 +365,16 @@ async function main() {
       : `${SITE_URL}/img/blog/${meta.slug || file.replace(/\.md$/, '')}.png`;
 
     const html = template
+      // ⚠️ Replace SEO_TITLE BEFORE TITLE — '{{SEO_TITLE}}' contains '{{TITLE}}' as a
+      // substring only if you are careless with the order, and a TITLE-first pass would
+      // leave a mangled '{{SEO_<title text>}}' in the head.
+      //
+      // A separate <title> exists because the SERP truncates around 60 characters while a
+      // headline above an article has no such limit. Three hand-written posts already do
+      // this deliberately ("... (2026)", "... | Aleph"); this gives generated posts the
+      // same room. The <h1> and the JSON-LD headline both stay on `title`, so they still
+      // match each other — which is what the structure guard asserts.
+      .replaceAll('{{SEO_TITLE}}', escapeHtml(meta.seo_title || meta.title))
       .replaceAll('{{TITLE}}', escapeHtml(meta.title))
       .replaceAll('{{DESCRIPTION}}', escapeHtml(meta.description))
       .replaceAll('{{URL}}', url)
