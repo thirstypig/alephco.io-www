@@ -1,7 +1,7 @@
 ---
 title: "REACH and SVHC for US companies selling into the EU"
 description: "You are almost never the duty holder under REACH. Your EU customer is, which is why their questionnaire arrives with a deadline attached and yours does not."
-date: 2027-01-11
+date: 2026-10-12
 slug: reach-and-svhc-for-us-companies-selling
 keywords: [REACH, SVHC, Candidate List, Article 33, only representative, 0.1% w/w, EU compliance, US exporter]
 sources: [https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02006R1907-20241010, https://echa.europa.eu/candidate-list-table]

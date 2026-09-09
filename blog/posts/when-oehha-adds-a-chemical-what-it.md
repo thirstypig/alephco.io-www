@@ -1,7 +1,7 @@
 ---
 title: "When OEHHA adds a chemical: what it means for your catalogue"
 description: "A listing starts a twelve-month clock, and the routes onto the list mean an addition can arrive with no California rulemaking you would have noticed."
-date: 2026-11-30
+date: 2027-02-22
 slug: when-oehha-adds-a-chemical-what-it
 keywords: [OEHHA listing, Prop 65 list, 25249.8, twelve month grace period, authoritative body, labeling requirement, monitoring]
 sources: [https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.8, https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.10]

@@ -1,7 +1,7 @@
 ---
 title: "Supplier declarations that hold up in an audit"
 description: "What separates a declaration that answers an auditor's question from one that merely exists, drawn from what the reporting rules actually ask you to file."
-date: 2027-02-08
+date: 2026-11-30
 slug: supplier-declarations-that-hold-up-in-an
 keywords: [supplier declaration, audit, compliance evidence, CASRN, material change, document retention, importer]
 sources: [https://www.revisor.mn.gov/statutes/cite/116.943, https://www.ecfr.gov/current/title-16/part-1107, https://www.ecfr.gov/current/title-21/section-1.505, https://www.env.nm.gov/opf/wp-content/uploads/sites/13/2026/04/EXHIBIT-A-20.13.2-NMAC-FINAL.pdf]

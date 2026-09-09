@@ -1,7 +1,7 @@
 ---
 title: "Hazard analysis without a consultant"
 description: "The regulation lets you review and adopt your supplier's analysis, and lets you stop early if no hazard requires a control. Both are written into the rule."
-date: 2026-12-21
+date: 2027-01-11
 slug: hazard-analysis-without-a-consultant
 keywords: [hazard analysis, FSVP, 1.504, qualified individual, biological chemical physical hazards, food importer, preventive controls]
 sources: [https://www.ecfr.gov/current/title-21/section-1.504, https://www.ecfr.gov/current/title-21/section-1.503, https://www.ecfr.gov/current/title-21/part-1/subpart-L]

@@ -1,7 +1,7 @@
 ---
 title: "Compliance for a 200-SKU catalogue without a compliance team"
 description: "Rules apply per product, so effort scales with catalogue size unless you change the unit of work. What to standardise, batch, and deliberately not do."
-date: 2027-02-22
+date: 2027-02-15
 slug: compliance-for-a-200-sku-catalogue-without
 keywords: [compliance operations, SKU management, importer, small team, prioritisation, supplier declarations, record keeping]
 sources: [https://www.ecfr.gov/current/title-16/part-1107, https://www.ecfr.gov/current/title-21/section-1.505, https://www.revisor.mn.gov/statutes/cite/116.943, https://www.ecfr.gov/current/title-16/part-1110]

@@ -1,7 +1,7 @@
 ---
 title: "The children's product compliance checklist"
 description: "Six obligations that travel together for anyone importing children's products, in the order they actually bite, each linked to the rule behind it."
-date: 2026-10-26
+date: 2027-02-01
 slug: the-children-s-product-compliance-checklist
 keywords: [children's product, CPSIA checklist, CPC, tracking label, third party testing, CPSC eFiling, importer compliance]
 sources: [https://www.ecfr.gov/current/title-16/part-1200, https://www.ecfr.gov/current/title-16/part-1110, https://www.ecfr.gov/current/title-16/part-1107, https://www.law.cornell.edu/uscode/text/15/2063, https://www.federalregister.gov/documents/2025/01/08/2024-30826/certificates-of-compliance]

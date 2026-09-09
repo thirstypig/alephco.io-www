@@ -1,7 +1,7 @@
 ---
 title: "Getting a PFAS declaration out of an overseas supplier"
 description: "What the states actually require you to file, why that is the only declaration form worth sending, and what to do when a supplier will not answer."
-date: 2026-09-21
+date: 2026-10-26
 slug: getting-a-pfas-declaration-out-of-an
 keywords: [PFAS declaration, supplier declaration, PFAS reporting, overseas supplier, CASRN, importer compliance, supply chain agreement]
 sources: [https://www.revisor.mn.gov/statutes/cite/116.943, https://www.pca.state.mn.us/air-water-land-climate/reporting-pfas-in-products, https://www.env.nm.gov/opf/wp-content/uploads/sites/13/2026/04/EXHIBIT-A-20.13.2-NMAC-FINAL.pdf, https://portal.ct.gov/deep/p2/pfas-in-products]

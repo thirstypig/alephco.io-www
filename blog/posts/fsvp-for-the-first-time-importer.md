@@ -1,7 +1,7 @@
 ---
 title: "FSVP for the first-time importer"
 description: "You are the importer if you are the US owner or consignee at entry. What the programme has to contain, and the exemption most people never check for."
-date: 2026-12-07
+date: 2026-10-05
 slug: fsvp-for-the-first-time-importer
 keywords: [FSVP, foreign supplier verification program, FDA, food importer, qualified individual, DUNS, hazard analysis]
 sources: [https://www.ecfr.gov/current/title-21/part-1/subpart-L, https://www.ecfr.gov/current/title-21/section-1.500, https://www.ecfr.gov/current/title-21/section-1.502, https://www.ecfr.gov/current/title-21/section-1.509]

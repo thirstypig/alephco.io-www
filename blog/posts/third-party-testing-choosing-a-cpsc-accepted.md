@@ -1,7 +1,7 @@
 ---
 title: "Third-party testing: choosing a CPSC-accepted lab"
 description: "Accreditation is scope-specific, so a lab accepted for one rule may not be accepted for yours. Plus the retest intervals and the five-year record rule."
-date: 2026-10-19
+date: 2026-12-14
 slug: third-party-testing-choosing-a-cpsc-accepted
 keywords: [third party testing, CPSC accepted lab, ISO 17025, children's product certificate, periodic testing, material change, firewalled lab]
 sources: [https://www.ecfr.gov/current/title-16/part-1112, https://www.ecfr.gov/current/title-16/part-1107, https://www.law.cornell.edu/uscode/text/15/2063]

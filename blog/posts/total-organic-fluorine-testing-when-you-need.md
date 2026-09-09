@@ -1,7 +1,7 @@
 ---
 title: "Total organic fluorine testing: when you actually need it"
 description: "Fluorine testing does not prove PFAS. It shifts who has to prove what, at three different trigger levels, and two of them are not what summaries report."
-date: 2026-09-28
+date: 2026-12-07
 slug: total-organic-fluorine-testing-when-you-need
 keywords: [total organic fluorine, TOF testing, total fluorine, PFAS testing, rebuttable presumption, PFAS screening, importer compliance]
 sources: [https://app.leg.wa.gov/WAC/default.aspx?cite=173-337, https://www.env.nm.gov/opf/wp-content/uploads/sites/13/2026/04/EXHIBIT-A-20.13.2-NMAC-FINAL.pdf, https://www.revisor.mn.gov/statutes/cite/116.943]

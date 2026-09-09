@@ -1,7 +1,7 @@
 ---
 title: "Supplier verification: what FDA actually accepts"
 description: "Four activities, one of which becomes mandatory and annual for serious hazards, plus the written determination that lets you use something else instead."
-date: 2026-12-14
+date: 2026-11-16
 slug: supplier-verification-what-fda-actually-accepts
 keywords: [FSVP verification, onsite audit, SAHCODHA, qualified auditor, sampling and testing, food safety records, FDA]
 sources: [https://www.ecfr.gov/current/title-21/section-1.506, https://www.ecfr.gov/current/title-21/section-1.505, https://www.ecfr.gov/current/title-21/part-1/subpart-L]

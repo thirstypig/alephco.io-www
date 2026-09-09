@@ -1,7 +1,7 @@
 ---
 title: "Selling into Canada and Mexico: what changes"
 description: "Canada adds a two-day incident report and six years of records. Mexico requires a Mexican entity to hold compliance. Neither is a US programme with a new flag."
-date: 2027-01-25
+date: 2027-01-18
 slug: selling-into-canada-and-mexico-what-changes
 keywords: [Canada Consumer Product Safety Act, CCPSA, incident reporting, Mexico NOM, NOM-050, NOM-051, Spanish labeling, RFC, cross-border]
 sources: [https://laws-lois.justice.gc.ca/eng/acts/C-1.68/page-1.html, https://www.trade.gov/country-commercial-guides/mexico-labelingmarking-requirements, https://www.snice.gob.mx/cs/avi/snice/etiquetado.info.com.html]

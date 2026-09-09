@@ -2,7 +2,7 @@
 title: "Amazon compliance documents: what Seller Central asks for and why"
 seo_title: "Amazon compliance documents: what Seller Central asks for"
 description: "Almost every document Amazon requests exists because a law requires it. Knowing which law tells you what will satisfy the request and what will not."
-date: 2027-02-01
+date: 2026-10-19
 slug: amazon-compliance-documents-what-seller-central-requires
 keywords: [Amazon Seller Central, compliance documents, CPC, GCC, Prop 65, listing suppression, marketplace compliance, importer]
 sources: [https://www.ecfr.gov/current/title-16/part-1110, https://www.law.cornell.edu/uscode/text/15/2063, https://www.law.cornell.edu/regulations/california/27-CCR-25603, https://www.ecfr.gov/current/title-16/part-1107]

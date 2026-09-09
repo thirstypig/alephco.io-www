@@ -1,7 +1,7 @@
 ---
 title: "Prop 65 exposure assessment without a toxicologist"
 description: "How the no-significant-risk defence actually works, which parts you can do yourself, and the point at which paying an expert becomes the cheaper option."
-date: 2026-11-16
+date: 2026-12-21
 slug: exposure-assessment-without-a-toxicologist
 keywords: [Prop 65, no significant risk level, NSRL, MADL, safe harbor level, exposure assessment, 25249.10, burden of proof]
 sources: [https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.10, https://www.law.cornell.edu/regulations/california/27-CCR-25703, https://www.law.cornell.edu/regulations/california/27-CCR-25801, https://www.law.cornell.edu/regulations/california/27-CCR-25805]

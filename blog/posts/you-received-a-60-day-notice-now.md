@@ -1,7 +1,7 @@
 ---
 title: "You received a Prop 65 60-day notice. Now what?"
 description: "What the notice is, what the certificate of merit means, why silence from the Attorney General is not good news, and what the first two weeks decide."
-date: 2026-11-23
+date: 2027-02-08
 slug: you-received-a-60-day-notice-now
 keywords: [Prop 65 60-day notice, certificate of merit, private enforcement, 25249.7, civil penalty, settlement, importer]
 sources: [https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.7, https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.10]

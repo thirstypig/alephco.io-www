@@ -1,7 +1,7 @@
 ---
 title: "GCC vs CPC: which certificate does your product need?"
 description: "The difference is not paperwork preference. One requires testing at a CPSC-accepted lab, and since July 2026 both must be filed electronically at entry."
-date: 2026-10-05
+date: 2026-09-21
 slug: gcc-vs-cpc-which-certificate-does-your
 keywords: [GCC, CPC, general certificate of conformity, children's product certificate, CPSIA, CPSC eFiling, importer certification]
 sources: [https://www.ecfr.gov/current/title-16/part-1110, https://www.law.cornell.edu/uscode/text/15/2063, https://www.federalregister.gov/documents/2025/01/08/2024-30826/certificates-of-compliance, https://www.ecfr.gov/current/title-16/part-1200]
