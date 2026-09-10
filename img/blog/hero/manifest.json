@@ -313,5 +313,59 @@
     "pexels_url": "https://www.pexels.com/photo/man-sitting-in-front-of-a-laptop-7437487/",
     "alt": "Focused young professional working on a laptop in a modern office environment.",
     "provider": "Pexels"
+  },
+  "de-minimis-section-321-is-changing": {
+    "query": "cardboard parcels delivery boxes stacked",
+    "id": 7844001,
+    "photographer": "Kampus Production",
+    "photographer_url": "https://www.pexels.com/@kampus",
+    "pexels_url": "https://www.pexels.com/photo/stacks-of-brown-cardboards-on-a-push-cart-7844001/",
+    "alt": "Close-up of hands holding a trolley with stacked cardboard boxes outdoors.",
+    "provider": "Pexels"
+  },
+  "does-relabeling-change-country-of-origin": {
+    "query": "factory assembly line workers",
+    "id": 31019572,
+    "photographer": "EqualStock IN",
+    "photographer_url": "https://www.pexels.com/@equalstock",
+    "pexels_url": "https://www.pexels.com/photo/blue-collar-workers-in-textile-factory-31019572/",
+    "alt": "Workers in a textile factory operating sewing machines and organizing fabric.",
+    "provider": "Pexels"
+  },
+  "uflpa-detention-what-triggers-it": {
+    "query": "cargo shipping containers port",
+    "id": 21234960,
+    "photographer": "Wolfgang Weiser",
+    "photographer_url": "https://www.pexels.com/@wolfgang-weiser-467045605",
+    "pexels_url": "https://www.pexels.com/photo/container-ship-at-terminal-burchardkai-in-hamburg-21234960/",
+    "alt": "Container ships moored at Terminal Burchardkai in Hamburg, Germany during evening hours.",
+    "provider": "Pexels"
+  },
+  "packaging-epr-laws-state-by-state-timeline": {
+    "query": "recycling bins sorted plastic",
+    "id": 6591427,
+    "photographer": "cottonbro studio",
+    "photographer_url": "https://www.pexels.com/@cottonbro",
+    "pexels_url": "https://www.pexels.com/photo/person-sitting-on-the-chair-near-the-plastic-containers-with-lables-6591427/",
+    "alt": "Volunteers organize recyclables into glass, paper, and plastic bins to promote eco-friendly practices.",
+    "provider": "Pexels"
+  },
+  "lacey-act-declaration-wood-product-importers-miss": {
+    "query": "lumber wood planks stacked",
+    "id": 12278586,
+    "photographer": "Mark Stebnicki",
+    "photographer_url": "https://www.pexels.com/@nc-farm-bureau-mark",
+    "pexels_url": "https://www.pexels.com/photo/piles-of-wooden-planks-in-yard-12278586/",
+    "alt": "High stacks of wooden planks stored outdoors in a lumber yard.",
+    "provider": "Pexels"
+  },
+  "fcc-equipment-authorization-for-electronics-importers": {
+    "query": "circuit board electronics closeup",
+    "id": 3520692,
+    "photographer": "Miguel Á. Padriñán",
+    "photographer_url": "https://www.pexels.com/@padrinan",
+    "pexels_url": "https://www.pexels.com/photo/black-and-white-photography-of-a-mother-board-3520692/",
+    "alt": "Detailed black and white photo of a circuit board showing intricate components, perfect for tech projects.",
+    "provider": "Pexels"
   }
 }

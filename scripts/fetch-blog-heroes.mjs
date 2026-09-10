@@ -84,6 +84,16 @@ const QUERIES = {
   'year-end-compliance-review-what-to-close': 'desk paperwork review office',
   'you-received-a-60-day-notice-now': 'legal envelope mail letter desk',
 
+  // ── 6 new posts added 2027-03 (de minimis / Section 301 / UFLPA / EPR /
+  // Lacey Act / FCC), same rule as everything above: name something a camera
+  // can point at, not the regulation itself. ─────────────────────────────────
+  'de-minimis-section-321-is-changing': 'cardboard parcels delivery boxes stacked',
+  'does-relabeling-change-country-of-origin': 'factory assembly line workers',
+  'uflpa-detention-what-triggers-it': 'cargo shipping containers port',
+  'packaging-epr-laws-state-by-state-timeline': 'recycling bins sorted plastic',
+  'lacey-act-declaration-wood-product-importers-miss': 'lumber wood planks stacked',
+  'fcc-equipment-authorization-for-electronics-importers': 'circuit board electronics closeup',
+
   // ── The 12 hand-written posts (not generated from Markdown) ───────────────
   // They shipped with inline gradient heroes in the PRE-MANIFEST palette (#0F6E56 teal,
   // #BA7517 amber), which the redesign left behind. Photos bring them into line with the
