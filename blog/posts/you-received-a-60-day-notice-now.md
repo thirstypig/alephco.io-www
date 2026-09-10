@@ -32,7 +32,7 @@ days, and public prosecutors have been told.
 
 A notice alleging a §25249.6 violation must include a **certificate of merit**, executed by
 the noticing party's attorney (or the party, if unrepresented), stating that they consulted
-one or more persons with relevant experience or expertise who reviewed facts, studies or
+one or more persons with relevant experience or expertise who reviewed facts, studies, or
 other data regarding the exposure.
 
 That is a statement about *their* diligence. It is not a test result you can inspect, and
@@ -79,8 +79,9 @@ specifically notes *when* you acted.
 4. **Pull the file you already have** — supplier declarations, test reports, dates. If
    [an exposure assessment](/blog/exposure-assessment-without-a-toxicologist.html) exists,
    this is the moment it earns its cost. Remember §25249.10(c) puts the burden on you.
-5. **Do not quietly relabel and say nothing.** Fixing it is good and is a §25249.7(b)(2)(D)
-   factor. Doing it without advice, in a way that reads as an admission, is not.
+5. **Do not quietly relabel and say nothing.** Fixing it is good, and it counts as a
+   §25249.7(b)(2)(D) factor. Doing it without advice, in a way that reads as an admission,
+   is not.
 6. **Preserve documents.** Including the supplier correspondence you would rather not have
    written.
 
@@ -90,7 +91,7 @@ Settlements do not stay private in the way people assume. Under §25249.7(f)(1),
 settling or litigating must submit a reporting form to the Attorney General with the results
 and final disposition **even if the case is dismissed**.
 
-Which is the real lesson of a 60-day notice: the file you can produce in week one determines
+That is the real lesson of a 60-day notice: the file you can produce in week one determines
 the outcome, and that file is built in the ordinary course or not at all.
 
 ---

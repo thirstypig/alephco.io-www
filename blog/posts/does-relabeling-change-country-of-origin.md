@@ -41,8 +41,8 @@ five of the six and a half days needed to build the finished panel, with 43% US 
 and US-based R&D. CBP called that "making a product with a new name, character, and use."
 Real transformation, not a finishing step.
 
-The difference isn't subjective. It's whether the process changed what the thing *is*, not
-just where it was touched last.
+The difference isn't subjective. It comes down to whether the process changed what the
+thing *is*, not just where it was touched last.
 
 ## What ignoring that test actually costs
 
@@ -56,7 +56,7 @@ settlement.
 
 That's the real shape of the risk: not a disputed classification argument, but a False
 Claims Act case with a nine-figure number attached, because "we relabeled it" and "we
-transformed it" are legally two very different claims.
+transformed it" are two legally distinct claims.
 
 ## What this means practically
 

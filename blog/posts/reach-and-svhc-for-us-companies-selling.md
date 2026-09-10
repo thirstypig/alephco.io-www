@@ -47,8 +47,9 @@ default obligation.
 > On request by a consumer … The relevant information shall be provided, **free of charge,
 > within 45 days** of receipt of the request.
 
-Your customer cannot answer either without data from you. That is the entire mechanism by
-which REACH reaches a US supplier: contractually, through someone who has 45 days.
+Your customer cannot answer either question without data from you. That is the entire
+mechanism by which REACH reaches a US supplier: contractually, through someone else's
+45-day clock.
 
 ## The notification threshold is different, and has two limbs
 
@@ -70,10 +71,10 @@ does whether exposure can be excluded.
 ## Two things worth getting right
 
 **0.1% is a concentration in the article, and "the article" is the argued question.** The
-threshold in Articles 7 and 33 is expressed against the article containing the substance. How
-that applies to an assembled product made of many components is the point on which answers
-most often differ — ask your customer which basis they are working to before you answer, and
-record the basis alongside your answer.
+threshold in Articles 7 and 33 is expressed against the article containing the substance, and
+how that applies to an assembled product made of many components is exactly where
+interpretations diverge — ask your customer which basis they are working to before you
+answer, and record the basis alongside your answer.
 
 **The Candidate List is a moving list.** It is maintained by ECHA under Article 59 and
 updated periodically. Any answer you give is an answer as at a date, against a version of the

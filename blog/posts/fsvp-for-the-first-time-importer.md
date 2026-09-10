@@ -8,9 +8,9 @@ sources: [https://www.ecfr.gov/current/title-21/part-1/subpart-L, https://www.ec
 draft: true
 ---
 
-FSVP catches people out because it is not a licence, a registration or an approval. It is a
-programme you are required to have, in writing, that nobody asks to see until an FDA
-investigator does — and then they ask for it in 24 hours.
+FSVP catches people out because it isn't a licence, a registration, or an approval. It's a
+programme you're required to have, in writing, that nobody asks to see until an FDA
+investigator does — and then they want it within 24 hours.
 
 Checked against 21 CFR part 1 subpart L on **6 September 2026**.
 
@@ -21,9 +21,9 @@ the **US owner or consignee** of the article of food at the time of entry. If th
 owner or consignee, it is the **US agent or representative of the foreign owner or
 consignee**, designated for FSVP purposes.
 
-Note what this is not. It is not whoever is on the customs paperwork as a matter of habit,
-and it is not the customs broker. The obligation follows ownership of the food, and it can
-land on a party who thought they were arranging logistics.
+Note what this is not. It isn't whoever happens to be named on the customs paperwork, and
+it isn't the customs broker. The obligation follows ownership of the food, and it can land
+on a party who thought they were merely arranging logistics.
 
 ## Check the exemptions first
 
@@ -39,7 +39,7 @@ people skip it:
 - **meat, poultry and egg products** subject to USDA jurisdiction
 
 That last one matters commercially: a mixed catalogue can have USDA products sitting
-outside FSVP entirely while everything beside them is inside it.
+entirely outside FSVP while everything else on the same shelf falls inside it.
 
 ## What the programme has to contain
 
@@ -69,10 +69,10 @@ individual** to develop the FSVP and perform the required activities. The bar is
 plus the ability to **read and understand the language of any records** that must be
 reviewed.
 
-There is no certification, no register, and no requirement that the person be your employee.
+There's no certification, no register, and no requirement that the person be your employee.
 The language point is the one with teeth: if your supplier's food safety records are in a
-language nobody in the chain reads, you cannot review them, and reviewing them is one of the
-verification options.
+language nobody in the chain reads, you can't review them — and reviewing them is one of
+the verification options.
 
 ## The bit that shows up at the border
 
@@ -81,9 +81,9 @@ line entry of food, the importer's **name, email address and unique facility ide
 are transmitted electronically at entry. In practice that is a DUNS number, and it must be
 recognised as acceptable by FDA.
 
-This is the part your broker touches, and the most common first failure: entries filed with
-a missing or wrong identifier, or with a party named as FSVP importer who has never heard of
-FSVP.
+This is the part your broker touches, and the most common first failure looks like this:
+entries filed with a missing or wrong identifier, or naming a party as FSVP importer who has
+never heard of FSVP.
 
 ## Records: two years, produced in 24 hours
 
@@ -91,9 +91,9 @@ FSVP.
 **at least 2 years**, be legible and stored to prevent deterioration, and be made available
 to FDA **within 24 hours** of request.
 
-Twenty-four hours is the design constraint for everything else. A programme that is
+Twenty-four hours is the design constraint behind everything else here. A programme that's
 technically complete but scattered across inboxes and a shared drive fails at exactly the
-moment it is tested.
+moment it's tested.
 
 ## The realistic first month
 

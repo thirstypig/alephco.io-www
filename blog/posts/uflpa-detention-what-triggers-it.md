@@ -24,7 +24,7 @@ good... was not mined, produced, or manufactured wholly or in part by forced lab
 
 Clear and convincing evidence is a real, higher legal standard than the "preponderance of
 the evidence" bar used in most civil disputes. That's the part people underestimate: this
-isn't a checkbox, it's a genuine evidentiary burden, and it sits entirely on the importer.
+isn't a checkbox but a genuine evidentiary burden, and it sits entirely on the importer.
 
 ## Who's actually on the list
 
@@ -47,8 +47,8 @@ evidence to allow for an exception could not be confirmed," while it worked with
 counsel to make its case, maintaining that it and VSUN "do not use raw materials
 originating from the Uyghur region."
 
-That's what "rebuttable" costs in practice while you're rebutting it — the goods sit, and
-the business impact starts immediately, win or lose the eventual case.
+That's what "rebuttable" costs in practice while you're rebutting it: the goods sit, and the
+business impact starts immediately, whether you eventually win the case or lose it.
 
 ## What this means practically
 

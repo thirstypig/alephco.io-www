@@ -9,8 +9,8 @@ draft: true
 ---
 
 Five states now require the "producer" of packaged goods to pay for what happens to that
-packaging after the customer throws it out. Treat this as one law with five names and
-you'll get at least one deadline wrong — the states aren't on the same schedule, and one of
+packaging after the customer throws it out. Treat this as one law with five names, and
+you'll get at least one deadline wrong: the states aren't on the same schedule, and one of
 them currently has no functioning program at all.
 
 Checked against each state's own program page on **9 March 2027**.
@@ -18,8 +18,8 @@ Checked against each state's own program page on **9 March 2027**.
 ## What "producer" actually means
 
 Every state runs some version of the same hierarchy: the brand-owning manufacturer is the
-producer, unless the brand is licensed (then the licensee), unless there's no US-based
-entity holding that role at all — in which case the obligation falls to **the importer of
+producer, unless the brand is licensed, in which case it's the licensee, unless no US-based
+entity holds that role at all — in which case the obligation falls to **the importer of
 record**. Oregon's own guidance spells this out with a worked example naming Amazon and
 L'Oréal directly. If your business imports private-label or unbranded goods with no US
 brand owner behind them, read that sentence twice: the law may already be pointing at you.

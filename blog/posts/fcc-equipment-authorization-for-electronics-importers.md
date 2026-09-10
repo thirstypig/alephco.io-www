@@ -8,10 +8,10 @@ sources: [https://www.fcc.gov/general/equipment-authorization-procedures, https:
 draft: true
 ---
 
-CPSIA gets all the attention for consumer products, and FCC compliance gets skipped by
-importers who don't think of themselves as "electronics companies" even though their
-product has a Bluetooth chip in it. That gap is exactly what one FCC enforcement action
-just cost a company over a million dollars to find out about.
+CPSIA gets all the attention for consumer products, and FCC compliance gets overlooked by
+importers who don't think of themselves as "electronics companies," even though their
+product has a Bluetooth chip inside it. That gap is exactly what one FCC enforcement action
+just cost a company over a million dollars to learn about.
 
 Checked against the FCC's own procedures on **9 March 2027**.
 
@@ -34,11 +34,10 @@ and separately has to meet SDoC standards for its non-radio digital circuitry.
 ## What CBP actually checks
 
 There is no dedicated FCC import form anymore. **FCC Form 740 was eliminated in November
-2017** because it duplicated data CBP already collects through its own entry system. What
-that means in practice: the burden shifted to the importer being able to *produce*
-equipment-authorization documentation on request, rather than filing it up front. If you
-can't produce it when asked, "we didn't know we needed a form" isn't the gap — the
-authorization itself is.
+2017** because it duplicated data CBP already collects through its own entry system. In
+practice, that shifted the burden onto the importer to *produce* equipment-authorization
+documentation on request, rather than filing it up front. If you can't produce it when
+asked, "we didn't know we needed a form" isn't the gap — the authorization itself is.
 
 ## CE marking doesn't substitute for any of this
 

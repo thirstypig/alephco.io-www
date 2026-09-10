@@ -9,7 +9,7 @@ draft: false
 ---
 
 PFAS is the compliance question importers ask us most often, and the honest answer is that
-there isn't one rule. There are several, they don't agree with each other, and which ones
+there isn't one rule. There are several, and they don't agree with each other; which ones
 apply depends on what you sell and where you sell it.
 
 Worse, the rules that get quoted in most summaries are frequently the *old* ones. Two of
@@ -27,7 +27,7 @@ importers end up doing the wrong work:
 - **Ban states** don't want a filing at all. Past a date, listed categories simply cannot
   be sold, and no amount of paperwork changes that.
 
-Maine is the clearest example of why this matters. Maine is widely described as a PFAS
+Maine is the clearest example of why this matters. It's widely described as a PFAS
 *reporting* state. It isn't any more — and that's not a subtle change.
 
 ## Maine: the reporting requirement was deleted

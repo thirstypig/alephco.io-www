@@ -8,8 +8,8 @@ sources: [https://www.law.cornell.edu/uscode/text/15/2063, https://www.ecfr.gov/
 draft: true
 ---
 
-Tracking labels look like the easiest CPSIA requirement and are one of the most commonly
-got-wrong, because almost everyone reads half the statute.
+Tracking labels look like the easiest CPSIA requirement, and they're among the most
+commonly mishandled, because almost everyone reads half the statute.
 
 Checked on **6 September 2026**. If you are still working out whether your product needs
 one, start with [GCC vs CPC](/blog/gcc-vs-cpc-which-certificate-does-your.html).
@@ -38,7 +38,7 @@ private labeler** appears only in the purchaser's list. A batch code that means 
 in your internal system, printed alone, satisfies your half and fails the customer's — they
 cannot tell whose product it is.
 
-Conversely a brand name and nothing else fails your half: no date, no cohort, nothing that
+Conversely, a brand name and nothing else fails your half: no date, no cohort, nothing that
 narrows a recall to a run.
 
 ## "Permanent" and "to the extent practicable"

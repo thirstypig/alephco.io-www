@@ -24,7 +24,7 @@ measurement, which counts inorganic fluorine too. Total organic fluorine is a na
 number, and it is not the one those rules key on. If a lab quotes you TOF and a rule asks
 about total fluorine, you have not answered the question that was asked.
 
-This matters more than it sounds, because
+This matters more than it might seem, because
 [as covered previously](/blog/what-intentionally-added-pfas-actually-means.html), "PFAS" is
 defined about as broadly as it can be — Minnesota's version is "a class of fluorinated
 organic chemicals containing at least one fully fluorinated carbon atom" (§116.943 subd.

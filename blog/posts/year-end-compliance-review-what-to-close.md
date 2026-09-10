@@ -8,8 +8,8 @@ sources: [https://www.ecfr.gov/current/title-21/section-1.505, https://www.ecfr.
 draft: true
 ---
 
-Most compliance failures we see are not decisions. They are things that expired while
-everyone was busy — a supplier approval that aged out, a test that was due, a label plate
+Most of the compliance failures we see aren't decisions. They're things that expired while
+everyone was busy: a supplier approval that aged out, a test that came due, a label plate
 that outlived its regulation.
 
 Here is what to close before the year ends, with the rule behind each. Dates checked on
@@ -18,14 +18,14 @@ Here is what to close before the year ends, with the rule behind each. Dates che
 ## Things that recur annually
 
 **Minnesota PFAS reporting update — 1 February.** After the initial report, updates are due
-each 1 February. See [PFAS rules for importers](/blog/pfas-rules-for-importers.html). If you
-filed for the first time this year, this is the first recurrence and the easiest to miss.
+every 1 February. See [PFAS rules for importers](/blog/pfas-rules-for-importers.html). If you
+filed for the first time this year, this is the first recurrence, and the easiest to miss.
 
 **Children's product periodic testing.**
 [16 CFR §1107.21](https://www.ecfr.gov/current/title-16/part-1107) requires testing at least
-once a year on a standard plan, or every two years with a production testing plan, or every
+once a year on a standard plan, every two years with a production testing plan, or every
 three with production testing at an ISO/IEC 17025 lab. Check which regime each SKU is
-actually on — people adopt the longer interval without putting the supporting plan in place.
+actually on: people adopt the longer interval without putting the supporting plan in place.
 
 **FSVP onsite audits for SAHCODHA hazards.** Where required, before first import and **at
 least annually thereafter** (§1.506(d)(2)). See
@@ -36,12 +36,12 @@ least annually thereafter** (§1.506(d)(2)). See
 **FSVP supplier reevaluation — every 3 years.**
 [§1.505(c)](https://www.ecfr.gov/current/title-21/section-1.505) requires reevaluation on
 new information and at least every three years. Three years is exactly long enough to be
-forgotten. Pull the list of approvals older than 34 months and start there.
+forgotten — pull the list of approvals older than 34 months and start there.
 
 **Prop 65 short-form labels — manufactured and labelled before 1 January 2028.**
 [27 CCR §25603(c)](https://www.law.cornell.edu/regulations/california/27-CCR-25603) lets the
-old short form stay on product manufactured and labelled before that date, sold whenever.
-What you must not do is *produce* the old form afterwards. See
+old short form stay on product manufactured and labelled before that date, and it can be sold
+whenever. What you must not do is *produce* the old form afterward. See
 [what changed](/blog/short-form-warnings-what-changed.html). If your artwork cycle is annual,
 this coming year is the one where the change has to land.
 
@@ -56,13 +56,13 @@ listed separately. "Complies with all applicable CPSC regulations" does not meet
 is the most common template defect. See
 [GCC vs CPC](/blog/gcc-vs-cpc-which-certificate-does-your.html).
 
-**Material changes you were not told about.** §1107.23 makes a change in design,
-manufacturing or **component sourcing** a trigger for a new certificate and new testing.
-Ask each supplier the year-end question: *what changed since [date]?* Not "has anything
-changed?"
+**Material changes you were never told about.** §1107.23 makes a change in design,
+manufacturing, or **component sourcing** a trigger for a new certificate and new testing.
+Ask each supplier the year-end question — *what changed since [date]?* — rather than
+"has anything changed?"
 
-**Supplier declarations with no date.** A declaration is evidence about one moment. If it
-carries no date, it cannot be re-checked, and it will not help you next year.
+**Supplier declarations with no date.** A declaration is evidence about a single moment. If
+it carries no date, it can't be re-checked, and it won't help you next year.
 
 **Records you could not produce in 24 hours.** FSVP records must be available to FDA within
 24 hours ([§1.510](https://www.ecfr.gov/current/title-21/section-1.510)); children's product
@@ -80,8 +80,8 @@ If you do nothing else:
 5. Pick one obligation and time how long it takes to produce the evidence. If it is more
    than a day, that is your real finding.
 
-None of these are hard. They are just invisible until someone looks, which is the argument
-for looking on a date rather than on an occasion.
+None of this is hard. It's just invisible until someone looks, which is the argument for
+looking on a fixed date rather than waiting for an occasion.
 
 ---
 

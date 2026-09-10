@@ -8,8 +8,9 @@ sources: [https://www.ecfr.gov/current/title-21/section-1.506, https://www.ecfr.
 draft: true
 ---
 
-"Supplier verification" sounds open-ended. It isn't — the regulation names the acceptable
-activities, and for one category of hazard it names which one you must use and how often.
+"Supplier verification" sounds open-ended. It isn't: the regulation names the acceptable
+activities, and for one category of hazard, it specifies which one you must use and how
+often.
 
 Checked against 21 CFR §1.506 on **6 September 2026**. Start with
 [FSVP for the first-time importer](/blog/fsvp-for-the-first-time-importer.html) if you are
@@ -24,8 +25,8 @@ new to this.
 3. **Review of the foreign supplier's relevant food safety records**
 4. **Other appropriate** supplier verification activities
 
-You choose based on the hazard, the food, the supplier's performance and the nature of the
-control — and you write down why. The choice is part of the record, not a private judgement.
+You choose based on the hazard, the food, the supplier's performance, and the nature of the
+control, and you write down why. The choice belongs in the record, not in your head.
 
 ## The exception that removes the choice
 
@@ -36,14 +37,14 @@ by the foreign supplier, §1.506(d)(2) requires:
 > an onsite audit of the foreign supplier before initially importing the food and at least
 > annually thereafter
 
-That is the default, and it is expensive. Which is why the alternative matters.
+That is the default, and it's expensive — which is exactly why the alternative matters.
 
 ## The written determination
 
 You may use other activities, or audit less often, if you make an **adequate written
 determination** that they provide adequate assurance the hazard is controlled. The operative
-word is *written*. An unwritten judgement that an audit was unnecessary is not an
-alternative to an audit; it is a gap.
+word is *written*: an unwritten judgment that an audit wasn't necessary isn't an alternative
+to an audit. It's a gap.
 
 Two things can also substitute for the onsite audit, where conducted **within one year**:
 
@@ -51,8 +52,8 @@ Two things can also substitute for the onsite audit, where conducted **within on
 - inspection by the food safety authority of a country whose system **FDA has recognised as
   comparable or determined to be equivalent**.
 
-Worth knowing before commissioning an audit: your supplier may already have been inspected
-in a way that counts.
+It's worth checking before commissioning an audit: your supplier may already have been
+inspected in a way that counts.
 
 ## Who may conduct the audit
 
@@ -60,8 +61,8 @@ The audit must be performed by a **qualified auditor**, and the regulation is ex
 you may not rely on the foreign supplier itself, or its employees, to conduct it — except
 for sampling and testing activities.
 
-This kills the most common shortcut, which is accepting the factory's own audit report as
-your verification. Their report can inform your evaluation; it is not your audit.
+That rules out the most common shortcut: accepting the factory's own audit report as your
+verification. Their report can inform your evaluation, but it isn't your audit.
 
 ## Approval comes before verification, and expires
 
@@ -70,11 +71,11 @@ approval of the supplier **before** importing, based on the hazard analysis and 
 supplier's performance — its procedures, processes and practices, and its compliance
 history.
 
-And it is not permanent: reevaluation is required when new information comes to light about
-the hazards or the supplier's performance, and **at least every 3 years** regardless.
+And it isn't permanent: reevaluation is required whenever new information surfaces about the
+hazards or the supplier's performance, and **at least every 3 years** regardless.
 
-Three years is long enough that nobody remembers it is due, which is the entire problem. It
-belongs on a calendar attached to the supplier record, not in an annual intention.
+Three years is long enough that nobody remembers it's due, which is the entire problem. It
+belongs on a calendar attached to the supplier record, not in a vague annual intention.
 
 ## A workable pattern
 

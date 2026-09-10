@@ -12,8 +12,8 @@ Every state PFAS obligation hangs off two words. Reporting, labelling, sales ban
 them apply to products with *intentionally added* PFAS, and none of them apply to anything
 else.
 
-So it's worth knowing precisely what the phrase means, because it does not mean "our lab
-found PFAS," and it is not written identically in every state. We covered
+So it's worth knowing precisely what the phrase means: it does not mean "our lab
+found PFAS," and it isn't written identically in every state. We covered
 [which states require what](/blog/pfas-rules-for-importers.html) last week; this is the
 definition underneath all of it. Everything below is quoted from the statute or rule, and
 checked on **6 September 2026**.
@@ -52,7 +52,7 @@ turned into later. Maine reaches it anyway.
 
 Maine also says "characteristic, appearance or quality **or** to perform a specific
 function," which is broader than function alone. A PFAS used to make something look right
-counts in Maine on wording that Minnesota does not obviously reach.
+counts in Maine, on wording that Minnesota does not obviously reach.
 
 **Practical consequence:** a supplier declaration written against Minnesota's definition is
 not automatically evidence for Maine. If your declaration form asks "does this product
@@ -103,8 +103,8 @@ Separately from *intentionally added*, the definition of PFAS is wide. Minnesota
 > a class of fluorinated organic chemicals containing at least one fully fluorinated carbon
 > atom.
 
-One fully fluorinated carbon atom. That is a much larger universe than the handful of
-substances most people picture — this is not a list of named chemicals you can check
+One fully fluorinated carbon atom. That's a much larger universe than the handful of
+substances most people picture. It is not a list of named chemicals you can check
 against.
 
 New Mexico carves out fluoropolymers with a perfluorinated carbon-only or perfluorinated

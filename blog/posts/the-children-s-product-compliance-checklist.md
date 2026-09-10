@@ -71,20 +71,20 @@ Keep everything **five years** (§1107.26).
 
 ## The three that actually go wrong
 
-In our experience it is rarely the initial certification that fails. It is:
+In our experience, it is rarely the initial certification that fails. It is:
 
-- **A component swap nobody told you about.** It is a material change, it invalidates the
-  certificate, and no system anywhere generates a notification. Ask "what changed since
+- **A component swap nobody told you about.** It is a material change; it invalidates the
+  certificate; and no system anywhere generates a notification. Ask "what changed since
   [date]?", not "has anything changed?"
 - **A certificate that names no rules.** "Complies with all applicable CPSC regulations"
   does not meet §1110.11(a)(2), and it is the most common template error we see.
 - **Records that live in an inbox.** Five years outlasts the supplier relationship, the
-  laptop and often the employee.
+  laptop, and often the employee.
 
 None of these are hard problems. They are all the same problem: the obligation is
 continuous and the paperwork was treated as an event.
 
-Aleph keeps certificates, test dates and the rules they cite against each product, so
+Aleph keeps certificates, test dates, and the rules they cite against each product, so
 "which of these is out of date" is a filter rather than an archaeology project.
 
 ---

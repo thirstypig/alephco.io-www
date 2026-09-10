@@ -40,9 +40,9 @@ age or younger", and §1200.2(c) gives four factors, weighed together:
 3. Whether consumers commonly recognise it as intended for that age group.
 4. The CPSC's Age Determination Guidelines.
 
-Note factor 1's qualifier. Labelling something "not for children" does not settle it if the
-other three point the other way — the factors are weighed as a whole, not passed one at a
-time.
+Note factor 1's qualifier: labelling something "not for children" does not settle it if the
+other three point the other way, because the factors are weighed as a whole, not passed one
+at a time.
 
 ## The importer is the certifier
 
@@ -85,7 +85,7 @@ Manufacture Place, Product Test Date, Testing Laboratory, and Point of Contact.
 Two practical notes. CPSC has said ACE will initially return **warning** messages rather
 than rejections for missing data — so a quiet entry is not evidence you filed correctly.
 And the agency has been explicit that it continues to enforce certificate requirements and
-to ask CBP to seize non-compliant products. The soft landing is on the message, not the
+continues to ask CBP to seize non-compliant products. The soft landing is on the message, not the
 obligation.
 
 A **Product Registry** exists for repeat shipments: you pre-load certificate data and give

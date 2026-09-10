@@ -12,8 +12,8 @@ Most PFAS declaration forms we see were written by guessing at what a regulator 
 want. That's the wrong way round, and it's why they come back empty or unusable.
 
 The states have already told you exactly which fields you will have to file. Ask for those
-fields, in those words, and a declaration stops being a favour you're asking and becomes a
-list your supplier can actually complete. Everything below is quoted from the statute or
+fields, in those words, and a declaration stops being a favour you're asking for and becomes
+a list your supplier can actually complete. Everything below is quoted from the statute or
 rule and checked on **6 September 2026**. Background:
 [which states require what](/blog/pfas-rules-for-importers.html) and
 [what "intentionally added" means](/blog/what-intentionally-added-pfas-actually-means.html).
@@ -84,8 +84,8 @@ New Mexico lets the supply chain decide who files. From 20.13.2.12 NMAC (A):
 
 A supplier — or a trade organisation acting for a group — can report on your behalf. The
 conditions are real and worth reading: the reporting party must notify the others that it
-has filed, everyone keeps documentation of the arrangement, everyone executes the agreement
-and produces it on request, and each manufacturer must verify that the data submitted on
+has filed; everyone keeps documentation of the arrangement; everyone executes the agreement
+and produces it on request; and each manufacturer must verify that the data submitted on
 its behalf is accurate and complete.
 
 For an importer buying from a large producer who already reports for other customers, that

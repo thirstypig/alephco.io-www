@@ -8,9 +8,9 @@ sources: [https://www.revisor.mn.gov/statutes/cite/116.943, https://www.ecfr.gov
 draft: true
 ---
 
-Most supplier declarations are collected to satisfy an internal checklist and are discovered,
-at audit, to answer no question anybody actually asks. The fix is not a better template. It
-is asking for what the rules require you to be able to say.
+Most supplier declarations are collected to satisfy an internal checklist, and at audit they
+turn out to answer no question anyone actually asks. The fix is not a better template. It is
+asking for what the rules require you to be able to say.
 
 Checked on **6 September 2026**.
 
@@ -28,8 +28,8 @@ see [getting a declaration out of a supplier](/blog/getting-a-pfas-declaration-o
 ## What makes a declaration survive scrutiny
 
 **A date.** A declaration is evidence about one moment. Undated, it cannot be aged, cannot be
-re-checked, and cannot be shown to predate or postdate a change. This is the single most
-common defect and the cheapest to fix.
+rechecked, and cannot be shown to predate or postdate a change — the single most common
+defect, and the cheapest to fix.
 
 **A named signatory with a role.** "Quality Department" is not a person. An auditor asking
 "who told you that?" needs an answer.

@@ -53,15 +53,16 @@ there instead of the Federal Register, you'll read the old rule as current. It i
 
 Shein and Temu didn't wait to find out. Both sent customers near-identical notices in April
 2025 — "we will be making price adjustments starting April 25, 2025" — ahead of a
-China-specific suspension that preceded the global one, as low-value postal shipments from
-China faced a duty of up to 120% or a flat per-item fee. The market response was immediate:
+China-specific suspension that preceded the global one. Low-value postal shipments from
+China were facing a duty of up to 120% or a flat per-item fee, and the market response was
+immediate:
 one traffic analysis found Temu's US audience fell as much as 62% and Shein's 47% in the
 weeks after, with both still running roughly 30% below their pre-tariff baseline a year
 later. In the two weeks *before* the change, the opposite happened — shoppers front-loaded
 orders, and both companies saw a short revenue spike of 38–60% year over year.
 
-That's the shape of the cost: not a line-item on an invoice, but a demand curve that moves
-as soon as the exemption a business model was built on disappears.
+That's the shape of the cost: not a line item on an invoice, but a demand curve that moves
+the moment the exemption a business model was built on disappears.
 
 ## What this means practically
 

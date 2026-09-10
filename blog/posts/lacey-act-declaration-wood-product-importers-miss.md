@@ -32,8 +32,8 @@ APHIS's Phase VII, effective **1 December 2024**, is the broadest expansion yet:
 wood, handbags, tools, cork, bamboo and rattan, footwear, and even some sporting goods and
 essential oils. Furniture is squarely, currently in scope.
 
-Plain paper (HTS Chapter 48) is not — it was slated for coverage originally, then removed
-when APHIS revised the schedule back in 2009, and it has stayed out since. Only paper or
+Plain paper (HTS Chapter 48) is not — it was originally slated for coverage, then removed
+when APHIS revised the schedule in 2009, and it has stayed out since. Only paper or
 paperboard products that fall under wood-product HTS Chapter 44 are captured. If your
 product is genuinely wood — furniture, flooring, plywood, veneer — this applies to you
 regardless of what you call it. If it's genuinely just paper, it likely doesn't.
@@ -53,8 +53,8 @@ number right if you cite it: the headline "$300,000" is the penalty alone; total
 including a $50,000 community-service payment and $261,844 in forfeited wood, ran closer to
 $612,000.
 
-Boise Cascade is the more relevant precedent for most wood-product importers today — it's
-about falsified country-of-origin paperwork on ordinary building material, not a
+Boise Cascade is the more relevant precedent for most wood-product importers today: it
+involves falsified country-of-origin paperwork on ordinary building material, not a
 celebrity-adjacent instrument maker.
 
 ## What this means practically

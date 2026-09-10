@@ -36,14 +36,14 @@ have, produced under time pressure by someone who has already sued you.
 ## Two different numbers, and the factor of 1,000
 
 The asymmetry catches people out. For carcinogens, the safe harbour is the No Significant
-Risk Level (NSRL) and the comparison is against **lifetime daily exposure**.
+Risk Level (NSRL), and the comparison is against **lifetime daily exposure**.
 
-For reproductive toxicants the number is the Maximum Allowable Dose Level (MADL), and
+For reproductive toxicants, the number is the Maximum Allowable Dose Level (MADL), and
 [27 CCR §25805(a)](https://www.law.cornell.edu/regulations/california/27-CCR-25805) puts
 the margin in the rule itself: exposure at or below the listed level "has no observable
 effect assuming exposure at **one thousand (1,000) times** that level."
 
-In other words the published MADL already has the 1,000× factor built in. Comparing your
+In other words, the published MADL already has the 1,000× factor built in. Comparing your
 exposure to the published number is the correct comparison — dividing again is a mistake
 that costs you a warning you didn't need.
 
@@ -60,7 +60,7 @@ last year is not a defence this year.
 **Work out the exposure, not the content.** This is the step most people skip. The rule is
 about how much a person is exposed to per day, not how much is in the product. A
 concentration in a component is the start of the calculation, not the answer. You need a
-defensible view of how much is used, how often, and by what route — oral, dermal or
+defensible view of how much is used, how often, and by what route — oral, dermal, or
 inhalation. Note that §25805's table gives levels **by route**, and they differ.
 
 **Write down the assumptions.** Every step where you chose a number — usage frequency,
@@ -84,7 +84,7 @@ can do neither.
   and it should be built by someone who has done it before.
 
 📌 [§25801](https://www.law.cornell.edu/regulations/california/27-CCR-25801) is explicit
-that nothing in the article stops you using other evidence, methodologies or levels to make
+that nothing in the article stops you using other evidence, methodologies, or levels to make
 the showing. The published levels are a safe harbour, not a ceiling on how you may argue —
 but stepping outside them means bringing your own science.
 

@@ -32,7 +32,7 @@ to.
 Almost certainly, if you sell into California.
 [§25249.11(b)](https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.11)
 excludes "any person employing **fewer than 10 employees**", plus government bodies and
-public water systems. There is no importer carve-out, no revenue threshold and no
+public water systems. There is no importer carve-out, no revenue threshold, and no
 distinction between a brand and a reseller.
 
 Note what the threshold is *not*: it is employees, not California employees, and not sales.
