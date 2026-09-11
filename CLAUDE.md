@@ -31,8 +31,9 @@
 
 ### Current board
 
-- **539** — the 25-post weekly schedule to Feb 2027. Post 1 shipped 2026-09-07; the rest
-  release automatically.
+- **539** — the weekly schedule, now 31 posts, interleaved, to 2027-04-05 (#33). Post 1
+  shipped 2026-09-07; the rest release automatically. ⚠️ 539's own §4 table is the older
+  25-post clustered schedule — `blog/schedule.json` and each post's `date:` are current.
 - **566** — counsel copy review. The brief is
   `docs/marketing/document-readiness-counsel-review-brief.md` in the app repo (**read-only**).
   ⚠️ Nothing in its section 3 may be published until section 4 is answered.

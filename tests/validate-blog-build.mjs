@@ -398,6 +398,61 @@ check("REFUSES a title whose quotes were escaped into backslashes", () => {
   } finally { cleanup(root); }
 });
 
+// ── A verification date in the future ────────────────────────────────────────
+// Session 118: six posts said "Checked … on 9 March 2027", written in September 2026.
+// Unlike the publish gate this must fail on a DRAFT, because by release day the date is
+// in the past and nothing downstream can tell it was ever a lie.
+const longDate = (iso) => {
+  const [y, m, d] = iso.split("-").map(Number);
+  const month = new Date(Date.UTC(y, m - 1, 1)).toLocaleString("en-US", { month: "long", timeZone: "UTC" });
+  return `${d} ${month} ${y}`;
+};
+
+check("FAILS the build when even a DRAFT claims a future verification date", () => {
+  const root = fixture({
+    posts: [{
+      slug: "time-traveller", title: "Time Traveller", date: future(200), draft: true,
+      body: `Checked against the Federal Register on **${longDate(future(180))}**.\n\n## Rules\n\nA claim.`,
+    }],
+  });
+  try {
+    const threw = refusal(root);
+    assert(threw, "a draft claiming a check 180 days from now was only listed, not refused");
+    assert(/has not happened yet/.test(threw), `wrong error: ${threw.slice(0, 200)}`);
+  } finally { cleanup(root); }
+});
+
+check("a future verification date WARNS under --drafts instead of blocking the preview", () => {
+  const root = fixture({
+    posts: [{
+      slug: "being-fixed", title: "Being Fixed", date: future(200), draft: true,
+      body: `Checked on **${longDate(future(180))}**.\n\n## Rules\n\nA claim.`,
+    }],
+  });
+  try {
+    build(root, ["--drafts"]);
+    assert(existsSync(join(root, "blog", "_preview", "being-fixed.html")), "a future-dated draft blocked the whole preview");
+  } finally { cleanup(root); }
+});
+
+// Negative control: a real, recent date must not trip it — including one written a day
+// ahead of UTC, which the rule deliberately allows.
+check("accepts a verification date of today or tomorrow (UTC slack)", () => {
+  const root = fixture({
+    posts: [
+      { slug: "checked-today", title: "Checked Today", date: future(-1),
+        body: `Checked on **${longDate(future(0))}**.\n\n## Rules\n\nA claim.` },
+      { slug: "checked-tomorrow", title: "Checked Tomorrow", date: future(-1),
+        body: `Checked on **${longDate(future(1))}**.\n\n## Rules\n\nA claim.` },
+    ],
+  });
+  try {
+    build(root);
+    assert(existsSync(join(root, "blog", "checked-today.html")), "a post checked today was refused");
+    assert(existsSync(join(root, "blog", "checked-tomorrow.html")), "the one-day UTC slack is not honoured");
+  } finally { cleanup(root); }
+});
+
 console.log(`\n${failures.length === 0 ? "✓" : "✗"} ${passed} passed, ${failures.length} failed`);
 for (const f of failures) console.log(`\n  ✗ ${f}`);
 process.exit(failures.length === 0 ? 0 : 1);
