@@ -1,16 +1,16 @@
 ---
 title: "Hazard analysis without a consultant"
 description: "The regulation lets you review and adopt your supplier's analysis, and lets you stop early if no hazard requires a control. Both are written into the rule."
-date: 2026-12-21
+date: 2027-01-11
 slug: hazard-analysis-without-a-consultant
 keywords: [hazard analysis, FSVP, 1.504, qualified individual, biological chemical physical hazards, food importer, preventive controls]
 sources: [https://www.ecfr.gov/current/title-21/section-1.504, https://www.ecfr.gov/current/title-21/section-1.503, https://www.ecfr.gov/current/title-21/part-1/subpart-L]
 draft: true
 ---
 
-The hazard analysis is the piece of FSVP that most first-time importers assume they must buy
-in. Sometimes that's right. But the regulation contains two provisions that between them
-change the economics, and neither is obscure — they are just rarely mentioned by people
+The hazard analysis is the piece of FSVP that most first-time importers assume they have to
+buy in. Sometimes that's right. But the regulation contains two provisions that, between
+them, change the economics — and neither is obscure. They're just rarely mentioned by people
 selling hazard analyses.
 
 Checked against 21 CFR §1.504 on **6 September 2026**. Background:
@@ -23,9 +23,9 @@ requirement by **reviewing and assessing a hazard analysis conducted by another 
 including your foreign supplier — provided it was conducted by a qualified individual and
 you document your review.
 
-That is a genuinely different job from writing one. Your supplier may already have a hazard
-analysis, done properly, for its own regulatory purposes. Your obligation can be to review
-it, assess it, and record that assessment.
+That's a genuinely different job from writing one. Your supplier may already have a hazard
+analysis, done properly, for its own regulatory purposes — and your obligation can simply be
+to review it, assess it, and record that assessment.
 
 ⚠️ Two conditions do real work. It must have been conducted by a **qualified individual**,
 and **your review must be documented**. An emailed PDF sitting in a folder is not a review;
@@ -36,10 +36,10 @@ the review is the artefact you produce.
 §1.504(f): where the analysis identifies **no hazards requiring a control**, foreign supplier
 verification is not required.
 
-This is the outcome nobody plans for, and for some products it is the right answer. The
-deliverable is then the analysis itself, showing the conclusion and the reasoning — not an
-absence of paperwork. Reaching "no hazards requiring control" without a written analysis is
-not the same thing at all.
+This is the outcome nobody plans for, and for some products it's the right one. The
+deliverable is then the analysis itself, showing the conclusion and the reasoning behind it —
+not an absence of paperwork. Reaching "no hazards requiring control" without a written
+analysis isn't the same thing at all.
 
 ## What the analysis has to cover
 
@@ -56,8 +56,8 @@ information".
 
 and requires you to consider hazards that occur naturally, are unintentionally introduced,
 **or are intentionally introduced for purposes of economic gain**. That last category is
-economically motivated adulteration, and it is easy to omit because it is not a
-manufacturing failure — it is someone's decision.
+economically motivated adulteration, and it's easy to omit because it isn't a manufacturing
+failure. It's someone's decision.
 
 ## Evaluating, not just listing
 
@@ -70,8 +70,8 @@ ingredients · transportation practices · harvesting, raising, manufacturing, p
 packing procedures · packaging and labelling · storage and distribution · intended or
 reasonably foreseeable use · sanitation, including employee hygiene
 
-A list of hazards with no evaluation against these factors is the most common weak analysis
-we see. The factors are the work.
+A list of hazards with no evaluation against these factors is the weak analysis we see most
+often. The factors are the work.
 
 ## Who can do it
 
@@ -79,8 +79,8 @@ we see. The factors are the work.
 individual: education, training **or** experience — or a combination — sufficient for the
 activity, plus the ability to read the language of the records reviewed.
 
-No certificate exists. A long-serving quality or technical person in a food business will
-often meet it. Write down why they qualify; that record is part of the programme.
+No certificate exists. A long-serving quality or technical person at a food business will
+often meet it — write down why they qualify, since that record is part of the programme.
 
 ## So when should you actually hire someone?
 
@@ -91,7 +91,7 @@ often meet it. Write down why they qualify; that record is part of the programme
 - You have had an FDA finding, in which case the analysis now has an audience.
 
 Otherwise: get your supplier's analysis, have a qualified individual review it against
-§1.504(c)'s factors, and document that review. That is a defensible programme, and it is the
+§1.504(c)'s factors, and document that review. That's a defensible programme, and it's the
 route the regulation explicitly provides.
 
 ---

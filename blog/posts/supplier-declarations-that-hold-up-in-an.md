@@ -1,16 +1,16 @@
 ---
 title: "Supplier declarations that hold up in an audit"
 description: "What separates a declaration that answers an auditor's question from one that merely exists, drawn from what the reporting rules actually ask you to file."
-date: 2027-02-08
+date: 2026-11-30
 slug: supplier-declarations-that-hold-up-in-an
 keywords: [supplier declaration, audit, compliance evidence, CASRN, material change, document retention, importer]
 sources: [https://www.revisor.mn.gov/statutes/cite/116.943, https://www.ecfr.gov/current/title-16/part-1107, https://www.ecfr.gov/current/title-21/section-1.505, https://www.env.nm.gov/opf/wp-content/uploads/sites/13/2026/04/EXHIBIT-A-20.13.2-NMAC-FINAL.pdf]
 draft: true
 ---
 
-Most supplier declarations are collected to satisfy an internal checklist and are discovered,
-at audit, to answer no question anybody actually asks. The fix is not a better template. It
-is asking for what the rules require you to be able to say.
+Most supplier declarations are collected to satisfy an internal checklist, and at audit they
+turn out to answer no question anyone actually asks. The fix is not a better template. It is
+asking for what the rules require you to be able to say.
 
 Checked on **6 September 2026**.
 
@@ -28,8 +28,8 @@ see [getting a declaration out of a supplier](/blog/getting-a-pfas-declaration-o
 ## What makes a declaration survive scrutiny
 
 **A date.** A declaration is evidence about one moment. Undated, it cannot be aged, cannot be
-re-checked, and cannot be shown to predate or postdate a change. This is the single most
-common defect and the cheapest to fix.
+rechecked, and cannot be shown to predate or postdate a change — the single most common
+defect, and the cheapest to fix.
 
 **A named signatory with a role.** "Quality Department" is not a person. An auditor asking
 "who told you that?" needs an answer.

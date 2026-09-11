@@ -1,7 +1,7 @@
 ---
 title: "When OEHHA adds a chemical: what it means for your catalogue"
 description: "A listing starts a twelve-month clock, and the routes onto the list mean an addition can arrive with no California rulemaking you would have noticed."
-date: 2026-11-30
+date: 2027-02-22
 slug: when-oehha-adds-a-chemical-what-it
 keywords: [OEHHA listing, Prop 65 list, 25249.8, twelve month grace period, authoritative body, labeling requirement, monitoring]
 sources: [https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.8, https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.10]
@@ -9,8 +9,8 @@ draft: true
 ---
 
 The Prop 65 list is not static, and an addition to it can change what your existing,
-unchanged product requires. Worth understanding how chemicals get on, because one of the
-routes produces additions that never looked like a California rulemaking at all.
+unchanged product requires. It's worth understanding how chemicals get on, because one of
+the routes produces additions that never looked like a California rulemaking at all.
 
 Checked against the statute on **6 September 2026**. Background:
 [Prop 65 for importers](/blog/prop-65-for-importers-who-it-applies.html).
@@ -42,10 +42,10 @@ says a chemical is known to the state to cause cancer or reproductive toxicity i
 3. **An agency of the state or federal government** "has formally required it to be labeled
    or identified as causing cancer or reproductive toxicity."
 
-Routes 2 and 3 are the ones to notice. A listing can follow from a determination made
+Routes 2 and 3 are the ones to watch. A listing can follow from a determination made
 somewhere else entirely — by an authoritative scientific body, or by a federal agency
 imposing its own labelling requirement. The triggering event may have had nothing to do
-with California and may not have been reported as a Prop 65 development anywhere you read.
+with California, and it may not have been reported anywhere as a Prop 65 development.
 
 §25249.8(a) also requires the list to be revised and republished "at least once per year",
 which is the floor, not the cadence.
@@ -80,8 +80,8 @@ calendar.
 
 Twelve months feels generous, and it is — right up until the moment you discover the
 chemical is in a component you never specified, supplied by a factory you no longer buy
-from, in stock that is already on a boat. The clock does not care, and it started when the
-chemical was listed rather than when you learned any of this.
+from, in stock that is already on a boat. The clock doesn't care. It started when the
+chemical was listed, not when you found out.
 
 Aleph tracks which chemicals are associated with each product, so a listing becomes a query
 rather than a survey.

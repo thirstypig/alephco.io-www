@@ -2,7 +2,7 @@
 title: "Amazon compliance documents: what Seller Central asks for and why"
 seo_title: "Amazon compliance documents: what Seller Central asks for"
 description: "Almost every document Amazon requests exists because a law requires it. Knowing which law tells you what will satisfy the request and what will not."
-date: 2027-02-01
+date: 2026-10-19
 slug: amazon-compliance-documents-what-seller-central-requires
 keywords: [Amazon Seller Central, compliance documents, CPC, GCC, Prop 65, listing suppression, marketplace compliance, importer]
 sources: [https://www.ecfr.gov/current/title-16/part-1110, https://www.law.cornell.edu/uscode/text/15/2063, https://www.law.cornell.edu/regulations/california/27-CCR-25603, https://www.ecfr.gov/current/title-16/part-1107]
@@ -18,9 +18,8 @@ Regulatory citations checked on **6 September 2026**.
 ## The requests are not arbitrary
 
 A marketplace asking for a "compliance document" is almost always asking for something a
-statute or regulation already required you to have. That reframing is useful, because it
-turns "what does Amazon want?" into "what does the rule require?" — a question with a
-findable answer.
+statute or regulation already requires you to have. That reframing is useful: it turns "what
+does Amazon want?" into "what does the rule require?" — a question with a findable answer.
 
 | Typical request | What it actually is |
 |---|---|
@@ -41,8 +40,8 @@ a reviewer cannot match it to the category. This is the single most common defec
 [GCC vs CPC](/blog/gcc-vs-cpc-which-certificate-does-your.html).
 
 **2. The lab is not accepted for that rule.** Acceptance is scope-specific — a body applies
-naming the rules and test methods it seeks. A real report from a real lab still fails if the
-rule you cite is outside its scope. See
+for recognition against particular rules and test methods, not blanket approval. A real
+report from a real lab still fails if the rule you cite falls outside its scope. See
 [choosing a lab](/blog/third-party-testing-choosing-a-cpsc-accepted.html).
 
 **3. The certificate is the factory's, not yours.** For imported goods

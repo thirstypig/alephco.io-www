@@ -1,15 +1,15 @@
 ---
 title: "Selling into Canada and Mexico: what changes"
 description: "Canada adds a two-day incident report and six years of records. Mexico requires a Mexican entity to hold compliance. Neither is a US programme with a new flag."
-date: 2027-01-25
+date: 2027-01-18
 slug: selling-into-canada-and-mexico-what-changes
 keywords: [Canada Consumer Product Safety Act, CCPSA, incident reporting, Mexico NOM, NOM-050, NOM-051, Spanish labeling, RFC, cross-border]
 sources: [https://laws-lois.justice.gc.ca/eng/acts/C-1.68/page-1.html, https://www.trade.gov/country-commercial-guides/mexico-labelingmarking-requirements, https://www.snice.gob.mx/cs/avi/snice/etiquetado.info.com.html]
 draft: true
 ---
 
-The instinct when expanding north or south is to treat it as the US programme with a
-translated label. Both countries break that assumption, in different places.
+The instinct when expanding north or south is to treat each market as the US programme with
+a translated label. Both countries break that assumption, in different places.
 
 Checked on **6 September 2026**. Canadian requirements below are from the statute; Mexican
 requirements are summarised from US government guidance, and the Mexican standards
@@ -54,9 +54,9 @@ labelling and broader NOM compliance **must be carried out by the Mexican import
 another Mexican entity** holding an RFC — a Mexican tax ID.
 
 You cannot be the compliance party from the US. That is not a paperwork detail; it decides
-your route to market. Either you have a Mexican entity, or your importer or distributor
-holds compliance and therefore holds a great deal of control over your product's presence in
-the market.
+your route to market. Either you establish a Mexican entity, or your importer or distributor
+holds compliance — and, with it, a great deal of control over your product's presence in
+that market.
 
 **The standards themselves.** Products for retail sale must comply with Mexican Official
 Standards (NOMs), in Spanish:
@@ -66,8 +66,8 @@ Standards (NOMs), in Spanish:
 - **NOM-051** covers foods and non-alcoholic beverages, including front-of-pack labelling.
 
 Compliance is verified at the border, and depending on the product, labelling may be
-completed under customs control through authorised mechanisms — which is the practical
-answer to goods that arrive unlabelled, at a cost.
+completed under customs control through authorised mechanisms — the practical, if costly,
+answer for goods that arrive unlabelled.
 
 ⚠️ Sector-specific NOMs override the default, and their conformity assessment routes differ.
 Check whether one applies to your product before assuming NOM-050. The Secretariat of

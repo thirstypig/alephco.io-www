@@ -1,7 +1,7 @@
 ---
 title: "Total organic fluorine testing: when you actually need it"
 description: "Fluorine testing does not prove PFAS. It shifts who has to prove what, at three different trigger levels, and two of them are not what summaries report."
-date: 2026-09-28
+date: 2026-12-07
 slug: total-organic-fluorine-testing-when-you-need
 keywords: [total organic fluorine, TOF testing, total fluorine, PFAS testing, rebuttable presumption, PFAS screening, importer compliance]
 sources: [https://app.leg.wa.gov/WAC/default.aspx?cite=173-337, https://www.env.nm.gov/opf/wp-content/uploads/sites/13/2026/04/EXHIBIT-A-20.13.2-NMAC-FINAL.pdf, https://www.revisor.mn.gov/statutes/cite/116.943]
@@ -24,7 +24,7 @@ measurement, which counts inorganic fluorine too. Total organic fluorine is a na
 number, and it is not the one those rules key on. If a lab quotes you TOF and a rule asks
 about total fluorine, you have not answered the question that was asked.
 
-This matters more than it sounds, because
+This matters more than it might seem, because
 [as covered previously](/blog/what-intentionally-added-pfas-actually-means.html), "PFAS" is
 defined about as broadly as it can be — Minnesota's version is "a class of fluorinated
 organic chemicals containing at least one fully fluorinated carbon atom" (§116.943 subd.

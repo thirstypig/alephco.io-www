@@ -1,7 +1,7 @@
 ---
 title: "GCC vs CPC: which certificate does your product need?"
 description: "The difference is not paperwork preference. One requires testing at a CPSC-accepted lab, and since July 2026 both must be filed electronically at entry."
-date: 2026-10-05
+date: 2026-09-21
 slug: gcc-vs-cpc-which-certificate-does-your
 keywords: [GCC, CPC, general certificate of conformity, children's product certificate, CPSIA, CPSC eFiling, importer certification]
 sources: [https://www.ecfr.gov/current/title-16/part-1110, https://www.law.cornell.edu/uscode/text/15/2063, https://www.federalregister.gov/documents/2025/01/08/2024-30826/certificates-of-compliance, https://www.ecfr.gov/current/title-16/part-1200]
@@ -40,9 +40,9 @@ age or younger", and §1200.2(c) gives four factors, weighed together:
 3. Whether consumers commonly recognise it as intended for that age group.
 4. The CPSC's Age Determination Guidelines.
 
-Note factor 1's qualifier. Labelling something "not for children" does not settle it if the
-other three point the other way — the factors are weighed as a whole, not passed one at a
-time.
+Note factor 1's qualifier: labelling something "not for children" does not settle it if the
+other three point the other way, because the factors are weighed as a whole, not passed one
+at a time.
 
 ## The importer is the certifier
 
@@ -85,7 +85,7 @@ Manufacture Place, Product Test Date, Testing Laboratory, and Point of Contact.
 Two practical notes. CPSC has said ACE will initially return **warning** messages rather
 than rejections for missing data — so a quiet entry is not evidence you filed correctly.
 And the agency has been explicit that it continues to enforce certificate requirements and
-to ask CBP to seize non-compliant products. The soft landing is on the message, not the
+continues to ask CBP to seize non-compliant products. The soft landing is on the message, not the
 obligation.
 
 A **Product Registry** exists for repeat shipments: you pre-load certificate data and give

@@ -1,7 +1,7 @@
 ---
 title: "MoCRA for cosmetics importers: registration and listing"
 description: "Two separate obligations on two different parties with two different clocks. Foreign facilities are in scope, and new products get 120 days."
-date: 2027-01-18
+date: 2026-11-23
 slug: mocra-for-cosmetics-importers-registration-and-listing
 keywords: [MoCRA, cosmetics, FDA registration, product listing, responsible person, Cosmetics Direct, importer, 364c]
 sources: [https://www.law.cornell.edu/uscode/text/21/364c, https://www.fda.gov/cosmetics/registration-listing-cosmetic-product-facilities-and-products, https://www.fda.gov/cosmetics/registration-listing-cosmetic-product-facilities-and-products/cosmetics-direct]

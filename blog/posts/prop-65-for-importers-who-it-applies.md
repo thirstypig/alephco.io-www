@@ -2,7 +2,7 @@
 title: "Prop 65 for importers: who it applies to and what it actually requires"
 seo_title: "Prop 65 for importers: who it applies to, and what it requires"
 description: "There is no registration, no filing and no approval. There is one duty, three exemptions, and a private enforcement system that does the work."
-date: 2026-11-02
+date: 2026-09-28
 slug: prop-65-for-importers-who-it-applies
 keywords: [Proposition 65, Prop 65, California warning, importer compliance, safe harbor, 60-day notice, listed chemicals]
 sources: [https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.6, https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.10, https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.11, https://www.law.cornell.edu/regulations/california/27-CCR-25603]
@@ -32,7 +32,7 @@ to.
 Almost certainly, if you sell into California.
 [§25249.11(b)](https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.11)
 excludes "any person employing **fewer than 10 employees**", plus government bodies and
-public water systems. There is no importer carve-out, no revenue threshold and no
+public water systems. There is no importer carve-out, no revenue threshold, and no
 distinction between a brand and a reseller.
 
 Note what the threshold is *not*: it is employees, not California employees, and not sales.

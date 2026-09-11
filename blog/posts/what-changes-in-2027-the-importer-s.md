@@ -28,8 +28,8 @@ or distributed with intentionally added PFAS. The restriction does not apply to 
 **manufactured before** that date
 ([WAC 173-337](https://app.leg.wa.gov/WAC/default.aspx?cite=173-337)).
 
-**8 January — CPSC eFiling reaches foreign trade zones.** The main rule took effect 8 July
-2026; entries from an FTZ for consumption or warehousing follow now
+**8 January — CPSC eFiling reaches foreign trade zones.** The main rule took effect on 8 July
+2026, and entries from an FTZ for consumption or warehousing follow now
 ([final rule](https://www.federalregister.gov/documents/2025/01/08/2024-30826/certificates-of-compliance)).
 If you use an FTZ, this is the one to check with your broker.
 
@@ -45,7 +45,7 @@ the initial report ([§116.943](https://www.revisor.mn.gov/statutes/cite/116.943
 ## Rolling through the year
 
 **MoCRA facility renewals.** Biennial, and dated from **your** initial registration rather
-than a common date — so they land whenever they land. See
+than from a common date, so they land whenever they land. See
 [MoCRA for cosmetics importers](/blog/mocra-for-cosmetics-importers-registration-and-listing.html).
 
 **FSVP supplier reevaluations.** At least every three years under §1.505(c). For anyone who
@@ -65,7 +65,7 @@ to product **manufactured and labelled** from that date, with unlimited sell-thr
 older stock ([27 CCR §25603(c)](https://www.law.cornell.edu/regulations/california/27-CCR-25603)).
 See [what changed](/blog/short-form-warnings-what-changed.html).
 
-Both get pulled forward in summaries. Acting a year early on the Prop 65 change in
+Both get pulled forward in summaries, and acting a year early on the Prop 65 change in
 particular means scrapping labels you were entitled to keep using.
 
 ## The pattern worth noticing
@@ -74,13 +74,13 @@ Look at the wording on the PFAS restrictions above: New Mexico's labelling reach
 *manufactured after*, Washington's restriction exempts products *manufactured before*, and
 California's short-form transition keys on *manufactured and labelled prior to*.
 
-**Almost none of these key on the date of sale.** They key on when the product was made.
-Which means the operative question in your catalogue is not "what are we selling in 2027?"
-but "what will we still be *producing* after each of these dates, and to what
-specification?" Existing stock is usually safe; the next purchase order usually is not.
+**Almost none of these key on the date of sale.** They key on when the product was made,
+which means the operative question for your catalogue isn't "what are we selling in 2027?"
+It's "what will we still be *producing* after each of these dates, and to what
+specification?" Existing stock is usually safe. The next purchase order usually isn't.
 
 That distinction decides whether these deadlines cost you a label change or an inventory
-write-off, and it is the single most common thing to get backwards.
+write-off, and it's the single most common thing to get backward.
 
 ---
 

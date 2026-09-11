@@ -1,15 +1,15 @@
 ---
 title: "Compliance for a 200-SKU catalogue without a compliance team"
 description: "Rules apply per product, so effort scales with catalogue size unless you change the unit of work. What to standardise, batch, and deliberately not do."
-date: 2027-02-22
+date: 2027-02-15
 slug: compliance-for-a-200-sku-catalogue-without
 keywords: [compliance operations, SKU management, importer, small team, prioritisation, supplier declarations, record keeping]
 sources: [https://www.ecfr.gov/current/title-16/part-1107, https://www.ecfr.gov/current/title-21/section-1.505, https://www.revisor.mn.gov/statutes/cite/116.943, https://www.ecfr.gov/current/title-16/part-1110]
 draft: true
 ---
 
-Every rule in this blog applies **per product**. That is the whole problem: obligations scale
-with catalogue size and headcount does not. At 200 SKUs, doing it the way you did it at 20
+Every rule in this blog applies **per product**. That's the whole problem: obligations scale
+with catalogue size, and headcount doesn't. At 200 SKUs, doing it the way you did at 20
 stops working, and the failure is quiet.
 
 Checked on **6 September 2026**.
@@ -24,13 +24,12 @@ The single highest-leverage move is to stop working per product and start workin
 - a **supplier or factory** decides who you chase and when approvals expire
 - a **destination** decides which state or country rules apply
 
-200 SKUs is rarely 200 answers. It is usually a dozen materials from eight suppliers in four
+200 SKUs is rarely 200 answers. It's usually a dozen materials from eight suppliers in four
 categories. Do the work once per group and inherit it, and the catalogue stops being the unit
 of effort.
 
-The prerequisite is knowing which SKUs are in which group — which is a data problem you
-solve once, and the reason it gets skipped is that it produces nothing visible on the day
-you do it.
+The prerequisite is knowing which SKUs belong to which group. That's a data problem you solve
+once, and it gets skipped for a simple reason: it produces nothing visible on the day you do it.
 
 ## Batch by clock, not by product
 
@@ -44,13 +43,13 @@ The recurring obligations run on a handful of clocks:
 - **Event-driven**: material change ([§1107.23](https://www.ecfr.gov/current/title-16/part-1107)),
   new listings, new product launches
 
-Handle each clock as one session across the whole catalogue rather than per product as it
-comes up. One afternoon writing to every supplier beats 200 individual chases, and the
-answers arrive in a form you can compare.
+Treat each clock as one session across the whole catalogue, rather than handling it product
+by product as it comes up. One afternoon spent writing to every supplier beats 200 individual
+chases, and the answers come back in a form you can actually compare.
 
 ## The four questions worth being able to answer in a minute
 
-If you can answer these, you are in better shape than most:
+If you can answer these, you're in better shape than most:
 
 1. **Which SKUs are children's products?** It decides the entire CPSIA regime — see
    [the checklist](/blog/the-children-s-product-compliance-checklist.html).
@@ -59,8 +58,8 @@ If you can answer these, you are in better shape than most:
 3. **Which test dates are older than their interval?**
 4. **Which supplier approvals are past three years?**
 
-Each is a filter over data you either have or don't. If answering one takes a week, that is
-the finding — not the answer.
+Each is a filter over data you either have or don't. If answering one takes a week, that's
+the finding, not the answer.
 
 ## What to deliberately not do
 
@@ -74,10 +73,10 @@ declaration first; it is cheaper and it is what filings actually require.
 the level.
 
 **Do not build a system before you have the data.** A tidy folder structure over unknown
-attributes is theatre.
+attributes is theatre dressed up as progress.
 
-**Do not chase perfection across the tail.** Concentrate on categories where the consequence
-is a banned sale or a suspended listing.
+**Do not chase perfection across the tail.** Concentrate on the categories where the
+consequence is a banned sale or a suspended listing.
 
 ## The honest ordering
 
@@ -88,8 +87,8 @@ is a banned sale or a suspended listing.
 5. Run one drill: pick a SKU, produce its full file, time it. See
    [surviving a records request](/blog/surviving-a-cpsc-or-fda-request-for.html).
 
-None of this needs a compliance team. It needs the work to be organised around what the
-rules key on, rather than around the order products happen to arrive in.
+None of this needs a compliance team. It needs the work organised around what the rules key
+on, rather than around the order in which products happen to arrive.
 
 ---
 

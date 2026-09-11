@@ -1,7 +1,7 @@
 ---
 title: "Third-party testing: choosing a CPSC-accepted lab"
 description: "Accreditation is scope-specific, so a lab accepted for one rule may not be accepted for yours. Plus the retest intervals and the five-year record rule."
-date: 2026-10-19
+date: 2026-12-14
 slug: third-party-testing-choosing-a-cpsc-accepted
 keywords: [third party testing, CPSC accepted lab, ISO 17025, children's product certificate, periodic testing, material change, firewalled lab]
 sources: [https://www.ecfr.gov/current/title-16/part-1112, https://www.ecfr.gov/current/title-16/part-1107, https://www.law.cornell.edu/uscode/text/15/2063]
@@ -9,24 +9,24 @@ draft: true
 ---
 
 If your product is a children's product, its certificate has to rest on testing at a
-CPSC-accepted third party lab — see [GCC vs CPC](/blog/gcc-vs-cpc-which-certificate-does-your.html)
-for which certificate you need. Choosing that lab has one trap in it that costs people a
-whole test round.
+CPSC-accepted third-party lab — see [GCC vs CPC](/blog/gcc-vs-cpc-which-certificate-does-your.html)
+for which certificate you need. Choosing that lab holds one trap, and it can cost you an
+entire round of testing.
 
 Checked against the regulations on **6 September 2026**.
 
 ## Acceptance is per-rule, not per-lab
 
-A lab is not simply "CPSC-accepted". Under
-[16 CFR §1112.13](https://www.ecfr.gov/current/title-16/part-1112) a body applies with a
+A lab is not simply "CPSC-accepted." Under
+[16 CFR §1112.13](https://www.ecfr.gov/current/title-16/part-1112), a body applies with a
 **statement of scope identifying the specific CPSC rules and test methods** it seeks
-acceptance for, backed by ISO/IEC 17025 accreditation from an accreditation body that is a
-signatory to the ILAC Mutual Recognition Arrangement.
+acceptance for, and that acceptance must be backed by ISO/IEC 17025 accreditation from an
+accreditation body that is a signatory to the ILAC Mutual Recognition Arrangement.
 
 So the question is never "are you CPSC-accepted?" It is **"are you accepted for the rule my
-product is subject to?"** A lab accepted for lead content is not thereby accepted for small
-parts, or for a specific toy standard. Ask for the scope, and check it against the rules you
-named on your certificate.
+product is subject to?"** A lab accepted for lead content isn't automatically accepted for
+small parts, or for a specific toy standard. Ask for the scope, and check it against the
+rules you named on your certificate.
 
 ## Three kinds of body, and why it matters who owns it
 
@@ -67,7 +67,7 @@ less, and that reasoning is the kind of thing the file should show.
 
 Under §1107.23(a), a material change in design, manufacturing process or **component
 sourcing** that could affect compliance requires a **new Children's Product Certificate**,
-supported by new third party testing.
+supported by new third-party testing.
 
 "Component sourcing" is the one that catches importers. A factory switching a pigment
 supplier, a fastener or a coating is a material change even though the product looks
@@ -83,8 +83,8 @@ with their test results, and undue influence training records. All of it for **f
 (§1107.26(b)).
 
 Five years is longer than most supplier relationships and much longer than most inboxes.
-Test reports living in an email thread with a factory you no longer buy from is the normal
-state of affairs, and it is not a record system.
+Test reports sitting in an email thread with a factory you no longer buy from are the
+normal state of affairs, and that is not a record system.
 
 ## The practical order
 

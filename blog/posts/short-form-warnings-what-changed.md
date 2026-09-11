@@ -42,7 +42,7 @@ In every case, **a chemical name is now mandatory**.
 > A short-form warning on a product **manufactured and labeled prior to January 1, 2028**,
 > may use the following content **regardless of when the product is sold to a consumer**.
 
-Two things follow, and both are routinely got backwards:
+Two things follow from that, and people routinely get both backwards:
 
 - **The cutoff is manufacture and labelling, not sale.** Stock made and labelled before
   1 January 2028 can be sold afterwards, indefinitely. There is no requirement to relabel
@@ -60,7 +60,7 @@ Naming a chemical means knowing which chemical. The old short form let you warn 
 that — it was a hedge you could apply broadly when you suspected exposure but hadn't
 identified the source.
 
-That hedge is gone. To use the new short form you must be able to say *which* listed
+That hedge is gone. To use the new short form, you must be able to say *which* listed
 chemical, and where a warning covers both endpoints,
 [§25601(b)](https://www.law.cornell.edu/regulations/california/27-CCR-25601) requires a name
 **for each** — unless one chemical is listed for both and is identified as such.
@@ -75,7 +75,7 @@ to start well before the artwork deadline.
   being a sign or shelf tag at the point of display, an electronic warning delivered before
   or during purchase without the buyer seeking it out, and the long-form label.
 - Type size follows §25601(c), and **in no case smaller than 6-point type**.
-- §25601(c) also requires the warning be displayed "with such conspicuousness … as to
+- §25601(c) also requires that the warning be displayed "with such conspicuousness … as to
   render the warning likely to be seen, read, and understood by an ordinary individual
   under customary conditions of purchase or use". Small is allowed; hidden is not.
 

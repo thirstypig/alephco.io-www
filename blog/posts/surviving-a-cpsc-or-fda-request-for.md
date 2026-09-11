@@ -1,7 +1,7 @@
 ---
 title: "Surviving a CPSC or FDA request for records"
 description: "FSVP records have to reach FDA within 24 hours. That single number should design your filing system, because nothing else in the process is negotiable."
-date: 2027-02-15
+date: 2027-01-25
 slug: surviving-a-cpsc-or-fda-request-for
 keywords: [FDA records request, CPSC, FSVP 24 hours, record retention, inspection readiness, importer, document production]
 sources: [https://www.ecfr.gov/current/title-21/section-1.510, https://www.ecfr.gov/current/title-16/part-1107, https://www.ecfr.gov/current/title-16/part-1110, https://laws-lois.justice.gc.ca/eng/acts/C-1.68/page-1.html]
