@@ -164,6 +164,14 @@ function assertPublishable(meta, body, file) {
     }
   }
 
+  const stale = verificationProblem(verifiedOn(body), meta.date);
+  if (stale) {
+    throw new Error(
+      `${file}: REFUSING TO PUBLISH — ${stale}\n` +
+      `    Re-verify the claims against their sources and update the "checked on" date.`,
+    );
+  }
+
   // Frontmatter is searched too: a title or description can carry a placeholder just as
   // easily as the body, and those are the parts that reach search results.
   const haystack = `${body}\n${Object.values(meta).flat().join('\n')}`;
@@ -176,6 +184,67 @@ function assertPublishable(meta, body, file) {
       );
     }
   }
+}
+
+const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august',
+  'september', 'october', 'november', 'december'];
+
+/**
+ * The date a post says its claims were checked — the "Checked against the statute on
+ * **6 September 2026**" line near the top of every sourced post. Returns YYYY-MM-DD, or
+ * null when the post has no such line.
+ */
+function verifiedOn(body) {
+  const m = body.match(
+    /\b(?:checked|verified)\b[^.]{0,120}?\bon \*{0,2}(\d{1,2}) ([A-Za-z]+) (\d{4})\*{0,2}/i,
+  );
+  if (!m) return null;
+  const month = MONTHS.indexOf(m[2].toLowerCase());
+  if (month < 0) return null;
+  return `${m[3]}-${String(month + 1).padStart(2, '0')}-${m[1].padStart(2, '0')}`;
+}
+
+/**
+ * A verification date in the FUTURE is false the moment it is written, so unlike every
+ * other check here it applies to DRAFTS too — and it fails the build rather than just
+ * listing the draft as blocked, because `check:blog` in CI is the only thing that sees a
+ * draft before its release day.
+ *
+ * ⚠️ Found session 118: all six posts added in #32 said "Checked … on 9 March 2027",
+ * six months ahead. The publish gate could not have caught it — by the time the Lacey
+ * post releases on 2027-03-29, "9 March 2027" is in the past and looks like any other
+ * date. Only a check run at WRITING time sees it as a lie.
+ *
+ * One day of slack, because "today" is UTC and a post dated in a timezone ahead of UTC
+ * can legitimately be a day ahead of it. Returns the problem, or null.
+ */
+function futureVerification(body, file) {
+  const checked = verifiedOn(body);
+  if (!checked) return null;
+  const tomorrow = new Date(Date.now() + 86_400_000).toISOString().slice(0, 10);
+  return checked > tomorrow
+    ? `${file}: claims its sources were checked on ${checked}, which has not happened yet.`
+    : null;
+}
+
+/**
+ * TODO(James) — the freshness policy for a post that is about to publish.
+ *
+ * Every sourced post carries a "checked on" date, and most were checked on 6 Sep 2026
+ * for release dates running to April 2027. Regulatory facts move (Minnesota's PFAS
+ * deadline, the de minimis rules, EPR timelines), so a check that was true when written
+ * can be months stale on release day. Four posts carry no "checked on" line at all.
+ *
+ * Runs ONLY for a post going live (via assertPublishable), so a blocked draft shows up
+ * in `npm run check:blog` months ahead as "⚠️ <your reason>", and on its release Monday
+ * the workflow fails loudly instead of publishing.
+ *
+ * @param {string|null} checkedOn    YYYY-MM-DD from the post's "checked on" line, or null
+ * @param {string}      publishDate  the post's frontmatter `date:` (YYYY-MM-DD)
+ * @returns {string|null}            a one-line reason to REFUSE publishing, or null to allow
+ */
+function verificationProblem(checkedOn, publishDate) {
+  return null;
 }
 
 const REQUIRED = ['title', 'description', 'date'];
@@ -374,10 +443,21 @@ async function main() {
   // are the majority here (24 of 25). Frontmatter is parsed twice as a result, which is
   // cheap and beats threading state through the render loop.
   const parsed = [];
+  const futureDated = [];
   for (const file of mdFiles) {
     const raw = await fs.readFile(path.join(POSTS_DIR, file), 'utf8');
-    const { meta } = parseFrontmatter(raw, file);
+    const { meta, body } = parseFrontmatter(raw, file);
     parsed.push({ file, meta, slug: meta.slug || file.replace(/\.md$/, '') });
+    const problem = futureVerification(body, file);
+    if (problem) futureDated.push(problem);
+  }
+  // Every offender at once, not the first — and a WARNING under --drafts, because nothing
+  // here may block previewing a draft (see the "does NOT block previewing" test). CI runs
+  // --check, not --drafts, so the hard stop still lands where it has to.
+  if (futureDated.length) {
+    const msg = `${futureDated.join('\n')}\n    Use the date the claims were actually verified.`;
+    if (withDrafts) console.warn(`[build-blog] ⚠️ ${msg}`);
+    else throw new Error(msg);
   }
   // ⚠️ NON-DRAFTS ONLY, AND NOT `|| withDrafts`. That was the first version of this line and
   // it was wrong: `--drafts` still rewrites the REAL blog/*.html for every non-draft post,

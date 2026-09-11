@@ -101,7 +101,7 @@ Things that work, in rough order of effectiveness:
   usually does.
 - **Offer the bands.** "Which of these six ranges" beats "what concentration."
 - **Name the law.** Suppliers who ignore a buyer's form will often act on "Minnesota
-  requires this by 15 September and I am the filer."
+  requires me to report this, and I am the filer."
 - **Ask per product, not per catalogue.** A blanket request across 200 SKUs gets one
   blanket answer, which is worth nothing.
 - **Ask what it's for.** The function question is required anyway, and it's the one a
