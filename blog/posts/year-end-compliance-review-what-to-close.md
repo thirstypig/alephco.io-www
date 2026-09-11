@@ -17,8 +17,10 @@ Here is what to close before the year ends, with the rule behind each. Dates che
 
 ## Things that recur annually
 
-**Minnesota PFAS reporting update — 1 February.** After the initial report, updates are due
-every 1 February. See [PFAS rules for importers](/blog/pfas-rules-for-importers.html). If you
+**Minnesota PFAS reporting update — 1 February.** After the initial report, an update is due
+by 1 February of the following year
+[when something changes](https://www.pca.state.mn.us/air-water-land-climate/reporting-pfas-in-products):
+new information becomes available, a product changes, or a new product is introduced. See [PFAS rules for importers](/blog/pfas-rules-for-importers.html). If you
 filed for the first time this year, this is the first recurrence, and the easiest to miss.
 
 **Children's product periodic testing.**
