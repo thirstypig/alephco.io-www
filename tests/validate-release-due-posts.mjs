@@ -167,6 +167,40 @@ check("rejects a malformed RELEASE_TODAY instead of guessing", () => {
   rmSync(root, { recursive: true, force: true });
 });
 
+// ── The workflow, not the script ────────────────────────────────
+//
+// `validate-structure.mjs` builds its inventory from `git ls-files`, which does not see a
+// file until it is staged. A released post's HTML is written by the build step, so if the
+// suite runs BEFORE `git add`, the new page is "listed in the inventory but is not a
+// tracked file" and every real release fails. It did, in a rehearsal of the first
+// automated Monday (2026-09-14) — the only earlier run was a no-op, so nothing had ever
+// exercised the path. Staging first also means the suite judges exactly what is committed.
+check("publish workflow installs before building and stages before testing", () => {
+  const yml = readFileSync(
+    join(REPO, ".github", "workflows", "publish-scheduled-posts.yml"),
+    "utf-8",
+  );
+  const lines = yml.split("\n").filter((l) => !l.trim().startsWith("#"));
+  const install = lines.findIndex((l) => /run:\s*npm ci\b/.test(l));
+  const build = lines.findIndex((l) => /run:\s*npm run build:blog\b/.test(l));
+  const stage = lines.findIndex((l) => /\bgit add\b/.test(l));
+  const suite = lines.findIndex((l) => /run:\s*npm test\b/.test(l));
+  assert(build !== -1, "no `npm run build:blog` step found in the publish workflow");
+  assert(stage !== -1, "no `git add` step found in the publish workflow");
+  assert(suite !== -1, "no `npm test` step found in the publish workflow");
+  // The same rehearsal's SECOND failure, which would have fired first: build-blog.mjs
+  // imports `marked`, a devDependency, and the workflow never installed it. Invisible
+  // until a post is actually due, because a no-op run skips the build entirely.
+  assert(
+    install !== -1 && install < build,
+    "`npm ci` must run before `npm run build:blog` — the generator imports `marked`",
+  );
+  assert(
+    stage < suite,
+    "`npm test` runs before `git add` — git ls-files cannot see the new post, so the release fails",
+  );
+});
+
 console.log(`\n${failed === 0 ? "✓" : "✗"} ${passed} passed, ${failed} failed\n`);
 if (failed) {
   for (const f of failures) console.error(`  - ${f}`);
