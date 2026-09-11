@@ -4,7 +4,7 @@ description: "You are almost never the duty holder under REACH. Your EU customer
 date: 2026-10-12
 slug: reach-and-svhc-for-us-companies-selling
 keywords: [REACH, SVHC, Candidate List, Article 33, only representative, 0.1% w/w, EU compliance, US exporter]
-sources: [https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02006R1907-20241010, https://echa.europa.eu/candidate-list-table]
+sources: [https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02006R1907-20241010, https://echa.europa.eu/candidate-list-table, https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62014CJ0106]
 draft: true
 ---
 
@@ -70,11 +70,14 @@ does whether exposure can be excluded.
 
 ## Two things worth getting right
 
-**0.1% is a concentration in the article, and "the article" is the argued question.** The
-threshold in Articles 7 and 33 is expressed against the article containing the substance, and
-how that applies to an assembled product made of many components is exactly where
-interpretations diverge — ask your customer which basis they are working to before you
-answer, and record the basis alongside your answer.
+**0.1% is measured per article, including each article inside an assembled product.** The
+threshold in Articles 7 and 33 is expressed against "the article", and the EU Court of Justice
+[settled in 2015](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62014CJ0106) how
+that applies to a product made of several components: it is for "the importer of a product
+made up of more than one article, to determine for each article" whether a Candidate List
+substance is present above 0.1%. A substance that is a trace across the whole product can
+still cross the threshold in one component, so answer component by component, and record
+which components your figures cover.
 
 **The Candidate List is a moving list.** It is maintained by ECHA under Article 59 and
 updated periodically. Any answer you give is an answer as at a date, against a version of the
