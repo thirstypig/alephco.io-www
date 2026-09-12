@@ -34,6 +34,11 @@
 - **539** — the weekly schedule, now 31 posts, interleaved, to 2027-04-05 (#33). Post 1
   shipped 2026-09-07; the rest release automatically. ⚠️ 539's own §4 table is the older
   25-post clustered schedule — `blog/schedule.json` and each post's `date:` are current.
+- **539 §6 measurement** — readings live in `docs/seo-measurement-log.md` (append-only; §6
+  itself is in the app repo and is read-only from here). Baseline confirmed 2026-09-11:
+  **11 organic sessions/month**, so §6's "beat 86 in a month" target is ~8× the run rate.
+  ⚠️ Always filter GA4 to `hostName = www.alephco.io`, and report sessions WITH users — one
+  returning visitor was 9 of September's 22 organic sessions.
 - **566** — counsel copy review. The brief is
   `docs/marketing/document-readiness-counsel-review-brief.md` in the app repo (**read-only**).
   ⚠️ Nothing in its section 3 may be published until section 4 is answered.
@@ -117,10 +122,20 @@ status — while the app footer and Stripe both say `Pasadena Works, LLC d/b/a A
 
 ### 🔴 Publishing is AUTOMATED — never flip a `draft` flag by hand
 
-`.github/workflows/publish-scheduled-posts.yml` runs **Mondays 13:00 UTC** and calls
-`scripts/release-due-posts.mjs`, which flips `draft: true` → `false` for every post whose
-date has ARRIVED. Then it builds (the publish gate runs), runs `npm test`, commits, and
-**explicitly dispatches `deploy.yml`**.
+`.github/workflows/publish-scheduled-posts.yml` runs **Mondays 13:00 UTC**. It installs
+(`npm ci`), then calls `scripts/release-due-posts.mjs`, which flips `draft: true` → `false`
+for every post whose date has ARRIVED. Then it builds (the publish gate runs), **stages**,
+runs `npm test`, commits, and **explicitly dispatches `deploy.yml`**.
+
+🔴 **Two of those steps are ordering constraints, not conveniences, and session 117 found
+both by rehearsing a release that had never actually happened.** Guarded by
+`tests/validate-release-due-posts.mjs`, which was red against the old workflow for each:
+- **`npm ci` before the build.** `build-blog.mjs` imports `marked`, a devDependency. The
+  workflow installed nothing, so the first real release would have died at the build step.
+- **`git add -A` before `npm test`.** `validate-structure.mjs` inventories from
+  `git ls-files`, which cannot see the HTML the build just wrote — the suite failed with
+  "listed in the inventory but is not a tracked file". Post 1 hit this same error in CI.
+  Staging first also means the suite judges exactly the tree that gets committed.
 
 ⚠️ **Do not "schedule" posts by setting them all to `draft: false`.** A future-dated post
 with `draft: false` is BUILT and is LIVE AT ITS URL — only the sitemap entry and the index
@@ -138,6 +153,24 @@ website. Do not remove it as redundant.
 
 To rehearse: **Actions → Publish scheduled posts → Run workflow.** It is a no-op unless
 something is due.
+
+⚠️ **A no-op run proves almost nothing, and it looks identical to a real one.** Everything
+after the release script is `if: released != '0'`, so a run with nothing due skips the
+build, the staging, the suite, the commit and the deploy dispatch — five of the six steps
+that can fail. The 2026-09-08 rehearsal was green for exactly that reason while two defects
+sat in the path. `npm ci` is deliberately unconditional so at least the install is exercised
+on every run.
+
+To rehearse the **release path** instead, drive it locally against a throwaway worktree with
+the clock pinned — this is what found both defects, four days before they would have fired:
+
+```bash
+git worktree add --detach /tmp/rehearsal HEAD && cd /tmp/rehearsal
+npm ci
+RELEASE_TODAY=2026-09-14 node scripts/release-due-posts.mjs   # the next Monday
+npm run build:blog && git add -A && npm test                   # the workflow's own order
+git diff --cached --stat                                       # what the bot would commit
+```
 
 ## Navigation Structure
 - **Top nav**: Logo (links to `/`, serves as home button) + 3 links (How It Works, Industries, Pricing) + theme toggle + Log In CTA
