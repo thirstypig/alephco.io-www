@@ -12,3 +12,7 @@ learn/search/
 # ⚠️ MUST stay ignored: these are unpublished, often unverified posts, and the deploy
 # uploads the whole repo — a tracked _preview/ would ship them live.
 blog/_preview/
+
+# Cross-project port registry: kept on disk, never published (names private projects).
+# Synced from ~/Projects/MASTER-PORTS.md by ~/Projects/sync-master-ports.sh.
+MASTER-PORTS.md
