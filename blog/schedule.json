@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-11",
+  "generated": "2026-09-14",
   "posts": [
     {
       "slug": "fcc-equipment-authorization-for-electronics-importers",
@@ -265,11 +265,10 @@
     {
       "slug": "what-intentionally-added-pfas-actually-means",
       "title": "What \"intentionally added\" PFAS actually means",
-      "status": "planned",
-      "targetDate": "2026-09-14",
+      "status": "published",
+      "publishedDate": "2026-09-14",
       "image": "/img/blog/what-intentionally-added-pfas-actually-means.png",
-      "url": "https://www.alephco.io/blog/what-intentionally-added-pfas-actually-means.html",
-      "draft": true
+      "url": "https://www.alephco.io/blog/what-intentionally-added-pfas-actually-means.html"
     },
     {
       "slug": "pfas-rules-for-importers",

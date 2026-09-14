@@ -5,7 +5,7 @@ date: 2026-09-14
 slug: what-intentionally-added-pfas-actually-means
 keywords: [intentionally added PFAS, PFAS definition, total organic fluorine, PFAS testing, supplier declaration, fluoropolymer exemption, state PFAS law]
 sources: [https://www.revisor.mn.gov/statutes/cite/116.943, https://legislature.maine.gov/legis/statutes/38/title38sec1614.html, https://portal.ct.gov/deep/p2/pfas-in-products, https://www.env.nm.gov/opf/wp-content/uploads/sites/13/2026/04/EXHIBIT-A-20.13.2-NMAC-FINAL.pdf]
-draft: true
+draft: false
 ---
 
 Every state PFAS obligation hangs off two words. Reporting, labelling, sales bans — all of
