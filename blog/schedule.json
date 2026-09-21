@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-14",
+  "generated": "2026-09-21",
   "posts": [
     {
       "slug": "fcc-equipment-authorization-for-electronics-importers",
@@ -256,11 +256,10 @@
     {
       "slug": "gcc-vs-cpc-which-certificate-does-your",
       "title": "GCC vs CPC: which certificate does your product need?",
-      "status": "planned",
-      "targetDate": "2026-09-21",
+      "status": "published",
+      "publishedDate": "2026-09-21",
       "image": "/img/blog/gcc-vs-cpc-which-certificate-does-your.png",
-      "url": "https://www.alephco.io/blog/gcc-vs-cpc-which-certificate-does-your.html",
-      "draft": true
+      "url": "https://www.alephco.io/blog/gcc-vs-cpc-which-certificate-does-your.html"
     },
     {
       "slug": "what-intentionally-added-pfas-actually-means",

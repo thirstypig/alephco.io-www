@@ -5,7 +5,7 @@ date: 2026-09-21
 slug: gcc-vs-cpc-which-certificate-does-your
 keywords: [GCC, CPC, general certificate of conformity, children's product certificate, CPSIA, CPSC eFiling, importer certification]
 sources: [https://www.ecfr.gov/current/title-16/part-1110, https://www.law.cornell.edu/uscode/text/15/2063, https://www.federalregister.gov/documents/2025/01/08/2024-30826/certificates-of-compliance, https://www.ecfr.gov/current/title-16/part-1200]
-draft: true
+draft: false
 ---
 
 Two certificates, similar names, completely different amounts of work. Picking the wrong
