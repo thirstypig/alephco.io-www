@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-21",
+  "generated": "2026-09-28",
   "posts": [
     {
       "slug": "fcc-equipment-authorization-for-electronics-importers",
@@ -247,11 +247,10 @@
     {
       "slug": "prop-65-for-importers-who-it-applies",
       "title": "Prop 65 for importers: who it applies to and what it actually requires",
-      "status": "planned",
-      "targetDate": "2026-09-28",
+      "status": "published",
+      "publishedDate": "2026-09-28",
       "image": "/img/blog/prop-65-for-importers-who-it-applies.png",
-      "url": "https://www.alephco.io/blog/prop-65-for-importers-who-it-applies.html",
-      "draft": true
+      "url": "https://www.alephco.io/blog/prop-65-for-importers-who-it-applies.html"
     },
     {
       "slug": "gcc-vs-cpc-which-certificate-does-your",

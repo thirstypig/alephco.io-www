@@ -6,7 +6,7 @@ date: 2026-09-28
 slug: prop-65-for-importers-who-it-applies
 keywords: [Proposition 65, Prop 65, California warning, importer compliance, safe harbor, 60-day notice, listed chemicals]
 sources: [https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.6, https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.10, https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.11, https://www.law.cornell.edu/regulations/california/27-CCR-25603]
-draft: true
+draft: false
 ---
 
 Proposition 65 confuses people because they look for the process — the registration, the
