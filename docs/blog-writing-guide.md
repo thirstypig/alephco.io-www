@@ -37,7 +37,7 @@ Every post follows this skeleton:
 ### Post 1: Why I Built Aleph
 - **Primary keyword**: `import compliance software`
 - **Title tag**: `Why I Built Aleph | Import Compliance Software for Importers`
-- **Meta desc**: `The compliance tools for importers are painfully generic or absurdly expensive. Here's why I built a product compliance platform from scratch. Try Aleph free.`
+- **Meta desc**: `The compliance tools for importers are painfully generic or absurdly expensive. Here's why I built a product compliance platform from scratch. Get started with Aleph.`
 - **H2s**: Why Import Compliance Tools Are Broken / What Mid-Market Importers Actually Need / How Aleph Handles CPSIA, Prop 65, FSVP, and PFAS / What We're Building Next
 
 ### Post 2: FSVP Guide
@@ -49,13 +49,13 @@ Every post follows this skeleton:
 ### Post 3: CPC Certificate Guide
 - **Primary keyword**: `children's product certificate`
 - **Title tag**: `Children's Product Certificate (CPC): Importer Guide 2026`
-- **Meta desc**: `Step-by-step guide to CPSIA Children's Product Certificates. What's required, which tests you need, and how to generate a valid CPC. Start free.`
+- **Meta desc**: `Step-by-step guide to CPSIA Children's Product Certificates. What's required, which tests you need, and how to generate a valid CPC. Get started.`
 - **H2s**: What Is a CPC? / Who Needs One? / The 7 Required Elements / Which Testing Standards Apply? / How to Get Third-Party Testing / How to Generate a CPC
 
 ### Post 4: Prop 65 Warnings
 - **Primary keyword**: `Prop 65 warning requirements`
 - **Title tag**: `Prop 65 Warning Requirements: Do You Need One? (2026)`
-- **Meta desc**: `Not sure if your product needs a Prop 65 warning? Decision guide for importers: when warnings apply, safe harbor text, and label requirements. Try Aleph free.`
+- **Meta desc**: `Not sure if your product needs a Prop 65 warning? Decision guide for importers: when warnings apply, safe harbor text, and label requirements. Get started with Aleph.`
 - **H2s**: What Is Prop 65? / Does It Apply to You? / Safe Harbor Labels: Short vs Long / Most Common Chemicals / Prop 65 for Amazon Sellers / How to Generate Labels
 
 ### Post 5: PFAS Regulations
@@ -67,7 +67,7 @@ Every post follows this skeleton:
 ### Post 6: Spreadsheets Failing
 - **Primary keyword**: `product compliance management`
 - **Title tag**: `Why Spreadsheets Fail Product Compliance Teams | Aleph`
-- **Meta desc**: `Spreadsheets can't track document expiry, generate certificates, or alert you to regulation changes. See what breaks first. Try Aleph free.`
+- **Meta desc**: `Spreadsheets can't track document expiry, generate certificates, or alert you to regulation changes. See what breaks first. Get started with Aleph.`
 - **H2s**: The Spreadsheet Setup / 5 Ways Spreadsheets Break Down / What Happens When Docs Expire / The Real Cost / What a Compliance Platform Does Differently / Switching: What to Expect
 
 ## Internal Linking Matrix

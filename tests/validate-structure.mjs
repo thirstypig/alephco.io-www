@@ -665,6 +665,21 @@ for (const claim of VERIFICATION_CLAIMS) {
   );
 }
 
+// ── No call to action offers a free account (James, 2026-09-30) ──
+//
+// There is no self-serve free plan: the app's `free` plan is internal, and the pricing and
+// contact FAQs say "there is no self-serve free trial". Yet 60+ buttons and meta
+// descriptions said "Get Started Free", "Try Aleph free", "Create a free account" and "Sign
+// up free", so a visitor who clicked "free" hit a paywall. James chose to keep the FAQ and
+// reword the buttons. The FAQ's own "Is there a free trial?" question stays legal: this
+// matches an OFFER (verb + free), not the word.
+const FREE_OFFER = /\b(?:get started|start|sign up|try aleph|create a)\s+free\b|\bfree (?:account|plan)\b/i;
+const freeOffenders = COPY_FILES.filter((f) => FREE_OFFER.test(readFileSync(join(ROOT, f), "utf-8")));
+assert(
+  freeOffenders.length === 0,
+  `${freeOffenders.join(", ")}: offers a free account or plan — there is none; say "Get started"`
+);
+
 // ── Every blog post carries the same article furniture ──────────
 //
 // `blog/_template.html` was derived from a real post so that nav, footer and theme could
