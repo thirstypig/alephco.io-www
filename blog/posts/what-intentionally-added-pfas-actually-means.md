@@ -1,26 +1,28 @@
 ---
 title: 'What "intentionally added" PFAS actually means'
-description: "The phrase that triggers every state PFAS obligation, and why it doesn't mean what a lab report says. Quoted from Minnesota, Maine and New Mexico law."
+description: "The phrase that triggers almost every state PFAS obligation, and why it doesn't mean what a lab report says. Quoted from Minnesota, Maine and New Mexico law."
 date: 2026-09-14
 slug: what-intentionally-added-pfas-actually-means
 keywords: [intentionally added PFAS, PFAS definition, total organic fluorine, PFAS testing, supplier declaration, fluoropolymer exemption, state PFAS law]
-sources: [https://www.revisor.mn.gov/statutes/cite/116.943, https://legislature.maine.gov/legis/statutes/38/title38sec1614.html, https://portal.ct.gov/deep/p2/pfas-in-products, https://www.env.nm.gov/opf/wp-content/uploads/sites/13/2026/04/EXHIBIT-A-20.13.2-NMAC-FINAL.pdf]
+sources: [https://www.revisor.mn.gov/statutes/cite/116.943, https://legislature.maine.gov/legis/statutes/38/title38sec1614.html, https://portal.ct.gov/deep/p2/pfas-in-products, https://www.cga.ct.gov/current/pub/chap_446z.htm, https://www.env.nm.gov/opf/wp-content/uploads/sites/13/2026/04/EXHIBIT-A-20.13.2-NMAC-FINAL.pdf]
 draft: false
 ---
 
-Every state PFAS obligation hangs off two words. Reporting, labelling, sales bans — all of
-them apply to products with *intentionally added* PFAS, and none of them apply to anything
-else.
+Almost every state PFAS obligation hangs off two words. Reporting, labeling, sales bans —
+nearly all of them apply to products with *intentionally added* PFAS. (California is a
+notable exception: for food packaging, juvenile products and textiles it also regulates PFAS
+present at or above a total organic fluorine threshold, whatever the intent.)
 
 So it's worth knowing precisely what the phrase means: it does not mean "our lab
 found PFAS," and it isn't written identically in every state. We covered
 [which states require what](/blog/pfas-rules-for-importers.html) last week; this is the
 definition underneath all of it. Everything below is quoted from the statute or rule, and
-checked on **6 September 2026**.
+checked on **September 6, 2026**.
 
 ## The core definition
 
-Minnesota and Connecticut use the same words. Minnesota, at
+Minnesota and Connecticut ([Conn. Gen. Stat. §22a-903c](https://www.cga.ct.gov/current/pub/chap_446z.htm))
+use the same words. Minnesota, at
 [§116.943 subd. 1(l)](https://www.revisor.mn.gov/statutes/cite/116.943):
 
 > PFAS deliberately added during the manufacture of a product where the continued presence
@@ -68,7 +70,8 @@ one does not substitute for the other:
 - A product can test positive for fluorine and contain no intentionally added PFAS.
 - A product can contain intentionally added PFAS below what a given method detects.
 
-Which is why total organic fluorine testing is a screening tool, not a compliance answer.
+Which is why, outside California's thresholds, total organic fluorine testing is a screening
+tool, not a compliance answer.
 It tells you where to look.
 
 ## Except in New Mexico, where a test result shifts the burden
@@ -89,7 +92,7 @@ Three details that summaries tend to lose:
   which the burden of proof moves to you.
 - It sits inside the **testing** section, which applies where there is "reasonable
   suspicion" that a product contains intentionally added PFAS *and* the manufacturer has
-  not met the reporting or labelling requirements. It is not a blanket screen applied to
+  not met the reporting or labeling requirements. It is not a blanket screen applied to
   every product on the shelf.
 
 Still, the direction of travel is worth noticing: file and label properly, and you are
@@ -110,8 +113,8 @@ against.
 New Mexico carves out fluoropolymers with a perfluorinated carbon-only or perfluorinated
 polyether backbone that are solid at standard temperature and pressure, exempting them from
 its reporting and currently-unavoidable-use requirements (20.13.2.10 NMAC, subsection P).
-Other states have not written the same carve-out, so a fluoropolymer answer that satisfies
-New Mexico is not portable either.
+Minnesota's and Maine's statutes contain no such carve-out, so a fluoropolymer answer that
+satisfies New Mexico is not portable either.
 
 ## What to do with this
 
@@ -128,12 +131,12 @@ Fix the question before you send it. A useful supplier declaration:
 4. **Records who answered and when.** Material changes invalidate the answer, and a
    declaration with no date cannot be re-checked.
 
-Aleph's PFAS declaration requests ask suppliers the function question directly and attach
-the answer to the product record with its date, so the follow-up question — is this still
-true? — has somewhere to land.
+Aleph's PFAS declaration requests go to the supplier as a link they can fill in without an
+account, and the answer attaches to the product record with its date, so the follow-up
+question — is this still true? — has somewhere to land.
 
 ---
 
 *This article is general information, not legal advice. Every definition above is linked to
 the state's own statute or rule — check those before acting, and talk to counsel about your
-specific catalogue.*
+specific catalog.*

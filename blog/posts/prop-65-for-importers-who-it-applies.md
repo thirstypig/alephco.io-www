@@ -5,7 +5,7 @@ description: "There is no registration, no filing and no approval. There is one 
 date: 2026-09-28
 slug: prop-65-for-importers-who-it-applies
 keywords: [Proposition 65, Prop 65, California warning, importer compliance, safe harbor, 60-day notice, listed chemicals]
-sources: [https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.6, https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.10, https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.11, https://www.law.cornell.edu/regulations/california/27-CCR-25603]
+sources: [https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.6, https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.7, https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.8, https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.10, https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.11, https://www.law.cornell.edu/regulations/california/27-CCR-25603, https://www.law.cornell.edu/regulations/california/27-CCR-25600.2]
 draft: false
 ---
 
@@ -13,7 +13,7 @@ Proposition 65 confuses people because they look for the process — the registr
 filing, the approval — and there isn't one. There is a single duty, a short list of
 exemptions, and a private enforcement system that supplies all the pressure.
 
-Checked against the statute and regulations on **6 September 2026**.
+Checked against the statute and regulations on **September 29, 2026**.
 
 ## The whole obligation, in one sentence
 
@@ -33,7 +33,10 @@ Almost certainly, if you sell into California.
 [§25249.11(b)](https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.11)
 excludes "any person employing **fewer than 10 employees**", plus government bodies and
 public water systems. There is no importer carve-out, no revenue threshold, and no
-distinction between a brand and a reseller.
+distinction in the statute between a brand and a reseller. (The regulations do allocate who
+provides the warning: [27 CCR §25600.2](https://www.law.cornell.edu/regulations/california/27-CCR-25600.2)
+puts it primarily on the manufacturer, producer, packager, importer, supplier or distributor,
+and limits a retailer's responsibility.)
 
 Note what the threshold is *not*: it is employees, not California employees, and not sales.
 
@@ -53,15 +56,15 @@ gives you exactly three routes out:
 
 ⚠️ Read the last line of §25249.10(c): *"the burden of showing that an exposure meets the
 criteria of this subdivision shall be on the defendant."* The third exemption is real, and
-it is yours to prove — after you have been sued. It is not a defence you can rely on
+it is yours to prove — after you have been sued. It is not a defense you can rely on
 casually.
 
 ## What a compliant warning looks like
 
-The safe-harbour content is at
+The safe-harbor content is at
 [27 CCR §25603](https://www.law.cornell.edu/regulations/california/27-CCR-25603). The
 long-form consumer product warning needs the yellow triangle symbol with a black
-exclamation point, the word **WARNING:** (or CA WARNING / CALIFORNIA WARNING) in bold
+exclamation point (black and white is allowed where the label isn't printed in yellow), the word **WARNING:** (or CA WARNING / CALIFORNIA WARNING) in bold
 capitals, and text naming **one or more chemicals**:
 
 > This product can expose you to chemicals including [name of one or more chemicals], which
@@ -72,14 +75,15 @@ Separate wordings exist for reproductive toxicants and for both endpoints togeth
 [§25601(b)](https://www.law.cornell.edu/regulations/california/27-CCR-25601) requires a
 chemical name **for each endpoint** where a warning covers both.
 
-The safe harbour is optional in principle — the statute only asks for a "clear and
+The safe harbor is optional in principle — the statute only asks for a "clear and
 reasonable" warning — but stepping outside it means arguing about adequacy with someone who
 has already sued you.
 
 ## How enforcement actually happens
 
-Not by an inspector. Prop 65 is enforced overwhelmingly by private plaintiffs, who must
-first serve a **60-day notice**. We cover
+Mostly not by an inspector. The Attorney General, district attorneys and some city attorneys can
+sue, but much of the enforcement comes from private plaintiffs, who must first serve a
+**60-day notice** ([§25249.7(d)](https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.7)). We cover
 [what to do when one arrives](/blog/you-received-a-60-day-notice-now.html) separately —
 the short version is that the clock is real and the response window is where the outcome is
 decided.
@@ -91,7 +95,7 @@ decided.
   again.
 - **A warning is cheap; an unnecessary one is not free.** Over-warning has its own
   commercial cost and, on a marketplace listing, its own conversion cost.
-- **The list moves.** OEHHA revises it at least annually, and each addition starts a
+- **The list moves.** The statute ([§25249.8](https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=25249.8)) requires it to be revised at least once a year, and each addition starts a
   12-month clock — see [when OEHHA adds a chemical](/blog/when-oehha-adds-a-chemical-what-it.html).
 
 ---
