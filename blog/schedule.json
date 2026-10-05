@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-30",
+  "generated": "2026-10-05",
   "posts": [
     {
       "slug": "fcc-equipment-authorization-for-electronics-importers",
@@ -238,11 +238,10 @@
     {
       "slug": "fsvp-for-the-first-time-importer",
       "title": "FSVP for the first-time importer",
-      "status": "planned",
-      "targetDate": "2026-10-05",
+      "status": "published",
+      "publishedDate": "2026-10-05",
       "image": "/img/blog/fsvp-for-the-first-time-importer.png",
-      "url": "https://www.alephco.io/blog/fsvp-for-the-first-time-importer.html",
-      "draft": true
+      "url": "https://www.alephco.io/blog/fsvp-for-the-first-time-importer.html"
     },
     {
       "slug": "prop-65-for-importers-who-it-applies",

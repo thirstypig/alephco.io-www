@@ -5,7 +5,7 @@ date: 2026-10-05
 slug: fsvp-for-the-first-time-importer
 keywords: [FSVP, foreign supplier verification program, FDA, food importer, qualified individual, DUNS, hazard analysis]
 sources: [https://www.ecfr.gov/current/title-21/part-1/subpart-L, https://www.ecfr.gov/current/title-21/section-1.500, https://www.ecfr.gov/current/title-21/section-1.502, https://www.ecfr.gov/current/title-21/section-1.509]
-draft: true
+draft: false
 ---
 
 FSVP catches people out because it isn't a licence, a registration, or an approval. It's a
