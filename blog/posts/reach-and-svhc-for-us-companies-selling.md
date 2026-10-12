@@ -5,7 +5,7 @@ date: 2026-10-12
 slug: reach-and-svhc-for-us-companies-selling
 keywords: [REACH, SVHC, Candidate List, Article 33, only representative, 0.1% w/w, EU compliance, US exporter]
 sources: [https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02006R1907-20241010, https://echa.europa.eu/candidate-list-table, https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62014CJ0106]
-draft: true
+draft: false
 ---
 
 The most useful thing to understand about REACH, if you are a US company, is that it

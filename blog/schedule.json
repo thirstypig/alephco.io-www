@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-05",
+  "generated": "2026-10-12",
   "posts": [
     {
       "slug": "fcc-equipment-authorization-for-electronics-importers",
@@ -229,11 +229,10 @@
     {
       "slug": "reach-and-svhc-for-us-companies-selling",
       "title": "REACH and SVHC for US companies selling into the EU",
-      "status": "planned",
-      "targetDate": "2026-10-12",
+      "status": "published",
+      "publishedDate": "2026-10-12",
       "image": "/img/blog/reach-and-svhc-for-us-companies-selling.png",
-      "url": "https://www.alephco.io/blog/reach-and-svhc-for-us-companies-selling.html",
-      "draft": true
+      "url": "https://www.alephco.io/blog/reach-and-svhc-for-us-companies-selling.html"
     },
     {
       "slug": "fsvp-for-the-first-time-importer",
