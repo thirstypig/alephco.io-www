@@ -161,6 +161,9 @@ p  { color: var(--fg-muted); }
 .btn-outline:hover { border-color: var(--navy); background: var(--bg-subtle); }
 .btn-red { background: var(--accent); border: 2px solid var(--accent); color: var(--paper); }
 .btn-red:hover { opacity: .9; }
+/* Secondary button on the dark nav bar (LOG IN), so "Start free" beside it is the one red button. */
+.btn-nav-ghost { background: transparent; color: var(--paper); border: 2px solid rgba(243,238,226,0.45); }
+.btn-nav-ghost:hover { border-color: var(--paper); }
 .btn-lg { padding: .75rem 1.75rem; font-size: 12px; }
 .btn-sm { padding: .375rem .875rem; font-size: 10px; }
 
@@ -247,6 +250,9 @@ p  { color: var(--fg-muted); }
 }
 .pricing-price { font-size: 2.5rem; font-weight: 800; line-height: 1; margin: 1rem 0 .25rem; color: var(--fg); }
 .pricing-price span { font-size: 1rem; font-weight: 500; color: var(--fg-muted); }
+/* The amount is a <span> too (the billing toggle rewrites it), so the rule above shrank every
+   paid price to 1rem muted text while only the "/mo" was meant to be small. */
+.pricing-price .price-amount { font-size: inherit; font-weight: inherit; color: inherit; }
 .pricing-features { list-style: none; margin: 1.25rem 0; flex: 1; }
 .pricing-features li {
   padding: .4rem 0; font-size: .875rem; color: var(--fg-muted);
