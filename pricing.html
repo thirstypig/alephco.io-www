@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pricing — Aleph</title>
-  <meta name="description" content="Simple, transparent pricing for product compliance. Flat plans sized to your catalog; upgrade when you need more.">
+  <meta name="description" content="Simple, transparent pricing for product compliance. Start free with up to 2 products; every plan covers every regulation.">
   <link rel="canonical" href="https://www.alephco.io/pricing.html">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Pricing — Aleph">
-  <meta property="og:description" content="Simple, transparent pricing for product compliance. Flat plans sized to your catalog; upgrade when you need more.">
+  <meta property="og:description" content="Simple, transparent pricing for product compliance. Start free with up to 2 products; every plan covers every regulation.">
   <meta property="og:url" content="https://www.alephco.io/pricing.html">
   <meta property="og:site_name" content="Aleph">
   <meta property="og:image" content="https://www.alephco.io/img/og-default.png">
@@ -16,7 +16,7 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Pricing — Aleph">
-  <meta name="twitter:description" content="Simple, transparent pricing for product compliance. Flat plans sized to your catalog; upgrade when you need more.">
+  <meta name="twitter:description" content="Simple, transparent pricing for product compliance. Start free with up to 2 products; every plan covers every regulation.">
   <meta name="twitter:image" content="https://www.alephco.io/img/og-default.png">
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -96,7 +96,8 @@
           <button class="theme-toggle" aria-label="Toggle theme">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
           </button>
-          <a href="https://app.alephco.io/login" class="btn btn-red btn-sm">LOG IN</a>
+          <a href="https://app.alephco.io/login" class="btn btn-nav-ghost btn-sm">LOG IN</a>
+          <a href="https://app.alephco.io/register" class="btn btn-red btn-sm">Start free</a>
         </div>
       </div>
     </div>
@@ -111,7 +112,7 @@
       <div class="section-heading text-center">
         <span class="section-label">Pricing</span>
         <h1>Simple, transparent pricing</h1>
-        <p>No per-certificate charges. No hidden fees. Save 20% with annual billing.</p>
+        <p>Start free with up to 2 products. Every plan covers every regulation. Save 20% with annual billing.</p>
       </div>
 
       <!-- Billing toggle -->
@@ -120,22 +121,46 @@
         <button type="button" role="tab" id="billing-annual" aria-selected="true" data-period="annual" class="btn btn-primary btn-sm" style="min-width:110px;">Annual <span style="font-size:.75rem;opacity:.85;margin-left:.25rem;">−20%</span></button>
       </div>
 
+      <!-- Every plan covers every regulation (FSVP, CPSIA, Prop 65, PFAS, MoCRA). The plans
+           differ by products, team seats and support — nothing else. Numbers come from
+           alephco.io-app/shared/plan-entitlements.ts; check it before changing any of them. -->
       <div class="grid-4" data-billing="annual">
+        <!-- Free — deliberately has NO .price-amount / .price-note, so the billing toggle
+             leaves it at $0 in both periods (same mechanism as the Enterprise card below). -->
+        <div class="card pricing-card">
+          <div>
+            <h3>Free</h3>
+            <p style="font-size:.875rem;">For trying Aleph on your first products.</p>
+          </div>
+          <div class="pricing-price">
+            $0<span>/mo</span>
+            <div style="font-size:.75rem;color:var(--fg-muted);margin-top:.25rem;font-weight:500;">no card required</div>
+          </div>
+          <ul class="pricing-features">
+            <li>Every regulation &mdash; FSVP, CPSIA, Prop 65, PFAS, MoCRA</li>
+            <li>Up to 2 products</li>
+            <li>Up to 3 team seats</li>
+            <li>FSVP inspection package for FDA</li>
+            <li>Email support</li>
+          </ul>
+          <a href="https://app.alephco.io/register" class="btn btn-outline" style="width:100%;">Start free</a>
+        </div>
+
         <!-- Starter -->
         <div class="card pricing-card">
           <div>
             <h3>Starter</h3>
-            <p style="font-size:.875rem;">For importers with a single regulation to manage.</p>
+            <p style="font-size:.875rem;">For a small catalog.</p>
           </div>
           <div class="pricing-price">
             <span class="price-amount" data-monthly="$99" data-annual="$79">$79</span><span>/mo</span>
             <div class="price-note" style="font-size:.75rem;color:var(--fg-muted);margin-top:.25rem;">billed annually</div>
           </div>
           <ul class="pricing-features">
-            <li>Cover one regulation end to end</li>
+            <li>Every regulation &mdash; FSVP, CPSIA, Prop 65, PFAS, MoCRA</li>
             <li>Up to 25 products</li>
             <li>Up to 3 team seats</li>
-            <li>Store certificates, lab reports, and supplier documents</li>
+            <li>FSVP inspection package for FDA</li>
             <li>Email support</li>
           </ul>
           <a href="https://app.alephco.io/register" class="btn btn-outline" style="width:100%;">Get Started</a>
@@ -146,18 +171,18 @@
           <div class="pricing-badge">Most Popular</div>
           <div>
             <h3>Growth</h3>
-            <p style="font-size:.875rem;">For importers juggling multiple regulations.</p>
+            <p style="font-size:.875rem;">For a catalog in the hundreds.</p>
           </div>
           <div class="pricing-price">
             <span class="price-amount" data-monthly="$249" data-annual="$199">$199</span><span>/mo</span>
             <div class="price-note" style="font-size:.75rem;color:var(--fg-muted);margin-top:.25rem;">billed annually</div>
           </div>
           <ul class="pricing-features">
-            <li>Cover every regulation &mdash; FSVP, CPSIA, Prop 65, PFAS, MoCRA</li>
+            <li>Every regulation &mdash; FSVP, CPSIA, Prop 65, PFAS, MoCRA</li>
             <li>Up to 200 products</li>
             <li>Up to 3 team seats</li>
-            <li>Prop 65 warning labels and PFAS supplier declaration requests</li>
-            <li>Priority support</li>
+            <li>FSVP inspection package for FDA</li>
+            <li>Email support</li>
           </ul>
           <a href="https://app.alephco.io/register" class="btn btn-primary" style="width:100%;">Get Started</a>
         </div>
@@ -166,43 +191,34 @@
         <div class="card pricing-card">
           <div>
             <h3>Pro</h3>
-            <p style="font-size:.875rem;">For teams managing compliance at scale.</p>
+            <p style="font-size:.875rem;">For larger catalogs and bigger teams.</p>
           </div>
           <div class="pricing-price">
             <span class="price-amount" data-monthly="$499" data-annual="$399">$399</span><span>/mo</span>
             <div class="price-note" style="font-size:.75rem;color:var(--fg-muted);margin-top:.25rem;">billed annually</div>
           </div>
           <ul class="pricing-features">
-            <li>Every module, up to 500 products</li>
+            <li>Every regulation &mdash; FSVP, CPSIA, Prop 65, PFAS, MoCRA</li>
+            <li>Up to 500 products</li>
             <li>Up to 5 team seats</li>
-            <li>FSVP inspection package for inspectors</li>
-            <li>Dedicated support</li>
+            <li>FSVP inspection package for FDA</li>
+            <li>Email support + scheduled calls</li>
           </ul>
           <a href="https://app.alephco.io/register" class="btn btn-outline" style="width:100%;">Get Started</a>
         </div>
+      </div>
 
-        <!-- Enterprise — deliberately has NO .price-amount / .price-note, so the billing
-             toggle leaves it untouched. Claims here are limited to what we can actually
-             deliver today: a bigger catalog, more seats, and a conversation. -->
-        <div class="card pricing-card">
-          <div>
-            <h3>Enterprise</h3>
-            <p style="font-size:.875rem;">For importers whose catalog has outgrown self-serve.</p>
-          </div>
-          <!-- min-height matches the rendered height of a 2.5rem price + its note, so this
-               card's feature list and button stay on the same baseline as the other three. -->
-          <div class="pricing-price" style="font-size:1.75rem;min-height:3.65rem;display:flex;flex-direction:column;justify-content:flex-end;">
-            Let&rsquo;s talk
-            <div style="font-size:.75rem;color:var(--fg-muted);margin-top:.25rem;font-weight:500;">priced around your catalog</div>
-          </div>
-          <ul class="pricing-features">
-            <li>Everything in Pro</li>
-            <li>More than 500 products</li>
-            <li>Custom team seats</li>
-            <li>Onboarding support for bulk imports</li>
-          </ul>
-          <a href="contact.html" class="btn btn-outline" style="width:100%;">Contact Us</a>
+      <!-- Enterprise — deliberately has NO .price-amount / .price-note, so the billing
+           toggle leaves it untouched. Claims here are limited to what we can actually
+           deliver today: a bigger catalog, more seats, and a conversation. It sits OUTSIDE
+           the [data-billing] grid as a full-width row so the four self-serve plans compare
+           side by side at desktop width. -->
+      <div class="card" style="margin-top:1.5rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem 2rem;">
+        <div style="flex:1 1 280px;">
+          <h3 style="margin-bottom:.25rem;">Enterprise</h3>
+          <p style="font-size:.875rem;margin:0;">For importers whose catalog has outgrown self-serve: everything in Pro, more than 500 products, custom team seats, and onboarding support for bulk imports. Priced around your catalog.</p>
         </div>
+        <a href="contact.html" class="btn btn-outline" style="flex:0 0 auto;">Contact Us</a>
       </div>
 
       <script>
@@ -212,6 +228,7 @@
           // Selected by the data attribute, NOT by the grid class. This used to read
           // '.grid-3[data-billing]', so adding the Enterprise card (grid-3 -> grid-4) would
           // have silently disabled the whole Annual/Monthly toggle via the guard below.
+          // The Free card carries no .price-amount / .price-note, so it stays at $0.
           var grid = document.querySelector('[data-billing]');
           if (!monthlyBtn || !annualBtn || !grid) return;
           function setPeriod(period) {
@@ -235,7 +252,10 @@
         })();
       </script>
 
-      <p class="text-center mt-4" style="font-size:.875rem;color:var(--fg-subtle);">
+      <p class="text-center mt-4" style="font-size:.875rem;color:var(--fg-muted);">
+        Each size or color you sell as its own item counts as one product.
+      </p>
+      <p class="text-center" style="font-size:.875rem;color:var(--fg-subtle);margin-top:.5rem;">
         Need more than 500 products or 5 seats? <a href="contact.html" style="color:var(--accent);text-decoration:underline;">Contact us</a> and we'll build a plan around you.
       </p>
     </div>
@@ -247,54 +267,57 @@
       <div class="section-heading text-center" style="margin-bottom:2rem;">
         <span class="section-label">What's included</span>
         <h2>Core features</h2>
-        <p>The basics every Aleph plan covers — and where the tiers differ.</p>
+        <p>Every plan includes the same features. The plans differ by products, team seats, and support.</p>
       </div>
       <div class="pricing-compare-wrap">
         <table class="pricing-compare">
           <thead>
             <tr>
               <th scope="col" class="feature-col">Feature</th>
+              <th scope="col">Free</th>
               <th scope="col">Starter</th>
               <th scope="col">Growth</th>
               <th scope="col">Pro</th>
             </tr>
           </thead>
           <tbody>
-            <tr><th scope="row">Compliance modules</th><td>1 module</td><td>All 4 core</td><td>All 4 core</td></tr>
-            <tr><th scope="row">Products tracked</th><td>Up to 25</td><td>Up to 200</td><td>Up to 500</td></tr>
-            <tr><th scope="row">Team seats</th><td>3</td><td>3</td><td>5</td></tr>
-            <tr><th scope="row">Document upload + OCR</th><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-            <tr><th scope="row">Compliance alerts dashboard</th><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-            <tr><th scope="row">Bulk CSV import</th><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-            <tr><th scope="row">Prop 65 warning label PDFs</th><td>If Prop 65 chosen</td><td class="check">✓</td><td class="check">✓</td></tr>
-            <tr><th scope="row">Support</th><td>Email</td><td>Priority email</td><td>Email + scheduled calls</td></tr>
+            <tr><th scope="row">Regulations covered</th><td>All 5</td><td>All 5</td><td>All 5</td><td>All 5</td></tr>
+            <tr><th scope="row">Products tracked</th><td>Up to 2</td><td>Up to 25</td><td>Up to 200</td><td>Up to 500</td></tr>
+            <tr><th scope="row">Team seats</th><td>3</td><td>3</td><td>3</td><td>5</td></tr>
+            <tr><th scope="row">Document upload and storage</th><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><th scope="row">Compliance alerts dashboard</th><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><th scope="row">Bulk CSV import</th><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><th scope="row">Prop 65 warning label PDFs</th><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><th scope="row">PFAS supplier declaration requests</th><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><th scope="row">Support</th><td>Email</td><td>Email</td><td>Email</td><td>Email + scheduled calls</td></tr>
           </tbody>
         </table>
       </div>
     </div>
   </section>
 
-  <!-- Comparison: Advanced -->
+  <!-- Comparison: Downloads -->
   <section class="section" style="padding-top:0;padding-bottom:3rem;">
     <div class="container">
       <div class="section-heading text-center" style="margin-bottom:2rem;">
-        <h2>Advanced &amp; integrations</h2>
-        <p>Pro-tier capabilities for larger catalogs and audit-driven workflows.</p>
+        <h2>Downloads &amp; supply chain</h2>
+        <p>Included on every plan, Free too.</p>
       </div>
       <div class="pricing-compare-wrap">
         <table class="pricing-compare">
           <thead>
             <tr>
               <th scope="col" class="feature-col">Feature</th>
+              <th scope="col">Free</th>
               <th scope="col">Starter</th>
               <th scope="col">Growth</th>
               <th scope="col">Pro</th>
             </tr>
           </thead>
           <tbody>
-            <tr><th scope="row">Supply chain visualization</th><td>—</td><td class="check">✓</td><td class="check">✓</td></tr>
-            <tr><th scope="row">Per-product compliance package downloads</th><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-            <tr><th scope="row">FSVP inspection package (ZIP or secure email link)</th><td>—</td><td>—</td><td class="check">✓</td></tr>
+            <tr><th scope="row">Supply chain visualization</th><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><th scope="row">Per-product compliance package downloads</th><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><th scope="row">FSVP inspection package (ZIP or secure email link)</th><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
           </tbody>
         </table>
       </div>
@@ -313,20 +336,22 @@
           <thead>
             <tr>
               <th scope="col" class="feature-col">Regulation</th>
+              <th scope="col">Free</th>
               <th scope="col">Starter</th>
               <th scope="col">Growth</th>
               <th scope="col">Pro</th>
             </tr>
           </thead>
           <tbody>
-            <tr><th scope="row">FSVP (food importers)</th><td class="check">✓ (if chosen)</td><td class="check">✓</td><td class="check">✓</td></tr>
-            <tr><th scope="row">CPSIA / CPC (children's products)</th><td class="check">✓ (if chosen)</td><td class="check">✓</td><td class="check">✓</td></tr>
-            <tr><th scope="row">Prop 65 (California)</th><td class="check">✓ (if chosen)</td><td class="check">✓</td><td class="check">✓</td></tr>
-            <tr><th scope="row">PFAS (multi-state)</th><td class="check">✓ (if chosen)</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><th scope="row">FSVP (food importers)</th><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><th scope="row">CPSIA / CPC (children's products)</th><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><th scope="row">Prop 65 (California)</th><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><th scope="row">PFAS (multi-state)</th><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><th scope="row">MoCRA (cosmetics)</th><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
           </tbody>
         </table>
         <p style="text-align:center;font-size:.875rem;color:var(--fg-muted);margin-top:1rem;">
-          Starter covers any one of the four core modules. Growth covers all four. Pro adds more products, more seats, and the FSVP inspection package.
+          Every plan, Free included, covers every regulation. The plans differ by products, team seats, and support.
         </p>
       </div>
     </div>
@@ -339,8 +364,9 @@
         <h3 style="margin-top:0;">No per-product charges</h3>
         <p>Every plan is a flat fee. Your bill does not change with the size of your catalog:</p>
         <ul style="margin:0 0 1rem 1.25rem;">
-          <li><strong>Starter</strong> covers up to 25 products, <strong>Growth</strong> up to 200, <strong>Pro</strong> up to 500.</li>
-          <li>There is no per-SKU charge and no overage billing at any tier.</li>
+          <li><strong>Free</strong> covers up to 2 products, <strong>Starter</strong> up to 25, <strong>Growth</strong> up to 200, <strong>Pro</strong> up to 500.</li>
+          <li>Each size or color you sell as its own item counts as one product.</li>
+          <li>There is no per-product charge and no overage billing at any tier.</li>
           <li>Outgrown Pro? <a href="contact.html" style="color:var(--accent);text-decoration:underline;">Talk to us</a> — we'll put together a plan that fits.</li>
         </ul>
         <p style="margin:0;font-size:.875rem;color:var(--fg-muted);">
@@ -388,28 +414,28 @@
           <div class="faq-a"><p>Yes. Upgrades prorate &mdash; you only pay the difference for the remainder of the current cycle. Downgrades take effect at the start of the next billing cycle so you don't lose paid time.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">What happens if I exceed my SKU limit?</button>
-          <div class="faq-a"><p>Your bill never changes with your catalog size &mdash; there is no per-SKU charge at any tier. If you're approaching your plan's limit, move up a tier: Starter covers 25 products, Growth 200, and Pro 500. Beyond 500, get in touch and we'll build a plan around you.</p></div>
+          <button class="faq-q">What happens if I go over my product limit?</button>
+          <div class="faq-a"><p>Your bill never changes with your catalog size &mdash; there is no per-product charge at any tier. When you reach your plan's limit, Aleph won't add another product and offers you a plan with room for more. Nothing you already have is removed: you can still open, edit, and download every product. To make room, archive a product you no longer need, or move up a plan: Free covers 2 products, Starter 25, Growth 200, and Pro 500. Each size or color you sell as its own item counts as one product. Beyond 500, get in touch and we'll build a plan around you.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q">Do you offer annual contracts with custom pricing?</button>
-          <div class="faq-a"><p>Yes. For catalogs over 500 SKUs or teams over 5 seats, contact sales for custom annual pricing with negotiated terms.</p></div>
+          <div class="faq-a"><p>Yes. For catalogs over 500 products or teams over 5 seats, contact sales for custom annual pricing with negotiated terms.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">Is there a free trial?</button>
-          <div class="faq-a"><p>Not right now. Plans start when you subscribe, and you can cancel any time &mdash; you keep access through the period you have paid for. If you would like to see the platform against your own products first, <a href="contact.html" style="color:var(--accent);text-decoration:underline;">get in touch</a> and we will walk you through it.</p></div>
+          <button class="faq-q">Is there a free plan?</button>
+          <div class="faq-a"><p>Yes. The Free plan covers up to 2 products and every regulation &mdash; FSVP, CPSIA, Prop 65, PFAS, and MoCRA &mdash; with up to 3 team seats, including the FSVP inspection package for FDA for those products. Signing up does not ask for a card. When you need more products, choose a paid plan. Paid plans can be canceled any time, and you keep access through the period you have paid for.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q">Does Aleph file with CPSC, CBP, or FDA for me?</button>
-          <div class="faq-a"><p>No. Aleph keeps your compliance records organized and produces downloads such as per-product compliance packages and, on Pro, the FSVP inspection package. Aleph does not submit anything to CPSC, CBP, FDA, or any other agency on your behalf. Filings &mdash; including the certificate data that 16 CFR 1110.13 requires importers of certified consumer products to eFile at entry &mdash; are made by you or your customs broker.</p></div>
+          <div class="faq-a"><p>No. Aleph keeps your compliance records organized and produces downloads such as per-product compliance packages and, on every plan, the FSVP inspection package. Aleph does not submit anything to CPSC, CBP, FDA, or any other agency on your behalf. Filings &mdash; including the certificate data that 16 CFR 1110.13 requires importers of certified consumer products to eFile at entry &mdash; are made by you or your customs broker.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q">How secure is my compliance data? Can auditors see it?</button>
-          <div class="faq-a"><p>All data is encrypted at rest and in transit. You can give an auditor or inspector read-only access by link: with the FSVP module, a product share link covers only the products you choose, expires after 7, 30, or 90 days, and can be revoked; on Pro, the FSVP inspection package can be emailed as a secure link that expires after 72 hours. Recipients cannot modify data &mdash; they only see what you've shared.</p></div>
+          <div class="faq-a"><p>All data is encrypted at rest and in transit. You can give an auditor or inspector read-only access by link: with the FSVP module, a product share link covers only the products you choose, expires after 7, 30, or 90 days, and can be revoked; on every plan, the FSVP inspection package can be emailed as a secure link that expires after 72 hours. Recipients cannot modify data &mdash; they only see what you've shared.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q">Which tier covers my regulations?</button>
-          <div class="faq-a"><p><strong>Starter</strong> covers any one of the four core modules &mdash; pick FSVP if you import food, or one of CPSIA/Prop 65/PFAS for consumer or children's goods. <strong>Growth</strong> covers all four core modules together. <strong>Pro</strong> adds the FSVP inspection package &mdash; a ZIP download or a secure email link &mdash; for businesses with audit volume.</p></div>
+          <div class="faq-a"><p>Every plan, Free included, covers every regulation: FSVP, CPSIA, Prop 65, PFAS, and MoCRA. The plans differ only by how many products you can track, how many team seats you get, and the support that comes with them.</p></div>
         </div>
       </div>
     </div>

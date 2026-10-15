@@ -289,6 +289,17 @@ for (const page of PAGES) {
     assert(false, `${page}: nav-links block not found`);
   }
 
+  // 2b. The nav carries the sign-up button beside LOG IN (James, 2026-10-14). Checked inside
+  // `.nav-actions` specifically: a "Start free" link elsewhere on the page (a hero, a footer)
+  // is not the button at the top of every page that this exists to guarantee.
+  const navActions = html.match(/<div class="nav-actions">[\s\S]*?<\/div>/);
+  assert(
+    navActions !== null &&
+      /<a href="https:\/\/app\.alephco\.io\/register" class="btn btn-red btn-sm">Start free<\/a>/.test(navActions[0]) &&
+      navActions[0].includes('href="https://app.alephco.io/login"'),
+    `${page}: nav-actions must hold LOG IN and the "Start free" button to app.alephco.io/register`
+  );
+
   // 3. Footer has grid structure
   assert(
     html.includes('class="footer-grid"'),
@@ -665,20 +676,69 @@ for (const claim of VERIFICATION_CLAIMS) {
   );
 }
 
-// ── No call to action offers a free account (James, 2026-09-30) ──
+// ── Plan claims match the plans (James, 2026-10-14) ──
 //
-// There is no self-serve free plan: the app's `free` plan is internal, and the pricing and
-// contact FAQs say "there is no self-serve free trial". Yet 60+ buttons and meta
-// descriptions said "Get Started Free", "Try Aleph free", "Create a free account" and "Sign
-// up free", so a visitor who clicked "free" hit a paywall. James chose to keep the FAQ and
-// reword the buttons. The FAQ's own "Is there a free trial?" question stays legal: this
-// matches an OFFER (verb + free), not the word.
-const FREE_OFFER = /\b(?:get started|start|sign up|try aleph|create a)\s+free\b|\bfree (?:account|plan)\b/i;
-const freeOffenders = COPY_FILES.filter((f) => FREE_OFFER.test(readFileSync(join(ROOT, f), "utf-8")));
-assert(
-  freeOffenders.length === 0,
-  `${freeOffenders.join(", ")}: offers a free account or plan — there is none; say "Get started"`
-);
+// HISTORY. From 2026-09-30 this block banned every "free" offer: there was no self-serve free
+// plan then, and 60+ buttons said "Get Started Free" to a paywall. On 2026-10-14 James decided
+// there IS one — Free: 2 products, every regulation, 3 seats — and that every PAID plan covers
+// every regulation too, the plans differing only by products, seats and support. So the ban is
+// retired, and what it guarded (copy that promises something the product does not do) is now
+// guarded against the claims the new decision made false.
+//
+// Numbers come from alephco.io-app/shared/plan-entitlements.ts. If a plan changes there, change
+// the copy and this list in the same PR.
+const RETIRED_PLAN_CLAIMS = [
+  {
+    pattern: /Starter covers (?:any )?one\b|cover one regulation|single regulation to manage|one core module/i,
+    why: "says Starter covers one regulation — every plan covers every regulation since 2026-10-14",
+  },
+  {
+    pattern: /\bno (?:self-serve )?free (?:plan|tier)\b|there is no (?:self-serve )?free\b/i,
+    why: "says there is no free plan — there is one since 2026-10-14 (2 products)",
+  },
+  {
+    // The FSVP inspection package is on every plan, Free included (todo 727 for paid plans;
+    // the 2026-10-14 decision for Free). Matches "(Pro plan)", "on the Pro plan", "on Pro," next
+    // to the package, in either order within one sentence.
+    pattern: /inspection package[^.<]{0,80}\((?:on )?Pro(?: plan)?\)|\bon (?:the )?Pro(?: plan)?,[^.<]{0,60}inspection package|On the Pro plan,[^.<]{0,80}(?:FSVP|inspection)/i,
+    why: "says the FSVP inspection package is Pro-only — it is on every plan",
+  },
+  {
+    // A trial is a different thing from a free plan, and there is no trial: don't offer one.
+    pattern: /\b(?:start|begin|try)\s+(?:a|your)\s+free trial\b|\b\d+-day free trial\b/i,
+    why: "offers a free trial — there is no trial; there is a Free plan",
+  },
+];
+for (const claim of RETIRED_PLAN_CLAIMS) {
+  const offenders = COPY_FILES.filter((f) => claim.pattern.test(readFileSync(join(ROOT, f), "utf-8")));
+  assert(offenders.length === 0, `${offenders.join(", ")}: ${claim.why}`);
+}
+
+// ── Our own pages say "products", never "SKU" (James, 2026-10-14) ──
+//
+// The plan limits are counted in products, and a buyer reading "SKU" on one page and
+// "products" on the next has to wonder whether they are two numbers. Blog posts and /learn
+// articles are editorial and keep their own wording; the site's own pages do not.
+const OWN_PAGES = PAGES.filter((p) => !p.startsWith("blog/") && existsSync(join(ROOT, p)));
+assert(OWN_PAGES.length >= 20, `SKU guard found only ${OWN_PAGES.length} own pages — the list is broken`);
+const skuOffenders = OWN_PAGES.filter((p) => /\bSKUs?\b/i.test(readFileSync(join(ROOT, p), "utf-8")));
+assert(skuOffenders.length === 0, `${skuOffenders.join(", ")}: says "SKU" — say "product" on the site's own pages`);
+
+// ── The Free card stays at $0 when the billing toggle flips ──
+//
+// The toggle rewrites every .price-amount / .price-note inside [data-billing]. The Free card
+// must carry neither (same mechanism that leaves Enterprise alone), or Monthly would print
+// whatever its data-monthly said — or, with none, keep a stale value.
+{
+  const pricing = readFileSync(join(ROOT, "pricing.html"), "utf-8");
+  const freeCard = pricing.match(/<h3>Free<\/h3>[\s\S]*?<\/ul>/);
+  assert(freeCard !== null, "pricing.html: Free card not found");
+  if (freeCard) {
+    assert(!/price-amount|price-note/.test(freeCard[0]), "pricing.html: Free card must not carry .price-amount or .price-note");
+    assert(/\$0/.test(freeCard[0]), "pricing.html: Free card must show $0");
+    assert(/Up to 2 products/.test(freeCard[0]), "pricing.html: Free card must say Up to 2 products (plan-entitlements.ts)");
+  }
+}
 
 // ── Every blog post carries the same article furniture ──────────
 //

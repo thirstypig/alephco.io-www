@@ -140,7 +140,7 @@ To rehearse: **Actions → Publish scheduled posts → Run workflow.** It is a n
 something is due.
 
 ## Navigation Structure
-- **Top nav**: Logo (links to `/`, serves as home button) + 3 links (How It Works, Industries, Pricing) + theme toggle + Log In CTA
+- **Top nav**: Logo (links to `/`, serves as home button) + 3 links (How It Works, Industries, Pricing) + theme toggle + LOG IN (`btn-nav-ghost`) + a red "Start free" button to `app.alephco.io/register` (James, 2026-10-14; `npm test` asserts it on every page). The nav is copied into every page, `blog/_template.html` and `learn/_templates/_nav.html` — change all of them together
 - **Footer**: 5-column CSS grid (`.footer-grid`) — Brand + tagline, Product, Resources, Company, Legal — with copyright bar (`.footer-bottom`)
 - **Mobile**: hamburger menu at 768px breakpoint; footer collapses to 2-col then 1-col
 - **Path convention**: Root pages use `how-it-works.html`; subdirectory pages use `../how-it-works.html`
@@ -215,7 +215,11 @@ resolved. Run `dig NS alephco.io` before giving anyone DNS instructions.
 - "Log In" and "Get Started" link to `app.alephco.io/login` and `/register`
 - `main.js` rewrites these to `localhost:4060` when running on localhost
 - Local dev: `npm run dev` (serves on port 3060)
-- **Pricing page buttons are LIVE (session 86)** — all four cards link out, three to
+- **Pricing (James, 2026-10-14): Free $0 / 2 products, then Starter 25 · Growth 200 · Pro 500.
+  Every plan covers every regulation; plans differ only by products, seats and support.** The
+  grid is Free/Starter/Growth/Pro; Enterprise is a full-width row below it. The Free card has
+  no `.price-amount`/`.price-note`, so the toggle leaves it at $0 (asserted by `npm test`).
+- **Pricing page buttons are LIVE (session 86)** — every card links out, the self-serve ones to
   `app.alephco.io/register` and Enterprise to `contact.html`. They were previously disabled
   `<span>`s with `pointer-events:none`. Real cards are charged from the app, so **any claim on
   `pricing.html` is now a commitment**: opening them exposed three that the product does not
