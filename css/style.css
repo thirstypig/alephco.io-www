@@ -488,6 +488,12 @@ tr:last-child td { border-bottom: none; }
 .blog-hero-credit a { color: var(--fg-muted); text-decoration: underline; }
 .blog-hero-credit a:hover { color: var(--fg); }
 
+/* In-article figure (e.g. a screenshot). Bordered so a light screenshot doesn't melt into the page. */
+.blog-figure { margin: 2rem 0; }
+.blog-figure img { width: 100%; height: auto; display: block; border: 1px solid var(--rule-soft, #e5e7eb); }
+.blog-figure figcaption { font-size: .8125rem; color: var(--fg-muted); padding-top: .5rem; line-height: 1.5; }
+.blog-figure figcaption a { color: var(--fg-muted); text-decoration: underline; }
+
 .blog-hero-fallback svg { flex: none; color: var(--paper); opacity: .8; }
 .blog-hero-fallback span {
   font-family: var(--font-mono); font-size: .8125rem; letter-spacing: .08em;
