@@ -129,7 +129,6 @@ const EXEMPT_PAGES = new Set([
   "confirm.html", // transactional email landing, deliberately chrome-free
   "unsubscribe.html", // ditto
   "blog/_template.html", // authoring scaffold, never served
-  "dist/index.html", // build output of the Vite widget, not a marketing page
   // Learn-page templates. The GENERATED pages are gitignored build artifacts and are
   // excluded from the tracked list entirely (see below); these tracked templates are
   // what actually needs policing, and they are fragments, not whole documents.
