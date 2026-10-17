@@ -5,6 +5,15 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  # Daily rebuild, so /learn follows the app's help articles (2026-10-16, James).
+  # The /learn pages are generated from the app's help_articles table at build time, and only a push
+  # here used to rebuild them — so a help change in the app stayed stale on the public site until
+  # someone changed this repo. Found when a sentence removed from the app on 2026-10-16 (#739) was
+  # still live on /learn, and four new public articles (#753) were missing.
+  # ⚠️ GitHub may delay a scheduled run, and disables schedules in a repo with no activity for
+  # 60 days — a manual "Run workflow" on this file republishes at any time.
+  schedule:
+    - cron: "0 12 * * *" # 12:00 UTC daily (05:00 PT)
 
 jobs:
   # ── Tests ───────────────────────────────────────────────────────
