@@ -35,6 +35,9 @@ const MODULES = [
   { id: 'cpsia', label: 'CPSIA', title: 'CPSIA / CPC certificates', description: 'Children’s Product Certificates and CPSC testing requirements.' },
   { id: 'prop65', label: 'Prop 65', title: 'California Proposition 65', description: 'Warning labels and exposure analysis for California sales.' },
   { id: 'pfas', label: 'PFAS', title: 'PFAS state requirements', description: '"Forever chemicals" disclosures across US states.' },
+  // MoCRA (2026-10-18): the app has a help module for it since #757; without a card its articles
+  // were listed only under "All articles", with the raw label "mocra".
+  { id: 'mocra', label: 'MoCRA', title: 'MoCRA — cosmetics', description: 'FDA cosmetics rules: facility registration, product listing and safety records.' },
   { id: 'general', label: 'General', title: 'Getting started & general', description: 'Onboarding, multi-module overviews, and platform basics.' },
 ];
 const MODULE_BY_ID = Object.fromEntries(MODULES.map((m) => [m.id, m]));
@@ -183,7 +186,7 @@ async function buildLanding(common, articles) {
   const articleCards = articles.map(articleCardHtml).join('\n');
   const head = renderHead(common, {
     PAGE_TITLE: 'Aleph Learn — compliance guides for US importers',
-    PAGE_DESCRIPTION: 'Plain-language guides to FSVP, CPSIA, Prop 65, and PFAS for US importers. Updated as the rules change.',
+    PAGE_DESCRIPTION: 'Plain-language guides to FSVP, CPSIA, Prop 65, MoCRA and PFAS for US importers. Updated as the rules change.',
     CANONICAL_URL: landingUrl(),
     OG_TYPE: 'website',
     EXTRA_HEAD: '',
