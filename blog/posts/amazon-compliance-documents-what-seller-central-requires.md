@@ -78,8 +78,8 @@ A workable minimum per SKU:
 - any substance declarations, with dates
 - the answer to "what changed since [date]?" from your supplier
 
-Aleph keeps exactly this set against each product, so a document request is a lookup rather
-than a hunt through email.
+In Aleph, you upload these documents against each product they cover, with their dates, so a
+document request is a lookup rather than a hunt through email.
 
 ---
 
