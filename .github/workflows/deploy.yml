@@ -87,9 +87,19 @@ jobs:
       # URL, so the sitemap is the only thing actually holding it back from search.
       - name: Build blog posts from Markdown
         run: npm run build:blog
+      # 🔴 PUBLISH ONLY THE SITE (2026-10-19). This uploaded `path: '.'` — the WHOLE checkout,
+      # after `npm ci` — so CLAUDE.md, docs/ (including the counsel email draft), the raw Markdown
+      # of every unreleased draft post, package.json and node_modules/ were all publicly
+      # readable at www.alephco.io/<path>. Found by a code review; every one returned 200.
+      # Now an ALLOWLIST is copied into _site/ and only that is uploaded. A new top-level file
+      # or folder is NOT published until it is added here — on purpose: forgetting to publish a
+      # page is visible at once; publishing something private is not.
+      - name: Stage only the public site
+        run: scripts/stage-site.sh _site
       - uses: actions/upload-pages-artifact@v3.0.1
         with:
-          path: '.'
+          path: '_site'
+          # For .nojekyll, which must ship or GitHub Pages runs Jekyll and drops generated files.
           include-hidden-files: true
       - id: deployment
         uses: actions/deploy-pages@v4
