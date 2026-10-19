@@ -453,6 +453,42 @@ check("accepts a verification date of today or tomorrow (UTC slack)", () => {
   } finally { cleanup(root); }
 });
 
+// ── A published post must never link to a draft ─────────────────────────────
+// A draft builds no HTML, so a link to one is a 404 on a live page. Five were live on
+// 2026-10-19. The generator renders such a link as its text, and restores it once the
+// target publishes — both halves asserted here, plus a link to a PUBLISHED post kept.
+check("a link to a draft renders as plain text; links to published posts survive", () => {
+  const body = [
+    "See [the draft](/blog/still-a-draft.html), [bare](still-a-draft.html),",
+    "[absolute](https://www.alephco.io/blog/still-a-draft.html) and [live](/blog/live-target.html).",
+  ].join("\n");
+  const root = fixture({
+    posts: [
+      { slug: "linker", title: "Linker", date: "2026-01-05", body },
+      { slug: "live-target", title: "Live Target", date: "2026-01-01" },
+      { slug: "still-a-draft", title: "Still A Draft", date: future(30), draft: true },
+    ],
+  });
+  try {
+    build(root);
+    const html = read(root, "blog/linker.html");
+    assert(!html.includes("still-a-draft.html"), "a published post links to a draft — a 404 on a live page");
+    for (const text of ["the draft", "bare", "absolute"]) {
+      assert(html.includes(text), `the link text "${text}" was dropped along with the link`);
+    }
+    assert(html.includes('href="/blog/live-target.html"'), "a link to a PUBLISHED post was removed too");
+
+    // Publishing the target brings the link back on the next build, with no source edit.
+    const draftFile = join(root, "blog", "posts", "still-a-draft.md");
+    writeFileSync(draftFile, read(root, "blog/posts/still-a-draft.md").replace("draft: true\n", ""));
+    build(root);
+    assert(
+      read(root, "blog/linker.html").includes('href="/blog/still-a-draft.html"'),
+      "the link did not come back once its target published",
+    );
+  } finally { cleanup(root); }
+});
+
 console.log(`\n${failures.length === 0 ? "✓" : "✗"} ${passed} passed, ${failures.length} failed`);
 for (const f of failures) console.log(`\n  ✗ ${f}`);
 process.exit(failures.length === 0 ? 0 : 1);

@@ -385,6 +385,27 @@ function relatedPosts(slug, meta, universe) {
 }
 
 /** Photographer credits, slug -> {photographer, photographer_url, pexels_url, alt}. */
+/**
+ * A link from a post to a DRAFT is a guaranteed 404: a draft builds nothing (2026-10-19 found
+ * five such links live on published posts). Render each as its plain text instead, and say so.
+ *
+ * Deliberately a render step, not an edit to the Markdown: the link stays in the source, and
+ * because every build regenerates every Markdown post, it comes back by itself on the first
+ * build after its target publishes — the weekly release run included. Matches the three forms a
+ * post can use for another post: `/blog/<slug>.html`, `<slug>.html`, and the absolute site URL.
+ */
+function unlinkDrafts(html, draftSlugs, file) {
+  const unlinked = [];
+  const out = html.replace(/<a href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/g, (whole, href, text) => {
+    const m = href.match(/^(?:https?:\/\/(?:www\.)?alephco\.io)?(?:\/blog\/|(?![a-z]+:|\/))([a-z0-9-]+)\.html(?:#.*)?$/i);
+    if (!m || !draftSlugs.has(m[1])) return whole;
+    unlinked.push(m[1]);
+    return text;
+  });
+  for (const slug of unlinked) console.log(`  unlinked ${file} → ${slug} (a draft — link returns when it publishes)`);
+  return out;
+}
+
 async function heroManifest() {
   try {
     return JSON.parse(await fs.readFile(path.join(ROOT, 'img', 'blog', 'hero', 'manifest.json'), 'utf8'));
@@ -469,6 +490,9 @@ async function main() {
   // and never deployed, and those links resolve the moment the post actually publishes.
   const willPublish = parsed.filter((x) => String(x.meta.draft).toLowerCase() !== 'true');
   const mdSlugs = new Set(parsed.map((x) => x.slug));
+  const draftSlugs = new Set(
+    parsed.filter((x) => String(x.meta.draft).toLowerCase() === 'true').map((x) => x.slug)
+  );
   const legacyForLinks = (
     await Promise.all(
       (await fs.readdir(BLOG_DIR))
@@ -554,7 +578,7 @@ async function main() {
       .replaceAll('{{TAGS}}', categoryTags(meta))
       .replaceAll('{{HERO}}', heroFigure(slug, meta, heroes, heroCredits))
       .replaceAll('{{RELATED}}', relatedPosts(slug, meta, universe))
-      .replaceAll('{{BODY}}', marked.parse(body));
+      .replaceAll('{{BODY}}', unlinkDrafts(marked.parse(body), draftSlugs, file));
 
     const isDraft = String(meta.draft).toLowerCase() === 'true';
     const out = isDraft

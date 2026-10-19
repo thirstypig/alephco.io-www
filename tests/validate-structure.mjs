@@ -90,8 +90,6 @@ const PAGES = [
   "features/mocra.html",
   "features/pfas-tracking.html",
   "features/prop-65-labels.html",
-  "features/regulatory-alerts.html",
-  "features/supplier-declarations.html",
   "for/amazon-sellers.html",
   "for/food-importers.html",
   "for/toy-importers.html",
@@ -346,6 +344,18 @@ for (const page of PAGES) {
       existsSync(target),
       `${page}: broken link → ${href} (resolved to ${target})`
     );
+  }
+
+  // 8b. Root-relative links ("/blog/x.html") resolve too. The check above skipped every href
+  // starting with "/", and that is exactly the form generated posts use for each other — so
+  // five links from published posts to unbuilt drafts (404s) sat live until 2026-10-19.
+  // /learn/ is generated in CI by build:learn and is not in the repo, so it is left out.
+  const rootLinks = html.match(/href="\/(?!\/|learn\/)[^"]*"/g) || [];
+  for (const link of rootLinks) {
+    const href = link.slice(6, -1).split("#")[0].split("?")[0];
+    const rel = href.replace(/^\//, "");
+    const target = join(ROOT, rel === "" || rel.endsWith("/") ? `${rel}index.html` : rel);
+    assert(existsSync(target), `${page}: broken root-relative link → ${href} (resolved to ${target})`);
   }
 
   // 9. Logo links to "/" (home)
@@ -719,7 +729,8 @@ for (const claim of RETIRED_PLAN_CLAIMS) {
 // "products" on the next has to wonder whether they are two numbers. Blog posts and /learn
 // articles are editorial and keep their own wording; the site's own pages do not.
 const OWN_PAGES = PAGES.filter((p) => !p.startsWith("blog/") && existsSync(join(ROOT, p)));
-assert(OWN_PAGES.length >= 20, `SKU guard found only ${OWN_PAGES.length} own pages — the list is broken`);
+// 19 since 2026-10-19, when two feature pages for features no customer could reach were deleted.
+assert(OWN_PAGES.length >= 18, `SKU guard found only ${OWN_PAGES.length} own pages — the list is broken`);
 const skuOffenders = OWN_PAGES.filter((p) => /\bSKUs?\b/i.test(readFileSync(join(ROOT, p), "utf-8")));
 assert(skuOffenders.length === 0, `${skuOffenders.join(", ")}: says "SKU" — say "product" on the site's own pages`);
 
