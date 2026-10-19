@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-12",
+  "generated": "2026-10-19",
   "posts": [
     {
       "slug": "fcc-equipment-authorization-for-electronics-importers",
@@ -220,11 +220,10 @@
     {
       "slug": "amazon-compliance-documents-what-seller-central-requires",
       "title": "Amazon compliance documents: what Seller Central asks for and why",
-      "status": "planned",
-      "targetDate": "2026-10-19",
+      "status": "published",
+      "publishedDate": "2026-10-19",
       "image": "/img/blog/amazon-compliance-documents-what-seller-central-requires.png",
-      "url": "https://www.alephco.io/blog/amazon-compliance-documents-what-seller-central-requires.html",
-      "draft": true
+      "url": "https://www.alephco.io/blog/amazon-compliance-documents-what-seller-central-requires.html"
     },
     {
       "slug": "reach-and-svhc-for-us-companies-selling",
