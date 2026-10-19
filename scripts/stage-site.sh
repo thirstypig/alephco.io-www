@@ -15,6 +15,9 @@ mkdir -p "$OUT/blog"
 cp ./*.html CNAME robots.txt sitemap.xml favicon.png .nojekyll "$OUT/"
 # Assets and page folders.
 cp -R css js img features for compare "$OUT/"
+# Build-time photo credits keyed by post slug, including UNRELEASED posts — it would reveal
+# upcoming topics. The published pages carry their own credit lines.
+rm -f "$OUT/img/blog/hero/manifest.json"
 # Blog: built pages only — never the Markdown sources (blog/posts/, drafts included), the
 # publishing schedule or the page template.
 cp blog/*.html "$OUT/blog/"
@@ -25,12 +28,15 @@ rm -rf "$OUT/learn/_templates"
 
 # Fail loudly if anything private got in, or anything essential is missing.
 fail=0
-for p in CLAUDE.md package.json package-lock.json .env.example .env .github docs scripts tests node_modules blog/posts blog/schedule.json blog/_template.html learn/_templates; do
+for p in img/blog/hero/manifest.json CLAUDE.md package.json package-lock.json .env.example .env .github docs scripts tests node_modules blog/posts blog/schedule.json blog/_template.html learn/_templates; do
   if [ -e "$OUT/$p" ]; then echo "stage-site: PRIVATE path would be published: $p" >&2; fail=1; fi
 done
 for p in index.html pricing.html CNAME .nojekyll sitemap.xml robots.txt css js img blog.html learn/index.html; do
   if [ ! -e "$OUT/$p" ]; then echo "stage-site: REQUIRED path missing: $p" >&2; fail=1; fi
 done
+if find "$OUT" -name '*.json' | grep -q .; then
+  echo "stage-site: JSON files would be published (build inputs belong in the repo, not the site):" >&2; find "$OUT" -name '*.json' >&2; fail=1
+fi
 if find "$OUT" -name '*.md' | grep -q .; then
   echo "stage-site: Markdown files would be published:" >&2; find "$OUT" -name '*.md' >&2; fail=1
 fi
