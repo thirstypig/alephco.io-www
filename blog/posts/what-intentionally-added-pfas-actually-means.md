@@ -131,9 +131,8 @@ Fix the question before you send it. A useful supplier declaration:
 4. **Records who answered and when.** Material changes invalidate the answer, and a
    declaration with no date cannot be re-checked.
 
-Aleph's PFAS declaration requests go to the supplier as a link they can fill in without an
-account, and the answer attaches to the product record with its date, so the follow-up
-question — is this still true? — has somewhere to land.
+In Aleph, the declaration you get back is uploaded against the product it covers, with its
+date, so the follow-up question — is this still true? — has somewhere to land.
 
 ---
 

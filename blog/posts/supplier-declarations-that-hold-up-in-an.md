@@ -77,8 +77,8 @@ Not in an email thread, because retention periods outlast relationships — five
 children's product records ([§1107.26](https://www.ecfr.gov/current/title-16/part-1107)),
 two years for FSVP, and six years in Canada.
 
-That is what Aleph does with declarations: the request goes out by link, the answer attaches
-to the product with its date, and the follow-up question has somewhere to land.
+In Aleph, a declaration is uploaded against the product it covers, with its date and an
+expiry, so the follow-up question has somewhere to land.
 
 ---
 

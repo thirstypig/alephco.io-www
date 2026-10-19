@@ -132,9 +132,9 @@ it can be handed to.
 4. Keep the declaration on the product record, not in an inbox.
 5. Re-check when a supplier changes materials, or a state changes its list.
 
-Aleph handles steps 3 and 4: you request a declaration from a supplier by link, they fill
-it in without needing an account, and it attaches to the product record when they complete
-it.
+Aleph helps with step 4: upload the declaration against the product it covers, with its
+date and an expiry, and Aleph alerts you before it lapses. Getting the declaration out of
+the supplier in step 3 is still your email, not ours.
 
 ## The part most people get wrong
 

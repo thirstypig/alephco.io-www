@@ -116,8 +116,8 @@ coating, move a line to a second factory. Nothing tells you when that has happen
 is why the declaration needs to live on the product record with its date, so the question
 "is this still true?" has somewhere to land.
 
-That's what Aleph does with these: you send the request by link, the supplier completes it
-without needing an account, and the answer attaches to the product with its date.
+In Aleph, you upload the declaration against the product it covers, with its date and an
+expiry, and you get an alert before it lapses.
 
 ---
 

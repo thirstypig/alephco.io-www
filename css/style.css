@@ -21,7 +21,7 @@
   --bg-muted: #ebe6d8;
   --fg: var(--ink);
   --fg-muted: var(--dim);
-  --fg-subtle: #8b9bb1;
+  --fg-subtle: #566479; /* was #8b9bb1, 2.4:1 on paper; now 5.2:1 on --paper, 4.8:1 on --bg-muted (WCAG AA) */
   --border: var(--rule);
   --primary: var(--navy-deep);
   --primary-fg: var(--paper);
