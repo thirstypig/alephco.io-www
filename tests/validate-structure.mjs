@@ -689,7 +689,7 @@ for (const claim of VERIFICATION_CLAIMS) {
 //
 // HISTORY. From 2026-09-30 this block banned every "free" offer: there was no self-serve free
 // plan then, and 60+ buttons said "Get Started Free" to a paywall. On 2026-10-14 James decided
-// there IS one — Free: 2 products, every regulation, 3 seats — and that every PAID plan covers
+// there IS one — Free: 2 products, every regulation, 1 seat — and that every PAID plan covers
 // every regulation too, the plans differing only by products, seats and support. So the ban is
 // retired, and what it guarded (copy that promises something the product does not do) is now
 // guarded against the claims the new decision made false.
