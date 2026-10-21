@@ -8,12 +8,15 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { marked } from 'marked';
+import { learnLinkRenderer } from './lib/learn-links.mjs';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 
 dotenv.config();
+// External links (and the sample PDFs) open in a new tab, as they do in the app's Help panel.
+marked.use(learnLinkRenderer);
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const TEMPLATES = path.join(ROOT, 'learn', '_templates');

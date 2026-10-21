@@ -1,0 +1,46 @@
+{
+  "samples": [
+    {
+      "file": "fsvp-sample-supplier-evaluation.pdf",
+      "title": "Foreign supplier evaluation (21 CFR 1.505(a))",
+      "bytes": 24144,
+      "sha256": "e7b68bd23d72c86e469ba8b5f9025017eff39e5720904609848108cf1ccd66a7"
+    },
+    {
+      "file": "fsvp-sample-supplier-approval.pdf",
+      "title": "Foreign supplier approval (21 CFR 1.505(b))",
+      "bytes": 19093,
+      "sha256": "1980ad1df7cb79a1112bf81b0f013e0c6731616ced5f602aa5e23087eb73a983"
+    },
+    {
+      "file": "fsvp-sample-verification-activity.pdf",
+      "title": "Verification activity record (21 CFR 1.506(e))",
+      "bytes": 23030,
+      "sha256": "36e7117e9bfa150461eafee7a7ae0717b95ab5e4d6caab309a4c78623a86f6a5"
+    },
+    {
+      "file": "fsvp-sample-corrective-action.pdf",
+      "title": "Corrective action (21 CFR 1.508)",
+      "bytes": 21360,
+      "sha256": "73e1bffb35428e9a55231f63cbb70e47c7fcd724f08447d1d331af321c390034"
+    },
+    {
+      "file": "fsvp-sample-written-procedures.pdf",
+      "title": "Written verification procedures (21 CFR 1.506(b))",
+      "bytes": 19869,
+      "sha256": "09e6729cec9e9f9168d728f18c80dd01b3242bca0bb2609d516c78728fe9edc1"
+    },
+    {
+      "file": "fsvp-sample-qualified-individual.pdf",
+      "title": "Qualified individual (21 CFR 1.503)",
+      "bytes": 19626,
+      "sha256": "327674c4da5749673b3574e8c759b545735b6e879b4328606ae8806dcd46c551"
+    },
+    {
+      "file": "fsvp-sample-hazard-analysis.pdf",
+      "title": "Hazard analysis (21 CFR 1.504)",
+      "bytes": 25041,
+      "sha256": "6fa819a25c62397f0726d4a3b7181e3e139f6d0835203e7b8d2df717cfa62031"
+    }
+  ]
+}
