@@ -1,0 +1,53 @@
+{
+  "samples": [
+    {
+      "file": "fsvp-sample-supplier-evaluation.pdf",
+      "title": "Foreign supplier evaluation (21 CFR 1.505(a))",
+      "bytes": 24067,
+      "sha256": "b4a6e0448f9e8090abf14cd9b9e96ec532f4422f11181da8ab9a3ce0b862b972",
+      "textSha256": "5ccbe7f3203efa676a6f7119134328ddf742891857720699dea185be949c716d"
+    },
+    {
+      "file": "fsvp-sample-supplier-approval.pdf",
+      "title": "Foreign supplier approval (21 CFR 1.505(b))",
+      "bytes": 18537,
+      "sha256": "710d4cc196f2e701e1200d816e20337efd57da0bb78c5d8cf05d1202b6152041",
+      "textSha256": "f2f5c52fdc24d5aff92ffaca740eab36f800a2ba9f45ce2476b54e35a56ba1df"
+    },
+    {
+      "file": "fsvp-sample-verification-activity.pdf",
+      "title": "Verification activity record (21 CFR 1.506(e))",
+      "bytes": 22494,
+      "sha256": "e320e6f33b1d61e60991e5584f18dca84ef1a9e47f5e6dbbe309439968629264",
+      "textSha256": "7f7a8f1cdec5ed7d588649087aca8cde70eedecf41a4b513877c14637efd2594"
+    },
+    {
+      "file": "fsvp-sample-corrective-action.pdf",
+      "title": "Corrective action (21 CFR 1.508)",
+      "bytes": 20626,
+      "sha256": "79691add558ca224fe60152749b3923da2daadf91b3aa9433e7262c95b62bb3b",
+      "textSha256": "a35f1dd1fd5c5f73af191cb906e609ca422736acab1d92c4df91da287b41e7a7"
+    },
+    {
+      "file": "fsvp-sample-written-procedures.pdf",
+      "title": "Written verification procedures (21 CFR 1.506(b))",
+      "bytes": 20468,
+      "sha256": "a3a1f3189dabca51b7419b048ebebe8e1a802dc92a54ad73e3c7336fc5c1aafb",
+      "textSha256": "775b2ae3513db2aa0b3cf508b96d9159308eb5e4480624c228358b5a35329fa7"
+    },
+    {
+      "file": "fsvp-sample-qualified-individual.pdf",
+      "title": "Qualified individual (21 CFR 1.503)",
+      "bytes": 18993,
+      "sha256": "d324c81406eb4464cf52bdf88cee30c0e83fe25f49babd5453c58389e7ac152f",
+      "textSha256": "625099e48458da2fde5c1b815de78c9c6cd92b5215a72634599fd7ddb42b63c1"
+    },
+    {
+      "file": "fsvp-sample-hazard-analysis.pdf",
+      "title": "Hazard analysis (21 CFR 1.504)",
+      "bytes": 24396,
+      "sha256": "640f3c5807c666514bee33b697dd706383f7e35025ae6e3e813676eb2424b127",
+      "textSha256": "ef934ecdbef9755abf47298a2d47dfee2e16f73dd94bf59a84c125ee423ae7ad"
+    }
+  ]
+}
