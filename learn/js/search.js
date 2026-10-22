@@ -2,7 +2,9 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
 const SUPABASE_URL = 'https://jkupfcvqxhlqwwqwmypr.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImprdXBmY3ZxeGhscXd3cXdteXByIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEyNjM4MDEsImV4cCI6MjA4NjgzOTgwMX0.3lFJjByJYzObvjj42ujdqhpvCtUuwZfzwvstRdxXyXk';
+// Supabase publishable key (public by design; RLS still scopes results). Replaced the legacy anon JWT,
+// deactivated 2026-10-21 after the Railway env-var disclosure.
+const SUPABASE_ANON_KEY = 'sb_publishable_2fNhSA6sOxNKw867-cPFdw_Nux3xrHr';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
