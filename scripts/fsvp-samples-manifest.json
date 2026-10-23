@@ -3,51 +3,51 @@
     {
       "file": "fsvp-sample-supplier-evaluation.pdf",
       "title": "Foreign supplier evaluation (21 CFR 1.505(a))",
-      "bytes": 24067,
-      "sha256": "b4a6e0448f9e8090abf14cd9b9e96ec532f4422f11181da8ab9a3ce0b862b972",
-      "textSha256": "5ccbe7f3203efa676a6f7119134328ddf742891857720699dea185be949c716d"
+      "bytes": 76990,
+      "sha256": "a7205fb4548ee78f3abc7fe63559a04fd3640c5a73b3ecb00e4c82c6f56f40fc",
+      "textSha256": "3bbc378ca0d168055c613558bd3cacf01f7a65f5e1f7aae867f7e07ca8e493fb"
     },
     {
       "file": "fsvp-sample-supplier-approval.pdf",
       "title": "Foreign supplier approval (21 CFR 1.505(b))",
-      "bytes": 18537,
-      "sha256": "710d4cc196f2e701e1200d816e20337efd57da0bb78c5d8cf05d1202b6152041",
-      "textSha256": "f2f5c52fdc24d5aff92ffaca740eab36f800a2ba9f45ce2476b54e35a56ba1df"
+      "bytes": 69399,
+      "sha256": "564657ee8c267f71966627f419eaad47e8a93da66df9c6d2282e86a2c51a6660",
+      "textSha256": "e123b3103baf7acaee36210568249a8364ae906b3259dd12c49370297d802b55"
     },
     {
       "file": "fsvp-sample-verification-activity.pdf",
       "title": "Verification activity record (21 CFR 1.506(e))",
-      "bytes": 22494,
-      "sha256": "e320e6f33b1d61e60991e5584f18dca84ef1a9e47f5e6dbbe309439968629264",
-      "textSha256": "7f7a8f1cdec5ed7d588649087aca8cde70eedecf41a4b513877c14637efd2594"
+      "bytes": 74881,
+      "sha256": "80c9856c70bf6dbd7a5c74a6e0101cb12cdabc71aaf592bd152d11157e343292",
+      "textSha256": "4e42c1f10e876e8d806cad4a8e0244fcf21c6093c2ef52ee13576e34406c6f16"
     },
     {
       "file": "fsvp-sample-corrective-action.pdf",
       "title": "Corrective action (21 CFR 1.508)",
-      "bytes": 20626,
-      "sha256": "79691add558ca224fe60152749b3923da2daadf91b3aa9433e7262c95b62bb3b",
-      "textSha256": "a35f1dd1fd5c5f73af191cb906e609ca422736acab1d92c4df91da287b41e7a7"
+      "bytes": 71633,
+      "sha256": "c2b7bfea326f39a04a23f52ad1fd3628f1e7b15eb2a16cafaa5b5e26243ba479",
+      "textSha256": "175ab529301decff46edbfdce52f2cdbda5ca3fd881dc937c646e12506145006"
     },
     {
       "file": "fsvp-sample-written-procedures.pdf",
       "title": "Written verification procedures (21 CFR 1.506(b))",
-      "bytes": 20468,
-      "sha256": "a3a1f3189dabca51b7419b048ebebe8e1a802dc92a54ad73e3c7336fc5c1aafb",
-      "textSha256": "775b2ae3513db2aa0b3cf508b96d9159308eb5e4480624c228358b5a35329fa7"
+      "bytes": 75459,
+      "sha256": "00c3caf22d3818765cdd6bc8b7176c71aa62b98b6a73145d5b2e1798b862f603",
+      "textSha256": "d20645d626da22aa4da120cf3b2da9e680db59247bb57fd6ff95d917d0180259"
     },
     {
       "file": "fsvp-sample-qualified-individual.pdf",
       "title": "Qualified individual (21 CFR 1.503)",
-      "bytes": 18993,
-      "sha256": "d324c81406eb4464cf52bdf88cee30c0e83fe25f49babd5453c58389e7ac152f",
-      "textSha256": "625099e48458da2fde5c1b815de78c9c6cd92b5215a72634599fd7ddb42b63c1"
+      "bytes": 69918,
+      "sha256": "a879318fed7fa17d6d31f61ce1ee50dbe39fd608816a288535b02fbd702d0abf",
+      "textSha256": "cdfb045ff9d2eed5a5d7239c1ebfe798e9330bbded58eb7ecdf3d6f2ccf5c35d"
     },
     {
       "file": "fsvp-sample-hazard-analysis.pdf",
       "title": "Hazard analysis (21 CFR 1.504)",
-      "bytes": 24396,
-      "sha256": "640f3c5807c666514bee33b697dd706383f7e35025ae6e3e813676eb2424b127",
-      "textSha256": "ef934ecdbef9755abf47298a2d47dfee2e16f73dd94bf59a84c125ee423ae7ad"
+      "bytes": 77233,
+      "sha256": "3db5f94ddf949d30de34f6f69fa99b16fb1bd080c294153edc66d4da0e75fa4b",
+      "textSha256": "3af4eecf8e0a6230e6b87cc91e05d4d55dabe0bd510dce18d07faf9f57b97b42"
     }
   ]
 }
