@@ -213,6 +213,9 @@ p  { color: var(--fg-muted); }
 .mod-prop65 .card-icon { background: #f2e4e3; color: var(--accent); }
 .mod-pfas  .card-icon { background: #e2e8ef; color: #2563eb; }
 .mod-mocra .card-icon { background: #fdf2f8; color: #db2777; }
+.mod-dairy .card-icon { background: #e6eef0; color: #0e7490; }
+.mod-reach .card-icon { background: #ece8f3; color: #6d28d9; }
+.mod-ul    .card-icon { background: #eeeeec; color: #57534e; }
 
 /* ── Section Headings ────────────────────────────────────── */
 .section-heading { margin-bottom: 3rem; }
