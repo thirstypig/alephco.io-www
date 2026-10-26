@@ -5,7 +5,7 @@ date: 2026-10-26
 slug: getting-a-pfas-declaration-out-of-an
 keywords: [PFAS declaration, supplier declaration, PFAS reporting, overseas supplier, CASRN, importer compliance, supply chain agreement]
 sources: [https://www.revisor.mn.gov/statutes/cite/116.943, https://www.pca.state.mn.us/air-water-land-climate/reporting-pfas-in-products, https://www.env.nm.gov/opf/wp-content/uploads/sites/13/2026/04/EXHIBIT-A-20.13.2-NMAC-FINAL.pdf, https://portal.ct.gov/deep/p2/pfas-in-products]
-draft: true
+draft: false
 ---
 
 Most PFAS declaration forms we see were written by guessing at what a regulator might

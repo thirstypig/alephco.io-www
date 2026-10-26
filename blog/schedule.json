@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-19",
+  "generated": "2026-10-26",
   "posts": [
     {
       "slug": "fcc-equipment-authorization-for-electronics-importers",
@@ -211,11 +211,10 @@
     {
       "slug": "getting-a-pfas-declaration-out-of-an",
       "title": "Getting a PFAS declaration out of an overseas supplier",
-      "status": "planned",
-      "targetDate": "2026-10-26",
+      "status": "published",
+      "publishedDate": "2026-10-26",
       "image": "/img/blog/getting-a-pfas-declaration-out-of-an.png",
-      "url": "https://www.alephco.io/blog/getting-a-pfas-declaration-out-of-an.html",
-      "draft": true
+      "url": "https://www.alephco.io/blog/getting-a-pfas-declaration-out-of-an.html"
     },
     {
       "slug": "amazon-compliance-documents-what-seller-central-requires",
