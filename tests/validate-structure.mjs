@@ -116,6 +116,8 @@ const PAGES = [
 const REDIRECT_PAGES = {
   "privacy.html": "https://app.alephco.io/legal/privacy",
   "terms.html": "https://app.alephco.io/legal/terms",
+  // People type alephco.io/signup (app todo 831); the apex forwards to www, which had no page.
+  "signup.html": "https://app.alephco.io/register",
 };
 
 /**
