@@ -45,9 +45,9 @@
     {
       "file": "fsvp-sample-hazard-analysis.pdf",
       "title": "Hazard analysis (21 CFR 1.504)",
-      "bytes": 77233,
-      "sha256": "3db5f94ddf949d30de34f6f69fa99b16fb1bd080c294153edc66d4da0e75fa4b",
-      "textSha256": "3af4eecf8e0a6230e6b87cc91e05d4d55dabe0bd510dce18d07faf9f57b97b42"
+      "bytes": 77580,
+      "sha256": "f9dcb4a0ef2f3f922b64a73b10035ba5d9fad6639f242beb2b8a00ad2d26b736",
+      "textSha256": "410782ee1fd4e1a73c040f78f2ebf8a29905b099faf02da33005db3aaa6561db"
     }
   ]
 }
