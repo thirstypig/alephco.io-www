@@ -26,6 +26,11 @@
 .prose pre code { background: transparent; padding: 0; }
 .prose a { color: var(--teal-600, #0f766e); }
 .prose img { max-width: 100%; border-radius: 8px; }
+/* Help guides (2026-10-30): the TL;DR box, and a step's screenshot framed like the app frames it. */
+.prose .learn-tldr { border: 2px solid var(--fg, #1f3a5f); padding: .5rem 1rem; margin: 1rem 0 1.5rem; background: var(--bg-subtle); }
+.prose .learn-tldr > p:first-child { font-family: 'IBM Plex Mono', monospace; font-size: .75rem; font-weight: 700; letter-spacing: .2em; color: #c43a2e; margin: .25rem 0; }
+.prose .learn-tldr ul { margin: .25rem 0 .5rem; }
+.prose img[src^="https://app.alephco.io/help-img/"] { display: block; width: 100%; height: auto; border: 2px solid var(--fg, #1f3a5f); border-radius: 0; margin: .75rem 0; }
 
 .article-cta { margin: 2.5rem 0; padding: 1.5rem; background: var(--bg-subtle); border-radius: 12px; border: 1px solid var(--border); }
 .article-cta h3 { margin: 0 0 .5rem; }
