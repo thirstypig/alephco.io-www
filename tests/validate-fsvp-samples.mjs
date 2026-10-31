@@ -80,6 +80,23 @@ await check("/learn article links that leave the site open in a new tab; links i
   assert(/marked\.use\(learnLinkRenderer\)/.test(build), "build-learn-pages.mjs does not use the link renderer");
 });
 
+await check("app help links, guide pictures and the TL;DR box render for /learn", async () => {
+  const { marked } = await import("marked");
+  const { learnLinkRenderer, learnHref, learnImageSrc } = await import("../scripts/lib/learn-links.mjs");
+  marked.use(learnLinkRenderer);
+  assert(learnHref("/help/compliance/fsvp-basics") === "/learn/articles/compliance/fsvp-basics/", learnHref("/help/compliance/fsvp-basics"));
+  assert(learnHref("/help/documents/x") === "https://app.alephco.io/help/documents/x", "a signed-in-only article must open in the app");
+  assert(learnHref("/learn/articles/y/") === "/learn/articles/y/", "a /learn link must be left alone");
+  assert(learnImageSrc("/help-img/fsvp/step-1.png") === "https://app.alephco.io/help-img/fsvp/step-1.png", "guide picture not loaded from the app");
+  assert(learnImageSrc("https://example.com/a.png") === "https://example.com/a.png", "an absolute picture must be left alone");
+  const html = marked.parse("> **TL;DR**\n>\n> - One.\n> - Two.\n\n### 1. Step\n\n![The form. Marker 1: Name.](/help-img/fsvp/step-1.png)\n\n[More](/help/compliance/fsvp-basics)\n\n> An ordinary quote.");
+  assert(/<aside class="learn-tldr" aria-label="TL;DR">/.test(html), html);
+  assert(/<li>One\.<\/li>/.test(html), html);
+  assert(/<img src="https:\/\/app\.alephco\.io\/help-img\/fsvp\/step-1\.png" alt="The form\. Marker 1: Name\." loading="lazy">/.test(html), html);
+  assert(/<a href="\/learn\/articles\/compliance\/fsvp-basics\/">More<\/a>/.test(html), html);
+  assert(/<blockquote>\n<p>An ordinary quote\.<\/p>\n<\/blockquote>/.test(html), html);
+});
+
 if (failures.length === 0) {
   console.log(`✓ All ${passed} FSVP sample checks passed (${listed.length} samples)`);
 } else {
