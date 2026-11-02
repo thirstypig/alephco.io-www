@@ -72,6 +72,7 @@ const PAGES = [
   "industries.html",
   "pricing.html",
   "status.html",
+  "security.html",
   "blog/cpc-certificate-guide.html",
   "blog/cpsc-recalls-for-importers.html",
   "blog/fsvp-guide-for-importers.html",
