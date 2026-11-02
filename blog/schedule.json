@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-26",
+  "generated": "2026-11-02",
   "posts": [
     {
       "slug": "fcc-equipment-authorization-for-electronics-importers",
@@ -202,11 +202,10 @@
     {
       "slug": "tracking-labels-what-has-to-be-on",
       "title": "Tracking labels: what has to be on a children's product",
-      "status": "planned",
-      "targetDate": "2026-11-02",
+      "status": "published",
+      "publishedDate": "2026-11-02",
       "image": "/img/blog/tracking-labels-what-has-to-be-on.png",
-      "url": "https://www.alephco.io/blog/tracking-labels-what-has-to-be-on.html",
-      "draft": true
+      "url": "https://www.alephco.io/blog/tracking-labels-what-has-to-be-on.html"
     },
     {
       "slug": "getting-a-pfas-declaration-out-of-an",

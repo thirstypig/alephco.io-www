@@ -5,7 +5,7 @@ date: 2026-11-02
 slug: tracking-labels-what-has-to-be-on
 keywords: [tracking label, CPSIA section 103, children's product, permanent marking, cohort information, recall, importer compliance]
 sources: [https://www.law.cornell.edu/uscode/text/15/2063, https://www.ecfr.gov/current/title-16/part-1200]
-draft: true
+draft: false
 ---
 
 Tracking labels look like the easiest CPSIA requirement, and they're among the most
