@@ -105,10 +105,10 @@ itself — the broker still transmits.
 4. Ask your broker what they are currently transmitting for you, and whether ACE is
    returning any messages on your entries.
 
-Aleph keeps the certificates you issue and the lab reports behind them on each product,
-and emails you before the expiry dates you record, so "which of these is expiring" is a list
-rather than a search. You write, attest to, and file the certificate; Aleph does not generate
-it or file with CPSC or CBP.
+Aleph builds the GCC or CPC from your records and prints it as a PDF, keeps it and the lab
+reports behind it on each product, and emails you before the expiry dates you record, so "which
+of these is expiring" is a list rather than a search. You choose the rules the certificate
+cites and attest to it as the certifier.
 
 ---
 
