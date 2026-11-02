@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>System Status — Aleph</title>
-  <meta name="description" content="Real-time system status for Aleph's compliance platform. Check if all services are operational.">
+  <meta name="description" content="Check whether the Aleph app is up right now. A live check from your browser, with no history.">
   <link rel="canonical" href="https://www.alephco.io/status.html">
   <meta property="og:type" content="website">
   <meta property="og:title" content="System Status — Aleph">
-  <meta property="og:description" content="Real-time system status for Aleph's compliance platform. Check if all services are operational.">
+  <meta property="og:description" content="Check whether the Aleph app is up right now. A live check from your browser, with no history.">
   <meta property="og:url" content="https://www.alephco.io/status.html">
   <meta property="og:site_name" content="Aleph">
   <meta property="og:image" content="https://www.alephco.io/img/og-default.png">
@@ -16,7 +16,7 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="System Status — Aleph">
-  <meta name="twitter:description" content="Real-time system status for Aleph's compliance platform. Check if all services are operational.">
+  <meta name="twitter:description" content="Check whether the Aleph app is up right now. A live check from your browser, with no history.">
   <meta name="twitter:image" content="https://www.alephco.io/img/og-default.png">
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -29,6 +29,7 @@
     .status-banner { display: inline-flex; align-items: center; gap: .5rem; padding: .5rem 1.25rem; border-radius: 999px; font-size: .9375rem; font-weight: 600; margin-top: 1rem; }
     .status-banner.operational { background: rgba(16,185,129,.1); color: #10b981; border: 1px solid rgba(16,185,129,.2); }
     .status-banner.degraded { background: rgba(245,158,11,.1); color: #f59e0b; border: 1px solid rgba(245,158,11,.2); }
+    .status-banner.unknown { background: rgba(107,114,128,.1); color: var(--fg-muted); border: 1px solid rgba(107,114,128,.2); }
     .status-banner.down { background: rgba(239,68,68,.1); color: #ef4444; border: 1px solid rgba(239,68,68,.2); }
     .status-dot-lg { width: 10px; height: 10px; border-radius: 50%; }
     .status-dot-lg.green { background: #10b981; }
@@ -50,16 +51,6 @@
     .status-footer-note a { color: var(--primary); }
     .status-updated { text-align: center; font-size: .75rem; color: var(--fg-subtle); margin-top: 1rem; }
 
-    /* Uptime bars */
-    .uptime-bars { display: flex; gap: 1px; height: 32px; margin-top: .75rem; }
-    .uptime-bar { flex: 1; border-radius: 2px; min-width: 2px; position: relative; cursor: pointer; transition: opacity .15s; }
-    .uptime-bar:hover { opacity: .8; }
-    .uptime-bar.green { background: #10b981; }
-    .uptime-bar.yellow { background: #f59e0b; }
-    .uptime-bar.red { background: #ef4444; }
-    .uptime-bar.gray { background: var(--border); }
-    .uptime-label { display: flex; justify-content: space-between; font-size: .6875rem; color: var(--fg-subtle); margin-top: .25rem; }
-    .uptime-pct { font-size: .75rem; font-weight: 600; color: var(--fg-muted); margin-top: .5rem; text-align: right; }
   </style>
   <!-- Google Analytics 4 -->
   <script src="/js/analytics.js"></script>
@@ -116,57 +107,17 @@
       <!-- Hero -->
       <div class="status-hero">
         <h1>System Status</h1>
-        <p style="color:var(--fg-muted);">Real-time health of Aleph's compliance platform.</p>
-        <div class="status-banner operational" id="status-banner">
-          <span class="status-dot-lg green" id="banner-dot"></span>
-          <span id="banner-text">Checking...</span>
+        <p style="color:var(--fg-muted);">When you open this page, your browser asks the Aleph app whether it is running. Nothing is recorded, so there is no history here.</p>
+        <div class="status-banner unknown" id="status-banner" role="status" aria-live="polite">
+          <span class="status-dot-lg gray" id="banner-dot"></span>
+          <span id="banner-text">App: checking&hellip;</span>
         </div>
+        <div class="status-updated" id="status-detail"></div>
         <div class="status-updated" id="status-time"></div>
+        <div style="margin-top:1rem;"><button type="button" class="btn btn-outline btn-sm" id="status-recheck">Check again</button></div>
       </div>
 
-      <!-- Components with uptime bars -->
-      <div class="status-grid">
-        <div class="status-row" style="flex-direction:column;align-items:stretch;">
-          <div style="display:flex;justify-content:space-between;align-items:center;">
-            <div class="status-row-name">Application<small>app.alephco.io &mdash; web application</small></div>
-            <div class="status-row-badge unknown" id="comp-app"><span class="status-dot-lg gray"></span> Checking</div>
-          </div>
-          <div class="uptime-bars" id="bars-app"></div>
-          <div class="uptime-label"><span>90 days ago</span><span class="uptime-pct" id="pct-app"></span><span>Today</span></div>
-        </div>
-        <div class="status-row" style="flex-direction:column;align-items:stretch;">
-          <div style="display:flex;justify-content:space-between;align-items:center;">
-            <div class="status-row-name">Database<small>PostgreSQL &mdash; Supabase hosted</small></div>
-            <div class="status-row-badge unknown" id="comp-db"><span class="status-dot-lg gray"></span> Checking</div>
-          </div>
-          <div class="uptime-bars" id="bars-db"></div>
-          <div class="uptime-label"><span>90 days ago</span><span class="uptime-pct" id="pct-db"></span><span>Today</span></div>
-        </div>
-        <div class="status-row" style="flex-direction:column;align-items:stretch;">
-          <div style="display:flex;justify-content:space-between;align-items:center;">
-            <div class="status-row-name">Authentication<small>Supabase Auth &mdash; login, OAuth, sessions</small></div>
-            <div class="status-row-badge unknown" id="comp-auth"><span class="status-dot-lg gray"></span> Checking</div>
-          </div>
-          <div class="uptime-bars" id="bars-auth"></div>
-          <div class="uptime-label"><span>90 days ago</span><span class="uptime-pct" id="pct-auth"></span><span>Today</span></div>
-        </div>
-        <div class="status-row" style="flex-direction:column;align-items:stretch;">
-          <div style="display:flex;justify-content:space-between;align-items:center;">
-            <div class="status-row-name">Document Storage<small>Supabase Storage &mdash; file uploads, PDFs</small></div>
-            <div class="status-row-badge unknown" id="comp-storage"><span class="status-dot-lg gray"></span> Checking</div>
-          </div>
-          <div class="uptime-bars" id="bars-storage"></div>
-          <div class="uptime-label"><span>90 days ago</span><span class="uptime-pct" id="pct-storage"></span><span>Today</span></div>
-        </div>
-        <div class="status-row" style="flex-direction:column;align-items:stretch;">
-          <div style="display:flex;justify-content:space-between;align-items:center;">
-            <div class="status-row-name">Marketing Site<small>alephco.io &mdash; GitHub Pages</small></div>
-            <div class="status-row-badge ok" id="comp-www"><span class="status-dot-lg green"></span> Operational</div>
-          </div>
-          <div class="uptime-bars" id="bars-www"></div>
-          <div class="uptime-label"><span>90 days ago</span><span class="uptime-pct" id="pct-www"></span><span>Today</span></div>
-        </div>
-      </div>
+      <p class="status-footer-note" style="margin:2rem 0 0;">This checks <a href="https://app.alephco.io/api/health">app.alephco.io/api/health</a>, which answers when the app is running and says whether it can reach its database. It does not check sign-in or file storage separately.</p>
 
       <div class="status-footer-note">
         <p>Having issues? <a href="contact.html">Contact support</a> or email <a href="mailto:support@alephco.io">support@alephco.io</a></p>
@@ -234,101 +185,56 @@
 
   <script src="js/main.js"></script>
   <script>
-    // Check system health
-    (async function checkStatus() {
-      const banner = document.getElementById('status-banner');
-      const bannerDot = document.getElementById('banner-dot');
-      const bannerText = document.getElementById('banner-text');
-      const timeEl = document.getElementById('status-time');
+    // One live check from the visitor's browser: GET app.alephco.io/api/health (the app allows
+    // alephco.io and www.alephco.io in its CORS list). It returns {status, database, timestamp}.
+    // No history and no percentages: nothing here is recorded anywhere.
+    (function () {
+      var banner = document.getElementById('status-banner');
+      var dot = document.getElementById('banner-dot');
+      var text = document.getElementById('banner-text');
+      var detail = document.getElementById('status-detail');
+      var timeEl = document.getElementById('status-time');
+      var button = document.getElementById('status-recheck');
 
-      function setBadge(id, status, label) {
-        const el = document.getElementById(id);
-        if (!el) return;
-        const dotClass = status === 'ok' ? 'green' : status === 'warn' ? 'yellow' : status === 'err' ? 'red' : 'gray';
-        const badgeClass = status === 'ok' ? 'ok' : status === 'warn' ? 'warn' : status === 'err' ? 'err' : 'unknown';
-        el.className = 'status-row-badge ' + badgeClass;
-        el.innerHTML = '<span class="status-dot-lg ' + dotClass + '"></span> ' + label;
+      function show(state, label, note) {
+        var dotClass = state === 'up' ? 'green' : state === 'down' ? 'red' : 'gray';
+        var bannerClass = state === 'up' ? 'operational' : state === 'down' ? 'down' : 'unknown';
+        banner.className = 'status-banner ' + bannerClass;
+        dot.className = 'status-dot-lg ' + dotClass;
+        text.textContent = label;
+        detail.textContent = note || '';
+        timeEl.textContent = 'Checked at ' + new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', second: '2-digit', timeZoneName: 'short' });
       }
 
-      try {
-        const res = await fetch('https://app.alephco.io/api/health');
-        const data = await res.json();
-
-        if (data.status === 'healthy' && data.database === 'connected') {
-          // All good
-          banner.className = 'status-banner operational';
-          bannerDot.className = 'status-dot-lg green';
-          bannerText.textContent = 'All Systems Operational';
-          setBadge('comp-app', 'ok', 'Operational');
-          setBadge('comp-db', 'ok', 'Connected');
-          setBadge('comp-auth', 'ok', 'Operational');
-          setBadge('comp-storage', 'ok', 'Operational');
-        } else if (data.status === 'healthy') {
-          // App up but DB issue
-          banner.className = 'status-banner degraded';
-          bannerDot.className = 'status-dot-lg yellow';
-          bannerText.textContent = 'Partial System Degradation';
-          setBadge('comp-app', 'ok', 'Operational');
-          setBadge('comp-db', 'warn', 'Degraded');
-          setBadge('comp-auth', 'warn', 'Degraded');
-          setBadge('comp-storage', 'ok', 'Operational');
-        }
-
-        timeEl.textContent = 'Last checked: ' + new Date().toLocaleTimeString();
-      } catch (e) {
-        // App unreachable
-        banner.className = 'status-banner down';
-        bannerDot.className = 'status-dot-lg red';
-        bannerText.textContent = 'Service Disruption';
-        setBadge('comp-app', 'err', 'Unreachable');
-        setBadge('comp-db', 'unknown', 'Unknown');
-        setBadge('comp-auth', 'unknown', 'Unknown');
-        setBadge('comp-storage', 'unknown', 'Unknown');
-        timeEl.textContent = 'Last checked: ' + new Date().toLocaleTimeString();
-      }
-
-      // Render uptime bars for all components
-      renderUptimeBars();
-
-      // Re-check every 60 seconds
-      setTimeout(checkStatus, 60000);
-    })();
-    function renderUptimeBars() {
-      // Generate 90 bars for each component
-      // For a new service, show all green (operational since launch ~April 2026)
-      // Later: replace with real data from UptimeRobot API
-      const components = ['app', 'db', 'auth', 'storage', 'www'];
-      const days = 90;
-      const launchDate = new Date('2026-04-06'); // approximate launch
-      const today = new Date();
-
-      for (const comp of components) {
-        const container = document.getElementById('bars-' + comp);
-        const pctEl = document.getElementById('pct-' + comp);
-        if (!container) continue;
-
-        let greenDays = 0;
-        for (let i = days - 1; i >= 0; i--) {
-          const bar = document.createElement('div');
-          bar.className = 'uptime-bar';
-          const date = new Date(today.getTime() - i * 24 * 60 * 60 * 1000);
-
-          if (date < launchDate) {
-            bar.classList.add('gray'); // before launch
-            bar.title = date.toLocaleDateString() + ' — Not yet launched';
-          } else {
-            bar.classList.add('green');
-            bar.title = date.toLocaleDateString() + ' — Operational';
-            greenDays++;
+      async function check() {
+        button.disabled = true;
+        text.textContent = 'App: checking\u2026';
+        var controller = new AbortController();
+        var timer = setTimeout(function () { controller.abort(); }, 10000);
+        try {
+          var res = await fetch('https://app.alephco.io/api/health', { cache: 'no-store', signal: controller.signal });
+          if (!res.ok) {
+            show('down', 'App: down', 'The app answered with an error (HTTP ' + res.status + ').');
+            return;
           }
-          container.appendChild(bar);
+          var data = await res.json();
+          if (data && data.status === 'healthy') {
+            show('up', 'App: up', data.database === 'connected' ? '' : 'The app is running, but it reported a problem reaching its database.');
+          } else {
+            show('down', 'App: down', 'The app answered, but did not report itself healthy.');
+          }
+        } catch (e) {
+          // A network error or timeout can mean the app is down OR that this browser cannot reach it.
+          show('unknown', "App: couldn't check", 'Your browser could not reach app.alephco.io. The app may be down, or your connection may be blocking it.');
+        } finally {
+          clearTimeout(timer);
+          button.disabled = false;
         }
-
-        const activeDays = Math.min(days, Math.floor((today.getTime() - launchDate.getTime()) / (24*60*60*1000)));
-        const pct = activeDays > 0 ? ((greenDays / activeDays) * 100).toFixed(2) : '100.00';
-        if (pctEl) pctEl.textContent = pct + '% uptime';
       }
-    }
+
+      button.addEventListener('click', check);
+      check();
+    })();
   </script>
 </body>
 </html>
