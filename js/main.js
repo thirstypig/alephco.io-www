@@ -99,35 +99,78 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
-  // Contact form
+  // Contact form — JSON to the app's public endpoint, which emails the message to Aleph
+  // (app: server/routes/public-contact.ts). The inbox is configured on the server; no address
+  // but the public support@ fallback appears in this file. Same localhost rule as the signup.
   const form = document.getElementById('contact-form');
   if (form) {
+    const errorBox = form.querySelector('.form-error');
+    const successBox = document.querySelector('.form-success');
+    const showError = (lead) => {
+      errorBox.textContent = lead + ' ';
+      const a = document.createElement('a');
+      a.href = 'mailto:support@alephco.io';
+      a.textContent = 'Email support@alephco.io';
+      errorBox.appendChild(a);
+      errorBox.appendChild(document.createTextNode('.'));
+      errorBox.style.display = 'block';
+    };
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      errorBox.style.display = 'none';
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
       const btn = form.querySelector('button[type="submit"]');
       const original = btn.textContent;
       btn.textContent = 'Sending...';
       btn.disabled = true;
 
+      let source = location.pathname;
       try {
-        const res = await fetch(form.action, {
+        const ref = document.referrer ? new URL(document.referrer) : null;
+        if (ref && ref.hostname === location.hostname && ref.pathname !== location.pathname) {
+          source += ' (from ' + ref.pathname + ')';
+        }
+      } catch (_) { /* unparseable referrer: page path alone */ }
+
+      const value = (name) => (form.elements[name] ? form.elements[name].value.trim() : '');
+      const payload = {
+        name: value('name'),
+        email: value('email'),
+        message: value('message'),
+        source: source.slice(0, 200),
+        website: form.elements.website ? form.elements.website.value : '',
+      };
+      if (value('company')) payload.company = value('company');
+      if (value('regulation')) payload.regulation = value('regulation');
+
+      try {
+        const res = await fetch(SIGNUP_API_BASE + '/api/public/contact', {
           method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload),
         });
         if (res.ok) {
           form.style.display = 'none';
-          document.querySelector('.form-success').style.display = 'block';
-        } else {
-          btn.textContent = 'Error — try again';
-          btn.disabled = false;
-          setTimeout(() => { btn.textContent = original; }, 3000);
+          successBox.style.display = 'block';
+          successBox.focus();
+          return;
         }
-      } catch {
-        btn.textContent = 'Error — try again';
-        btn.disabled = false;
-        setTimeout(() => { btn.textContent = original; }, 3000);
+        if (res.status === 429) {
+          showError('Too many messages from this connection. Please try again later.');
+        } else if (res.status === 400) {
+          showError('Please check your name, email and message, then try again.');
+        } else {
+          showError('Sorry \u2014 your message did not send.');
+        }
+      } catch (_) {
+        showError('Sorry \u2014 your message did not send.');
       }
+      btn.textContent = original;
+      btn.disabled = false;
     });
   }
 });

@@ -99,24 +99,25 @@
         <p>Request a demo, ask a question, or tell us which regulation is keeping you up at night.</p>
       </div>
 
-      <div class="form-success">
-        <strong>Message sent.</strong> We&rsquo;ll get back to you within one business day.
+      <div class="form-success" role="status" tabindex="-1">
+        <strong>Thanks &mdash; we&rsquo;ll get back to you soon.</strong>
       </div>
 
-      <form id="contact-form" action="https://formspree.io/f/PLACEHOLDER" method="POST">
+      <!-- Posted by js/main.js as JSON to app.alephco.io/api/public/contact, which emails it to Aleph. -->
+      <form id="contact-form" novalidate>
         <div class="form-row">
           <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" id="name" name="name" required placeholder="Your name">
+            <input type="text" id="name" name="name" required maxlength="200" autocomplete="name" placeholder="Your name">
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" required placeholder="you@company.com">
+            <input type="email" id="email" name="email" required maxlength="254" autocomplete="email" placeholder="you@company.com">
           </div>
         </div>
         <div class="form-group">
           <label for="company">Company</label>
-          <input type="text" id="company" name="company" placeholder="Your company name">
+          <input type="text" id="company" name="company" maxlength="200" autocomplete="organization" placeholder="Your company name">
         </div>
         <div class="form-group">
           <label for="regulation">Which regulation are you dealing with?</label>
@@ -137,8 +138,12 @@
         </div>
         <div class="form-group">
           <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Tell us about your compliance needs..."></textarea>
+          <textarea id="message" name="message" required maxlength="5000" placeholder="Tell us about your compliance needs..."></textarea>
         </div>
+        <!-- Honeypot: hidden from people + screen readers; bots fill it → the server drops the message. -->
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"
+               style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" />
+        <div class="form-error" role="alert"></div>
         <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Send Message</button>
       </form>
 
