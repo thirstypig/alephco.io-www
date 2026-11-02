@@ -142,7 +142,10 @@ const EXEMPT_PAGES = new Set([
   "learn/_templates/search.html",
 ]);
 
-const EXPECTED_NAV_LINKS = ["How It Works", "Industries", "Pricing"];
+// Contact joined the top nav 2026-11-02: the founder found contacting Aleph "buried" (it was
+// a footer link on every page and nowhere above the fold). The count stays EXACT — a fifth
+// link sneaking in should still fail here and be a deliberate change, like this one was.
+const EXPECTED_NAV_LINKS = ["How It Works", "Industries", "Pricing", "Contact"];
 
 /**
  * Every tracked .html file in the repo.
@@ -271,13 +274,13 @@ for (const page of PAGES) {
     );
   }
 
-  // 2. Correct nav links (exactly 3)
+  // 2. Correct nav links (exactly EXPECTED_NAV_LINKS.length — 4 since Contact joined)
   if (homeInNav) {
     const navLinks = homeInNav[0].match(/<a [^>]*>([^<]+)<\/a>/g) || [];
     const navTexts = navLinks.map((l) => l.replace(/<[^>]+>/g, "").trim());
     assert(
-      navTexts.length === 3,
-      `${page}: expected 3 nav links, got ${navTexts.length}: [${navTexts.join(", ")}]`
+      navTexts.length === EXPECTED_NAV_LINKS.length,
+      `${page}: expected ${EXPECTED_NAV_LINKS.length} nav links, got ${navTexts.length}: [${navTexts.join(", ")}]`
     );
     for (const expected of EXPECTED_NAV_LINKS) {
       assert(
@@ -288,6 +291,22 @@ for (const page of PAGES) {
   } else {
     assert(false, `${page}: nav-links block not found`);
   }
+
+  // 2a. The nav Contact link actually goes to the contact page (a link TEXT check alone
+  // passes a "Contact" that points somewhere else).
+  if (homeInNav) {
+    assert(
+      new RegExp(`<a href="(${prefix}|/)contact\\.html">Contact</a>`).test(homeInNav[0]),
+      `${page}: nav "Contact" must link to contact.html`
+    );
+  }
+
+  // 2a-ii. The footer "Contact" link is on every page, inside the footer (not only the nav).
+  const footerBlock = html.match(/<footer class="footer">[\s\S]*?<\/footer>/);
+  assert(
+    footerBlock !== null && new RegExp(`<a href="(${prefix}|/)contact\\.html">Contact</a>`).test(footerBlock[0]),
+    `${page}: footer must carry a "Contact" link to contact.html`
+  );
 
   // 2b. The nav carries the sign-up button beside LOG IN (James, 2026-10-14). Checked inside
   // `.nav-actions` specifically: a "Start free" link elsewhere on the page (a hero, a footer)
@@ -999,6 +1018,34 @@ assert(
   for (const a of addresses) {
     assert(["support@alephco.io", "you@company.com"].includes(a), `contact.html / js/main.js print an email address other than support@alephco.io: ${a}`);
   }
+}
+
+// ── Contact is one click from everywhere (2026-11-02) ───────────
+// The founder found contacting Aleph "buried". The page loop above checks the nav and
+// footer of every TRACKED page; the generated /learn pages are gitignored, so their
+// templates are checked here instead, and the home + pricing pages must carry the
+// shared "Questions? Contact us" block near the bottom.
+{
+  const learnNav = readFileSync(join(ROOT, "learn/_templates/_nav.html"), "utf-8");
+  assert(
+    /<ul class="nav-links">[\s\S]*<a href="\/contact\.html">Contact<\/a>[\s\S]*?<\/ul>/.test(learnNav),
+    "learn/_templates/_nav.html: nav must carry Contact → /contact.html"
+  );
+  const learnFooter = readFileSync(join(ROOT, "learn/_templates/_footer.html"), "utf-8");
+  assert(
+    learnFooter.includes('<a href="/contact.html">Contact</a>'),
+    "learn/_templates/_footer.html: footer must carry Contact → /contact.html"
+  );
+  const ctas = ["index.html", "pricing.html"].map((p) => {
+    const html = readFileSync(join(ROOT, p), "utf-8");
+    const m = html.match(/<!-- CONTACT_CTA[\s\S]*?<\/section>/);
+    assert(
+      m !== null && /<a href="contact\.html" class="btn[^"]*">Contact us<\/a>/.test(m[0]),
+      `${p}: missing the "Questions? Contact us" block with a button to contact.html`
+    );
+    return m?.[0];
+  });
+  assert(ctas[0] === ctas[1], "index.html and pricing.html: the CONTACT_CTA block has drifted — keep them identical");
 }
 
 // ── Report ──────────────────────────────────────────────────────
