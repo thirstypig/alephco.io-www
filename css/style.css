@@ -560,3 +560,9 @@ tr:last-child td { border-bottom: none; }
   letter-spacing: 0.14em; text-transform: uppercase;
 }
 .announce a { color: inherit; text-decoration: underline; }
+
+/* ── Security page (security.html) ───────────────────────── */
+.security-page h2 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); line-height: 1.15; margin-bottom: .5rem; }
+.security-page ul { padding-left: 1.25rem; color: var(--fg-muted); }
+.security-page li + li { margin-top: .4rem; }
+.security-page a { text-decoration: underline; }

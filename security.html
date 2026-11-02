@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security — Aleph</title>
+  <meta name="description" content="How Aleph protects your product records and compliance documents: where data is stored, encryption, private documents, company separation, two-step sign-in and backups.">
+  <link rel="canonical" href="https://www.alephco.io/security.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Security — Aleph">
+  <meta property="og:description" content="How Aleph protects your product records and compliance documents: where data is stored, encryption, private documents, company separation, two-step sign-in and backups.">
+  <meta property="og:url" content="https://www.alephco.io/security.html">
+  <meta property="og:site_name" content="Aleph">
+  <meta property="og:image" content="https://www.alephco.io/img/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Security — Aleph">
+  <meta name="twitter:description" content="How Aleph protects your product records and compliance documents: where data is stored, encryption, private documents, company separation, two-step sign-in and backups.">
+  <meta name="twitter:image" content="https://www.alephco.io/img/og-default.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&family=Bungee+Inline&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <!-- Google Analytics 4 -->
+  <script src="/js/analytics.js"></script>
+</head>
+<body>
+
+  <!-- Nav -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <nav class="nav" role="navigation">
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <img src="img/aleph-logo-dark.png" alt="Aleph" height="28"/>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="nav-menu">
+        <ul class="nav-links">
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="industries.html">Industries</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="theme-toggle" aria-label="Toggle theme">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+          <a href="https://app.alephco.io/login" class="btn btn-nav-ghost btn-sm">LOG IN</a>
+          <a href="https://app.alephco.io/register" class="btn btn-red btn-sm">Start free</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div id="main-content" tabindex="-1"></div>
+
+  <div class="spacer"></div>
+
+  <!-- Security -->
+  <section class="section">
+    <div class="container security-page" style="max-width:720px;">
+      <div class="section-heading">
+        <span class="section-label">Security</span>
+        <h1>How we protect your records</h1>
+        <p>Aleph holds your product records and compliance documents. This page lists what protects them today, and what we have not done yet. Last reviewed November 2, 2026.</p>
+      </div>
+      <div style="font-size:1.0625rem;line-height:1.7;">
+
+        <h2>Where your data is stored</h2>
+        <p>Your records and uploaded documents are stored in the United States, in a data center in Ohio. The Aleph app runs on servers in Virginia.</p>
+
+        <h2 class="mt-4">Encryption</h2>
+        <ul>
+          <li>Every connection to the Aleph app uses HTTPS (TLS 1.2 or 1.3). Older versions are refused, and plain-HTTP requests are redirected to HTTPS.</li>
+          <li>The app tells your browser to use only HTTPS when it connects to us.</li>
+          <li>The connection between our app and our database is encrypted, and the app checks the database&rsquo;s certificate before it connects.</li>
+          <li>Our database and file-storage provider, Supabase, states that it encrypts all stored customer data with AES-256 (<a href="https://supabase.com/security">supabase.com/security</a>).</li>
+        </ul>
+
+        <h2 class="mt-4">Your documents</h2>
+        <ul>
+          <li>Uploaded files are kept in private storage, which is not open to the public internet.</li>
+          <li>Each time you open a file, we first check that you are allowed to see it, then give you a link that expires after one hour.</li>
+          <li>Uploads are limited to PDF, Word, Excel and common image files, up to 10 MB each. We check what each file really is, not just its name.</li>
+        </ul>
+
+        <h2 class="mt-4">Each company&rsquo;s data is kept separate</h2>
+        <ul>
+          <li>Every request is checked against the company you belong to. You can see your own company&rsquo;s records and no one else&rsquo;s.</li>
+          <li>Our database blocks direct outside access to company records and to stored documents. The app checks both settings every time it starts, and if either is wrong it refuses to start.</li>
+        </ul>
+
+        <h2 class="mt-4">Signing in</h2>
+        <ul>
+          <li>Sign in with an email and password, or with Google.</li>
+          <li>New passwords must be at least 12 characters. Resetting your password signs you out everywhere else.</li>
+          <li>Two-step sign-in with an authenticator app is available to every user under Settings &rarr; Security. It is optional.</li>
+        </ul>
+
+        <h2 class="mt-4">Links you share</h2>
+        <p>When you share records with FDA, or send a package or a supplier request, the link contains a long random key. We store only a scrambled (hashed) form of that key, so even our own database does not hold a working copy of the link. Links expire, and you can withdraw them.</p>
+
+        <h2 class="mt-4">A record of changes</h2>
+        <p>Aleph keeps a history of changes to your compliance records. You can see your own recorded actions, and each product shows its history.</p>
+
+        <h2 class="mt-4">When our team helps you</h2>
+        <p>If our staff view the app as one of your users to answer a support question, that view is read-only, ends after 30 minutes, and is recorded.</p>
+
+        <h2 class="mt-4">Backups</h2>
+        <p>Our database is backed up automatically every day, and each backup is kept for seven days.</p>
+
+        <h2 class="mt-4">Who else handles your data</h2>
+        <p>We use a small number of outside services to run Aleph, such as hosting and payments. The current list, and what each one does, is in our <a href="https://app.alephco.io/legal/privacy">Privacy Policy</a>.</p>
+
+        <h2 class="mt-4">What we do not have yet</h2>
+        <ul>
+          <li>We do not hold a SOC 2 or ISO 27001 certification.</li>
+          <li>We have not had an independent penetration test.</li>
+          <li>We do not run a 24/7 security operations center.</li>
+        </ul>
+
+        <h2 class="mt-4">Report a security issue</h2>
+        <p>If you think you have found a security problem, email <a href="mailto:security@alephco.io">security@alephco.io</a> with what you found and how to reproduce it. Please test only with accounts you own, and do not access or change other customers&rsquo; data.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-sm">
+    <div class="container">
+      <div class="cta-banner">
+        <h2>Ready to simplify compliance?</h2>
+        <p>Create an account and see how Aleph can help your import business.</p>
+        <a href="https://app.alephco.io/register" class="btn btn-lg">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/">
+            <img src="img/aleph-logo-dark.png" alt="Aleph" height="24"/>
+          </a>
+          <p>Product compliance for importers who ship physical goods into the U.S.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="industries.html">Industries</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="https://app.alephco.io/register">Get Started</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="learn/">Learn</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="pricing.html#faq">FAQ</a></li>
+            <li><a href="features/cpsia-cpc-generator.html">CPSIA &amp; CPC</a></li>
+            <li><a href="features/prop-65-labels.html">Prop 65 Labels</a></li>
+            <li><a href="features/pfas-tracking.html">PFAS Tracking</a></li>
+            <li><a href="features/fsvp-management.html">FSVP Management</a></li>
+            <li><a href="features/mocra.html">MoCRA Cosmetics</a></li>
+            <li><a href="features/cfr-citations.html">CFR Citations</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="status.html">System Status</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="https://app.alephco.io/legal/terms">Terms of Service</a></li>
+            <li><a href="https://app.alephco.io/legal/privacy">Privacy Policy</a></li>
+            <li><a href="security.html" aria-current="page">Security</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Aleph Compliance, Inc.</span>
+        <div class="footer-social">
+          <a href="https://app.alephco.io/login">Log In</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>
