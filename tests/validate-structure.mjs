@@ -969,6 +969,38 @@ for (const file of BLOG_POSTS) {
   );
 }
 
+// ── Every form reaches a real endpoint (2026-11-02) ─────────────
+// Until 2026-11-02 contact.html posted to formspree.io/f/PLACEHOLDER — a 404 — so every message
+// sent from the site was lost, silently. The contact form now posts JSON from js/main.js to the
+// app's /api/public/contact, which emails it to Aleph from a server-side setting.
+const mainJs = readFileSync(join(ROOT, "js/main.js"), "utf-8");
+for (const page of ALL_HTML_FILES) {
+  const html = readFileSync(join(ROOT, page), "utf-8");
+  assert(!/formspree/i.test(html), `${page}: mentions Formspree — Aleph's forms post to app.alephco.io, never a third-party form service`);
+  for (const m of html.matchAll(/<form\b[^>]*\saction="([^"]*)"/gi)) {
+    assert(!/PLACEHOLDER/i.test(m[1]), `${page}: a form posts to a placeholder action (${m[1]}) — its messages go nowhere`);
+  }
+}
+assert(!/formspree/i.test(mainJs), "js/main.js: mentions Formspree");
+assert(
+  mainJs.includes("'/api/public/contact'"),
+  "js/main.js: the contact form no longer posts to the app's /api/public/contact"
+);
+{
+  const contact = readFileSync(join(ROOT, "contact.html"), "utf-8");
+  assert(/<form id="contact-form"/.test(contact), "contact.html: #contact-form is gone (js/main.js binds to it)");
+  assert(
+    /<input[^>]+name="website"[^>]+tabindex="-1"[^>]+aria-hidden="true"/.test(contact),
+    "contact.html: the honeypot field (name=website, tabindex=-1, aria-hidden) is missing"
+  );
+  // The only address the site prints is the public support@ one: the founder's inbox lives in the
+  // app's CONTACT_FORM_TO setting and must never reach a page.
+  const addresses = new Set([...(contact + mainJs).matchAll(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}/g)].map((m) => m[0]));
+  for (const a of addresses) {
+    assert(["support@alephco.io", "you@company.com"].includes(a), `contact.html / js/main.js print an email address other than support@alephco.io: ${a}`);
+  }
+}
+
 // ── Report ──────────────────────────────────────────────────────
 console.log("");
 if (failed === 0) {

@@ -382,6 +382,11 @@ tr:last-child td { border-bottom: none; }
   border-radius: 0; color: var(--good); font-size: .875rem;
   display: none;
 }
+.form-error {
+  padding: 1rem; margin-bottom: 1rem; background: #fbeaea; border: 2px solid #991b1b;
+  color: #991b1b; font-size: .875rem; display: none;
+}
+.form-error a { color: inherit; font-weight: 700; text-decoration: underline; }
 
 /* ── FAQ ─────────────────────────────────────────────────── */
 .faq-item { border-bottom: 1px solid var(--rule); }
