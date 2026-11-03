@@ -88,9 +88,14 @@ const PAGES = [
   "features/cfr-citations.html",
   "features/cpsia-cpc-generator.html",
   "features/fsvp-management.html",
+  // One canonical page per regulation (2026-11-02): the hub (every regulation's one sentence, and
+  // the UL listings section) plus the two regulations that had no page of their own.
+  "features/index.html",
   "features/mocra.html",
   "features/pfas-tracking.html",
   "features/prop-65-labels.html",
+  "features/reach.html",
+  "features/usda-dairy.html",
   "for/amazon-sellers.html",
   "for/food-importers.html",
   "for/toy-importers.html",
