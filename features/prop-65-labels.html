@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prop 65 Warning Labels — Aleph</title>
-  <meta name="description" content="Record your California Prop 65 warning decision per product, pick chemicals from OEHHA's Prop 65 list, and generate short-form or long-form warning label PDFs.">
+  <title>California Prop 65 Warnings and Labels — Aleph</title>
+  <meta name="description" content="Search OEHHA's chemical list, record your own warning decision for each product, and generate short-form or long-form Prop 65 warning labels as PDFs.">
   <link rel="canonical" href="https://www.alephco.io/features/prop-65-labels.html">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Prop 65 Warning Labels — Aleph">
-  <meta property="og:description" content="Record your California Prop 65 warning decision per product, pick chemicals from OEHHA's Prop 65 list, and generate short-form or long-form warning label PDFs.">
+  <meta property="og:title" content="California Prop 65 Warnings and Labels — Aleph">
+  <meta property="og:description" content="Search OEHHA's chemical list, record your own warning decision for each product, and generate short-form or long-form Prop 65 warning labels as PDFs.">
   <meta property="og:url" content="https://www.alephco.io/features/prop-65-labels.html">
   <meta property="og:site_name" content="Aleph">
   <meta property="og:image" content="https://www.alephco.io/img/og-default.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Prop 65 Warning Labels — Aleph">
-  <meta name="twitter:description" content="Record your California Prop 65 warning decision per product, pick chemicals from OEHHA's Prop 65 list, and generate short-form or long-form warning label PDFs.">
+  <meta name="twitter:title" content="California Prop 65 Warnings and Labels — Aleph">
+  <meta name="twitter:description" content="Search OEHHA's chemical list, record your own warning decision for each product, and generate short-form or long-form Prop 65 warning labels as PDFs.">
   <meta name="twitter:image" content="https://www.alephco.io/img/og-default.png">
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -57,117 +57,70 @@
   </nav>
   <div id="main-content" tabindex="-1"></div>
 
-  <!-- Hero -->
+  <!-- Hero: the badge, the one sentence used for this regulation everywhere on the site -->
   <section class="hero">
     <div class="container">
-      <span class="section-label">Prop 65 Module</span>
-      <h1>California Prop 65 warning labels made easy</h1>
-      <p>Hundreds of listed chemicals. Detailed warning-content rules. Aleph gives you a searchable copy of OEHHA&rsquo;s Prop 65 list, a place to record whether each product needs a warning and why, and a label generator for short-form and long-form warnings &mdash; so your decision and your label live in one record.</p>
+      <span class="section-label">Prop 65 &middot; California &middot; 27 CCR 25600</span>
+      <h1>California Prop 65 warnings and labels</h1>
+      <p>Search OEHHA&rsquo;s chemical list, record your own warning decision for each product, and generate short-form or long-form warning labels as PDFs.</p>
       <div class="hero-actions">
-        <a href="https://app.alephco.io/register" class="btn btn-primary btn-lg">Get Started</a>
-        <a href="../how-it-works.html" class="btn btn-outline btn-lg">See How It Works</a>
+        <a href="https://app.alephco.io/register" class="btn btn-primary btn-lg">Start free &mdash; 2 products</a>
       </div>
     </div>
   </section>
 
-  <!-- Problem -->
-  <section class="section" style="background: var(--bg-subtle);">
+  <section class="section" id="the-rule" style="background: var(--bg-subtle);">
     <div class="container">
       <div class="section-heading text-center">
-        <span class="section-label">The Problem</span>
-        <h2>Prop 65 is a minefield</h2>
+        <span class="section-label">What the rule asks</span>
+        <h2>A clear and reasonable warning, or a reason you need none</h2>
+        <p>A business with 10 or more employees may not knowingly and intentionally expose people in California to a listed chemical without a clear and reasonable warning (Cal. Health &amp; Safety Code 25249.6, 25249.11).</p>
       </div>
       <div class="grid-3">
         <div class="card">
-          <div class="card-icon" style="background: #fef2f2; color: #dc2626;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          </div>
           <h3>Hundreds of listed chemicals</h3>
-          <p>California&rsquo;s Prop 65 list names hundreds of chemicals known to the state to cause cancer or reproductive harm &mdash; check OEHHA&rsquo;s current list. Figuring out which ones apply to your product is the hard part.</p>
+          <p>OEHHA&rsquo;s list names hundreds of chemicals known to the state to cause cancer or reproductive harm. Many have a No Significant Risk Level or Maximum Allowable Dose Level; many do not.</p>
         </div>
         <div class="card">
-          <div class="card-icon" style="background: var(--amber-50); color: var(--amber-500);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <h3>Complex exposure math</h3>
-          <p>Many listed chemicals have a No Significant Risk Level (NSRL) or Maximum Allowable Dose Level (MADL); many do not. Working out whether your product&rsquo;s exposure needs a warning requires specialized knowledge.</p>
+          <h3>Short-form warnings changed</h3>
+          <p>Amendments operative January 1, 2025, require new short-form warnings to name at least one listed chemical; products manufactured and labeled before January 1, 2028, may still use the earlier text (27 CCR 25603). Food has its own warning format.</p>
         </div>
         <div class="card">
-          <div class="card-icon" style="background: #eff6ff; color: #2563eb;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          </div>
           <h3>Lawsuit risk</h3>
           <p>Besides public prosecutors, private enforcers can sue in the public interest after a 60-day notice, and civil penalties run up to $2,500 per day for each violation.</p>
         </div>
       </div>
+      <p class="text-center mt-3" style="font-size:.9375rem;color:var(--fg-muted);">The rules in plain language: <a href="/learn/m/prop65/">Prop 65 on Learn</a> &middot; <a href="/learn/articles/compliance/prop65-requirements/">Prop 65 requirements</a></p>
     </div>
   </section>
 
-  <!-- Solution -->
-  <section class="section">
+  <section class="section" id="what-aleph-does">
     <div class="container">
       <div class="section-heading text-center">
-        <span class="section-label">The Solution</span>
+        <span class="section-label">What Aleph does</span>
         <h2>Record your decision. Generate the label.</h2>
-        <p>Aleph&rsquo;s Prop 65 module includes a searchable copy of OEHHA&rsquo;s Prop 65 list, a per-product warning assessment you complete, and a label generator for short-form and long-form warnings. Whether a warning is required is your determination &mdash; Aleph records it.</p>
+        <p>Whether a warning is required is your determination &mdash; Aleph records it with the product.</p>
       </div>
       <div class="grid-3">
-        <div class="card text-center">
-          <div class="card-icon" style="background: #fef2f2; color: #dc2626; margin: 0 auto 1rem;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          </div>
+        <div class="card">
           <h3>OEHHA&rsquo;s chemical list</h3>
-          <p>Search the Prop 65 list by chemical name or CAS number. Each entry shows its listing type (cancer, reproductive, or both). The list is imported from OEHHA&rsquo;s published file.</p>
+          <p>Search the Prop 65 list by chemical name or CAS number, with each entry&rsquo;s listing type (cancer, reproductive, or both). The list is imported from OEHHA&rsquo;s published file.</p>
         </div>
-        <div class="card text-center">
-          <div class="card-icon" style="background: #fef2f2; color: #dc2626; margin: 0 auto 1rem;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          </div>
-          <h3>Warning assessment</h3>
-          <p>Record whether each product needs a Prop 65 warning, which chemicals, warning type, and exposure routes, and attach your lab test report. Aleph does not decide for you &mdash; it points you to OEHHA&rsquo;s guidance and records your answer.</p>
+        <div class="card">
+          <h3>Your warning decision</h3>
+          <p>Record whether each product needs a warning, which chemicals, the warning type and exposure routes, and attach your lab report &mdash; or record that no warning is needed, and why.</p>
         </div>
-        <div class="card text-center">
-          <div class="card-icon" style="background: #fef2f2; color: #dc2626; margin: 0 auto 1rem;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
-          </div>
-          <h3>Warning label generator</h3>
-          <p>Generate short-form or long-form Prop 65 warning text with the warning triangle symbol, as a downloadable PDF. Long-form labels name the chemicals you selected.</p>
+        <div class="card">
+          <h3>Short-form and long-form labels</h3>
+          <p>Generate either label as a PDF with the warning triangle and the P65Warnings.ca.gov reference; the long form names the chemicals you select. A food product&rsquo;s label uses the food warning format instead.</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features Detail -->
-  <section class="section" style="background: var(--bg-subtle);">
-    <div class="container">
-      <div class="section-heading text-center">
-        <span class="section-label">Features</span>
-        <h2>Prop 65 compliance, covered</h2>
-      </div>
-      <div class="grid-3">
+        <div class="card">
+          <h3>Materials checked against the list</h3>
+          <p>Each confirmed ingredient or material is checked against the Prop 65 list by exact CAS number or name. A match means the chemical is on the list, not how much of it is in the product.</p>
+        </div>
         <div class="card">
           <h3>Safe harbor determination, recorded</h3>
           <p>Record whether you consider your warning safe harbor compliant, from your own review of OEHHA&rsquo;s rules. Aleph does not make that call; it keeps your answer with the product.</p>
-        </div>
-        <div class="card">
-          <h3>Short-form warning rules changed</h3>
-          <p>Amendments operative January 1, 2025, require new short-form warnings to name at least one listed chemical; products manufactured and labeled before January 1, 2028, may still use the earlier short-form text. Aleph&rsquo;s short-form label uses the current text and names the chemical you select; still check it against 27 CCR 25603 for your products.</p>
-        </div>
-        <div class="card">
-          <h3>Short-form &amp; long-form labels</h3>
-          <p>Generate either label format &mdash; the short form for on-product labels, the long form naming the selected chemicals &mdash; both with the triangle symbol and the P65Warnings.ca.gov reference. A food product&rsquo;s label uses the food warning format instead, which points to P65Warnings.ca.gov/food and has no triangle.</p>
-        </div>
-        <div class="card">
-          <h3>Multi-chemical tracking</h3>
-          <p>Products often contain multiple listed chemicals. Record all of them on the product, and the long-form label names them.</p>
-        </div>
-        <div class="card">
-          <h3>Listed chemicals, not guesses</h3>
-          <p>The chemical picker draws on OEHHA&rsquo;s own Prop 65 list, imported by hand from OEHHA&rsquo;s published file, not a hand-written shortlist. You can still add a chemical that is not on it.</p>
-        </div>
-        <div class="card">
-          <h3>Label export</h3>
-          <p>Download warning labels as PDF files. Include them in your packaging artwork or product listing images.</p>
         </div>
         <div class="card">
           <h3>Audit trail</h3>
@@ -177,13 +130,41 @@
     </div>
   </section>
 
+  <section class="section" id="what-you-do" style="background: var(--bg-subtle);">
+    <div class="container">
+      <div class="section-heading text-center">
+        <span class="section-label">What you still do yourself</span>
+        <h2>The exposure call stays with you</h2>
+      </div>
+      <div class="card" style="max-width: 720px; margin: 0 auto;">
+        <ul style="padding-left: 1.25rem; display: grid; gap: .5rem;">
+          <li>Decide whether a product causes an exposure that needs a warning, with your lab or advisor.</li>
+          <li>Check the generated label against 27 CCR 25603 for your products, and put it on the product, its packaging or your product page.</li>
+          <li>Answer any 60-day notice. Aleph does not give legal advice.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="plans">
+    <div class="container">
+      <div class="section-heading text-center">
+        <span class="section-label">Plan availability</span>
+        <h2>On every plan</h2>
+      </div>
+      <div class="card" style="max-width: 720px; margin: 0 auto;">
+        <p>Every plan, Free included, covers it. Plans differ only by products (Free 2, Starter 25, Growth 200, Pro 500), team seats and support. Prop 65 is offered on food and cosmetics products as well as consumer goods. <a href="../pricing.html">See pricing</a>.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="section-sm">
     <div class="container">
       <div class="cta-banner">
         <h2>Get your Prop 65 record in order</h2>
-        <p>Create an account and record your first Prop 65 warning assessment in minutes.</p>
-        <a href="https://app.alephco.io/register" class="btn btn-lg">Get Started</a>
+        <p>Create an account and record your first Prop 65 warning decision.</p>
+        <a href="https://app.alephco.io/register" class="btn btn-lg">Start free &mdash; 2 products</a>
       </div>
     </div>
   </section>
@@ -212,11 +193,14 @@
             <li><a href="../learn/">Learn</a></li>
             <li><a href="../blog.html">Blog</a></li>
             <li><a href="../pricing.html#faq">FAQ</a></li>
-            <li><a href="../features/cpsia-cpc-generator.html">CPSIA &amp; CPC</a></li>
-            <li><a href="../features/prop-65-labels.html">Prop 65 Labels</a></li>
-            <li><a href="../features/pfas-tracking.html">PFAS Tracking</a></li>
-            <li><a href="../features/fsvp-management.html">FSVP Management</a></li>
-            <li><a href="../features/mocra.html">MoCRA Cosmetics</a></li>
+            <li><a href="../features/">All regulations</a></li>
+            <li><a href="../features/fsvp-management.html">FSVP</a></li>
+            <li><a href="../features/usda-dairy.html">USDA dairy</a></li>
+            <li><a href="../features/cpsia-cpc-generator.html">CPSIA, CPC &amp; GCC</a></li>
+            <li><a href="../features/prop-65-labels.html">Prop 65</a></li>
+            <li><a href="../features/pfas-tracking.html">PFAS</a></li>
+            <li><a href="../features/reach.html">REACH (EU)</a></li>
+            <li><a href="../features/mocra.html">MoCRA</a></li>
             <li><a href="../features/cfr-citations.html">CFR Citations</a></li>
           </ul>
         </div>
