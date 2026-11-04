@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPSC-Accepted Testing Lab Directory — Aleph</title>
+  <meta name="description" content="Search CPSC&#39;s accepted testing laboratories by lab name, CPSC Lab ID, city, country, lab type and accepted scope. A dated copy of CPSC&#39;s list; check a lab&#39;s current status on CPSC&#39;s site.">
+  <link rel="canonical" href="https://www.alephco.io/testing-labs.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CPSC-Accepted Testing Lab Directory — Aleph">
+  <meta property="og:description" content="Search CPSC&#39;s accepted testing laboratories by lab name, CPSC Lab ID, city, country, lab type and accepted scope. A dated copy of CPSC&#39;s list; check a lab&#39;s current status on CPSC&#39;s site.">
+  <meta property="og:url" content="https://www.alephco.io/testing-labs.html">
+  <meta property="og:site_name" content="Aleph">
+  <meta property="og:image" content="https://www.alephco.io/img/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CPSC-Accepted Testing Lab Directory — Aleph">
+  <meta name="twitter:description" content="Search CPSC&#39;s accepted testing laboratories by lab name, CPSC Lab ID, city, country, lab type and accepted scope. A dated copy of CPSC&#39;s list; check a lab&#39;s current status on CPSC&#39;s site.">
+  <meta name="twitter:image" content="https://www.alephco.io/img/og-default.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&family=Bungee+Inline&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <!-- Google Analytics 4 -->
+  <script src="/js/analytics.js"></script>
+</head>
+<body>
+
+  <!-- Nav -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <nav class="nav" role="navigation">
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <img src="img/aleph-logo-dark.png" alt="Aleph" height="28"/>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="nav-menu">
+        <ul class="nav-links">
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="industries.html">Industries</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="theme-toggle" aria-label="Toggle theme">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+          <a href="https://app.alephco.io/login" class="btn btn-nav-ghost btn-sm">LOG IN</a>
+          <a href="https://app.alephco.io/register" class="btn btn-red btn-sm">Start free</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div id="main-content" tabindex="-1"></div>
+
+  <div class="spacer"></div>
+
+  <!-- Testing labs directory -->
+  <section class="section">
+    <div class="container labs-page" style="max-width:960px;">
+      <div class="section-heading">
+        <span class="section-label">Testing labs &middot; CPSC-accepted</span>
+        <h1>Testing lab directory</h1>
+        <p>Every lab on CPSC&rsquo;s list of accepted testing laboratories, plus the labs on Aleph&rsquo;s own list. Search by lab name, CPSC Lab ID or city. A lab is accepted only for the scopes listed under it.</p>
+      </div>
+
+      <div id="lab-directory" class="lab-directory" data-src="data/testing-labs.json">
+        <div class="lab-filters">
+          <label class="lab-field lab-field-wide">
+            <span>Lab name, CPSC Lab ID or city</span>
+            <input type="search" id="lab-q" autocomplete="off" placeholder="e.g. Shenzhen, 1016, SGS">
+          </label>
+          <label class="lab-field">
+            <span>Country</span>
+            <select id="lab-country"><option value="">Any country</option></select>
+          </label>
+          <label class="lab-field">
+            <span>CPSC lab type</span>
+            <select id="lab-type"><option value="">Any type</option></select>
+          </label>
+          <label class="lab-field lab-field-wide">
+            <span>Accepted scope</span>
+            <select id="lab-scope"><option value="">Any scope</option></select>
+          </label>
+        </div>
+
+        <p class="lab-asof" id="lab-asof">
+          CPSC list as of <span id="lab-asof-date">&hellip;</span>.
+          Check a lab&rsquo;s current status on <a href="https://www.cpsc.gov/cgi-bin/labsearch/" rel="noopener" target="_blank">CPSC&rsquo;s lab search</a> before you rely on it.
+        </p>
+
+        <p class="lab-count" id="lab-count" aria-live="polite"></p>
+        <ul class="lab-list" id="lab-list"></ul>
+        <div class="lab-pager">
+          <button type="button" class="btn btn-sm" id="lab-prev">Previous</button>
+          <span id="lab-page"></span>
+          <button type="button" class="btn btn-sm" id="lab-next">Next</button>
+        </div>
+        <noscript><p>This search needs JavaScript. You can search the same list on <a href="https://www.cpsc.gov/cgi-bin/labsearch/">CPSC&rsquo;s lab search</a>.</p></noscript>
+      </div>
+
+      <div class="mt-4" style="font-size:1rem;line-height:1.7;">
+        <h2>About this list</h2>
+        <ul>
+          <li>The labs and their scopes come from CPSC&rsquo;s public lab search, copied by Aleph by hand. CPSC publishes no download feed, so the copy is dated &mdash; the date is shown above.</li>
+          <li>Each lab shows its type as CPSC lists it (independent, firewalled or governmental) and the scopes CPSC has accepted it for. Check that the scopes cover each rule your product is tested to.</li>
+          <li>&ldquo;Group&rdquo; is Aleph&rsquo;s match on the start of the lab&rsquo;s name (for example, SGS). It does not say who owns the lab.</li>
+          <li>A lab marked &ldquo;Not on CPSC&rsquo;s accepted-lab list&rdquo; is on Aleph&rsquo;s own list only. It is not CPSC-accepted.</li>
+          <li>Aleph does not test products, and does not say a lab is right for your product. Choosing a lab stays your call.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-sm">
+    <div class="container">
+      <div class="cta-banner">
+        <h2>Ready to simplify compliance?</h2>
+        <p>Create an account and see how Aleph can help your import business.</p>
+        <a href="https://app.alephco.io/register" class="btn btn-lg">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/">
+            <img src="img/aleph-logo-dark.png" alt="Aleph" height="24"/>
+          </a>
+          <p>Product compliance for importers who ship physical goods into the U.S.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="industries.html">Industries</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="https://app.alephco.io/register">Get Started</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="learn/">Learn</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="pricing.html#faq">FAQ</a></li>
+            <li><a href="features/">All regulations</a></li>
+            <li><a href="features/fsvp-management.html">FSVP</a></li>
+            <li><a href="features/usda-dairy.html">USDA dairy</a></li>
+            <li><a href="features/cpsia-cpc-generator.html">CPSIA, CPC &amp; GCC</a></li>
+            <li><a href="features/prop-65-labels.html">Prop 65</a></li>
+            <li><a href="features/pfas-tracking.html">PFAS</a></li>
+            <li><a href="features/reach.html">REACH (EU)</a></li>
+            <li><a href="features/mocra.html">MoCRA</a></li>
+            <li><a href="features/cfr-citations.html">CFR Citations</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="status.html">System Status</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="https://app.alephco.io/legal/terms">Terms of Service</a></li>
+            <li><a href="https://app.alephco.io/legal/privacy">Privacy Policy</a></li>
+            <li><a href="security.html">Security</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Aleph Compliance, Inc.</span>
+        <div class="footer-social">
+          <a href="https://app.alephco.io/login">Log In</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="js/testing-labs-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

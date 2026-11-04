@@ -174,3 +174,109 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+// ── Testing lab directory (/testing-labs.html) ──────────────────────
+// Reads window.ALEPH_TESTING_LABS from js/testing-labs-data.js, a static copy generated in the app
+// repo (`npm run labs:export-www`). No request to the app: the page works when the app is down.
+// Renders 25 labs a page — never the whole list at once. Text goes in with textContent only.
+document.addEventListener('DOMContentLoaded', () => {
+  const root = document.getElementById('lab-directory');
+  const data = window.ALEPH_TESTING_LABS;
+  if (!root || !data) return;
+
+  const PAGE = 25;
+  const TYPE_LABEL = { Independent: 'Independent lab', Firewalled: 'Firewalled lab', Governmental: 'Governmental lab' };
+  const fold = (s) => String(s || '').normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/\s+/g, ' ').trim();
+  const $ = (id) => document.getElementById(id);
+  const q = $('lab-q'), country = $('lab-country'), type = $('lab-type'), scope = $('lab-scope');
+  const list = $('lab-list'), count = $('lab-count'), pageLabel = $('lab-page'), prev = $('lab-prev'), next = $('lab-next');
+
+  const scopes = data.facets.scopes;
+  const labs = data.labs.map((l) => ({ ...l, hay: fold([l.cpscLabId || '', l.name, l.location].join(' ')), nameF: fold(l.name) }));
+  $('lab-asof-date').textContent = data.asOf;
+
+  const fill = (select, values, label) => values.forEach((v) => {
+    const o = document.createElement('option');
+    o.value = String(v);
+    o.textContent = label ? label(v) : v;
+    select.appendChild(o);
+  });
+  fill(country, data.facets.countries);
+  fill(type, data.facets.bodyTypes, (t) => TYPE_LABEL[t] || t);
+  fill(scope, scopes.map((_, i) => i), (i) => scopes[i]);
+
+  // ?q= seeds the search, so other pages can link straight to a lab.
+  const params = new URLSearchParams(location.search);
+  if (params.get('q')) q.value = params.get('q');
+
+  let page = 1;
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+
+  function matches() {
+    const words = fold(q.value).split(' ').filter(Boolean);
+    const qf = fold(q.value);
+    const c = country.value, t = type.value, s = scope.value === '' ? null : Number(scope.value);
+    const hits = labs.filter((l) =>
+      words.every((w) => l.hay.includes(w)) &&
+      (!c || l.country === c) && (!t || l.bodyType === t) && (s === null || l.scopes.includes(s)));
+    if (qf) {
+      const rank = (l) => (l.cpscLabId === qf ? 0 : l.nameF.startsWith(qf) ? 1 : 2);
+      hits.sort((a, b) => rank(a) - rank(b));
+    }
+    return hits;
+  }
+
+  function row(l) {
+    const li = el('li', 'lab-row');
+    const head = el('div', 'lab-row-head');
+    const who = el('div');
+    who.appendChild(el('p', 'lab-name', l.name));
+    const facts = [l.cpscLabId ? 'CPSC Lab ID ' + l.cpscLabId : 'Not on CPSC’s accepted-lab list'];
+    if (l.location || l.country) facts.push(l.location || l.country);
+    if (l.group) facts.push('Group: ' + l.group);
+    who.appendChild(el('p', 'lab-facts', facts.join(' · ')));
+    head.appendChild(who);
+    const tags = el('div', 'lab-tags');
+    if (l.bodyType) tags.appendChild(el('span', 'lab-tag', TYPE_LABEL[l.bodyType] || l.bodyType));
+    if (l.source === 'aleph' && l.alephTags.length) tags.appendChild(el('span', 'lab-tag', 'Aleph’s list: ' + l.alephTags.join(', ')));
+    if (l.website) {
+      const a = el('a', 'lab-site', 'Website');
+      a.href = /^https?:\/\//i.test(l.website) ? l.website : 'https://' + l.website;
+      a.rel = 'noopener nofollow';
+      a.target = '_blank';
+      tags.appendChild(a);
+    }
+    head.appendChild(tags);
+    li.appendChild(head);
+    if (l.scopes.length) {
+      const d = el('details', 'lab-scopes');
+      d.appendChild(el('summary', null, l.scopes.length + (l.scopes.length === 1 ? ' accepted scope' : ' accepted scopes')));
+      const ul = el('ul');
+      l.scopes.forEach((i) => ul.appendChild(el('li', null, scopes[i])));
+      d.appendChild(ul);
+      li.appendChild(d);
+    }
+    return li;
+  }
+
+  function render() {
+    const hits = matches();
+    const pages = Math.max(1, Math.ceil(hits.length / PAGE));
+    if (page > pages) page = pages;
+    const shown = hits.slice((page - 1) * PAGE, page * PAGE);
+    list.replaceChildren(...shown.map(row));
+    count.textContent = hits.length
+      ? ((page - 1) * PAGE + 1) + '–' + ((page - 1) * PAGE + shown.length) + ' of ' + hits.length + ' labs'
+      : 'No lab matches. Try fewer words or another filter.';
+    pageLabel.textContent = 'Page ' + page + ' of ' + pages;
+    prev.disabled = page <= 1;
+    next.disabled = page >= pages;
+  }
+
+  let timer;
+  q.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(() => { page = 1; render(); }, 150); });
+  [country, type, scope].forEach((s) => s.addEventListener('change', () => { page = 1; render(); }));
+  prev.addEventListener('click', () => { page -= 1; render(); root.scrollIntoView({ block: 'start' }); });
+  next.addEventListener('click', () => { page += 1; render(); root.scrollIntoView({ block: 'start' }); });
+  render();
+});
