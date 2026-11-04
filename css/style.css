@@ -571,3 +571,29 @@ tr:last-child td { border-bottom: none; }
 .security-page ul { padding-left: 1.25rem; color: var(--fg-muted); }
 .security-page li + li { margin-top: .4rem; }
 .security-page a { text-decoration: underline; }
+
+/* ── Testing lab directory (testing-labs.html) ── */
+.lab-filters { display: grid; gap: 0.75rem; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 1.5rem; }
+.lab-field { display: grid; gap: 0.25rem; font-size: 0.8125rem; color: var(--fg-muted); }
+.lab-field-wide { grid-column: 1 / -1; }
+.lab-field input, .lab-field select { width: 100%; min-width: 0; padding: 0.5rem 0.625rem; font: inherit; font-size: 0.9375rem; color: var(--fg); background: var(--bg); border: 1px solid var(--border, #d1d5db); border-radius: var(--radius); }
+.lab-asof { margin-top: 1rem; font-size: 0.8125rem; color: var(--fg-muted); }
+.lab-count { margin-top: 0.75rem; font-size: 0.875rem; font-weight: 600; }
+.lab-list { list-style: none; margin: 0.5rem 0 0; padding: 0; border: 1px solid var(--border, #e5e7eb); border-radius: var(--radius); }
+.lab-row { padding: 0.75rem 1rem; border-top: 1px solid var(--border, #e5e7eb); }
+.lab-row:first-child { border-top: 0; }
+.lab-row-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem; }
+.lab-name { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.lab-facts { margin: 0.125rem 0 0; font-size: 0.8125rem; color: var(--fg-muted); overflow-wrap: anywhere; }
+.lab-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+.lab-tag { font-size: 0.75rem; padding: 0.125rem 0.5rem; border: 1px solid var(--border, #d1d5db); border-radius: 999px; white-space: nowrap; }
+.lab-site { font-size: 0.8125rem; }
+.lab-scopes { margin-top: 0.5rem; font-size: 0.8125rem; }
+.lab-scopes summary { cursor: pointer; color: var(--fg-muted); }
+.lab-scopes ul { margin: 0.375rem 0 0; padding-left: 1.25rem; }
+.lab-pager { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-top: 0.75rem; font-size: 0.875rem; }
+.lab-pager button[disabled] { opacity: 0.45; cursor: default; }
+@media (min-width: 768px) {
+  .lab-filters { grid-template-columns: 2fr 1fr 1fr; }
+  .lab-field-wide:first-child { grid-column: auto; }
+}

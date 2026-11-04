@@ -73,6 +73,7 @@ const PAGES = [
   "pricing.html",
   "status.html",
   "security.html",
+  "testing-labs.html",
   "blog/cpc-certificate-guide.html",
   "blog/cpsc-recalls-for-importers.html",
   "blog/fsvp-guide-for-importers.html",
