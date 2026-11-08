@@ -161,7 +161,7 @@ p  { color: var(--fg-muted); }
 .btn-outline:hover { border-color: var(--navy); background: var(--bg-subtle); }
 .btn-red { background: var(--accent); border: 2px solid var(--accent); color: var(--paper); }
 .btn-red:hover { opacity: .9; }
-/* Secondary button on the dark nav bar (LOG IN), so "Start free" beside it is the one red button. */
+/* Secondary button on the dark nav bar (LOG IN), so "Get Started" beside it is the one red button. */
 .btn-nav-ghost { background: transparent; color: var(--paper); border: 2px solid rgba(243,238,226,0.45); }
 .btn-nav-ghost:hover { border-color: var(--paper); }
 .btn-lg { padding: .75rem 1.75rem; font-size: 12px; }

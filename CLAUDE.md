@@ -173,7 +173,7 @@ git diff --cached --stat                                       # what the bot wo
 ```
 
 ## Navigation Structure
-- **Top nav**: Logo (links to `/`, serves as home button) + 3 links (How It Works, Industries, Pricing) + theme toggle + LOG IN (`btn-nav-ghost`) + a red "Start free" button to `app.alephco.io/register` (James, 2026-10-14; `npm test` asserts it on every page). The nav is copied into every page, `blog/_template.html` and `learn/_templates/_nav.html` — change all of them together
+- **Top nav**: Logo (links to `/`, serves as home button) + 3 links (How It Works, Industries, Pricing) + theme toggle + LOG IN (`btn-nav-ghost`) + a red "Get Started" button (was "Start free" until 2026-11-08, todo 845) to `app.alephco.io/register` (James, 2026-10-14; `npm test` asserts it on every page). The nav is copied into every page, `blog/_template.html` and `learn/_templates/_nav.html` — change all of them together
 - **Footer**: 5-column CSS grid (`.footer-grid`) — Brand + tagline, Product, Resources, Company, Legal — with copyright bar (`.footer-bottom`)
 - **Mobile**: hamburger menu at 768px breakpoint; footer collapses to 2-col then 1-col
 - **Path convention**: Root pages use `how-it-works.html`; subdirectory pages use `../how-it-works.html`

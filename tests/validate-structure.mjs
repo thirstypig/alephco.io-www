@@ -315,14 +315,14 @@ for (const page of PAGES) {
   );
 
   // 2b. The nav carries the sign-up button beside LOG IN (James, 2026-10-14). Checked inside
-  // `.nav-actions` specifically: a "Start free" link elsewhere on the page (a hero, a footer)
+  // `.nav-actions` specifically: a "Get Started" link elsewhere on the page (a hero, a footer)
   // is not the button at the top of every page that this exists to guarantee.
   const navActions = html.match(/<div class="nav-actions">[\s\S]*?<\/div>/);
   assert(
     navActions !== null &&
-      /<a href="https:\/\/app\.alephco\.io\/register" class="btn btn-red btn-sm">Start free<\/a>/.test(navActions[0]) &&
+      /<a href="https:\/\/app\.alephco\.io\/register" class="btn btn-red btn-sm">Get Started<\/a>/.test(navActions[0]) &&
       navActions[0].includes('href="https://app.alephco.io/login"'),
-    `${page}: nav-actions must hold LOG IN and the "Start free" button to app.alephco.io/register`
+    `${page}: nav-actions must hold LOG IN and the "Get Started" button to app.alephco.io/register`
   );
 
   // 3. Footer has grid structure
@@ -769,8 +769,15 @@ assert(skuOffenders.length === 0, `${skuOffenders.join(", ")}: says "SKU" — sa
 // whatever its data-monthly said — or, with none, keep a stale value.
 {
   const pricing = readFileSync(join(ROOT, "pricing.html"), "utf-8");
-  const freeCard = pricing.match(/<h3>Free<\/h3>[\s\S]*?<\/ul>/);
+  const freeCard = pricing.match(/<h3[^>]*>Free<\/h3>[\s\S]*?<\/ul>/);
   assert(freeCard !== null, "pricing.html: Free card not found");
+  // James, 2026-11-08 (todo 845): Free is a small box BELOW Enterprise, not a headline plan in
+  // the [data-billing] grid. Being outside the grid also keeps the toggle off it entirely.
+  const gridOpen = pricing.indexOf("data-billing=");
+  const enterpriseAt = pricing.search(/<h3[^>]*>Enterprise<\/h3>/);
+  const freeAt = pricing.search(/<h3[^>]*>Free<\/h3>/);
+  assert(gridOpen !== -1 && enterpriseAt !== -1 && freeAt > enterpriseAt && enterpriseAt > gridOpen,
+    "pricing.html: the Free box must sit below the Enterprise row, outside the [data-billing] grid (todo 845)");
   if (freeCard) {
     assert(!/price-amount|price-note/.test(freeCard[0]), "pricing.html: Free card must not carry .price-amount or .price-note");
     assert(/\$0/.test(freeCard[0]), "pricing.html: Free card must show $0");
