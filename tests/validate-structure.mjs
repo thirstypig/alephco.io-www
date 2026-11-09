@@ -98,6 +98,8 @@ const PAGES = [
   "features/reach.html",
   "features/usda-dairy.html",
   "for/amazon-sellers.html",
+  "for/brand-owners.html",
+  "for/customs-brokers.html",
   "for/food-importers.html",
   "for/toy-importers.html",
   "compare/assent-compliance.html",
