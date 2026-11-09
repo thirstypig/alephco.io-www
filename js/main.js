@@ -239,6 +239,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const tags = el('div', 'lab-tags');
     if (l.bodyType) tags.appendChild(el('span', 'lab-tag', TYPE_LABEL[l.bodyType] || l.bodyType));
     if (l.source === 'aleph' && l.alephTags.length) tags.appendChild(el('span', 'lab-tag', 'Aleph’s list: ' + l.alephTags.join(', ')));
+    // The same badge as the app's Testing labs page (#1005): matched to FDA's LAAF registry by hand.
+    if (l.fdaLaaf) tags.appendChild(el('span', 'lab-tag', 'FDA LAAF food lab'));
     if (l.website) {
       const a = el('a', 'lab-site', 'Website');
       a.href = /^https?:\/\//i.test(l.website) ? l.website : 'https://' + l.website;
@@ -248,6 +250,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     head.appendChild(tags);
     li.appendChild(head);
+    // "Check scope" (to-do 871, as on the app's page since #1016): the accreditation body's own public page for
+    // this lab's certificate — UKAS or A2LA only, built from the certificate number; never a guessed link, so a lab
+    // with no verified link shows none. Its own wrapping row, so three certificates fit a 390px phone.
+    const links = l.scopeLinks || [];
+    if (links.length) {
+      const checks = el('div', 'lab-checks');
+      links.forEach((link) => {
+        const several = links.length > 1;
+        const a = el('a', 'lab-check', several ? 'Check scope · ' + link.certificate : 'Check scope');
+        a.href = link.url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.setAttribute('aria-label', 'Check ' + l.name + '’s accredited scope at ' + link.body +
+          (several ? ', certificate ' + link.certificate : '') + ' (opens in a new tab)');
+        checks.appendChild(a);
+      });
+      li.appendChild(checks);
+    }
     if (l.scopes.length) {
       const d = el('details', 'lab-scopes');
       d.appendChild(el('summary', null, l.scopes.length + (l.scopes.length === 1 ? ' accepted scope' : ' accepted scopes')));
