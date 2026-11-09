@@ -5,7 +5,7 @@ date: 2026-11-09
 slug: short-form-warnings-what-changed
 keywords: [Prop 65 short-form warning, 25603, OEHHA amendment, 2028 deadline, warning label, chemical name, sell-through]
 sources: [https://www.law.cornell.edu/regulations/california/27-CCR-25603, https://www.law.cornell.edu/regulations/california/27-CCR-25602, https://www.law.cornell.edu/regulations/california/27-CCR-25601]
-draft: true
+draft: false
 ---
 
 The short-form Prop 65 warning — the tiny one that says "Cancer — www.P65Warnings.ca.gov"

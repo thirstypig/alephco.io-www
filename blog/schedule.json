@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-02",
+  "generated": "2026-11-09",
   "posts": [
     {
       "slug": "fcc-equipment-authorization-for-electronics-importers",
@@ -193,11 +193,10 @@
     {
       "slug": "short-form-warnings-what-changed",
       "title": "Short-form Prop 65 warnings: what changed",
-      "status": "planned",
-      "targetDate": "2026-11-09",
+      "status": "published",
+      "publishedDate": "2026-11-09",
       "image": "/img/blog/short-form-warnings-what-changed.png",
-      "url": "https://www.alephco.io/blog/short-form-warnings-what-changed.html",
-      "draft": true
+      "url": "https://www.alephco.io/blog/short-form-warnings-what-changed.html"
     },
     {
       "slug": "tracking-labels-what-has-to-be-on",
