@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-09",
+  "generated": "2026-11-16",
   "posts": [
     {
       "slug": "fcc-equipment-authorization-for-electronics-importers",
@@ -184,11 +184,10 @@
     {
       "slug": "supplier-verification-what-fda-actually-accepts",
       "title": "Supplier verification: what FDA actually accepts",
-      "status": "planned",
-      "targetDate": "2026-11-16",
+      "status": "published",
+      "publishedDate": "2026-11-16",
       "image": "/img/blog/supplier-verification-what-fda-actually-accepts.png",
-      "url": "https://www.alephco.io/blog/supplier-verification-what-fda-actually-accepts.html",
-      "draft": true
+      "url": "https://www.alephco.io/blog/supplier-verification-what-fda-actually-accepts.html"
     },
     {
       "slug": "short-form-warnings-what-changed",

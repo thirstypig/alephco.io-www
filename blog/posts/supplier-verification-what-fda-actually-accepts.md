@@ -5,7 +5,7 @@ date: 2026-11-16
 slug: supplier-verification-what-fda-actually-accepts
 keywords: [FSVP verification, onsite audit, SAHCODHA, qualified auditor, sampling and testing, food safety records, FDA]
 sources: [https://www.ecfr.gov/current/title-21/section-1.506, https://www.ecfr.gov/current/title-21/section-1.505, https://www.ecfr.gov/current/title-21/part-1/subpart-L]
-draft: true
+draft: false
 ---
 
 "Supplier verification" sounds open-ended. It isn't: the regulation names the acceptable
