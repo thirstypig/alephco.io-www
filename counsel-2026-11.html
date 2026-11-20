@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Aleph legal questions</title>
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!--
+  Unlisted review page for counsel (James, 2026-11-20). The password check runs in the browser, so it is a light
+  lock, not security: everything here concerns pages that are already public. Answers stay in the reviewer's browser
+  (localStorage) until he presses "Send my answers", which emails them to James. Nothing is sent to any server.
+  Source of truth for the questions: alephco.io-app docs/operations/legal-questions.md (DOC-104), section 0.
+-->
+<style>
+:root { --bg:#f7f4ec; --surface:#fff; --fg:#1d2733; --muted:#5a6573; --rule:#ddd6c6; --navy:#1f3a5f; --accent:#c43a2e;
+  --ok:#2f6b45; --ok-bg:#e6f0e8; --warn-bg:#fbeae7; --chip:#eef1f5; --sel:#e8eef7;
+  --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.6 var(--body); }
+.wrap { max-width:780px; margin:0 auto; padding:32px 16px 96px; }
+.label { font:600 11px/1.4 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+h1 { font:700 28px/1.2 var(--body); color:var(--navy); margin:6px 0 8px; }
+h2 { font:700 20px/1.3 var(--body); color:var(--navy); margin:0; }
+a { color:var(--navy); text-underline-offset:2px; }
+button, input, textarea { font:inherit; }
+:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+.btn { font:600 14px var(--body); border:2px solid var(--navy); background:var(--navy); color:#fff; border-radius:6px; padding:9px 16px; cursor:pointer; }
+.btn.ghost { background:var(--surface); color:var(--navy); }
+/* gate */
+.gate { min-height:80vh; display:flex; align-items:center; justify-content:center; padding:16px; }
+.gate form { background:var(--surface); border:2px solid var(--navy); border-radius:8px; padding:28px; width:100%; max-width:380px; display:grid; gap:12px; }
+.gate input { border:1px solid var(--rule); border-radius:6px; padding:10px 12px; }
+.err { color:var(--accent); font-size:14px; min-height:1.2em; margin:0; }
+/* content */
+.tldr { background:var(--surface); border:1px solid var(--rule); border-left:4px solid var(--accent); border-radius:6px; padding:16px 20px; margin-top:20px; }
+.tldr ul { margin:8px 0 0; padding-left:20px; display:grid; gap:6px; }
+.progress { position:sticky; top:0; z-index:5; background:var(--bg); border-bottom:1px solid var(--rule); padding:10px 0; margin-top:20px; display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center; justify-content:space-between; }
+.bar { flex:1 1 200px; height:8px; background:var(--chip); border-radius:99px; overflow:hidden; }
+.bar > div { height:100%; background:var(--ok); width:0; transition:width .2s; }
+.saved { font:500 12px var(--mono); color:var(--muted); }
+section { margin-top:36px; }
+.sec-head { display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline; border-bottom:2px solid var(--navy); padding-bottom:8px; }
+.pill { font:600 11px var(--mono); letter-spacing:.05em; text-transform:uppercase; padding:3px 8px; border-radius:99px; background:var(--chip); color:var(--muted); }
+.pill.high { background:var(--warn-bg); color:var(--accent); }
+.sec-intro { color:var(--muted); margin:10px 0 0; }
+.links { display:flex; flex-wrap:wrap; gap:6px 14px; margin:10px 0 0; font-size:14px; }
+.links::before { content:"Read: "; font:600 11px/2 var(--mono); letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+.q { margin-top:18px; background:var(--surface); border:1px solid var(--rule); border-radius:8px; padding:18px; }
+.q.done { border-color:var(--ok); }
+.q-top { display:flex; gap:12px; align-items:baseline; }
+.qn { font:700 15px var(--mono); color:var(--accent); min-width:2em; }
+.q h3 { font:600 16px/1.4 var(--body); margin:0; min-width:0; }
+.q dl { display:grid; grid-template-columns:7.5em 1fr; gap:6px 14px; margin:12px 0 0; }
+.q dt { font:600 11px/1.9 var(--mono); letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+.q dd { margin:0; min-width:0; }
+.sugg { color:var(--ok); font-weight:600; }
+.q .links { margin:0; }
+.q .links::before { content:none; }
+blockquote { margin:6px 0 0; padding:6px 12px; border-left:3px solid var(--rule); font-size:14px; }
+fieldset { border:0; padding:0; margin:14px 0 0; display:grid; gap:8px; }
+legend { font:600 11px var(--mono); letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+.opt { display:flex; gap:10px; align-items:flex-start; border:1px solid var(--rule); border-radius:6px; padding:9px 12px; cursor:pointer; }
+.opt:has(input:checked) { background:var(--sel); border-color:var(--navy); }
+.opt input { margin-top:4px; accent-color:var(--navy); }
+.opt b { font-weight:600; }
+textarea { width:100%; min-height:64px; border:1px solid var(--rule); border-radius:6px; padding:8px 10px; resize:vertical; margin-top:8px; }
+.send { margin-top:40px; background:var(--surface); border:2px solid var(--navy); border-radius:8px; padding:20px; display:grid; gap:12px; }
+.send .row { display:flex; flex-wrap:wrap; gap:10px; }
+#answers-text { min-height:180px; font:13px/1.5 var(--mono); }
+.muted { color:var(--muted); font-size:13px; }
+@media (max-width:540px) { .q dl { grid-template-columns:1fr; gap:2px; } .q dd { margin-bottom:8px; } h1 { font-size:24px; } }
+@media (prefers-reduced-motion:reduce) { .bar > div { transition:none; } }
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <form id="gate-form" autocomplete="off">
+    <div class="label">Aleph · for counsel</div>
+    <h2 style="margin:0">Enter the password</h2>
+    <label for="pw" class="muted">James sent it to you with the link.</label>
+    <input id="pw" type="password" autofocus>
+    <button class="btn" type="submit">Open</button>
+    <p class="err" id="gate-err" role="alert"></p>
+  </form>
+</div>
+
+<main class="wrap" id="app" hidden>
+  <div class="label">Pasadena Works, LLC d/b/a Aleph Co. · November 20, 2026</div>
+  <h1>Aleph legal questions</h1>
+  <p class="muted" style="margin:0">36 questions. Each has the background, our suggested answer, why, and the alternatives. Pick one, add a note if you like.</p>
+
+  <div class="tldr">
+    <div class="label">TL;DR</div>
+    <ul>
+      <li><strong>Aleph</strong> is web software that helps small US importers keep the records FDA and CPSC ask for. About 8 people use it; nobody pays yet.</li>
+      <li><strong>Most important: 1–12</strong> (about 20 minutes): how our privacy policy describes our AI reading documents, and our Terms of Service, which no lawyer has reviewed.</li>
+      <li><strong>"Not my area" is a fine answer</strong>, especially 25–36 (customs law). Skip anything.</li>
+      <li>Your answers save in this browser as you go, so you can stop and come back. When you're done, press <strong>Send my answers</strong> at the bottom.</li>
+    </ul>
+  </div>
+
+  <div class="progress"><span class="label" id="count">0 of 36 answered</span><div class="bar"><div id="bar"></div></div><span class="saved" id="saved"></span></div>
+
+  <div id="sections"></div>
+
+  <div class="send" id="send">
+    <h2>Send my answers</h2>
+    <p class="muted" style="margin:0">Opens your email with every answer filled in, addressed to James (james@alephco.io). If it doesn't open, copy the text below and email it.</p>
+    <div class="row">
+      <button class="btn" type="button" id="btn-email">Send my answers</button>
+      <button class="btn ghost" type="button" id="btn-copy">Copy answers</button>
+      <button class="btn ghost" type="button" id="btn-download">Download as a text file</button>
+    </div>
+    <p class="err" id="send-msg" role="status" style="color:var(--ok)"></p>
+    <label for="answers-text" class="label">Your answers</label>
+    <textarea id="answers-text" readonly></textarea>
+    <p class="muted" style="margin:0">Nothing leaves this browser until you send it. The suggested answers are our proposals, not legal conclusions.</p>
+  </div>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var HASH = "6f9edcd3408cbda14a837e6a44fc5b7f64ccc9a2477c1498fcb13c777ffb9605";
+  var STORE = "aleph-counsel-2026-11";
+  var APP = "https://app.alephco.io";
+  var L = {
+    privacy: ["Privacy policy", APP + "/legal/privacy"], dpa: ["Data processing agreement", APP + "/legal/dpa"],
+    security: ["Security page", APP + "/legal/security"], terms: ["Terms of Service", APP + "/legal/terms"],
+    signup: ["Sign-up page", APP + "/register"], anthropic: ["Anthropic commercial terms", "https://www.anthropic.com/legal/commercial-terms"],
+    pricing: ["Pricing page", "/pricing.html"], home: ["Home page", "/"], about: ["About page", "/about.html"],
+    prop65: ["Prop 65 page", "/features/prop-65-labels.html"], toys: ["Toy importers page", "/for/toy-importers.html"],
+    brokers: ["Customs brokers page", "/for/customs-brokers.html"],
+    cfr111: ["19 CFR part 111 (eCFR)", "https://www.ecfr.gov/current/title-19/part-111"],
+    cfr11139: ["19 CFR 111.39", "https://www.ecfr.gov/current/title-19/section-111.39"],
+    cfr11124: ["19 CFR 111.24", "https://www.ecfr.gov/current/title-19/section-111.24"],
+    cfr1110: ["16 CFR 1110.15", "https://www.ecfr.gov/current/title-16/section-1110.15"]
+  };
+
+  var SECTIONS = [
+    { id: "A", title: "Privacy policy and data agreement", pill: "High", links: ["privacy", "dpa", "security"],
+      intro: "When a customer uploads a document, Aleph sends the whole file and its name to Anthropic, an AI company, so the software can suggest the document's details. Until November 3 our privacy policy mentioned Anthropic only for a weekly internal report. We published corrected pages on November 3, before any lawyer saw them. They list all 11 outside companies that receive customer data; three of them (Google Analytics, Cloudflare and Google) had never been listed." },
+    { id: "B", title: "Terms of Service", pill: "High", links: ["terms", "signup"],
+      intro: "Our Terms are dated May 1, 2026 and no lawyer has reviewed them. Since May we added four things they don't mention: AI reading of documents; sharing records with a customs broker, distributor or brand; sending a customer's certificates to CPSC with the customer's own CPSC key; and looking up a supplier's public FDA records. If you have 15 minutes, please skim the Terms with those in mind." },
+    { id: "C", title: "Marketing and PDF wording", pill: "Low", links: [],
+      intro: "None of this is published yet. Aleph's rule is that it never tells a customer it is \"compliant\". It shows facts, such as \"3 of 8 records on file\"." },
+    { id: "D", title: "Website wording on alephco.io", pill: "Low", links: ["home", "pricing", "about"],
+      intro: "All of this is live on our public site today. We left it unchanged until a lawyer looks." },
+    { id: "E", title: "New data flows", pill: "Low", links: ["privacy"], intro: "" },
+    { id: "F", title: "Customs brokers", pill: "Specialist", links: ["brokers", "cfr111", "cfr11139"],
+      intro: "These need customs law. \"Not my area\" is a perfectly good answer. The setup: an importer can give its licensed customs broker a free, read-only login showing the products and filing IDs it chooses, and can stop at any time. The rule behind most of these: a broker who knows a client \"has not complied with the law or has made an error in, or omission from, any document\" must \"advise the client promptly\" (19 CFR 111.39(c)). We worry that showing a broker the client's missing records gives the broker that knowledge." },
+    { id: "G", title: "CPSC filing", pill: "Specialist", links: ["cfr1110"], intro: "" }
+  ];
+
+  // n, section, title, context, suggested, why, alternatives, links
+  var Q = [
+    [1,"A","Do we owe anyone a 15-day notice for the three newly listed companies?","Our data processing agreement promises customers 15 days' email notice before we add a new outside company that handles their data. We already used these three; we just hadn't listed them. No customer has signed the agreement yet.","No notice now. For future customers, send the 15-day notice whenever we add a company.","Nobody has signed the agreement, so nobody is owed notice. It keeps the promise for the customers it will bind.",["Send the notice now anyway, to our ~8 users","Remove the 15-day promise from the agreement"],["dpa"]],
+    [2,"A","Can we tell customers Anthropic won't train its AI on their documents?","Anthropic's commercial terms (Section B, read October 27, 2026) say it \"may not train models on Customer Content from Services\". Our privacy policy repeats that, citing those terms.","Yes, stated as Anthropic's contractual promise to us, not our own guarantee.","Customers ask about this first. Attributing it to Anthropic keeps us from promising something we don't control.",["Remove the sentence","Just link to Anthropic's terms without restating them"],["anthropic","privacy"]],
+    [3,"A","Is our description of the AI use enough?","The privacy policy says we send \"the full file and its file name\" to \"our AI service provider\". Anthropic is named in the table of outside companies on the same page.","Yes, and we'll also name Anthropic in that sentence.","Naming it in the sentence costs nothing and removes any argument that we hid it.",["Enough as written; no change needed","Not enough; it needs more (for example retention or location). Say what in the note"],["privacy"]],
+    [4,"A","Do fonts and a bot check need cookie consent before they load?","Google web fonts (every page) and Cloudflare's anti-bot check (sign-up) load before a visitor answers our cookie banner. Both send the visitor's IP address to those companies. Analytics (PostHog, Google Analytics) already wait for consent. Our customers are US businesses.","Disclosure is enough. We'll also host the fonts ourselves so Google gets nothing; the bot check is security and stays.","US privacy law doesn't require opt-in for this. Self-hosting the fonts is cheap and removes the one item a European visitor could object to.",["Both must wait for consent","Disclosure is enough; no need to self-host the fonts"],["privacy"]],
+    [5,"A","Do we owe anything for the months the old pages understated the AI use?","The AI reading has been on since before November 3. No data was exposed; Anthropic received documents under its commercial terms. About 8 people use Aleph.","No. Publishing the corrected pages is enough. Optionally, a short \"we updated our privacy policy\" email.","Nothing went wrong except the description. A short notice is good manners and cheap.",["Yes, a notice email to users is required","Something else is owed. Say what in the note"],["privacy"]],
+    [6,"B","Are our Terms binding if sign-up never shows them?","The Terms say \"By creating an account… you agree\". But the sign-up page has no link to the Terms and no checkbox; they are linked only from our other legal pages. The Terms carry an arbitration clause, a class-action waiver and a liability cap.","Add one line under the sign-up button: \"By creating an account, you agree to the Terms of Service and Privacy Policy\" (both linked), and record the date and version each person agreed to.","Without visible notice, the arbitration clause and the cap may not hold.",["Use a required checkbox instead of a line","Also ask existing users to agree the next time they sign in"],["signup","terms"]],
+    [7,"B","Fix the old domain in the Terms?","The Terms define the service as the platform \"at fsvppro.com\", our old name. The app is now app.alephco.io.","Yes. Change it to alephco.io and app.alephco.io.","The definition of \"the Services\" is what the whole agreement attaches to.",["Define the Services without naming any domain"],["terms"]],
+    [8,"B","Add a clause that AI-read details are suggestions the customer must check?","Aleph suggests details from documents (an expiry date, a certificate number). The app asks the customer to confirm them, but the Terms say nothing about AI. They already say we don't verify the accuracy of uploaded documents.","Yes. \"Details Aleph suggests from your documents are suggestions. You are responsible for checking them before you rely on them.\"","An AI misreading a date is the most likely way a customer could blame us.",["Not needed; \"we don't verify accuracy\" already covers it","Go further: also exclude AI errors in the liability section"],["terms"]],
+    [9,"B","Add a clause about sharing records with other companies?","A customer can give its customs broker, a distributor or a brand partner a free, read-only view of the records it chooses, and stop at any time. The Terms say nothing about this.","Yes. \"When you share records with another company through Aleph, you authorize us to show it what you choose. You are responsible for who you share with; we are not responsible for what they do with it.\"","It makes the customer's choice the legal basis for the sharing and keeps us out of disputes between the two companies.",["Also require the receiving company to accept our terms","Not needed"],["terms"]],
+    [10,"B","Add a clause about sending data to government agencies for the customer?","A customer can connect its own CPSC account (its own key) and have Aleph send its certificates to CPSC. A food importer can ask Aleph to look up a supplier's public FDA records. Aleph acts only when the customer clicks.","Yes. \"When you ask Aleph to send information to a government agency, you authorize us to send it as you instruct. You remain responsible for its accuracy and for your legal filings. Aleph does not file anything on its own.\"","A wrong certificate at CPSC is the customer's legal problem; the Terms should say so plainly.",["Also add an indemnity from the customer for its filings","Not needed"],["terms"]],
+    [11,"B","Is our liability cap OK for free users?","The cap is \"the total fees paid by you… in the twelve (12) months\" before a claim. A free-plan user has paid nothing, so their cap is $0.","Change it to \"the greater of the fees you paid in the 12 months before the claim, or $100.\"","A $0 cap is more likely to be challenged as unfair. A small floor is common and easier to defend.",["Keep it as is ($0 for free users)","Use a different floor. Say the amount in the note"],["terms"]],
+    [12,"B","How do we roll out the updated Terms?","The Terms promise \"at least 30 days\" email notice before a material change takes effect. Questions 6–11 would change them. About 8 people have accounts.","Email everyone the new Terms, effective 30 days later. New sign-ups agree to the new version right away.","It does exactly what our own Terms promise, at almost no cost with so few users.",["Make it effective right away for everyone","Ask existing users to click \"I agree\" at their next sign-in"],["terms"]],
+    [13,"C","Can marketing say Aleph finds \"incomplete\" documents?","Aleph can flag a document as missing fields (for example, a certificate with no expiry date).","Yes, with the qualifier next to it: \"Flags documents with missing fields\", never \"verifies your documents\".","\"Missing fields\" is a fact we can show; \"verified\" is a promise we can't keep.",["Don't use \"incomplete\" at all","Fine without a qualifier"],[]],
+    [14,"C","Drop \"Compliant\" from the Prop 65 label tool?","The tool (inside the app) shows \"Compliant\" when the customer picks one of California's standard \"safe harbor\" warning texts.","Yes. Show \"Uses the safe-harbor warning wording\" instead.","The right wording alone doesn't make a product compliant (placement, size and exposure matter). Everywhere else Aleph avoids verdicts.",["Keep \"Compliant\" with a footnote","Remove any status word entirely"],["prop65"]],
+    [15,"C","Are two sentences on a signed PDF safe?","A company officer signs a PDF Aleph generates. It says \"…hereby attest that the above-referenced product has been evaluated for compliance with the following regulations\". The footer says \"This document is for informational purposes. Verify compliance status at app.alephco.io\".","Keep the attestation (it is the officer's own statement). Change the footer to \"Prepared with Aleph. Aleph does not certify compliance.\"","\"Verify compliance status at Aleph\" suggests Aleph decides compliance, which it never does.",["Both are fine as written","Change the attestation too. Say how in the note"],[]],
+    [16,"D","Which company name must the website show?","51 pages of the website name the publisher \"Aleph Compliance, Inc.\", which doesn't exist. The app, the Terms and Stripe say \"Pasadena Works, LLC d/b/a Aleph Co.\", a Delaware LLC.","Pasadena Works, LLC d/b/a Aleph Co. everywhere.","The site should name the company that actually signs the contracts.",["\"Aleph Co.\" alone is fine on marketing pages, with the full name in the footer"],["about"]],
+    [17,"D","Replace \"GDPR- and CCPA-aligned data handling\"?","That line is on the pricing page. We haven't had an audit or formal review against either law.","Yes. Replace it with what the app does: \"Export or delete your data at any time.\"","It sounds like a compliance claim we can't back up.",["Keep it","Remove it with no replacement"],["pricing"]],
+    [18,"D","Keep \"All data encrypted at rest and in transit\"?","Our hosting companies (Supabase, Railway) encrypt storage and every connection uses TLS. We don't yet have their written statements on file.","Keep it once we file their written statements.","It's true as far as we know; we just want the paper behind it.",["Keep it now; their public documentation is enough","Remove it"],["pricing","security"]],
+    [19,"D","Is \"Documented retention and deletion\" OK?","The privacy policy has a \"Data Retention\" section. Nothing else documents retention.","Yes, with the words linked to that section.","With the link, \"documented\" points at real text.",["Drop the word \"documented\"","Fine as is, no link needed"],["pricing","privacy"]],
+    [20,"D","Do our headlines promise an outcome?","\"Product compliance, handled.\" · \"Audit-ready records\" · \"FDA-ready export\" · \"Why Compliance Teams Trust Aleph\" · \"Don't risk a recall\"","Yes. Rewrite them to say what Aleph does, for example \"Keep every record FDA asks for in one place.\"","\"Handled\" and \"ready\" sound like guarantees. If a customer fails an inspection, the headline is what they quote.",["Fine as ordinary marketing language","Only some need changing. Say which in the note"],["home"]],
+    [21,"D","Fix two Prop 65 page lines?","\"Civil penalties run up to $2,500 per day\" (we haven't checked the statute) and \"Record whether you consider your warning safe harbor compliant\".","Yes. Cite the statute for the penalty once checked, and say \"uses the safe-harbor warning wording\" instead of \"compliant\".","An uncited legal number and the word \"compliant\" are both avoidable risks.",["Remove the penalty number entirely","Fine as is"],["prop65"]],
+    [22,"D","Remove \"300+ recalls\" a year?","Our toy importers page says it with no source. CPSC's website blocks our automated checks, so we couldn't confirm it.","Yes, remove it, unless we can cite a CPSC count for a named year.","An unsourced statistic is easy to cut.",["Keep it as is"],["toys"]],
+    [23,"D","Replace the About page's team sentence?","It says \"A team of compliance and software professionals … spent years in the import/export industry.\" It describes a team we don't have yet.","Yes. Replace it with a short founder paragraph in James's own words.","It overstates who we are.",["Fine as is"],["about"]],
+    [24,"E","Should the privacy policy mention two features added after it was written?","(a) When a food importer asks, Aleph sends its foreign supplier's FDA facility number to FDA's public data service and saves the result. (b) When an importer shares certificates with a distributor, the importer can see who at the distributor opened or downloaded each one (their email and the time).","Yes, one line each.","(b) involves people at another company who never agreed to our privacy policy, so it's better said than not.",["Only (b) needs it","Neither needs it"],["privacy"]],
+    [25,"F","Do our terms need anything for broker sharing?","The client agrees with one line when it shares (see 32). Brokers accept short broker terms when they sign up; those are drafted but not reviewed.","Yes: the client's consent line plus the broker terms.","The broker isn't a paying customer, so it needs its own short agreement.",["The consent line alone is enough","More is needed. Say what in the note"],["brokers","terms"]],
+    [26,"F","Does sharing only what the client chooses keep both sides safe under the duty to advise?","Today a broker sees products, filing IDs and, if the client allows, who makes and exports each product, plus how many required records are on file. It does not see which records are missing, alerts, or documents.","Yes.","The broker learns nothing the client didn't choose to show.",["Not enough. Say what to add in the note"],["cfr11139"]],
+    [27,"F","Is Aleph doing \"customs business\"?","Only licensed brokers may do customs business for others (19 U.S.C. 1641; 19 CFR 111.1). Aleph puts the importer's own data into a sheet its broker uses to file. Aleph never files with or deals with Customs.","No. It falls under the \"corporate compliance activity\" exclusion: the importer's own records, organized by the importer's own software.","If the answer were yes, the broker sheet would need a license, so this one matters most in the section.",["It might be. Ask a customs lawyer before real brokers use it"],["cfr111"]],
+    [28,"F","Does the broker sheet itself give the broker \"knowledge\"?","The sheet shows \"Not provided\" where a value is blank, and CPSC's own status words, never Aleph's judgments. We also email a broker when a filing ID changes.","No.","A blank field is not a finding that the client broke the law.",["Hide the \"Not provided\" blanks from the broker","Stop the ID-change emails"],["cfr11139"]],
+    [29,"F","Does in-app consent count as authorization \"in writing\"?","Brokers must keep client information confidential unless the client authorizes disclosure in writing (19 CFR 111.24). Our clients authorize sharing with a click that we record with the date and wording.","Yes. The broker terms also say the broker keeps the data confidential and uses it only to serve that client.","A recorded electronic agreement is normally treated as a writing.",["A signed document is needed instead"],["cfr11124"]],
+    [30,"F","Must a broker disclose a referral discount?","A broker can give clients a link that takes 20% off the first year of an annual Aleph plan. The broker gets nothing.","No.","The broker has no financial interest to disclose.",["The broker should tell clients about it anyway"],[]],
+    [31,"F","Should brokers ever see a client's missing records and alerts?","We built an option to show the broker the client's open items (which records are missing, alerts, checklists), with the client's consent. It is switched off until we have an answer.","Keep it off.","This is the one most likely to trigger the duty to advise; off is the safe default.",["OK to turn on, with the client's consent"],["cfr11139"]],
+    [32,"F","Is our consent line right?","With today's settings the client agrees to: \"Your broker will see the products you choose, their filing IDs, who makes and exports them, and how many of their required records are on file. It will not see which records are missing or your alerts, and sees a document only when you send it.\" The line changes to match what the client turns off. Clients who shared before November 6 agreed to an older line that also said \"anything still missing\".","Yes. If we ever turn on 31, every client agrees again.","The line says exactly what the broker sees, no more and no less.",["The wording needs changes. Say what in the note","Clients from before November 6 must agree again now"],[]],
+    [33,"F","Do record COUNTS give the broker \"knowledge\"?","The broker can see \"5 of 8 records on file\": how many are missing, but not which.","No. Counts identify no error. Alerts (which record, which due date) would be closer to the line.","It tells us whether counts can stay on by default.",["Counts too. Turn them off by default"],["cfr11139"]],
+    [34,"F","Later idea: a broker prepares the client's records and the client signs","Not built, and parked. Who would be liable for what the broker prepared, and what would the broker terms and client consent need?","Skip for now.","We won't build it without a broker asking and a specialist's answer.",["I can comment. See my note"],[]],
+    [35,"F","A broker files with a wrong ID it took from Aleph: who is exposed?","The broker sheet carries the client's FDA registration, product codes and CPSC certificate IDs, all entered by the client.","Add a clause to both the Terms and the broker terms: the data comes from the client, the client is responsible for its accuracy, and Aleph only displays it.","It puts responsibility with the party that typed the number.",["Not needed"],["terms"]],
+    [36,"G","If an Aleph employee files a client's certificates in the client's CPSC account, does Aleph take on risk?","Not built. We asked CPSC on November 20 whether this is allowed. CPSC says invited trade partners make an attestation when they submit (90 FR 1815). The importer stays \"legally responsible\" (16 CFR 1110.15).","Skip until CPSC answers. Then the question becomes whether our terms can put that risk back on the client.","CPSC's answer may make the question moot.",["I can comment now. See my note"],["cfr1110"]]
+  ];
+
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE) || "{}") || {}; } catch (e) { state = {}; }
+  function save() {
+    try { localStorage.setItem(STORE, JSON.stringify(state)); document.getElementById("saved").textContent = "Saved in this browser"; }
+    catch (e) { document.getElementById("saved").textContent = "Not saved: use Copy answers before leaving"; }
+  }
+
+  function el(tag, attrs, text) {
+    var n = document.createElement(tag);
+    if (attrs) for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function linkRow(keys) {
+    var row = el("div", { "class": "links" });
+    keys.forEach(function (k) { var a = el("a", { href: L[k][1], target: "_blank", rel: "noopener" }, L[k][0] + " ↗"); row.appendChild(a); });
+    return row;
+  }
+
+  function choiceLabel(q, v) {
+    if (v === "s") return "Agree with suggested";
+    if (v === "n") return "Not my area";
+    if (v && v.charAt(0) === "a") { var i = +v.slice(1); return "Alternative " + String.fromCharCode(65 + i) + ": " + q[6][i]; }
+    return "";
+  }
+
+  function render() {
+    var root = document.getElementById("sections");
+    SECTIONS.forEach(function (s) {
+      var sec = el("section", { id: "sec-" + s.id });
+      var head = el("div", { "class": "sec-head" });
+      head.appendChild(el("h2", null, s.id + ". " + s.title));
+      head.appendChild(el("span", { "class": "pill" + (s.pill === "High" ? " high" : "") }, s.pill));
+      sec.appendChild(head);
+      if (s.intro) sec.appendChild(el("p", { "class": "sec-intro" }, s.intro));
+      if (s.links.length) sec.appendChild(linkRow(s.links));
+      Q.filter(function (q) { return q[1] === s.id; }).forEach(function (q) { sec.appendChild(card(q)); });
+      root.appendChild(sec);
+    });
+  }
+
+  function card(q) {
+    var n = q[0], ans = state[n] || {};
+    var box = el("div", { "class": "q", id: "q" + n });
+    var top = el("div", { "class": "q-top" });
+    top.appendChild(el("span", { "class": "qn" }, String(n)));
+    top.appendChild(el("h3", null, q[2]));
+    box.appendChild(top);
+    var dl = el("dl");
+    [["Context", q[3]], ["Suggested", q[4]], ["Why", q[5]]].forEach(function (p, i) {
+      dl.appendChild(el("dt", null, p[0]));
+      var dd = el("dd", i === 1 ? { "class": "sugg" } : null, p[1]);
+      dl.appendChild(dd);
+    });
+    if (q[7].length) { dl.appendChild(el("dt", null, "Read")); var dd = el("dd"); dd.appendChild(linkRow(q[7])); dd.firstChild.classList.add("inline"); dl.appendChild(dd); }
+    box.appendChild(dl);
+
+    var fs = el("fieldset");
+    fs.appendChild(el("legend", null, "Your answer"));
+    var opts = [["s", "Agree with suggested", ""]];
+    q[6].forEach(function (t, i) { opts.push(["a" + i, "Alternative " + String.fromCharCode(65 + i) + ": ", t]); });
+    opts.push(["n", "Not my area", ""]);
+    opts.forEach(function (o) {
+      var id = "q" + n + "-" + o[0];
+      var lab = el("label", { "class": "opt", "for": id });
+      var inp = el("input", { type: "radio", name: "q" + n, id: id, value: o[0] });
+      if (ans.c === o[0]) inp.checked = true;
+      inp.addEventListener("change", function () { state[n] = state[n] || {}; state[n].c = o[0]; save(); refresh(); });
+      lab.appendChild(inp);
+      var span = el("span"); span.appendChild(el("b", null, o[1])); if (o[2]) span.appendChild(document.createTextNode(o[2]));
+      lab.appendChild(span);
+      fs.appendChild(lab);
+    });
+    var ta = el("textarea", { id: "q" + n + "-note", placeholder: "Comment or your own wording (optional)", "aria-label": "Comment on question " + n });
+    ta.value = ans.t || "";
+    var timer;
+    ta.addEventListener("input", function () { clearTimeout(timer); timer = setTimeout(function () { state[n] = state[n] || {}; state[n].t = ta.value; save(); refresh(); }, 400); });
+    fs.appendChild(ta);
+    box.appendChild(fs);
+    return box;
+  }
+
+  function answersText() {
+    var lines = ["Aleph legal questions: answers (" + new Date().toLocaleDateString() + ")", ""];
+    Q.forEach(function (q) {
+      var a = state[q[0]] || {};
+      var c = choiceLabel(q, a.c);
+      var t = (a.t || "").trim();
+      if (!c && !t) return;
+      lines.push(q[0] + ". " + q[2]);
+      lines.push("   " + (c || "(no choice)"));
+      if (t) lines.push("   Note: " + t.replace(/\n/g, "\n         "));
+      lines.push("");
+    });
+    if (lines.length === 2) lines.push("(No answers yet.)");
+    return lines.join("\n");
+  }
+
+  function refresh() {
+    var done = 0;
+    Q.forEach(function (q) {
+      var a = state[q[0]] || {};
+      var ok = !!(a.c || (a.t && a.t.trim()));
+      if (ok) done++;
+      var c = document.getElementById("q" + q[0]); if (c) c.classList.toggle("done", ok);
+    });
+    document.getElementById("count").textContent = done + " of 36 answered";
+    document.getElementById("bar").style.width = (done / 36 * 100) + "%";
+    document.getElementById("answers-text").value = answersText();
+  }
+
+  function unlock() {
+    document.getElementById("gate").hidden = true;
+    document.getElementById("app").hidden = false;
+    try { sessionStorage.setItem(STORE + "-ok", "1"); } catch (e) {}
+    render(); refresh();
+  }
+
+  async function sha256(s) {
+    var buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
+    return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, "0"); }).join("");
+  }
+
+  document.getElementById("gate-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    var v = document.getElementById("pw").value.trim().toLowerCase();
+    if ((await sha256(v)) === HASH) unlock();
+    else document.getElementById("gate-err").textContent = "That password didn't work. Check the email from James.";
+  });
+  try { if (sessionStorage.getItem(STORE + "-ok") === "1") unlock(); } catch (e) {}
+
+  document.getElementById("btn-email").addEventListener("click", function () {
+    var body = answersText();
+    var url = "mailto:james@alephco.io?subject=" + encodeURIComponent("Aleph legal questions: my answers") + "&body=" + encodeURIComponent(body);
+    if (url.length > 1900) {
+      url = "mailto:james@alephco.io?subject=" + encodeURIComponent("Aleph legal questions: my answers") +
+        "&body=" + encodeURIComponent("My answers are long, so I've pasted them below (or attached the text file):\n\n");
+      copy(); document.getElementById("send-msg").textContent = "Your answers are long, so they were copied. Paste them into the email that just opened.";
+    }
+    window.location.href = url;
+  });
+  function copy() {
+    var ta = document.getElementById("answers-text");
+    var txt = ta.value;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).then(function () { document.getElementById("btn-copy").textContent = "Copied"; },
+        function () { ta.select(); });
+    } else { ta.select(); }
+  }
+  document.getElementById("btn-copy").addEventListener("click", copy);
+  document.getElementById("btn-download").addEventListener("click", function () {
+    var blob = new Blob([answersText()], { type: "text/plain" });
+    var a = el("a", { href: URL.createObjectURL(blob), download: "aleph-legal-answers.txt" });
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+})();
+</script>
+</body>
+</html>

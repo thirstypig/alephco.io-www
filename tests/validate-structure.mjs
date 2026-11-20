@@ -137,6 +137,7 @@ const EXEMPT_PAGES = new Set([
   "404.html", // no nav by design — a dead end should not offer a full site chrome
   "confirm.html", // transactional email landing, deliberately chrome-free
   "unsubscribe.html", // ditto
+  "counsel-2026-11.html", // unlisted, password-gated review page for counsel (James, 2026-11-20); noindex, no site chrome, not in the sitemap
   "blog/_template.html", // authoring scaffold, never served
   // Learn-page templates. The GENERATED pages are gitignored build artifacts and are
   // excluded from the tracked list entirely (see below); these tracked templates are
