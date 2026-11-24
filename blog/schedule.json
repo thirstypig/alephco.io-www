@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-16",
+  "generated": "2026-11-24",
   "posts": [
     {
       "slug": "fcc-equipment-authorization-for-electronics-importers",
@@ -175,11 +175,10 @@
     {
       "slug": "mocra-for-cosmetics-importers-registration-and-listing",
       "title": "MoCRA for cosmetics importers: registration and listing",
-      "status": "planned",
-      "targetDate": "2026-11-23",
+      "status": "published",
+      "publishedDate": "2026-11-23",
       "image": "/img/blog/mocra-for-cosmetics-importers-registration-and-listing.png",
-      "url": "https://www.alephco.io/blog/mocra-for-cosmetics-importers-registration-and-listing.html",
-      "draft": true
+      "url": "https://www.alephco.io/blog/mocra-for-cosmetics-importers-registration-and-listing.html"
     },
     {
       "slug": "supplier-verification-what-fda-actually-accepts",

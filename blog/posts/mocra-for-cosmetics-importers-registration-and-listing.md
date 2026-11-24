@@ -5,7 +5,7 @@ date: 2026-11-23
 slug: mocra-for-cosmetics-importers-registration-and-listing
 keywords: [MoCRA, cosmetics, FDA registration, product listing, responsible person, Cosmetics Direct, importer, 364c]
 sources: [https://www.law.cornell.edu/uscode/text/21/364c, https://www.fda.gov/cosmetics/registration-listing-cosmetic-product-facilities-and-products, https://www.fda.gov/cosmetics/registration-listing-cosmetic-product-facilities-and-products/cosmetics-direct]
-draft: true
+draft: false
 ---
 
 MoCRA is two obligations, not one, and they land on different parties with different
