@@ -134,6 +134,7 @@ const REDIRECT_PAGES = {
  * Each needs a REASON, because this set is the only way to leave the gate.
  */
 const EXEMPT_PAGES = new Set([
+  "counsel-2026-11.html", // unlisted, encrypted review page for counsel (James, 2026-11-26); noindex, no site chrome, not in the sitemap
   "404.html", // no nav by design — a dead end should not offer a full site chrome
   "confirm.html", // transactional email landing, deliberately chrome-free
   "unsubscribe.html", // ditto
