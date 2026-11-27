@@ -1,35 +1,52 @@
 #!/usr/bin/env node
-// Builds counsel-2026-11.html: an unlisted page whose questions are ENCRYPTED with a passphrase.
+// Builds counsel-2026-11.html: an unlisted answer form for counsel whose CONTENT is encrypted with a passphrase.
 //
 // Why encrypted and not just a password box: this repo is public. A password box alone leaves the full text in the
-// page source and on GitHub. Here the page holds only AES-GCM ciphertext; the browser decrypts it with a key derived
-// from the passphrase (PBKDF2-SHA-256, 600,000 rounds). The passphrase is never written to this repo.
+// page source and on GitHub. Here the page holds only AES-GCM ciphertext of the content; the browser decrypts it with
+// a key derived from the passphrase (PBKDF2-SHA-256, 600,000 rounds). The passphrase is never written to this repo.
+//
+// What is plain and what is encrypted:
+//   - PLAIN (in this file, public): the generic shell — layout CSS, light/dark theme toggle, the form renderer,
+//     answer storage (localStorage), the summary, print stylesheet, email and copy logic. None of it names a question.
+//   - ENCRYPTED: the content JSON (intro text, legal links, questions, suggestions, alternatives).
+// After decryption the shell builds the form from the JSON with createElement/textContent only — content strings are
+// never parsed as HTML.
 //
 // Limits: a short dictionary-word passphrase can be guessed offline by someone determined. This keeps out casual
 // visitors, crawlers and GitHub readers; it is not protection for secrets.
 //
-// Usage (the readable source lives in the PRIVATE app repo, alephco.io-app
-// docs/operations/counsel-2026-11-26/aleph-legal-questions.html):
-//   COUNSEL_PASSPHRASE=... node scripts/build-counsel-page.mjs <path-to-source.html>
+// Usage (the readable content lives in the PRIVATE app repo, alephco.io-app
+// docs/operations/counsel-2026-11-26/counsel-questions.json — never copy it into this repo):
+//   COUNSEL_PASSPHRASE=... node scripts/build-counsel-page.mjs <path-to-counsel-questions.json>
 import { readFileSync, writeFileSync } from "node:fs";
+import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { webcrypto as crypto } from "node:crypto";
 
 const OUT = new URL("../counsel-2026-11.html", import.meta.url);
+const REPO = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const ITERATIONS = 600000;
 
 const [srcPath] = process.argv.slice(2);
 const pass = (process.env.COUNSEL_PASSPHRASE || "").trim().toLowerCase();
 if (!srcPath || !pass) {
-  console.error("Usage: COUNSEL_PASSPHRASE=... node scripts/build-counsel-page.mjs <source.html>");
+  console.error("Usage: COUNSEL_PASSPHRASE=... node scripts/build-counsel-page.mjs <counsel-questions.json>");
+  process.exit(1);
+}
+if (resolve(srcPath).startsWith(REPO + "/")) {
+  console.error("Refusing: the readable content must live OUTSIDE this public repo (keep it in the private app repo).");
   process.exit(1);
 }
 
-const src = readFileSync(srcPath, "utf8");
-const styleMatch = src.match(/<style>([\s\S]*?)<\/style>/);
-const bodyMatch = src.match(/<div class="wrap">[\s\S]*<\/div>(?=\s*<script>)/);
-if (!styleMatch || !bodyMatch) {
-  console.error("Source must contain one <style> block and a <div class=\"wrap\"> followed by <script>.");
-  process.exit(1);
+const content = JSON.parse(readFileSync(srcPath, "utf8"));
+delete content._readme;
+for (const key of ["title", "intro", "legalLinks", "questions", "optional", "footer"]) {
+  if (!(key in content)) { console.error(`Content JSON is missing "${key}".`); process.exit(1); }
+}
+for (const q of [...content.questions, ...content.optional]) {
+  for (const k of ["id", "title", "question", "context", "suggestion", "why", "alternatives", "links"]) {
+    if (!(k in q)) { console.error(`Question ${q.id ?? "?"} is missing "${k}".`); process.exit(1); }
+  }
 }
 
 const b64 = (u8) => Buffer.from(u8).toString("base64");
@@ -39,9 +56,11 @@ const baseKey = await crypto.subtle.importKey("raw", new TextEncoder().encode(pa
 const key = await crypto.subtle.deriveKey(
   { name: "PBKDF2", salt, iterations: ITERATIONS, hash: "SHA-256" },
   baseKey, { name: "AES-GCM", length: 256 }, false, ["encrypt"]);
-const cipher = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, new TextEncoder().encode(bodyMatch[0])));
+const cipher = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, new TextEncoder().encode(JSON.stringify(content))));
 
-const page = `<!DOCTYPE html>
+// The shell below is a String.raw template with NO interpolation: the data line is substituted afterwards, so the
+// shell's own JS may use backslashes freely. Do not use backticks or dollar-brace inside it.
+const SHELL = String.raw`<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -49,83 +68,455 @@ const page = `<!DOCTYPE html>
 <meta name="robots" content="noindex, nofollow">
 <title>Aleph legal questions</title>
 <link rel="icon" href="/favicon.png" type="image/png">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <!--
-  Unlisted page for counsel (James, 2026-11-26). GENERATED by scripts/build-counsel-page.mjs. Do not edit by hand.
-  The questions are encrypted; the passphrase is not in this repo. Remove the page once counsel has answered.
+  Unlisted answer form for counsel (James, 2026-11-27). GENERATED by scripts/build-counsel-page.mjs. Do not edit by hand.
+  The content is encrypted; the passphrase is not in this repo. Remove the page once counsel has answered.
 -->
-<style>${styleMatch[1]}
-.gate { min-height: 80vh; display: grid; place-items: center; padding-block: 24px;
+<script>
+  // Apply a saved theme before first paint (no flash). Default: follow the system setting.
+  try { var t = localStorage.getItem("aleph-counsel-theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+</script>
+<style>
+:root {
+  --bg: #f7f4ec; --surface: #ffffff; --surface-2: #fbf9f4; --fg: #1d2733; --muted: #5a6573; --rule: #ddd6c6;
+  --navy: #1f3a5f; --link: #1a4f8f; --accent: #c43a2e; --accent-bg: #fbeae7; --ok: #2f6b45; --ok-bg: #e7f2ea; --chip: #eef1f5;
+  --btn-fg: #ffffff;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121820; --surface: #1a222c; --surface-2: #161d26; --fg: #e6e9ee; --muted: #a3adba; --rule: #2f3a47;
+  --navy: #9dbbe3; --link: #9cc4ff; --accent: #f08a7e; --accent-bg: #3a2220; --ok: #8fd0a4; --ok-bg: #1d3226; --chip: #232d39;
+  --btn-fg: #0f141a; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #121820; --surface: #1a222c; --surface-2: #161d26; --fg: #e6e9ee; --muted: #a3adba; --rule: #2f3a47;
+  --navy: #9dbbe3; --link: #9cc4ff; --accent: #f08a7e; --accent-bg: #3a2220; --ok: #8fd0a4; --ok-bg: #1d3226; --chip: #232d39;
+  --btn-fg: #0f141a; color-scheme: dark; }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 var(--font-body); overflow-wrap: anywhere; }
+.wrap { max-width: 760px; margin: 0 auto; padding-block: 24px 64px;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-.gate form { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 24px; width: min(380px, 100%); display: grid; gap: 10px; }
-.gate h1 { font-size: 22px; margin: 0; }
-.gate label { font-weight: 600; font-size: 14px; }
-.gate input { font: inherit; border: 1px solid var(--rule); border-radius: 6px; padding: 10px 12px; background: var(--bg); color: var(--fg); }
-.gate button { font: 600 15px var(--font-body); border: 0; border-radius: 6px; padding: 10px 12px; background: var(--navy); color: var(--bg); cursor: pointer; }
+.topbar { display: flex; justify-content: flex-end; gap: 8px; max-width: 760px; margin: 0 auto;
+  padding: 12px max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px)); }
+button, input, textarea { font: inherit; color: inherit; }
+a { color: var(--link); }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; border: 2px solid var(--navy); background: var(--navy); color: var(--btn-fg);
+  border-radius: 8px; padding: 10px 16px; font-weight: 700; font-size: 15px; cursor: pointer; text-decoration: none; min-height: 44px; }
+.btn.secondary { background: transparent; color: var(--navy); }
+.btn.small { padding: 6px 12px; font-size: 14px; min-height: 36px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.eyebrow { font: 600 12px/1.4 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0; }
+h1 { font-size: 30px; line-height: 1.2; color: var(--navy); margin: 6px 0 12px; }
+h2 { font-size: 21px; line-height: 1.3; color: var(--navy); margin: 40px 0 12px; padding-bottom: 6px; border-bottom: 2px solid var(--navy); }
+p { margin: 0 0 12px; }
+.first { background: var(--accent-bg); border-left: 5px solid var(--accent); border-radius: 6px; padding: 12px 14px; margin: 16px 0; font-weight: 600; }
+.legal { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 12px 0 4px; }
+.legal a { display: flex; flex-direction: column; gap: 2px; border: 2px solid var(--navy); border-radius: 8px; padding: 10px 12px;
+  background: var(--surface); color: var(--navy); font-weight: 700; text-decoration: none; min-height: 44px; }
+.legal a:hover { background: var(--chip); }
+.legal a .cue, .qlinks .cue { font-weight: 500; font-size: 12px; color: var(--muted); }
+.progress { position: sticky; top: 0; z-index: 2; background: var(--bg); padding: 10px 0; border-bottom: 1px solid var(--rule); margin-top: 16px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 14px; }
+.progress .bar { flex: 1 1 160px; height: 8px; background: var(--chip); border-radius: 4px; overflow: hidden; }
+.progress .bar span { display: block; height: 100%; width: 0; background: var(--ok); transition: width .2s; }
+.progress .saved { color: var(--muted); }
+.q { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 16px; margin: 16px 0; }
+.q.done { border-color: var(--ok); box-shadow: inset 4px 0 0 var(--ok); }
+.q-head { display: flex; gap: 12px; align-items: baseline; }
+.qn { flex: none; font: 700 16px var(--font-mono); color: var(--accent); min-width: 1.6em; }
+.q h3 { margin: 0; font-size: 18px; line-height: 1.35; }
+.q .ask { margin: 6px 0 12px; font-weight: 600; }
+.q .ctx { color: var(--fg); }
+.block { border-radius: 8px; padding: 10px 12px; margin: 10px 0; }
+.block .k { display: block; font: 700 12px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 2px; }
+.sugg { background: var(--ok-bg); }
+.sugg .k { color: var(--ok); }
+.why { background: var(--chip); }
+.why .k { color: var(--muted); }
+.qlinks { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 10px 0; }
+.qlinks .cue { margin-left: 6px; }
+.qlinks .cue::before { content: "("; } .qlinks .cue::after { content: ")"; }
+.qlinks a { font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+fieldset { border: 1px solid var(--rule); border-radius: 8px; margin: 14px 0 0; padding: 10px 12px 12px; }
+legend { font-weight: 700; padding: 0 6px; }
+.opt { display: flex; gap: 10px; align-items: flex-start; padding: 8px; border-radius: 6px; cursor: pointer; min-height: 44px; }
+.opt:hover { background: var(--chip); }
+.opt input { margin-top: 5px; width: 18px; height: 18px; flex: none; accent-color: var(--navy); }
+.opt.picked { background: var(--chip); }
+textarea { width: 100%; min-height: 72px; margin-top: 8px; border: 1px solid var(--rule); border-radius: 6px; padding: 10px; background: var(--bg); resize: vertical; }
+.optional-wrap { margin-top: 8px; }
+.optional-wrap .q { background: var(--surface-2); border-style: dashed; }
+.optional-wrap .q h3 { font-size: 16px; }
+.optional-wrap .q .ask, .optional-wrap .q .ctx { font-size: 15px; }
+.muted { color: var(--muted); }
+.sheet { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 16px; }
+.sheet h3 { margin: 0 0 4px; font-size: 18px; }
+.sheet ol { list-style: none; padding: 0; margin: 12px 0; }
+.sheet li { border-top: 1px solid var(--rule); padding: 8px 0; break-inside: avoid; }
+.sheet .t { font-weight: 700; }
+.sheet .c { display: block; }
+.sheet .c.none { color: var(--muted); font-style: italic; }
+.sheet .n { display: block; white-space: pre-wrap; color: var(--fg); }
+.sheet .n::before { content: "Comment: "; font-weight: 600; }
+.sign { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 16px; }
+.sign label { display: grid; gap: 4px; font-weight: 600; font-size: 14px; }
+.sign input { border: 0; border-bottom: 2px solid var(--fg); background: transparent; padding: 6px 2px; min-height: 40px; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 8px; }
+.msg { min-height: 1.4em; font-size: 14px; color: var(--ok); }
+.foot { margin-top: 40px; padding-top: 12px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 14px; }
+.gate { min-height: 75vh; display: grid; place-items: center; padding: 24px max(16px, env(safe-area-inset-right, 0px)) 24px max(16px, env(safe-area-inset-left, 0px)); }
+.gate form { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 24px; width: min(400px, 100%); display: grid; gap: 10px; }
+.gate h1 { font-size: 24px; margin: 0; }
+.gate input { border: 1px solid var(--rule); border-radius: 6px; padding: 10px 12px; background: var(--bg); min-height: 44px; }
 .gate .err { color: var(--accent); font-size: 14px; min-height: 1.4em; margin: 0; }
+.print-only { display: none; }
+@media (max-width: 480px) { h1 { font-size: 25px; } .q { padding: 14px 12px; } }
+@media print {
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --fg: #000; --muted: #444; --rule: #999; color-scheme: light; }
+  @page { margin: 16mm 14mm; }
+  body { background: #fff; color: #000; font-size: 11pt; line-height: 1.45; }
+  body * { visibility: hidden; }
+  #sheet, #sheet * { visibility: visible; }
+  .topbar, .gate, .progress, .no-print { display: none !important; }
+  #sheet { position: absolute; left: 0; top: 0; width: 100%; border: 0; padding: 0; }
+  .print-only { display: block; }
+  .sheet li { padding: 6px 0; }
+  .sign input { border-bottom: 1px solid #000; }
+  a { color: #000; text-decoration: none; }
+}
 </style>
 </head>
 <body>
+<div class="topbar no-print">
+  <button type="button" class="btn secondary small" id="theme-btn" aria-live="polite">Dark mode</button>
+</div>
 <div class="gate" id="gate">
   <form id="gate-form" novalidate>
     <h1>Aleph legal questions</h1>
-    <p style="margin:0;color:var(--muted);font-size:14px">Enter the passphrase you were given.</p>
-    <label for="pw">Passphrase</label>
+    <p class="muted" style="margin:0;font-size:15px">Enter the passphrase you were given.</p>
+    <label for="pw" style="font-weight:600">Passphrase</label>
     <input id="pw" type="password" autocomplete="current-password" autofocus>
-    <button type="submit">Open</button>
+    <button type="submit" class="btn">Open</button>
     <p class="err" id="err" role="alert"></p>
   </form>
 </div>
-<div id="content" hidden></div>
+<main class="wrap" id="app" hidden></main>
 <script>
 (function () {
-  var DATA = { salt: "${b64(salt)}", iv: "${b64(iv)}", ct: "${b64(cipher)}", iterations: ${ITERATIONS} };
-  function bytes(s) { return Uint8Array.from(atob(s), function (c) { return c.charCodeAt(0); }); }
-  async function open(pass) {
+  "use strict";
+  var DATA = /*__DATA__*/null;
+  var STORE = "aleph-counsel-2026-11-answers";
+  var PASS_KEY = "aleph-counsel-2026-11-pass";
+  var THEME_KEY = "aleph-counsel-theme";
+  var EMAIL = "james@alephco.io";
+  var MAILTO_LIMIT = 1800;
+  var C = null;          // decrypted content
+  var ALL = [];          // required + optional questions, in order
+  var state = { answers: {}, name: "", signature: "", date: "" };
+
+  /* ---------- theme ---------- */
+  var root = document.documentElement, themeBtn = document.getElementById("theme-btn");
+  var mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+  function isDark() { var t = root.getAttribute("data-theme"); return t ? t === "dark" : !!(mq && mq.matches); }
+  function paintThemeBtn() { themeBtn.textContent = isDark() ? "Light mode" : "Dark mode"; themeBtn.setAttribute("aria-label", isDark() ? "Switch to light mode" : "Switch to dark mode"); }
+  themeBtn.addEventListener("click", function () {
+    var next = isDark() ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+    paintThemeBtn();
+  });
+  if (mq && mq.addEventListener) mq.addEventListener("change", paintThemeBtn);
+  paintThemeBtn();
+
+  /* ---------- storage ---------- */
+  try { var raw = localStorage.getItem(STORE); if (raw) { var s = JSON.parse(raw); if (s && typeof s === "object") { state.answers = s.answers || {}; state.name = s.name || ""; state.signature = s.signature || ""; state.date = s.date || ""; } } } catch (e) {}
+  var savedEl = null;
+  function save() {
+    try { localStorage.setItem(STORE, JSON.stringify(state)); if (savedEl) savedEl.textContent = "Saved in this browser"; }
+    catch (e) { if (savedEl) savedEl.textContent = "Not saved. Use Copy my answers before you leave."; }
+  }
+
+  /* ---------- DOM helpers (textContent only; content is never parsed as HTML) ---------- */
+  function el(tag, attrs, text) {
+    var n = document.createElement(tag);
+    if (attrs) for (var k in attrs) if (Object.prototype.hasOwnProperty.call(attrs, k)) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function safeUrl(u) { return /^https:\/\//.test(u) || /^\/[^\/]/.test(u) ? u : "#"; }
+  function extLink(link, cls) {
+    var a = el("a", { href: safeUrl(link.url), target: "_blank", rel: "noopener noreferrer" });
+    if (cls) a.className = cls;
+    a.appendChild(document.createTextNode(link.label + " ↗"));
+    var cue = el("span", { "class": "cue" }, "opens in new tab");
+    a.appendChild(cue);
+    return a;
+  }
+  function letter(i) { return String.fromCharCode(65 + i); }
+
+  /* ---------- answers in words ---------- */
+  function choiceWords(q, c) {
+    if (c === "agree") return "Agree with the suggestion";
+    if (c === "na") return "Not my area";
+    if (c && c.charAt(0) === "a") { var i = +c.slice(1); if (q.alternatives[i] != null) return "Alternative " + letter(i) + ": " + q.alternatives[i]; }
+    return "";
+  }
+  function ans(q) { return state.answers[q.id] || {}; }
+  function answered(q) { var a = ans(q); return !!(a.c || (a.t && a.t.trim())); }
+
+  /* ---------- render ---------- */
+  function card(q, optional) {
+    var a = ans(q);
+    var box = el("section", { "class": "q", id: "q-" + q.id, "aria-labelledby": "qt-" + q.id });
+    var head = el("div", { "class": "q-head" });
+    head.appendChild(el("span", { "class": "qn" }, q.id + "."));
+    head.appendChild(el("h3", { id: "qt-" + q.id }, q.title));
+    box.appendChild(head);
+    box.appendChild(el("p", { "class": "ask" }, q.question));
+    box.appendChild(el("p", { "class": "ctx" }, q.context));
+    var sg = el("div", { "class": "block sugg" }); sg.appendChild(el("span", { "class": "k" }, "Our suggestion")); sg.appendChild(document.createTextNode(q.suggestion)); box.appendChild(sg);
+    var wy = el("div", { "class": "block why" }); wy.appendChild(el("span", { "class": "k" }, "Why")); wy.appendChild(document.createTextNode(q.why)); box.appendChild(wy);
+    if (q.links && q.links.length) {
+      var lr = el("div", { "class": "qlinks" });
+      lr.appendChild(el("span", { "class": "sr-only" }, "Read:"));
+      q.links.forEach(function (l) { lr.appendChild(extLink(l)); });
+      box.appendChild(lr);
+    }
+    var fs = el("fieldset");
+    fs.appendChild(el("legend", null, "Your answer" + (optional ? " (optional)" : "")));
+    var opts = [["agree", "Agree with the suggestion"]];
+    q.alternatives.forEach(function (t, i) { opts.push(["a" + i, "Alternative " + letter(i) + ": " + t]); });
+    opts.push(["na", "Not my area"]);
+    opts.forEach(function (o) {
+      var id = "q-" + q.id + "-" + o[0];
+      var lab = el("label", { "class": "opt" + (a.c === o[0] ? " picked" : ""), "for": id });
+      var inp = el("input", { type: "radio", name: "q-" + q.id, id: id, value: o[0] });
+      if (a.c === o[0]) inp.checked = true;
+      inp.addEventListener("change", function () {
+        state.answers[q.id] = state.answers[q.id] || {}; state.answers[q.id].c = o[0]; save();
+        Array.prototype.forEach.call(fs.querySelectorAll(".opt"), function (l) { l.classList.toggle("picked", l.contains(inp)); });
+        refresh();
+      });
+      lab.appendChild(inp);
+      lab.appendChild(el("span", null, o[1]));
+      fs.appendChild(lab);
+    });
+    var tid = "q-" + q.id + "-note";
+    fs.appendChild(el("label", { "for": tid, "class": "sr-only" }, "Comment on question " + q.id));
+    var ta = el("textarea", { id: tid, placeholder: "Comment or your own wording (optional)" });
+    ta.value = a.t || "";
+    var timer;
+    ta.addEventListener("input", function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () { state.answers[q.id] = state.answers[q.id] || {}; state.answers[q.id].t = ta.value; save(); refresh(); }, 300);
+    });
+    ta.addEventListener("blur", function () { clearTimeout(timer); state.answers[q.id] = state.answers[q.id] || {}; state.answers[q.id].t = ta.value; save(); refresh(); });
+    fs.appendChild(ta);
+    box.appendChild(fs);
+    return box;
+  }
+
+  var countEl, barEl, sheetList, msgEl;
+  function render() {
+    var app = document.getElementById("app");
+    var hdr = el("header", { "class": "no-print" });
+    hdr.appendChild(el("p", { "class": "eyebrow" }, (C.org || "") + (C.dateLabel ? " · " + C.dateLabel : "")));
+    hdr.appendChild(el("h1", null, C.title));
+    (C.intro || []).forEach(function (p) { hdr.appendChild(el("p", null, p)); });
+    hdr.appendChild(el("p", { "class": "muted", style: "margin:16px 0 0;font-weight:600" }, "Our live legal pages:"));
+    var lg = el("nav", { "class": "legal", "aria-label": "Live legal pages" });
+    C.legalLinks.forEach(function (l) { lg.appendChild(extLink(l)); });
+    hdr.appendChild(lg);
+    if (C.first) hdr.appendChild(el("p", { "class": "first" }, C.first));
+    app.appendChild(hdr);
+
+    var prog = el("div", { "class": "progress no-print", role: "status" });
+    countEl = el("span", { style: "font-weight:700" });
+    var bar = el("span", { "class": "bar", "aria-hidden": "true" }); barEl = el("span"); bar.appendChild(barEl);
+    savedEl = el("span", { "class": "saved" }, "Answers save in this browser as you go");
+    var jump = el("a", { href: "#summary" }, "Go to summary");
+    prog.appendChild(countEl); prog.appendChild(bar); prog.appendChild(savedEl); prog.appendChild(jump);
+    app.appendChild(prog);
+
+    var main = el("div", { "class": "no-print" });
+    main.appendChild(el("h2", null, "Questions"));
+    C.questions.forEach(function (q) { main.appendChild(card(q, false)); });
+    if (C.optional && C.optional.length) {
+      var ow = el("div", { "class": "optional-wrap" });
+      ow.appendChild(el("h2", null, C.optionalTitle || "Only if you have time"));
+      if (C.optionalIntro) ow.appendChild(el("p", { "class": "muted" }, C.optionalIntro));
+      C.optional.forEach(function (q) { ow.appendChild(card(q, true)); });
+      main.appendChild(ow);
+    }
+    app.appendChild(main);
+
+    /* summary + answer sheet (the sheet is the only thing that prints) */
+    var sum = el("section", { id: "summary", "aria-labelledby": "sum-h" });
+    var sh = el("h2", { id: "sum-h", "class": "no-print" }, "Your answers");
+    sum.appendChild(sh);
+    sum.appendChild(el("p", { "class": "no-print" }, "Check your answers below. Type your name, then save a PDF or send them to James. Nothing is sent anywhere until you choose to."));
+    var sheet = el("div", { "class": "sheet", id: "sheet" });
+    sheet.appendChild(el("p", { "class": "eyebrow print-only" }, C.org || ""));
+    sheet.appendChild(el("h3", null, C.title + ": counsel’s answers"));
+    sheetList = el("ol");
+    sheet.appendChild(sheetList);
+    var sign = el("div", { "class": "sign" });
+    [["name", "Name", "text", "name"], ["signature", "Signature (type your name)", "text", "off"], ["date", "Date", "text", "off"]].forEach(function (f) {
+      var lab = el("label", { "for": "sig-" + f[0] });
+      lab.appendChild(document.createTextNode(f[1]));
+      var inp = el("input", { id: "sig-" + f[0], type: f[2], autocomplete: f[3] });
+      inp.value = state[f[0]] || (f[0] === "date" ? new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : "");
+      inp.addEventListener("input", function () { state[f[0]] = inp.value; save(); });
+      lab.appendChild(inp);
+      sign.appendChild(lab);
+    });
+    sheet.appendChild(sign);
+    sheet.appendChild(el("p", { "class": "muted print-only", style: "margin-top:16px;font-size:9pt" }, C.footer || ""));
+    sum.appendChild(sheet);
+
+    var act = el("div", { "class": "actions no-print" });
+    var pr = el("button", { type: "button", "class": "btn", id: "btn-print" }, "Download PDF / Print");
+    var em = el("button", { type: "button", "class": "btn secondary", id: "btn-email" }, "Send my answers");
+    var cp = el("button", { type: "button", "class": "btn secondary", id: "btn-copy" }, "Copy my answers");
+    act.appendChild(pr); act.appendChild(em); act.appendChild(cp);
+    sum.appendChild(act);
+    sum.appendChild(el("p", { "class": "muted no-print", style: "font-size:14px" }, "To save a PDF: click Download PDF / Print, then choose “Save as PDF” as the printer."));
+    msgEl = el("p", { "class": "msg no-print", role: "status" });
+    sum.appendChild(msgEl);
+    app.appendChild(sum);
+
+    if (C.footer) app.appendChild(el("p", { "class": "foot no-print" }, C.footer));
+
+    pr.addEventListener("click", function () { refresh(); window.print(); });
+    em.addEventListener("click", sendEmail);
+    cp.addEventListener("click", function () { copyText(answersText(false)); });
+  }
+
+  function refresh() {
+    var req = 0, opt = 0;
+    C.questions.forEach(function (q) { if (answered(q)) req++; });
+    C.optional.forEach(function (q) { if (answered(q)) opt++; });
+    ALL.forEach(function (q) { var c = document.getElementById("q-" + q.id); if (c) c.classList.toggle("done", answered(q)); });
+    countEl.textContent = req + " of " + C.questions.length + " answered" + (C.optional.length ? " · optional " + opt + " of " + C.optional.length : "");
+    barEl.style.width = (req / C.questions.length * 100) + "%";
+    while (sheetList.firstChild) sheetList.removeChild(sheetList.firstChild);
+    ALL.forEach(function (q) {
+      var a = ans(q), li = el("li");
+      var isOpt = C.optional.indexOf(q) !== -1;
+      li.appendChild(el("span", { "class": "t" }, q.id + ". " + q.title + (isOpt ? " (optional)" : "")));
+      var words = choiceWords(q, a.c);
+      li.appendChild(el("span", { "class": "c" + (words ? "" : " none") }, words || "No choice"));
+      if (a.t && a.t.trim()) li.appendChild(el("span", { "class": "n" }, a.t.trim()));
+      sheetList.appendChild(li);
+    });
+  }
+
+  function answersText(compact) {
+    var lines = [C.title + ": my answers", ""];
+    ALL.forEach(function (q) {
+      var a = ans(q), words = choiceWords(q, a.c), t = (a.t || "").trim();
+      if (compact) {
+        if (!words && !t) return;
+        var w = a.c === "agree" ? "Agree" : a.c === "na" ? "Not my area" : a.c ? "Alternative " + letter(+a.c.slice(1)) : "No choice";
+        lines.push(q.id + ". " + q.title + ": " + w + (t ? " | " + t.replace(/\s+/g, " ") : ""));
+      } else {
+        lines.push(q.id + ". " + q.title);
+        lines.push("   " + (words || "No choice"));
+        if (t) lines.push("   Comment: " + t.replace(/\n/g, "\n   "));
+        lines.push("");
+      }
+    });
+    lines.push("");
+    if (state.name) lines.push("Name: " + state.name);
+    if (state.signature) lines.push("Signature: " + state.signature);
+    lines.push("Date: " + (state.date || new Date().toLocaleDateString("en-US")));
+    return lines.join("\n");
+  }
+
+  function sendEmail() {
+    refresh();
+    var subject = encodeURIComponent(C.title + ": my answers");
+    var url = "mailto:" + EMAIL + "?subject=" + subject + "&body=" + encodeURIComponent(answersText(true));
+    if (url.length > MAILTO_LIMIT) {
+      copyText(answersText(false), true);
+      msgEl.textContent = "Your answers are too long for an email link. They were copied: paste them into the email that opens, or attach the PDF instead.";
+      url = "mailto:" + EMAIL + "?subject=" + subject + "&body=" + encodeURIComponent("My answers are pasted below (or the PDF is attached).\n\n");
+    } else {
+      msgEl.textContent = "Your email app should open with your answers filled in. Check it, then press Send.";
+    }
+    window.location.href = url;
+  }
+
+  function copyText(txt, quiet) {
+    function fallback() {
+      var ta = el("textarea"); ta.value = txt; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      var ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+      ta.remove();
+      if (!quiet) msgEl.textContent = ok ? "Copied. Paste your answers into an email to " + EMAIL + "." : "Copy did not work here. Please use Download PDF instead.";
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(function () { if (!quiet) msgEl.textContent = "Copied. Paste your answers into an email to " + EMAIL + "."; }, fallback);
+      } else fallback();
+    } catch (e) { fallback(); }
+  }
+
+  /* ---------- unlock ---------- */
+  function bytes(s) { return Uint8Array.from(atob(s), function (ch) { return ch.charCodeAt(0); }); }
+  async function decrypt(pass) {
     var enc = new TextEncoder();
     var base = await crypto.subtle.importKey("raw", enc.encode(pass.trim().toLowerCase()), "PBKDF2", false, ["deriveKey"]);
     var key = await crypto.subtle.deriveKey({ name: "PBKDF2", salt: bytes(DATA.salt), iterations: DATA.iterations, hash: "SHA-256" },
       base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
     var plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: bytes(DATA.iv) }, key, bytes(DATA.ct));
-    return new TextDecoder().decode(plain);
+    return JSON.parse(new TextDecoder().decode(plain));
   }
-  function wireCopy() {
-    var btn = document.getElementById("copy-btn"), box = document.getElementById("reply-template");
-    if (!btn || !box) return;
-    function selectIt() {
-      var r = document.createRange(); r.selectNodeContents(box);
-      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-      btn.textContent = "Selected. Press Ctrl+C or Cmd+C";
-    }
-    btn.addEventListener("click", function () {
-      try { navigator.clipboard.writeText(box.textContent).then(function () { btn.textContent = "Copied"; }, selectIt); }
-      catch (e) { selectIt(); }
-    });
+  function show(content, pass) {
+    C = content;
+    C.optional = C.optional || [];
+    ALL = C.questions.concat(C.optional);
+    try { sessionStorage.setItem(PASS_KEY, pass); } catch (e) {}
+    document.getElementById("gate").remove();
+    var app = document.getElementById("app");
+    render(); refresh();
+    app.hidden = false;
   }
-  document.getElementById("gate-form").addEventListener("submit", async function (e) {
+  var form = document.getElementById("gate-form");
+  form.addEventListener("submit", async function (e) {
     e.preventDefault();
     var err = document.getElementById("err"), input = document.getElementById("pw");
     err.textContent = "Opening…";
-    try {
-      var html = await open(input.value);
-      var content = document.getElementById("content");
-      content.innerHTML = html;
-      content.hidden = false;
-      document.getElementById("gate").remove();
-      wireCopy();
-    } catch (x) {
-      err.textContent = "That passphrase didn't match. Try again.";
-      input.select();
-    }
+    try { show(await decrypt(input.value), input.value); }
+    catch (x) { err.textContent = "That passphrase didn’t match. Try again."; input.select(); }
   });
+  // Re-open automatically after a reload in the same tab (the passphrase is kept only for this tab session).
+  (async function () {
+    var p = null; try { p = sessionStorage.getItem(PASS_KEY); } catch (e) {}
+    if (!p) return;
+    try { show(await decrypt(p), p); } catch (e) { try { sessionStorage.removeItem(PASS_KEY); } catch (e2) {} }
+  })();
 })();
 </script>
 </body>
 </html>
 `;
 
-for (const leak of [pass, "Terms at sign-up", "We suggest"]) {
-  if (page.toLowerCase().includes(leak.toLowerCase())) {
+const DATA = JSON.stringify({ salt: b64(salt), iv: b64(iv), ct: b64(cipher), iterations: ITERATIONS });
+const page = SHELL.replace("/*__DATA__*/null", () => DATA);
+
+// Refuse to write anything readable: the passphrase, or distinctive question text.
+const LEAKS = [
+  pass,
+  "Terms at sign-up", "We suggest", "fsvppro.com", "Aleph Compliance, Inc.", "may not train models",
+  "class-action waiver", "15-day notice", "Pasadena Works",
+  ...[...content.questions, ...content.optional].map((q) => q.title),
+];
+for (const leak of LEAKS) {
+  if (leak && page.toLowerCase().includes(leak.toLowerCase())) {
     console.error(`Refusing to write: the output contains readable text (${JSON.stringify(leak === pass ? "the passphrase" : leak)}).`);
     process.exit(1);
   }
